@@ -1,4 +1,4 @@
-//import "./index.css";
+import "./index.css";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import Auth from "./Auth";
