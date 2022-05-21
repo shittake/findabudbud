@@ -1,12 +1,27 @@
-import "./styles.css";
+//import "./index.css";
+import { useState, useEffect } from "react";
+import { supabase } from "./supabaseClient";
+import Auth from "./Auth";
+import Account from "./Account";
 
 export default function App() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    setSession(supabase.auth.session());
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-      <h3> I think this may be easier </h3>
-      <h4> why is this different? </h4>
+    <div className="container" style={{ padding: "50px 0 100px 0" }}>
+      {!session ? (
+        <Auth />
+      ) : (
+        <Account key={session.user.id} session={session} />
+      )}
     </div>
   );
 }
