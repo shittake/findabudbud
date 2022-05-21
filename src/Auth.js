@@ -23,9 +23,13 @@ export default function Auth() {
   return (
     <div className="row flex flex-center">
       <div className="col-6 form-widget" aria-live="polite">
-        <h1 className="header">Supabase + React</h1>
+        <h1 className="header">
+          <center>FINDABUD</center>
+        </h1>
         <p className="description">
-          Sign in via magic link with your email below now
+          <center>
+            Key your NUSNET email below and receive a unique login link!
+          </center>
         </p>
         {loading ? (
           "Sending magic link..."

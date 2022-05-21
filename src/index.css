@@ -2,13 +2,13 @@ html,
 body {
   --custom-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  --custom-bg-color: #101010;
-  --custom-panel-color: #222;
-  --custom-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.8);
-  --custom-color: #fff;
+  --custom-bg-color: #68cbe9;
+  --custom-panel-color: rgba(253, 211, 120, 0.8);
+  --custom-box-shadow: 0 2px 8px 0 rgba(253, 211, 120, 0.8);
+  --custom-color: rgb(133, 32, 7);
   --custom-color-brand: #24b47e;
-  --custom-color-secondary: #666;
-  --custom-border: 1px solid #333;
+  --custom-color-secondary: rgb(41, 33, 33);
+  --custom-border: 0.8px solid rgb(36, 35, 35);
   --custom-border-radius: 5px;
   --custom-spacing: 5px;
 
@@ -169,7 +169,7 @@ body,
 
 label {
   display: block;
-  margin: 5px 0;
+  margin: 10px 0;
   color: var(--custom-color-secondary);
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -330,7 +330,7 @@ button.primary,
 
 .mainHeader {
   width: 100%;
-  font-size: 1.3rem;
+  font-size: 2rem;
   margin-bottom: 20px;
 }
 
@@ -362,7 +362,7 @@ button.primary,
 }
 
 .form-widget .button:hover {
-  background-color: #2a2a2a;
+  background-color: rgba(253, 211, 120, 0.8);
 }
 
 .form-widget .button > .loader {
