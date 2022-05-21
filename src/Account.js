@@ -70,7 +70,9 @@ const Account = ({ session }) => {
   return (
     <>
       <h1>
-        Please key in your name and indicate your gender and preferences.{" "}
+        <center>
+          Please key in your name and indicate your gender and preferences.{" "}
+        </center>
       </h1>
       <div aria-live="polite">
         {loading ? (
