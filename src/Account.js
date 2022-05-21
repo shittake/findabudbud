@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import MainPage  from "./MainPage";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -115,30 +116,33 @@ const Account = ({ session }) => {
               </button>
             </div>
 
-            <div>
-              <button className="button block primary" disabled={loading} 
-              onClick = {() => supabase.auth.signOut()}
-              >
-                Next
-              </button>
-            </div>
-
           </form>
         )}
         </div>
 
         <div>
+        <button className = "button block"
+        onClick = {() => clicked = true}>
+            Next
+        </button>
+        </div>
+
+        <div>
+
         <br></br>
         <hr></hr>
+
           <button className="button block"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
         </button>
+
         </div>
 
     </>
   );
 };
+
 
 export default Account;
