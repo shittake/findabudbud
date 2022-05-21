@@ -4,7 +4,7 @@ import { supabase } from "./supabaseClient";
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
-  const [website, setWebsite] = useState(null);
+  const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Account = ({ session }) => {
 
       if (data) {
         setUsername(data.username);
-        setWebsite(data.website);
+        setBrawlStars(data.brawl_stars);
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
@@ -48,7 +48,7 @@ const Account = ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        website,
+        brawl_stars,
         avatar_url,
         updated_at: new Date()
       };
@@ -90,12 +90,12 @@ const Account = ({ session }) => {
               />
             </div>
             <div>
-              <label htmlFor="website">Preferences</label>
+              <label htmlFor="website">Brawl stars?</label>
               <input
                 id="website"
-                type="url"
-                value={website || ""}
-                onChange={(e) => setWebsite(e.target.value)}
+                type="boolean"
+                value={brawl_stars || ""}
+                onChange={(e) => setBrawlStars(e.target.value)}
               />
             </div>
             <div>
