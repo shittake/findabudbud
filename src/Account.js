@@ -18,7 +18,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, avatar_url`)
+        .select(`username, website, brawl_stars, avatar_url`)
         .eq("id", user.id)
         .single();
 
@@ -90,9 +90,9 @@ const Account = ({ session }) => {
               />
             </div>
             <div>
-              <label htmlFor="website">Brawl stars?</label>
+              <label htmlFor="brawl_stars">Brawl stars?</label>
               <input
-                id="website"
+                id="brawl_stars"
                 type="boolean"
                 value={brawl_stars || ""}
                 onChange={(e) => setBrawlStars(e.target.value)}
