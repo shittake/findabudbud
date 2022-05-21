@@ -6,6 +6,7 @@ const Account = ({ session }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const lstOfPreferences = []
 
   useEffect(() => {
     getProfile();
@@ -37,6 +38,7 @@ const Account = ({ session }) => {
       setLoading(false);
     }
   };
+
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -71,18 +73,20 @@ const Account = ({ session }) => {
     <>
       <h1>
         <center>
-          Please key in your name and indicate your gender and preferences.{" "}
+          Please key in your username and indicate your preferences.{" "}
         </center>
       </h1>
+
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
         ) : (
           <form onSubmit={updateProfile} className="form-widget">
+
             <div>Email: {session.user.email}</div>
-            <div>Check</div>
+
             <div>
-              <label htmlFor="username">Name</label>
+              <label htmlFor="username">Username</label>
               <input
                 id="username"
                 type="text"
@@ -90,8 +94,13 @@ const Account = ({ session }) => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+
+            <div> Please indicate your preferences for the following categories. </div>
+            <div> Please type 'yes' or 'y' only if you wish to put that as one of your preferences. </div>
+            <div> Your results will be saved the next time you log in. </div>
+
             <div>
-              <label htmlFor="brawl_stars">Brawl stars?</label>
+              <label htmlFor="brawl_stars">Brawl Stars?</label>
               <input
                 id="brawl_stars"
                 type="boolean"
@@ -99,6 +108,7 @@ const Account = ({ session }) => {
                 onChange={(e) => setBrawlStars(e.target.value)}
               />
             </div>
+
             <div>
               <button className="button block primary" disabled={loading}>
                 Update profile now
@@ -106,6 +116,7 @@ const Account = ({ session }) => {
             </div>
           </form>
         )}
+
         <button
           type="button"
           className="button block"
