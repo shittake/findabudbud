@@ -74,7 +74,7 @@ const Account = ({ session }) => {
     <>
       <h1>
         <center>
-          Please key in your username and indicate your preferences.{" "}
+          Please key in your findabudbud.{" "}
         </center>
       </h1>
 
