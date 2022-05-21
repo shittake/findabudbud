@@ -114,17 +114,29 @@ const Account = ({ session }) => {
                 Update profile now
               </button>
             </div>
+
+            <div>
+              <button className="button block primary" disabled={loading} 
+              onClick = {() => supabase.auth.signOut()}
+              >
+                Next
+              </button>
+            </div>
+
           </form>
         )}
+        </div>
 
-        <button
-          type="button"
-          className="button block"
+        <div>
+        <br></br>
+        <hr></hr>
+          <button className="button block"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
         </button>
-      </div>
+        </div>
+
     </>
   );
 };
