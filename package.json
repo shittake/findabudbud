@@ -1,11 +1,8 @@
 {
-  "name": "react",
+  "name": "findabudbud",
   "version": "1.0.0",
-  "description": "React example starter project",
-  "keywords": [
-    "react",
-    "starter"
-  ],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "@supabase/supabase-js": "^1.35.3",

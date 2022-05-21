@@ -25,7 +25,7 @@ export default function Auth() {
       <div className="col-6 form-widget" aria-live="polite">
         <h1 className="header">Supabase + React</h1>
         <p className="description">
-          Sign in via magic link with your email below
+          Sign in via magic link with your email below now
         </p>
         {loading ? (
           "Sending magic link..."

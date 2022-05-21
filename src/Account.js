@@ -84,7 +84,7 @@ const Account = ({ session }) => {
             />
           </div>
           <div>
-            <label htmlFor="website">Website</label>
+            <label htmlFor="website">Preferences</label>
             <input
               id="website"
               type="url"
@@ -94,7 +94,7 @@ const Account = ({ session }) => {
           </div>
           <div>
             <button className="button block primary" disabled={loading}>
-              Update profile
+              Update profile now
             </button>
           </div>
         </form>
