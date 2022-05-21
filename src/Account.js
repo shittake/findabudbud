@@ -80,6 +80,7 @@ const Account = ({ session }) => {
         ) : (
           <form onSubmit={updateProfile} className="form-widget">
             <div>Email: {session.user.email}</div>
+            <div>Check</div>
             <div>
               <label htmlFor="username">Name</label>
               <input
