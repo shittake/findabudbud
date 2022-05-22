@@ -74,9 +74,6 @@ const Account = ({ session }) => {
     }
   };
 
-  var temp = "452/wed";
-  var slash = temp.slice(3,4);
-
   return (
     <>
       <h1>
