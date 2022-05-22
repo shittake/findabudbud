@@ -5,7 +5,7 @@ const MainPage = () => {
 	return (
 	<>
 		<div>
-		alert("This is the next page.")
+		This is the next page.
 		</div>
 	</>);
 }

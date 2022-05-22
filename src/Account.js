@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import MainPage  from "./MainPage";
+import {BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Pages/Layout";
+import FirstPage from "./Pages/FirstPage";
+import TestPage from "./Pages/TestPage";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -70,6 +74,9 @@ const Account = ({ session }) => {
     }
   };
 
+  var temp = "452/wed";
+  var slash = temp.slice(3,4);
+
   return (
     <>
       <h1>
@@ -120,12 +127,17 @@ const Account = ({ session }) => {
         )}
         </div>
 
-        <div>
-        <button className = "button block"
-        onClick = {() => clicked = true}>
-            Next
-        </button>
-        </div>
+
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element ={<TestPage />} />
+              <Route path="firstpage" element={<FirstPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        
+        
 
         <div>
 
