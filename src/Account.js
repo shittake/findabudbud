@@ -36,6 +36,9 @@ const Account = ({ session }) => {
         setUsername(data.username);
         setBrawlStars(data.brawl_stars);
         setAvatarUrl(data.avatar_url);
+        if (brawl_stars) {
+          lstOfPreferences.push("Brawl stars");
+        }
       }
     } catch (error) {
       alert(error.message);
@@ -129,7 +132,7 @@ const Account = ({ session }) => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element ={<TestPage />} />
-              <Route path="firstpage" element={<FirstPage />} />
+              <Route path="firstpage" element={<FirstPage session = {session}/>} />
             </Route>
           </Routes>
         </BrowserRouter>
