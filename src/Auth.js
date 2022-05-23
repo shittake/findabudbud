@@ -28,7 +28,7 @@ export default function Auth() {
         </h1>
         <p className="description">
           <center>
-            Key your NUSNET email below and receive a unique login link!
+            Key your personal email below and receive a unique login link! Do not use your NUSNET email.
           </center>
         </p>
         {loading ? (
