@@ -6,7 +6,7 @@ const TestPage = () => {
 	return (
 	<>
 		<div>
-		This is the home page.
+		This home page!
 		</div>
 	</>);
 }
