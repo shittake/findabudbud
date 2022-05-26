@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import MainPage  from "./MainPage";
-import {BrowserRouter, Routes, Route } from "react-router-dom";
+import MainPage from "./MainPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import FirstPage from "./Pages/FirstPage";
 import TestPage from "./Pages/TestPage";
@@ -11,7 +11,7 @@ const Account = ({ session }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
-  const lstOfPreferences = []
+  const lstOfPreferences = [];
 
   useEffect(() => {
     getProfile();
@@ -47,7 +47,6 @@ const Account = ({ session }) => {
     }
   };
 
-
   const updateProfile = async (e) => {
     e.preventDefault();
 
@@ -60,11 +59,11 @@ const Account = ({ session }) => {
         username,
         brawl_stars,
         avatar_url,
-        updated_at: new Date()
+        updated_at: new Date(),
       };
 
       let { error } = await supabase.from("profiles").upsert(updates, {
-        returning: "minimal" // Don't return the value after inserting
+        returning: "minimal", // Don't return the value after inserting
       });
 
       if (error) {
@@ -80,9 +79,7 @@ const Account = ({ session }) => {
   return (
     <>
       <h1>
-        <center>
-          Please key in your profile details!{" "}
-        </center>
+        <center>Please key in your profile details! </center>
       </h1>
 
       <div aria-live="polite">
@@ -90,7 +87,6 @@ const Account = ({ session }) => {
           "Saving ..."
         ) : (
           <form onSubmit={updateProfile} className="form-widget">
-
             <div>Email: {session.user.email}</div>
 
             <div>
@@ -103,8 +99,15 @@ const Account = ({ session }) => {
               />
             </div>
 
-            <div> Please indicate your preferences for the following categories. </div>
-            <div> Please type 'yes' or 'y' only if you wish to put that as one of your preferences. </div>
+            <div>
+              {" "}
+              Please indicate your preferences for the following categories.{" "}
+            </div>
+            <div>
+              {" "}
+              Please type 'yes' or 'y' only if you wish to put that as one of
+              your preferences.{" "}
+            </div>
             <div> Your results will be saved the next time you log in. </div>
 
             <div>
@@ -122,40 +125,32 @@ const Account = ({ session }) => {
                 Update profile now
               </button>
             </div>
-
           </form>
         )}
-        </div>
+      </div>
 
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<TestPage />} />
+            <Route path="firstpage" element={<FirstPage session={session} />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
 
-
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element ={<TestPage />} />
-              <Route path="firstpage" element={<FirstPage session = {session}/>} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-        
-        
-
-        <div>
-
+      <div>
         <br></br>
         <hr></hr>
 
-          <button className="button block"
+        <button
+          className="button block"
           onClick={() => supabase.auth.signOut()}
         >
           Sign Out
         </button>
-
-        </div>
-
+      </div>
     </>
   );
 };
-
 
 export default Account;

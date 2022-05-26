@@ -1,6 +1,7 @@
 //To-do list:
 
 // More urgent:
+// Add to the design
 // Figure out how to extract information about a user (using supabase? not sure)
 // Figure out if we can somehow link python code/java code/cpp code to all these code here?
 // Add a button in Account.js that gives an alert to show random information everytime we press it
