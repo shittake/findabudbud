@@ -1,6 +1,9 @@
 {
   "name": "findabudbud",
   "version": "1.0.0",
+  "engines": {
+    "node":"16.x"
+    },
   "description": "",
   "keywords": [],
   "main": "src/index.js",
