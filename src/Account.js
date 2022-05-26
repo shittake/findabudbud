@@ -82,6 +82,7 @@ const Account = ({ session }) => {
       <h1>
         <center>
           Please key in your profile details!{" "}
+          Testing
         </center>
       </h1>
 
