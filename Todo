@@ -1,0 +1,13 @@
+//To-do list:
+
+// More urgent:
+// Figure out how to extract information about a user (using supabase? not sure)
+// Figure out if we can somehow link python code/java code/cpp code to all these code here?
+// Add a button in Account.js that gives an alert to show random information everytime we press it
+// Add a button in Account.js that shows our contact information
+// Figure out if we can add another field in the login page to enter NUS id as well
+// Figure out if there's any 'chat' function that can be linked here
+
+// Less urgent:
+// Add more fields for the different interests (now there's only brawl stars)
+// Add more pages (now there's only firstpage and testpage which don't really show anything interesting)

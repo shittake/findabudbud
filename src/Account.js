@@ -82,6 +82,7 @@ const Account = ({ session }) => {
       <h1>
         <center>
           Please key in your findabudbud.{" "}
+          Testing
         </center>
       </h1>
 
