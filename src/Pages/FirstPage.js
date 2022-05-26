@@ -9,7 +9,7 @@ const FirstPage = ({session}) => {
 	return (
 	<>
 		<div>
-		This is first page.
+		This is the first page.
 		</div>
 	</>);
 }
