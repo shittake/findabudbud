@@ -6,12 +6,13 @@ const FirstPage = ({session}) => {
 	const [username, setUsername] = useState(null);
   	const [brawl_stars, setBrawlStars] = useState(null);
 
-	return (
+return(
 	<>
 		<div>
 		This is the first page.
+		Testing
 		</div>
-	</>);
+	</>);	
 }
 
 export default FirstPage;

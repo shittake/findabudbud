@@ -82,7 +82,6 @@ const Account = ({ session }) => {
       <h1>
         <center>
           Please key in your profile details!{" "}
-          Testing
         </center>
       </h1>
 
@@ -127,6 +126,7 @@ const Account = ({ session }) => {
           </form>
         )}
         </div>
+
 
 
         <BrowserRouter>
