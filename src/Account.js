@@ -11,11 +11,20 @@ const Account = ({ session }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
+  const [isActive, setActive] = useState("false");
   const lstOfPreferences = [];
 
   useEffect(() => {
     getProfile();
   }, [session]);
+
+  const handleToggle = () => {
+    setActive(!isActive);
+
+    if (isActive) {
+      alert("here");
+    }
+  };
 
   const getProfile = async () => {
     try {
@@ -129,6 +138,7 @@ const Account = ({ session }) => {
         )}
       </div>
 
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -137,6 +147,13 @@ const Account = ({ session }) => {
           </Route>
         </Routes>
       </BrowserRouter>
+
+      <div className = {isActive ? "press me" : null} >
+        <center><h1> To contact us: </h1></center>
+        <center><button onClick = {handleToggle}> Double click me to obtain our contact information! </button></center>
+      </div>
+      
+
 
       <div>
         <br></br>
