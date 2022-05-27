@@ -11,7 +11,7 @@ const FirstPage = ({session}) => {
   	const fetchData = async () => {
   		const {data, error} = await supabase
   		.from('profiles')
-  		.select('username')
+  		.select('*')
 
   		console.log(data);
 
@@ -26,7 +26,9 @@ const FirstPage = ({session}) => {
   
 return(
 	<>
-	{users.map(user => <p>{user.username}</p>)}
+	<p><center><strong> People who love brawl stars: </strong></center></p>
+	{users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
+
 	</>);	
 }
 
