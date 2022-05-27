@@ -143,6 +143,29 @@ const Account = ({ session }) => {
       </div>
 
 
+      <br></br>
+      
+      <div className = "button1" >
+        <center><button1 onClick = {handleToggle}> Double click me to obtain our contact information! </button1></center>
+      </div>
+
+      <br></br>
+      <br></br>
+
+      <div style={{ display: "flex", flexFlow: "row nowrap" }}>
+
+          <div className = "button2">
+            <center><button2 onClick = {handleSinglePress}> Click for some information! </button2></center>
+          </div>
+
+
+          <div className = "button2">
+            <center><button2 onClick = {handleSinglePress}> Click for some information! </button2></center>
+          </div>
+
+      </div>
+
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -151,15 +174,6 @@ const Account = ({ session }) => {
           </Route>
         </Routes>
       </BrowserRouter>
-
-      <div className = {isActive ? "press me" : null} >
-        <center><h1> To contact us: </h1></center>
-        <center><button onClick = {handleToggle}> Double click me to obtain our contact information! </button></center>
-      </div>
-      
-      <button className = "rowC">
-        <center><button onClick = {handleSinglePress}> Click for some information! </button></center>
-      </button>
 
 
       <div>
