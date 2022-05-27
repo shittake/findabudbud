@@ -248,7 +248,7 @@ button,
   cursor: pointer;
   text-align: center;
   font-size: 0.9rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 button.primary,
@@ -376,3 +376,5 @@ button.secondary,
   animation: spin 1s linear infinite;
   filter: invert(1);
 }
+
+.rowC{display: flex; flex-direction: row;}

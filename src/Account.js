@@ -157,8 +157,7 @@ const Account = ({ session }) => {
         <center><button onClick = {handleToggle}> Double click me to obtain our contact information! </button></center>
       </div>
       
-      <button className = "press me">
-        <center><h1> To contact us: </h1></center>
+      <button className = "rowC">
         <center><button onClick = {handleSinglePress}> Click for some information! </button></center>
       </button>
 
