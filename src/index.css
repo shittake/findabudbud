@@ -282,8 +282,9 @@ input[disabled] {
 }
 
 .button2: hover {
-  background-color:  red;
+  background-color:  #FAEBD7;
 }
+
 .button:hover {
   background-color: orange;
 }
