@@ -28,7 +28,7 @@ const Account = ({ session }) => {
   };
 
   const handleSinglePress = () => {
-    alert("press once");
+    alert("single press");
   };
 
   const getProfile = async () => {
