@@ -98,7 +98,7 @@ const Account = ({ session }) => {
         <ChatwootWidget />
       </div>
 
-      
+
       <div className="welcome-outer">
         <Welcome></Welcome>
       </div>
@@ -194,7 +194,7 @@ const Account = ({ session }) => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<TestPage />} />
-            <Route path="firstpage" element={<FirstPage session={session} />} />
+            <Route path="firstpage" element={<FirstPage session={session} />} />        
           </Route>
         </Routes>
       </BrowserRouter>
