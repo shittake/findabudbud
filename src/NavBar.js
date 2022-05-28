@@ -12,6 +12,10 @@ function NavBar() {
 				<li>
 					<Link to="firstpage">FirstPage</Link>
 				</li>
+
+				<li>
+					<Link to="chatpage">ChatPage</Link>
+				</li>
 			</ul>
 		</nav>
 	);

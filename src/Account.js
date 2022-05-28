@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import FirstPage from "./Pages/FirstPage";
 import TestPage from "./Pages/TestPage";
+import ChatPage from "./Pages/ChatPage";
 import Welcome from "./Components/UI/Welcome";
 import ChatwootWidget from "./chatwoot.js";
 
@@ -194,7 +195,8 @@ const Account = ({ session }) => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<TestPage />} />
-            <Route path="firstpage" element={<FirstPage session={session} />} />        
+            <Route path="firstpage" element={<FirstPage session={session} />} />   
+            <Route path="chatpage" element={<ChatPage />} />     
           </Route>
         </Routes>
       </BrowserRouter>
