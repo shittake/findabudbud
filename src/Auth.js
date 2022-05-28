@@ -21,32 +21,44 @@ export default function Auth() {
   };
 
   return (
-    <div className="row flex flex-center">
-      <div className="col-6 form-widget" aria-live="polite">
+    <div className="auth-formatting">
+      <div>
         <h1 className="header">
-          <center>FINDABUD</center>
+          <center>hello! you have arrived at findabud's login page :D</center>
         </h1>
         <p className="description">
           <center>
-            Key your personal email below and receive a unique login link! Do not use your NUSNET email.
+            <div className="auth-centralise-text">
+              Key your personal email below and receive a unique login link!
+            </div>
+            <div>
+              <strong>
+                <u>
+                  <em> DO NOT </em>
+                </u>
+              </strong>
+              use your NUSNET email.
+            </div>
           </center>
         </p>
         {loading ? (
           "Sending magic link..."
         ) : (
           <form onSubmit={handleLogin}>
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              className="inputField"
-              type="email"
-              placeholder="Your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button className="button block" aria-live="polite">
-              Send magic link
-            </button>
+            <div className="auth-email-formatting">
+              <label htmlFor="email">Email: </label>
+              <input
+                id="email"
+                className="inputField"
+                type="email"
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button className="button block" aria-live="polite">
+                Send magic link
+              </button>
+            </div>
           </form>
         )}
       </div>

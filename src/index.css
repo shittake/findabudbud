@@ -257,3 +257,29 @@ body {
   animation: spin 1s linear infinite;
   filter: invert(1);
 }
+
+.auth-centralise-text {
+  margin: 8px;
+}
+
+.auth-email-formatting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 30px;
+  border: 2px solid transparent;
+  border-radius: 17px;
+  background-color: #d3d6da;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 50px;
+  width: 400px;
+}
+
+.auth-formatting {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
