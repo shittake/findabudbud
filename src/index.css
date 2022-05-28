@@ -17,11 +17,9 @@ body {
   padding: 0;
   margin: 0;
   height: auto;
-  /* to be used for colour gradient background:
+  /* to be used for colour gradient background:*/
   background: linear-gradient(rgba(195, 255, 253, 1), transparent);
-  background-color: rgb(255, 222, 222); 
-  */
-  background-color: rgba(195, 255, 253, 1);
+  background-color: rgb(255, 222, 222);
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: var(--custom-font-family);

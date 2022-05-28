@@ -169,7 +169,7 @@ body,
 
 label {
   display: block;
-  margin: 10px 0;
+  margin: 100px 0;
   color: var(--custom-color-secondary);
   font-size: 0.8rem;
   text-transform: uppercase;
