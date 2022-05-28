@@ -6,6 +6,7 @@ import Layout from "./Pages/Layout";
 import FirstPage from "./Pages/FirstPage";
 import TestPage from "./Pages/TestPage";
 import Welcome from "./Components/UI/Welcome";
+import ChatwootWidget from "./chatwoot.js";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -90,12 +91,18 @@ const Account = ({ session }) => {
     }
   };
 
+
   return (
     <>
+      <div className="App">
+        <ChatwootWidget />
+      </div>
+
+      
       <div className="welcome-outer">
         <Welcome></Welcome>
       </div>
-      <h2>Please key in your profile details: </h2>
+      <h2>Please key in your profile details: </h2>    
 
       <div aria-live="polite">
         {loading ? (
