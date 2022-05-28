@@ -13,7 +13,7 @@ const Account = ({ session }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
-  const [isActive, setActive] = useState("false");
+  const [isActive, setActive] = useState("true");
   const lstOfPreferences = [];
 
   useEffect(() => {
@@ -91,18 +91,16 @@ const Account = ({ session }) => {
     }
   };
 
-
   return (
     <>
       <div className="App">
         <ChatwootWidget />
       </div>
 
-      
       <div className="welcome-outer">
         <Welcome></Welcome>
       </div>
-      <h2>Please key in your profile details: </h2>    
+      <h2>Please key in your profile details: </h2>
 
       <div aria-live="polite">
         {loading ? (
