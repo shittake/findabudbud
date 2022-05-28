@@ -1,5 +1,6 @@
 import * as React from "react";
 import Talk from "talkjs";
+import PropTypes from "prop-types";
 
 class TestPage extends React.Component {
     constructor(props) {
@@ -25,7 +26,7 @@ class TestPage extends React.Component {
         });
         if (!window.talkSession) {
           window.talkSession = new Talk.Session({
-            appId: "YOUR_APP_ID_HERE",
+            appId: "tI7ah68w",
             me: me,
           });
         }
@@ -52,14 +53,14 @@ class TestPage extends React.Component {
     return (
       <div>
         <div>
-          <h1 className="heading">Let's make some new friends :)</h1>
+          <h1 className="heading">Impressive Brawl stars gameplay by marc</h1>
         </div>
         <div className="flex-container">
           <div className="flex-child">
             <iframe
               width="853"
               height="480"
-              src={`https://www.youtube.com/embed/gyTdVFa-Fws`}
+              src={`https://www.youtube.com/embed/iTJVXNOYAM0`}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
