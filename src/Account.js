@@ -112,7 +112,7 @@ const Account = ({ session }) => {
             <p>
               <div>
                 <label htmlFor="username">Username: </label>
-                <div>
+                <div style={{ padding: "7px 0 0 0" }}>
                   <TextField
                     margin="dense"
                     size="small"
