@@ -268,13 +268,13 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 30px;
+  top: 22px;
   border: 2px solid transparent;
   border-radius: 17px;
   background-color: #d3d6da;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 50px;
-  width: 400px;
+  height: 75px;
+  width: 450px;
 }
 
 .auth-formatting {
