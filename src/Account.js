@@ -7,13 +7,14 @@ import FirstPage from "./Pages/FirstPage";
 import TestPage from "./Pages/TestPage";
 import Welcome from "./Components/UI/Welcome";
 import ChatwootWidget from "./chatwoot.js";
+import TextField from "@mui/material/TextField";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
-  const [isActive, setActive] = useState("true");
+  const [isActive, setActive] = useState("false");
   const lstOfPreferences = [];
 
   useEffect(() => {
@@ -112,10 +113,16 @@ const Account = ({ session }) => {
               <div>
                 <label htmlFor="username">Username: </label>
                 <div>
-                  <input
+                  <TextField
+                    margin="dense"
+                    size="small"
+                    // inputProps={{ sx: { height: 10 } }}
+                    required
                     id="username"
-                    type="text"
-                    value={username || ""}
+                    label="Required"
+                    // defaultValue="Hello World"
+                    placeholder="Your username"
+                    value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
