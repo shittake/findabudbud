@@ -13,6 +13,7 @@ const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
+  const [mobile_legends, setMobileLegends] = useState(true);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const lstOfPreferences = [];
@@ -20,6 +21,11 @@ const Account = ({ session }) => {
   useEffect(() => {
     getProfile();
   }, [session]);
+
+
+  const handleMobileLegendsChange = () => {
+    return setMobileLegends(!mobile_legends);
+  };
 
   const handleToggle = () => {
     setActive(!isActive);
@@ -40,7 +46,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, brawl_stars, avatar_url`)
+        .select(`username, website, brawl_stars, mobile_legends, avatar_url`)
         .eq("id", user.id)
         .single();
 
@@ -51,6 +57,7 @@ const Account = ({ session }) => {
       if (data) {
         setUsername(data.username);
         setBrawlStars(data.brawl_stars);
+        setMobileLegends(data.mobile_legends);
         setAvatarUrl(data.avatar_url);
         if (brawl_stars) {
           lstOfPreferences.push("Brawl stars");
@@ -74,6 +81,7 @@ const Account = ({ session }) => {
         id: user.id,
         username,
         brawl_stars,
+        mobile_legends,
         avatar_url,
         updated_at: new Date(),
       };
@@ -148,14 +156,23 @@ const Account = ({ session }) => {
               </div>
             </p>
 
-            <div>
-              <button className="button block primary" disabled={loading}>
-                Update profile now
-              </button>
-            </div>
+            
           </form>
         )}
       </div>
+
+      <div>
+        <button onClick = {() => handleMobileLegendsChange()}>Mobile legends?</button>
+        {mobile_legends ? " Yes I love Mobile Legends!" : " Not really interested"}
+      </div>
+
+    <form onSubmit={updateProfile} className="form-widget">
+      <div>
+          <button className="button block primary" disabled={loading}>
+           Update profile now
+           </button>
+      </div>
+      </form>
 
       <br></br>
 
