@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { supabase } from "./supabaseClient";
 
+import FormPropsTextFields from "./Components/UI/DefaultTextInput";
+import TextField from "@mui/material/TextField";
+
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    console.log(email);
 
     try {
       setLoading(true);
@@ -44,20 +48,35 @@ export default function Auth() {
         {loading ? (
           "Sending magic link..."
         ) : (
-          <form onSubmit={handleLogin}>
+          <form
+            onSubmit={handleLogin}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <div className="auth-email-formatting">
-              <label htmlFor="email">Email: </label>
-              <input
-                id="email"
-                className="inputField"
-                type="email"
-                placeholder="Your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button className="button block" aria-live="polite">
-                Send magic link
-              </button>
+              <div style={{ padding: "30px" }}>
+                <TextField
+                  margin="dense"
+                  size="small"
+                  // inputProps={{ sx: { height: 10 } }}
+                  required
+                  id="outlined-required"
+                  label="Required"
+                  // defaultValue="Hello World"
+                  className="inputField"
+                  type="email"
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
+              <div style={{ padding: "22.5px" }}>
+                <button className="button block" aria-live="polite">
+                  Send magic link
+                </button>
+              </div>
             </div>
           </form>
         )}
