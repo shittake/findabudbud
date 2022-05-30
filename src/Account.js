@@ -8,6 +8,7 @@ import TestPage from "./Pages/TestPage";
 import ChatPage from "./Pages/ChatPage";
 import Welcome from "./Components/UI/Welcome";
 import ChatwootWidget from "./chatwoot.js";
+import TextField from "@mui/material/TextField";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -122,11 +123,17 @@ const Account = ({ session }) => {
             <p>
               <div>
                 <label htmlFor="username">Username: </label>
-                <div>
-                  <input
+                <div style={{ padding: "7px 0 0 0" }}>
+                  <TextField
+                    margin="dense"
+                    size="small"
+                    // inputProps={{ sx: { height: 10 } }}
+                    required
                     id="username"
-                    type="text"
-                    value={username || ""}
+                    label="Required"
+                    // defaultValue="Hello World"
+                    placeholder="Your username"
+                    value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
