@@ -23,7 +23,6 @@ const Account = ({ session }) => {
     getProfile();
   }, [session]);
 
-
   const handleMobileLegendsChange = () => {
     return setMobileLegends(!mobile_legends);
   };
@@ -101,19 +100,15 @@ const Account = ({ session }) => {
     }
   };
 
-
   return (
     <>
       <div className="App">
         <ChatwootWidget />
       </div>
-
-
-      <div className="welcome-outer">
+      <div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>
         <Welcome></Welcome>
       </div>
-      <h2>Please key in your profile details: </h2>    
-
+      <h2>Please key in your profile details: </h2>
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
@@ -162,29 +157,26 @@ const Account = ({ session }) => {
                 />
               </div>
             </p>
-
-            
           </form>
         )}
       </div>
-
       <div>
-        <button onClick = {() => handleMobileLegendsChange()}>Mobile legends?</button>
-        {mobile_legends ? " Yes I love Mobile Legends!" : " Not really interested"}
+        <button onClick={() => handleMobileLegendsChange()}>
+          Mobile legends?
+        </button>
+        {mobile_legends
+          ? " Yes I love Mobile Legends!"
+          : " Not really interested"}
       </div>
-
-    <br></br>
-
-    <form onSubmit={updateProfile} className="form-widget">
-      <div>
-          <button className="button block primary" disabled={loading}>
-           Update profile now
-           </button>
-      </div>
-      </form>
-
       <br></br>
-
+      <form onSubmit={updateProfile} className="form-widget">
+        <div>
+          <button className="button block primary" disabled={loading}>
+            Update profile now
+          </button>
+        </div>
+      </form>
+      <br></br>
       <div className="button1">
         <center>
           <button1 onClick={handleToggle}>
@@ -193,10 +185,8 @@ const Account = ({ session }) => {
           </button1>
         </center>
       </div>
-
       <br></br>
       <br></br>
-
       <div style={{ display: "flex", flexFlow: "row nowrap" }}>
         <div className="button2">
           <center>
@@ -216,17 +206,15 @@ const Account = ({ session }) => {
           </center>
         </div>
       </div>
-
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<TestPage />} />
-            <Route path="firstpage" element={<FirstPage session={session} />} />   
-            <Route path="chatpage" element={<ChatPage />} />     
+            <Route path="firstpage" element={<FirstPage session={session} />} />
+            <Route path="chatpage" element={<ChatPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
-
       <div>
         <br></br>
         <hr></hr>

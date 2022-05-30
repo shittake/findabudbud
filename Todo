@@ -12,3 +12,10 @@
 // Less urgent:
 // Add more fields for the different interests (now there's only brawl stars)
 // Add more pages (now there's only firstpage and testpage which don't really show anything interesting)
+
+//notes:
+<div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>
+        <Welcome></Welcome>
+</div>
+
+<div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>

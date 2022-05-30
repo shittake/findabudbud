@@ -30,9 +30,9 @@ export default function Auth() {
         <h1 className="header">
           <center>hello! you have arrived at findabud's login page :D</center>
         </h1>
-        
+
         <h1 className="homepageimage">
-          <img src={friends} class = "centerimage" width = "150" height = "200"/>
+          <img src={friends} class="centerimage" width="150" height="200" />
         </h1>
 
         <p className="description">
@@ -44,15 +44,16 @@ export default function Auth() {
               <strong>
                 <u>
                   <em> DO NOT</em>
-                </u>
-                {" "}
+                </u>{" "}
               </strong>
               use your NUSNET email.
             </div>
           </center>
         </p>
         {loading ? (
-          "Sending magic link..."
+          <div className="welcome-outer" style={{ padding: "25px 0 0 0" }}>
+            <strong>"Sending magic link..."</strong>
+          </div>
         ) : (
           <form
             onSubmit={handleLogin}
