@@ -6,15 +6,15 @@ function NavBar() {
 		<nav>
 			<ul>
 				<li>
-					<Link to="/">TestPage</Link>
+					<Link to="/">Video of the Day</Link>
 				</li>
 
 				<li>
-					<Link to="firstpage">FirstPage</Link>
+					<Link to="firstpage">People who love brawl stars</Link>
 				</li>
 
 				<li>
-					<Link to="chatpage">ChatPage</Link>
+					<Link to="chatpage">Chat Page that is not working yet</Link>
 				</li>
 			</ul>
 		</nav>

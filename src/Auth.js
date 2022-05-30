@@ -38,8 +38,9 @@ export default function Auth() {
             <div>
               <strong>
                 <u>
-                  <em> DO NOT </em>
+                  <em> DO NOT</em>
                 </u>
+                {" "}
               </strong>
               use your NUSNET email.
             </div>

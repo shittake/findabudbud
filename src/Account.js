@@ -32,12 +32,12 @@ const Account = ({ session }) => {
     setActive(!isActive);
 
     if (isActive) {
-      alert("press twice");
+      alert("to be added");
     }
   };
 
   const handleSinglePress = () => {
-    alert("single press");
+    alert("to be added");
   };
 
   const getProfile = async () => {
@@ -172,6 +172,8 @@ const Account = ({ session }) => {
         <button onClick = {() => handleMobileLegendsChange()}>Mobile legends?</button>
         {mobile_legends ? " Yes I love Mobile Legends!" : " Not really interested"}
       </div>
+
+    <br></br>
 
     <form onSubmit={updateProfile} className="form-widget">
       <div>
