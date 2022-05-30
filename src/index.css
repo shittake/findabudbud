@@ -286,6 +286,15 @@ body {
   align-items: center;
 }
 
+.centerimage {
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+}
+
 /*
 input[type="text"] {
   margin: 10px 0px;

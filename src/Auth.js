@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { supabase } from "./supabaseClient";
-
+import friends from "./Images/friends.jpg";
 import FormPropsTextFields from "./Components/UI/DefaultTextInput";
 import TextField from "@mui/material/TextField";
 
@@ -30,6 +30,11 @@ export default function Auth() {
         <h1 className="header">
           <center>hello! you have arrived at findabud's login page :D</center>
         </h1>
+        
+        <h1 className="homepageimage">
+          <img src={friends} class = "centerimage" width = "150" height = "200"/>
+        </h1>
+
         <p className="description">
           <center>
             <div className="auth-centralise-text">
