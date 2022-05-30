@@ -105,7 +105,7 @@ const Account = ({ session }) => {
       <div className="App">
         <ChatwootWidget />
       </div>
-      <div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>
+      <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
         <Welcome></Welcome>
       </div>
       <h2>Please key in your profile details: </h2>
