@@ -232,6 +232,7 @@ body {
 }
 
 /*Widget -- didnt include everything yet*/
+
 .form-widget {
   display: block;
   flex-direction: row;
@@ -247,6 +248,7 @@ body {
   text-transform: none !important;
   transition: all 0.2s ease;
 }
+
 
 .form-widget .button:hover {
   background-color: rgba(253, 211, 120, 0.8);
@@ -284,6 +286,7 @@ body {
   align-items: center;
 }
 
+/*
 input[type="text"] {
   margin: 10px 0px;
   height: 30px;
@@ -299,6 +302,8 @@ input[type="text"] {
   -moz-transition: border-color 0.2s ease-in-out;
   transition: border-color 0.2s ease-in-out;
 }
+*/
+
 
 input[type="boolean"] {
   margin: 10px 0px;
