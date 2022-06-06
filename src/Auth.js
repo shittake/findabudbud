@@ -3,10 +3,16 @@ import { supabase } from "./supabaseClient";
 import logo from "./Images/FindabudLogo.png";
 import FormPropsTextFields from "./Components/UI/DefaultTextInput";
 import TextField from "@mui/material/TextField";
+import Popup from "./Popup";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const hoverClick = () => {
+    setIsOpen(!isOpen);
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,6 +30,7 @@ export default function Auth() {
     }
   };
 
+
   return (
     <div className="auth-formatting">
       <div>
@@ -32,8 +39,19 @@ export default function Auth() {
         </h1>
 
         <h1 className="homepageimage">
-          <img src={logo} class="centerimage" height="200" />
+          <img src={logo} class="centerimage" height="200" onClick = { hoverClick } style ={{cursor:'pointer'}} />
         </h1>
+
+        {isOpen && <Popup
+          content={<>
+            <b><center> ABOUT US </center></b>
+            <br></br>
+            <p> Findabud was created by Eric and Felicia to increase opportunities for NUS students to make more like-minded friends. </p>
+            <p> You can contact us using the live chat feature on the bottom right corner of your screen once you login. </p>
+            <p> Alternatively, you can email us at e0406922@u.nus.edu (Eric) or e0564015@u.nus.edu (Felicia). </p>
+            </>}
+            handleClose={hoverClick}
+          />}
 
         <p className="description">
           <center>
