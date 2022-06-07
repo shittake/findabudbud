@@ -1,8 +1,8 @@
 require('./ChatPage.css');
-require('./Login.css');
+require('./Chat/Login.css');
 
 import React from 'react';
-import ChatApp from './ChatApp';
+import ChatApp from './Chat/ChatApp';
 
 class ChatPage extends React.Component {
   constructor(props) {
