@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import MainPage from "./MainPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Pages/Layout";
 import LeaderboardPage from "./Pages/LeaderboardPage";
-import TestPage from "./Pages/TestPage";
+import VideoPage from "./Pages/VideoPage";
 import ChatPage from "./Pages/ChatPage";
 import Welcome from "./Components/UI/Welcome";
 import ChatwootWidget from "./chatwoot.js";
@@ -46,7 +45,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, brawl_stars, mobile_legends, avatar_url`)
+        .select("*")
         .eq("id", user.id)
         .single();
 
@@ -177,14 +176,8 @@ const Account = ({ session }) => {
         </div>
       </form>
       <br></br>
-      <div className="button1">
-        <center>
-          <button1 onClick={handleToggle}>
-            {" "}
-            Double click me to obtain our contact information!{" "}
-          </button1>
-        </center>
-      </div>
+
+      
       <br></br>
       <br></br>
       <div style={{ display: "flex", flexFlow: "row nowrap" }}>
@@ -206,15 +199,19 @@ const Account = ({ session }) => {
           </center>
         </div>
       </div>
+
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<TestPage />} />
+            <Route index element={<VideoPage />} />
             <Route path="firstpage" element={<LeaderboardPage session={session} />} />
             <Route path="chatpage" element={<ChatPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
+
+      
       <div>
         <br></br>
         <hr></hr>

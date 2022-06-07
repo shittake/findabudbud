@@ -1,6 +1,6 @@
 import * as React from "react";
 
-class TestPage extends React.Component {
+class VideoPage extends React.Component {
     
   render() {
     return (
@@ -26,4 +26,4 @@ class TestPage extends React.Component {
     );
   }
 }
-export default TestPage;
+export default VideoPage;
