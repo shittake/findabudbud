@@ -19,7 +19,9 @@ const Account = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
-  const [clickGames, setClickGames] = useState("false");
+  const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
+  const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
+  const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
 
   useEffect(() => {
     getProfile();
@@ -43,6 +45,14 @@ const Account = ({ session }) => {
 
   const toggleGames = () => {
     return setClickGames(!clickGames);
+  }
+
+  const toggleShows = () => {
+    return setClickShows(!clickShows);
+  }
+
+  const toggleLanguages = () => {
+    return setClickLanguages(!clickLanguages);
   }
 
   const handleSinglePress = () => {
@@ -72,7 +82,9 @@ const Account = ({ session }) => {
         setPoints(data.points);
         setAnime(data.anime);
         setFrench(data.french);
-        setClickGames(false);
+        setClickGames(false); //default set to false to avoid overwhelming user
+        setClickShows(false); //default set to false to avoid overwhelming user
+        setClickLanguages(false); //default set to false to avoid overwhelming user
       }
     } catch (error) {
       alert(error.message);
@@ -205,8 +217,11 @@ const Account = ({ session }) => {
       </>
     }
 
-    <h1 className= "title"><strong> TV Shows/Movies </strong></h1>
+    <br></br>
+    <h1 className= "clickableText"><strong> 
+    <button2 onClick={()=>toggleShows()}> TV Shows/Movies </button2></strong></h1>
 
+    {clickShows && <>
     {/* Toggle button to change preference for Anime */}
       <div>
         <button onClick={() => handleAnimeChange()}>
@@ -218,17 +233,39 @@ const Account = ({ session }) => {
       </div>
 
       <br></br>
+      </>
+    }
 
-    <h1 className= "title"><strong> Languages </strong></h1>
-    {/* Toggle button to change preference for French */}
-      <div>
-        <button onClick={() => handleFrenchChange()}>
-          French?
-        </button>
-        {french
-          ? " Yes I want to learn or practise French!"
-          : " Not really interested"}
-      </div>
+    {!clickShows && <>
+      <div2>
+        Click "TV Shows{"/"}Movies" if you would like to see the different TV Shows or movie subcategories!
+      </div2>
+      </>
+    }
+
+    <br></br>
+    <h1 className= "clickableText"><strong> 
+    <button2 onClick={()=>toggleLanguages()}> Languages </button2></strong></h1>
+
+    {clickLanguages && <>
+      {/* Toggle button to change preference for French */}
+        <div>
+          <button onClick={() => handleFrenchChange()}>
+            French?
+          </button>
+          {french
+            ? " Yes I want to learn or practise French!"
+            : " Not really interested"}
+        </div>
+      </>
+    }
+
+    {!clickLanguages && <>
+        <div2>
+          Click "Languages" if you would like to see the different language subcategories!
+        </div2>
+      </>
+    }
 
 
       <br></br>
