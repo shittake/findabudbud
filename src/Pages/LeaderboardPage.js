@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from 'react';
 import { supabase } from "../supabaseClient";
+import "../styles.css";
 
 const LeaderboardPage = ({session}) => {
 	const [username, setUsername] = useState(null);
@@ -30,6 +31,9 @@ const LeaderboardPage = ({session}) => {
 return(
 	<>
 
+  <div className = "title"><center><strong>Top 5 Users in Findabud</strong></center></div>
+  <br></br>
+
 	<div className="formatTable">
       <table>
         <tr>
@@ -37,7 +41,7 @@ return(
           <th>Username</th>
           <th>Points</th>
         </tr>
-        {users.sort((a,b) => a.points < b.points ? 1: -1).map((val, key) => {
+        {users.sort((a,b) => a.points < b.points ? 1: -1).slice(0,5).map((val, key) => {
           return (
             <tr key={key}>
               <td>{key+1}</td>
