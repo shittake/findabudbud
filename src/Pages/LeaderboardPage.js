@@ -39,8 +39,7 @@ const LeaderboardPage = ({session}) => {
   });
 
   uniquePoints.sort((a,b) => a < b ? 1: -1); //sort in descending order
-  console.log(uniquePoints);
-  console.log(number);
+
 return(
 	<>
 
@@ -68,11 +67,8 @@ return(
 
     <br></br>
     <div><center> You have {" "} <strong> {number} {(number == 1) ? "point" : "points"} </strong> now, which
-    places you in rank {" "} <strong> {uniquePoints.indexOf(parseInt(number))+1}</strong>! </center></div>
-
-
-    
-
+    places you in rank {" "} <strong> {uniquePoints.indexOf(parseInt(number))+1}</strong> {" "}
+    out of <strong> {totalUsers} </strong> buds!</center></div>
 
 	</>);	
 }
