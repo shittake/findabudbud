@@ -15,6 +15,7 @@ const Account = ({ session }) => {
   const [brawl_stars, setBrawlStars] = useState(false);
   const [mobile_legends, setMobileLegends] = useState(false);
   const [anime, setAnime] = useState(false);
+  const [french, setFrench] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -26,6 +27,18 @@ const Account = ({ session }) => {
   const handleMobileLegendsChange = () => {
     return setMobileLegends(!mobile_legends);
   };
+
+  const handleBrawlStarsChange = () => {
+    return setBrawlStars(!brawl_stars);
+  }
+
+  const handleAnimeChange = () => {
+    return setAnime(!anime);
+  }
+
+  const handleFrenchChange = () =>{
+    return setFrench(!french);
+  }
 
   const handleToggle = () => {
     setActive(!isActive);
@@ -61,6 +74,7 @@ const Account = ({ session }) => {
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
         setAnime(data.anime);
+        setFrench(data.french);
       }
     } catch (error) {
       alert(error.message);
@@ -82,6 +96,7 @@ const Account = ({ session }) => {
         brawl_stars,
         mobile_legends,
         anime,
+        french,
         avatar_url,
         points,
         updated_at: new Date(),
@@ -152,6 +167,7 @@ const Account = ({ session }) => {
         )}
       </div>
 
+    <h1 className= "title"><strong> Games </strong></h1>
 
     {/* Toggle button to change preference for Brawl Stars */}
       <div>
@@ -177,13 +193,28 @@ const Account = ({ session }) => {
 
       <br></br>
 
+    <h1 className= "title"><strong> TV Shows/Movies </strong></h1>
+
     {/* Toggle button to change preference for Anime */}
       <div>
-        <button onClick={() => handleAnime()}>
+        <button onClick={() => handleAnimeChange()}>
           Anime?
         </button>
         {anime
           ? " Yes I love Anime!"
+          : " Not really interested"}
+      </div>
+
+      <br></br>
+
+    <h1 className= "title"><strong> Languages </strong></h1>
+    {/* Toggle button to change preference for French */}
+      <div>
+        <button onClick={() => handleFrenchChange()}>
+          French?
+        </button>
+        {french
+          ? " Yes I want to learn or practise French!"
           : " Not really interested"}
       </div>
 
