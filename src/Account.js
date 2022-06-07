@@ -19,6 +19,7 @@ const Account = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
+  const [clickGames, setClickGames] = useState("false");
 
   useEffect(() => {
     getProfile();
@@ -36,17 +37,13 @@ const Account = ({ session }) => {
     return setAnime(!anime);
   }
 
-  const handleFrenchChange = () =>{
+  const handleFrenchChange = () => {
     return setFrench(!french);
   }
 
-  const handleToggle = () => {
-    setActive(!isActive);
-
-    if (isActive) {
-      alert("to be added");
-    }
-  };
+  const toggleGames = () => {
+    return setClickGames(!clickGames);
+  }
 
   const handleSinglePress = () => {
     alert("to be added");
@@ -75,6 +72,7 @@ const Account = ({ session }) => {
         setPoints(data.points);
         setAnime(data.anime);
         setFrench(data.french);
+        setClickGames(false);
       }
     } catch (error) {
       alert(error.message);
@@ -160,15 +158,20 @@ const Account = ({ session }) => {
             <p>
               <div>
                 {" "}
-                Please indicate your preferences for the following categories.{" "}
+                Please indicate your preferences for the following categories.{"\n"}
+                <br></br>
+                <br></br>
+                To reveal/hide the subcategories within each of the categories shown below, click on any of the yellow text!
               </div>
             </p>
           </form>
         )}
       </div>
 
-    <h1 className= "title"><strong> Games </strong></h1>
+    <h1 className= "clickableText"><strong> 
+    <button2 onClick={()=>toggleGames()}> Games </button2></strong></h1>
 
+    {clickGames && <>
     {/* Toggle button to change preference for Brawl Stars */}
       <div>
         <button onClick={() => handleBrawlStarsChange()}>
@@ -192,6 +195,15 @@ const Account = ({ session }) => {
       </div>
 
       <br></br>
+    </> 
+    }
+
+    {!clickGames && <>
+      <div2>
+        Click "Games" if you would like to see the different game subcategories!
+      </div2>
+      </>
+    }
 
     <h1 className= "title"><strong> TV Shows/Movies </strong></h1>
 

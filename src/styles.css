@@ -8,6 +8,12 @@
   color: gold ;
 }
 
+.clickableText {
+  font-size:  30px;
+  color:  gold;
+  cursor:  pointer;
+}
+
 .pointSystem{
   height: 200px;
   width: 20%;
@@ -16,4 +22,16 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px;
+}
+
+.expandButton {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor:  pointer;
 }
