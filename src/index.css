@@ -303,6 +303,16 @@ body {
   width: 20%;
 }
 
+.coinicon {
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 20%;
+  background-color:  transparent;
+}
+
 /*
 input[type="text"] {
   margin: 10px 0px;

@@ -12,11 +12,12 @@ import TextField from "@mui/material/TextField";
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
-  const [brawl_stars, setBrawlStars] = useState(null);
-  const [mobile_legends, setMobileLegends] = useState(true);
+  const [brawl_stars, setBrawlStars] = useState(false);
+  const [mobile_legends, setMobileLegends] = useState(false);
+  const [anime, setAnime] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
-  const lstOfPreferences = [];
+  const [points, setPoints] = useState(0);
 
   useEffect(() => {
     getProfile();
@@ -58,9 +59,8 @@ const Account = ({ session }) => {
         setBrawlStars(data.brawl_stars);
         setMobileLegends(data.mobile_legends);
         setAvatarUrl(data.avatar_url);
-        if (brawl_stars) {
-          lstOfPreferences.push("Brawl stars");
-        }
+        setPoints(data.points);
+        setAnime(data.anime);
       }
     } catch (error) {
       alert(error.message);
@@ -81,7 +81,9 @@ const Account = ({ session }) => {
         username,
         brawl_stars,
         mobile_legends,
+        anime,
         avatar_url,
+        points,
         updated_at: new Date(),
       };
 
@@ -101,9 +103,16 @@ const Account = ({ session }) => {
 
   return (
     <>
+    <h1 className = "pointSystem">
+      <div> {" "} <strong> Points: {points} </strong></div>
+      <div> <strong> Rank: Noob </strong></div>
+    </h1>
+
       <div className="App">
         <ChatwootWidget />
       </div>
+
+
       <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
         <Welcome></Welcome>
       </div>
@@ -138,27 +147,25 @@ const Account = ({ session }) => {
                 {" "}
                 Please indicate your preferences for the following categories.{" "}
               </div>
-              <div>
-                {" "}
-                Please type 'yes' or 'y' only if you wish to put that as one of
-                your preferences.{" "}
-              </div>
-              <div> Your results will be saved the next time you log in. </div>
-            </p>
-            <p>
-              <label htmlFor="brawl_stars">Brawl Stars? </label>
-              <div>
-                <input
-                  id="brawl_stars"
-                  type="boolean"
-                  value={brawl_stars || ""}
-                  onChange={(e) => setBrawlStars(e.target.value)}
-                />
-              </div>
             </p>
           </form>
         )}
       </div>
+
+
+    {/* Toggle button to change preference for Brawl Stars */}
+      <div>
+        <button onClick={() => handleBrawlStarsChange()}>
+          Brawl Stars?
+        </button>
+        {brawl_stars
+          ? " Yes I love Brawl Stars!"
+          : " Not really interested"}
+      </div>
+
+      <br></br>
+
+    {/* Toggle button to change preference for Mobile Legends */}
       <div>
         <button onClick={() => handleMobileLegendsChange()}>
           Mobile legends?
@@ -167,6 +174,20 @@ const Account = ({ session }) => {
           ? " Yes I love Mobile Legends!"
           : " Not really interested"}
       </div>
+
+      <br></br>
+
+    {/* Toggle button to change preference for Anime */}
+      <div>
+        <button onClick={() => handleAnime()}>
+          Anime?
+        </button>
+        {anime
+          ? " Yes I love Anime!"
+          : " Not really interested"}
+      </div>
+
+
       <br></br>
       <form onSubmit={updateProfile} className="form-widget">
         <div>
@@ -211,7 +232,7 @@ const Account = ({ session }) => {
         </Routes>
       </BrowserRouter>
 
-      
+
       <div>
         <br></br>
         <hr></hr>
