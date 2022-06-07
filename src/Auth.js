@@ -33,13 +33,14 @@ export default function Auth() {
 
   return (
     <div className="auth-formatting">
+    <br></br>
       <div>
         <h1 className="header">
           <center>hello! you have arrived at findabud's login page :D</center>
         </h1>
 
         <h1 className="homepageimage">
-          <img src={logo} class="centerimage" height="200" onClick = { hoverClick } style ={{cursor:'pointer'}} />
+          <img src={logo} class="centerimage" height="180" onClick = { hoverClick } style ={{cursor:'pointer'}} />
         </h1>
 
         {isOpen && <Popup

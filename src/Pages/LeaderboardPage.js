@@ -14,9 +14,8 @@ const LeaderboardPage = ({session}) => {
   		.from('profiles')
   		.select('*')
 
-  		console.log(data);
-
   		setUsers(data);
+
   	}
 
   	useEffect(() => {
@@ -28,6 +27,20 @@ const LeaderboardPage = ({session}) => {
 	{users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
 	*/
   
+  // To get the current user's number of points:
+  var number = users.filter(user => user.id == session.user.id).map(user => user.points);
+  var totalUsers = users.length;
+  const uniquePoints = [];
+
+  users.map(user => {
+    if (uniquePoints.indexOf(user.points) == -1) {
+      uniquePoints.push(user.points);
+    }
+  });
+
+  uniquePoints.sort((a,b) => a < b ? 1: -1); //sort in descending order
+  console.log(uniquePoints);
+  console.log(number);
 return(
 	<>
 
@@ -44,7 +57,7 @@ return(
         {users.sort((a,b) => a.points < b.points ? 1: -1).slice(0,5).map((val, key) => {
           return (
             <tr key={key}>
-              <td>{key+1}</td>
+              <td>{uniquePoints.indexOf(val.points)+1}</td>
               <td>{val.username}</td>
               <td>{val.points}</td>
             </tr>
@@ -52,6 +65,14 @@ return(
         })}
       </table>
     </div>
+
+    <br></br>
+    <div><center> You have {" "} <strong> {number} {(number == 1) ? "point" : "points"} </strong> now, which
+    places you in rank {" "} <strong> {uniquePoints.indexOf(parseInt(number))+1}</strong>! </center></div>
+
+
+    
+
 
 	</>);	
 }

@@ -11,20 +11,20 @@ function NavBar() {
 			<ul>
 				<Link to="/">
 					<h1 className="homepageimage">
-          				<img src={videologo} class="centerimage" height="170" style ={{cursor:'pointer'}} />
+          				<img src={videologo} class="clickicons" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 
 
 				<Link to="/firstpage">
 					<h1 className="homepageimage">
-          				<img src={leaderboard} class="centerimage" height="170" style ={{cursor:'pointer'}} />
+          				<img src={leaderboard} class="clickicons" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 
 				<Link to="/chatpage">
 					<h1 className="homepageimage">
-          				<img src={match} class="centerimage" height="170" style ={{cursor:'pointer'}} />
+          				<img src={match} class="clickicons" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 			</ul>
