@@ -46,7 +46,7 @@ const Account = ({ session }) => {
 
       let { data, error, status } = await supabase
         .from("profiles")
-        .select(`username, website, brawl_stars, mobile_legends, avatar_url`)
+        .select(`username, brawl_stars, mobile_legends, avatar_url`)
         .eq("id", user.id)
         .single();
 
