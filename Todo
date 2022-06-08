@@ -1,21 +1,40 @@
-//To-do list:
+{/*
 
-// More urgent:
-// Add to the design
-// Figure out how to extract information about a user (using supabase? not sure)
-// Figure out if we can somehow link python code/java code/cpp code to all these code here?
-// Add a button in Account.js that gives an alert to show random information everytime we press it
-// Add a button in Account.js that shows our contact information
-// Figure out if we can add another field in the login page to enter NUS id as well
-// Figure out if there's any 'chat' function that can be linked here
+1. Get data from supabase
 
-// Less urgent:
-// Add more fields for the different interests (now there's only brawl stars)
-// Add more pages (now there's only firstpage and testpage which don't really show anything interesting)
+        const [users, setUsers] = useState([]);
 
-//notes:
-<div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>
-        <Welcome></Welcome>
-</div>
+        const fetchData = async () => {
+                const {data, error} = await supabase
+                .from('profiles')
+                .select('*')
 
-<div className="welcome-outer" style={{ margin: "0 0 100px 0" }}>
+                setUsers(data);
+
+        }
+
+        useEffect(() => {
+                fetchData();
+        },[])
+
+2. To get user's row from supabase
+
+
+        users.filter(user => user.id == session.user.id);
+
+3. To get user's points
+        
+        users.filter(user => user.id == session.user.id).map(user => user.points);
+
+4. To add toggle button for any preference
+
+{/* Toggle button to change preference for Brawl Stars */}
+      <div>
+        <button onClick={() => handleBrawlStarsChange()}>
+          Brawl Stars?
+        </button>
+        {brawl_stars
+          ? " Yes I love Brawl Stars!"
+          : " Not really interested"}
+      </div>
+*/}
