@@ -43,7 +43,7 @@ const LeaderboardPage = ({session}) => {
 return(
 	<>
 
-  <div className = "title"><center><strong>Top 5 Users in Findabud</strong></center></div>
+  <div className = "title"><center><strong>Top 10 Ranks in Findabud</strong></center></div>
   <br></br>
 
 	<div className="formatTable">
@@ -53,10 +53,10 @@ return(
           <th>Username</th>
           <th>Points</th>
         </tr>
-        {users.sort((a,b) => a.points < b.points ? 1: -1).slice(0,5).map((val, key) => {
+        {users.sort((a,b) => a.points < b.points ? 1: -1).slice(0,10).map((val, key) => {
           return (
             <tr key={key}>
-              <td>{uniquePoints.indexOf(val.points)+1}</td>
+              <td>{users.filter(user => user.points > val.points).length + 1}</td>
               <td>{val.username}</td>
               <td>{val.points}</td>
             </tr>
@@ -67,7 +67,7 @@ return(
 
     <br></br>
     <div><center> You have {" "} <strong> {number} {(number == 1) ? "point" : "points"} </strong> now, which
-    places you in rank {" "} <strong> {uniquePoints.indexOf(parseInt(number))+1}</strong> {" "}
+    places you in rank {" "} <strong> {users.filter(user => user.points > number).length + 1}</strong> {" "}
     out of <strong> {totalUsers} </strong> buds!</center></div>
 
 	</>);	
