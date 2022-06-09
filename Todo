@@ -37,4 +37,28 @@
           ? " Yes I love Brawl Stars!"
           : " Not really interested"}
       </div>
+
+5. To update a user's points (or any other thing):
+
+const updatePoints = async (number) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({points: points+number}) // go to this column
+        .eq('id', session.user.id)   // find the specific user
+
+      if (error) throw error;
+
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 */}
+

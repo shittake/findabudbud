@@ -35,3 +35,32 @@
   font-size: 16px;
   cursor:  pointer;
 }
+
+.row::after {
+   content: "";
+   clear: both;
+   display: table;
+   background:  none;
+ }
+
+.child {
+  float: left;
+  width: 33.33%;
+  background: none;
+  text-align:  center;
+}
+
+.left {
+  width: 33%;
+  text-align: center;
+}
+
+.middle {
+  width: 33%;
+  text-align: center;
+}
+
+.right {
+  width: 33%;
+  text-align: center;
+}

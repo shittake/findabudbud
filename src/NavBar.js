@@ -8,25 +8,31 @@ import match from "./Images/Match.png";
 function NavBar() {
 	return (	
 		<nav>
-			<ul>
+			<ul>			
+				<h3 className = 'child'>
 				<Link to="/">
 					<h1 className="homepageimage">
-          				<img src={videologo} class="clickicons" height="170" style ={{cursor:'pointer'}} />
+          				<img src={videologo} height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
+				</h3>
 
-
+				<h3 className = 'child'>
 				<Link to="/firstpage">
 					<h1 className="homepageimage">
-          				<img src={leaderboard} class="clickicons" height="170" style ={{cursor:'pointer'}} />
+          				<img src={leaderboard} height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
+				</h3>
 
+				<h3 className = 'child'>
 				<Link to="/chatpage">
 					<h1 className="homepageimage">
-          				<img src={match} class="clickicons" height="170" style ={{cursor:'pointer'}} />
+          				<img src={match} height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
+				</h3>
+			
 			</ul>
 		</nav>
 	);

@@ -8,6 +8,8 @@ import ChatPage from "./Pages/ChatPage";
 import Welcome from "./Components/UI/Welcome";
 import ChatwootWidget from "./chatwoot.js";
 import TextField from "@mui/material/TextField";
+import {FacebookShareButton, FacebookIcon, FacebookShareCount, WhatsappShareButton,
+EmailShareButton, EmailIcon, WhatsappIcon} from "react-share";
 
 const Account = ({ session }) => {
   const [loading, setLoading] = useState(true);
@@ -158,8 +160,6 @@ const Account = ({ session }) => {
   return (
     <>
 
-    {/*Show the user's points and current rank
-    Todo - add more ranks (maybe have another separate file that will be called) */}
     <h1 className = "pointSystem">
       <div> {" "} <strong> Points: {points} </strong></div>
       <div> <strong> Rank: Noob </strong></div>
@@ -326,9 +326,6 @@ const Account = ({ session }) => {
     </form>
     
     <br></br>
-    <br></br>
-    <br></br>
-
 
     {/* Not sure what these 2 buttons will be changed to next time */}
     <div style={{ display: "flex", flexFlow: "row nowrap" }}>
@@ -361,6 +358,28 @@ const Account = ({ session }) => {
         </Route>
       </Routes>
     </BrowserRouter>
+
+
+
+    <h1 className = 'parent'>
+      <h2 className = 'child'>
+        <FacebookShareButton url="https://findabud.herokuapp.com/" quote={"Share!"} >
+          <FacebookIcon size={62} round={true}/>
+        </FacebookShareButton>
+      </h2>
+
+      <h2 className = 'child'>
+        <EmailShareButton url="https://findabud.herokuapp.com/" quote={"Share"}>
+          <EmailIcon size={62} round={true}/>
+        </EmailShareButton>
+      </h2>
+
+      <h2 className = 'child'>
+        <WhatsappShareButton url="https://findabud.herokuapp.com/" quote={"Share"}>
+          <WhatsappIcon size={62} round={true}/>
+        </WhatsappShareButton>
+      </h2>
+    </h1>
 
 
     {/* Sign out button */}
