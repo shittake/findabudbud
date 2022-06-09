@@ -5,16 +5,16 @@
 
 .title {
   font-size: 30px;
-  color: gold ;
+  color: gold;
 }
 
 .clickableText {
-  font-size:  30px;
-  color:  gold;
-  cursor:  pointer;
+  font-size: 30px;
+  color: gold;
+  cursor: pointer;
 }
 
-.pointSystem{
+.pointSystem {
   height: 200px;
   width: 20%;
   font-size: 20px;
@@ -25,7 +25,7 @@
 }
 
 .expandButton {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;
@@ -33,21 +33,21 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  cursor:  pointer;
+  cursor: pointer;
 }
 
 .row::after {
-   content: "";
-   clear: both;
-   display: table;
-   background:  none;
- }
+  content: "";
+  clear: both;
+  display: table;
+  background: none;
+}
 
 .child {
   float: left;
   width: 33.33%;
   background: none;
-  text-align:  center;
+  text-align: center;
 }
 
 .left {
