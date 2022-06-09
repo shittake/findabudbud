@@ -56,7 +56,29 @@ const Account = ({ session }) => {
   }
 
   const handleSinglePress = () => {
-    alert("to be added");
+    alert("4 points added!");
+    updatePoints(4);
+
+  };
+
+  const updatePoints = async (number) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({points: points+number})
+        .eq('id', session.user.id)
+
+      if (error) throw error;
+
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+      window.location.reload(false); // force the page to refresh
+    }
   };
 
   const getProfile = async () => {
@@ -286,7 +308,7 @@ const Account = ({ session }) => {
           <center>
             <button2 onClick={handleSinglePress}>
               {" "}
-              Click for some information!{" "}
+              Click for 4 points!{" "}
             </button2>
           </center>
         </div>
@@ -295,7 +317,7 @@ const Account = ({ session }) => {
           <center>
             <button2 onClick={handleSinglePress}>
               {" "}
-              Click for some information!{" "}
+              Click for 4 points!{" "}
             </button2>
           </center>
         </div>

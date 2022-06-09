@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import "../styles.css";
 
 const LeaderboardPage = ({session}) => {
-	const [username, setUsername] = useState(null);
+	  const [username, setUsername] = useState(null);
   	const [brawl_stars, setBrawlStars] = useState(null);
 
   	const [users, setUsers] = useState([]);
