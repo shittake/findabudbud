@@ -32,13 +32,13 @@ const Account = ({ session }) => {
   const [mobile_legends, setMobileLegends] = useState(false);
   const [anime, setAnime] = useState(false);
   const [french, setFrench] = useState(false);
+  const [korean, setKorean] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
-
   const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
   const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
   useEffect(() => {
@@ -59,6 +59,10 @@ const Account = ({ session }) => {
 
   const handleAnimeChange = () => {
     return setAnime(!anime);
+  };
+
+  const handleKoreanChange = () => {
+    setKorean(!korean);
   };
 
   const handleFrenchChange = () => {
@@ -130,6 +134,7 @@ const Account = ({ session }) => {
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
         setAnime(data.anime);
+        setKorean(data.korean);
         setFrench(data.french);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
@@ -157,6 +162,7 @@ const Account = ({ session }) => {
         brawl_stars,
         mobile_legends,
         anime,
+        korean,
         french,
         avatar_url,
         points,
@@ -342,6 +348,14 @@ const Account = ({ session }) => {
               variant={french ? "contained" : "outlined"}
               onClick={() => handleFrenchChange()}
               text="French"
+            ></BlueButton>
+          </div>
+          <br></br>
+          <div>
+            <BlueButton
+              variant={korean ? "contained" : "outlined"}
+              onClick={() => handleKoreanChange()}
+              text="Korean"
             ></BlueButton>
           </div>
         </>
