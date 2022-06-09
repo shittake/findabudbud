@@ -55,13 +55,15 @@ const Account = ({ session }) => {
     return setClickLanguages(!clickLanguages);
   }
 
-  const handleSinglePress = () => {
+  const handleSinglePress = () => { 
     alert("4 points added!");
     updatePoints(4);
-
   };
 
-  const updatePoints = async (number) => {
+// Method to update a user's points in database
+// Input --> an integer representing the number of points added
+
+  const updatePoints = async (number) => {  
     setLoading(true);
     try {
       const user = supabase.auth.user();
@@ -81,7 +83,9 @@ const Account = ({ session }) => {
     }
   };
 
-  const getProfile = async () => {
+// Method to obtain user's profile once he logs in
+
+  const getProfile = async () => { 
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -114,6 +118,8 @@ const Account = ({ session }) => {
       setLoading(false);
     }
   };
+
+// Method to update all columns for a user once he clicks on "update profile"
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -148,47 +154,56 @@ const Account = ({ session }) => {
     }
   };
 
+
   return (
     <>
+
+    {/*Show the user's points and current rank
+    Todo - add more ranks (maybe have another separate file that will be called) */}
     <h1 className = "pointSystem">
       <div> {" "} <strong> Points: {points} </strong></div>
       <div> <strong> Rank: Noob </strong></div>
     </h1>
 
-      <div className="App">
-        <ChatwootWidget />
-      </div>
+
+    {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
+    <div className="App">
+      <ChatwootWidget />
+    </div>
 
 
-      <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
-        <Welcome></Welcome>
-      </div>
-      <h2>Please key in your profile details: </h2>
-      <div aria-live="polite">
-        {loading ? (
-          "Saving ..."
-        ) : (
-          <form onSubmit={updateProfile} className="form-widget">
-            <p>Email: {session.user.email}</p>
-            <p>
-              <div>
-                <label htmlFor="username">Username: </label>
-                <div style={{ padding: "7px 0 0 0" }}>
-                  <TextField
-                    margin="dense"
-                    size="small"
-                    // inputProps={{ sx: { height: 10 } }}
-                    required
-                    id="username"
-                    label="Required"
-                    // defaultValue="Hello World"
-                    placeholder="Your username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
+    {/* Welcome Message */}
+    <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
+      <Welcome></Welcome>
+    </div>
+
+
+    {/* Instructions to user */}
+    <h2>Please key in your profile details: </h2>
+    <div aria-live="polite">
+      {loading ? (
+        "Saving ..."
+      ) : (
+        <form onSubmit={updateProfile} className="form-widget">
+          <p>Email: {session.user.email}</p>
+          <p>
+            <div>
+              <label htmlFor="username">Username: </label>
+              <div style={{ padding: "7px 0 0 0" }}>
+                <TextField
+                  margin="dense"
+                  size="small"
+                  required
+                  id="username"
+                  label="Required"
+                  placeholder="Your username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </div>
-            </p>
+            </div>
+          </p>
+
             <p>
               <div>
                 {" "}
@@ -202,6 +217,8 @@ const Account = ({ session }) => {
         )}
       </div>
 
+
+    {/* First Category - GAMES */}
     <h1 className= "clickableText"><strong> 
     <button2 onClick={()=>toggleGames()}> Games </button2></strong></h1>
 
@@ -215,7 +232,6 @@ const Account = ({ session }) => {
           ? " Yes I love Brawl Stars!"
           : " Not really interested"}
       </div>
-
       <br></br>
 
     {/* Toggle button to change preference for Mobile Legends */}
@@ -227,11 +243,12 @@ const Account = ({ session }) => {
           ? " Yes I love Mobile Legends!"
           : " Not really interested"}
       </div>
-
       <br></br>
+
     </> 
     }
 
+    {/* This is shown if the GAMES heading is not clicked. */}
     {!clickGames && <>
       <div2>
         Click "Games" if you would like to see the different game subcategories!
@@ -240,6 +257,8 @@ const Account = ({ session }) => {
     }
 
     <br></br>
+
+    {/* Second Heading - TV Shows/Movies */}
     <h1 className= "clickableText"><strong> 
     <button2 onClick={()=>toggleShows()}> TV Shows/Movies </button2></strong></h1>
 
@@ -253,11 +272,12 @@ const Account = ({ session }) => {
           ? " Yes I love Anime!"
           : " Not really interested"}
       </div>
-
       <br></br>
+
       </>
     }
 
+    {/* This is shown if the TV Shows/Movies header is not clicked */}
     {!clickShows && <>
       <div2>
         Click "TV Shows{"/"}Movies" if you would like to see the different TV Shows or movie subcategories!
@@ -266,6 +286,9 @@ const Account = ({ session }) => {
     }
 
     <br></br>
+
+
+    {/* Third heading - LANGUAGES */}
     <h1 className= "clickableText"><strong> 
     <button2 onClick={()=>toggleLanguages()}> Languages </button2></strong></h1>
 
@@ -282,6 +305,7 @@ const Account = ({ session }) => {
       </>
     }
 
+    {/* This is shown if the Languages heading is not clicked */}
     {!clickLanguages && <>
         <div2>
           Click "Languages" if you would like to see the different language subcategories!
@@ -290,63 +314,69 @@ const Account = ({ session }) => {
     }
 
 
-      <br></br>
-      <form onSubmit={updateProfile} className="form-widget">
-        <div>
-          <button className="button block primary" disabled={loading}>
-            Update profile now
-          </button>
-        </div>
-      </form>
-      <br></br>
+    <br></br>
 
-      
-      <br></br>
-      <br></br>
-      <div style={{ display: "flex", flexFlow: "row nowrap" }}>
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}>
-              {" "}
-              Click for 4 points!{" "}
-            </button2>
-          </center>
-        </div>
-
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}>
-              {" "}
-              Click for 4 points!{" "}
-            </button2>
-          </center>
-        </div>
-      </div>
-
-
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<VideoPage />} />
-            <Route path="firstpage" element={<LeaderboardPage session={session} />} />
-            <Route path="chatpage" element={<ChatPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
-
+    {/* Button that updates the user profile and updates database once user clicks */}
+    <form onSubmit={updateProfile} className="form-widget">
       <div>
-        <br></br>
-        <hr></hr>
-
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
+        <button className="button block primary" disabled={loading}>
+          Update profile now
         </button>
       </div>
-    </>
+    </form>
+    
+    <br></br>
+    <br></br>
+    <br></br>
+
+
+    {/* Not sure what these 2 buttons will be changed to next time */}
+    <div style={{ display: "flex", flexFlow: "row nowrap" }}>
+      <div className="button2">
+        <center>
+          <button2 onClick={handleSinglePress}>
+            {" "}
+            Click for 4 points!{" "}
+          </button2>
+        </center>
+      </div>
+
+      <div className="button2">
+        <center>
+          <button2 onClick={handleSinglePress}>
+            {" "}
+            Click for 4 points!{" "}
+          </button2>
+        </center>
+      </div>
+    </div>
+
+   {/* To link to to other pages using Router */}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<VideoPage />} />
+          <Route path="firstpage" element={<LeaderboardPage session={session} />} />
+          <Route path="chatpage" element={<ChatPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
+
+    {/* Sign out button */}
+    <div>
+      <br></br>
+      <hr></hr>
+
+      <button
+        className="button block"
+        onClick={() => supabase.auth.signOut()}
+      >
+        Sign Out
+      </button>
+    </div>
+  </>
+
   );
 };
 
