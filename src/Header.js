@@ -79,6 +79,27 @@ export default function Header({session}) {
 
   const { header, logo } = useStyles();
 
+  var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
+  var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
+
+
+  var i;
+  const findTitle = (points) => {
+    var answer = "";
+    console.log(points);
+    for (i=0;i<pointCutoff.length-1;i++){
+      if (points >= pointCutoff[i] && points < pointCutoff[i+1]) {
+        answer = titles[i];
+        break;
+      }
+    }
+    if (answer == "") {
+      return "God";
+    } else {
+      return answer;
+    }
+  }
+
   const clickFAQ = () => {
     setIsTourOpen(true);
   }  
@@ -107,6 +128,7 @@ export default function Header({session}) {
       setLoading(false);
     }
   };
+
   const displayDesktop = () => {
     return (<Toolbar className = 'myToolbar'>
 
@@ -123,11 +145,14 @@ export default function Header({session}) {
     );
   };
 
+
   const findabudLogo = (
     <Typography variant="h6" component="h1" className={logo}>
       FINDABUD
     </Typography>
   );
+
+
 
     const getMenuButtons = () => {
     return (
@@ -138,7 +163,7 @@ export default function Header({session}) {
         </div>
         <div>
           {" "}
-          <strong> Rank: Noob </strong>
+          <strong> Rank: {findTitle(points)} </strong>
         </div>
       </h1>
     );

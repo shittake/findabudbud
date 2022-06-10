@@ -19,6 +19,26 @@ const LeaderboardPage = ({ session }) => {
     fetchData();
   }, []);
 
+  var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
+  var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
+
+  var i;
+  const findTitle = (points) => {
+    var answer = "";
+    console.log(points);
+    for (i=0;i<pointCutoff.length-1;i++){
+      if (points >= pointCutoff[i] && points < pointCutoff[i+1]) {
+        answer = titles[i];
+        break;
+      }
+    }
+    if (answer == "") {
+      return "God";
+    } else {
+      return answer;
+    }
+  }
+
   /* Template code:
 	<p><center><strong> People who love brawl stars: </strong></center></p>
 	{users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
@@ -43,7 +63,7 @@ const LeaderboardPage = ({ session }) => {
     <>
       <div className="title">
         <center>
-          <strong>Top 10 Ranks in Findabud</strong>
+          <strong>Top 10 Users in Findabud</strong>
         </center>
       </div>
       <br></br>
@@ -68,7 +88,7 @@ const LeaderboardPage = ({ session }) => {
                   </td>
                   <td>{val.username}</td>
                   <td>{val.points}</td>
-                  <td>{"noob"}</td>
+                  <td>{findTitle(val.points)}</td>
                 </tr>
               );
             })}
