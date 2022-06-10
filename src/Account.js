@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./Pages/Layout";
 import LeaderboardPage from "./Pages/LeaderboardPage";
 import VideoPage from "./Pages/VideoPage";
@@ -8,6 +8,8 @@ import ChatPage from "./Pages/ChatPage";
 import Welcome from "./Components/Welcome/Welcome";
 import ChatwootWidget from "./chatwoot.js";
 import TextField from "@mui/material/TextField";
+import Header from "./Header";
+
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -26,6 +28,7 @@ import {
 } from "./Components/Buttons/ColouredButtons";
 
 const Account = ({ session }) => {
+
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(false);
@@ -185,6 +188,7 @@ const Account = ({ session }) => {
 
   return (
     <>
+    <Header/>
       <h1 className="pointSystem">
         <div>
           {" "}
