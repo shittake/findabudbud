@@ -4,6 +4,8 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import logo from "./Images/FindabudLogo.png";
 import { supabase } from "./supabaseClient";
+import Joyride from 'react-joyride';
+import Tour from "reactour";
 
 
 const useStyles = makeStyles(() => ({
@@ -19,17 +21,69 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Header({session}) {
+  const steps = [
+    {
+      selector: "#welcome-message",
+      content: "Welcome to findabud! You may wish to watch this tutorial if this is your first time here."
+    },
+    {
+      selector: "#profile1",
+      content: "If you have not done so yet, please update your profile!"
+    },
+    {
+      selector: "#username",
+      content: "Key in your username here. This will be shown to other users as well as be displayed on the leaderboard!"
+    },
+    {
+      selector: "#profile2",
+      content: "There are 3 main categories - Games, TV Shows/Movies and Languages. To open up the more specific sub-categories, click on any of these!"
+    },
+    {
+      selector: "#profile4",
+      content: "A filled box means that you are interested in it, while an empty box means that you are not listing it as one of your preferences. Click on any of these boxes to toggle!"
+    },
+    {
+      selector: "#profile3",
+      content: "After you are done updating your profile, remember to click the update button!"
+    },
+    {
+      selector: "#video",
+      content: "Here, you can watch a randomly chosen video featuring one of the many preferences! Who knows, you may find a new one that you like!"
+    },
+    {
+      selector: "#leaderboard",
+      content: "See how you rank in Findabud against other users! Any titles or custom names that you earn will be displayed here as well."
+    },
+    {
+      selector:"#chat",
+      content: "Match with someone with mutual interests and start chatting away!"
+    },
+    {
+      selector: "#livechat",
+      content: "If you ever need any assistance or wish to contact the developers directly to discuss improvements/new features, you can do so here! We will try to respond to you in 3 working days :D"
+    },
+    {
+      selector: "#share",
+      content: "Share this link with your friends and earn some extra points if you do so!"
+    }
+  ];
+
   useEffect(() => {
     getProfile();
   }, [session]);
 
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [click, setClick] = useState(false);
+  const [isTourOpen, setIsTourOpen] = useState(true);
 
   const { header, logo } = useStyles();
 
+  const clickFAQ = () => {
+    setIsTourOpen(true);
+  }  
 
-    const getProfile = async () => {
+  const getProfile = async () => {
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -61,7 +115,7 @@ export default function Header({session}) {
     {getMenuButtons()}
 
     <div className = 'roundButton'
-      onClick={()=>alert("FAQ")}>
+      onClick={()=>clickFAQ()}>
       ?
     </div>
 
@@ -93,6 +147,11 @@ export default function Header({session}) {
   return (
     <header>
       <AppBar className={header}>{displayDesktop()}</AppBar>
+      {isTourOpen && <Tour steps = {steps}
+      isOpen = {isTourOpen}
+      onRequestClose={() => setIsTourOpen(false)}
+      /> }
+
     </header>
   );
 }

@@ -12,7 +12,7 @@ function NavBar() {
 				<h3 className = 'child'>
 				<Link to="/">
 					<h1 className="homepageimage">
-          				<img src={videologo} height="170" style ={{cursor:'pointer'}} />
+          				<img src={videologo} id ="video" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 				</h3>
@@ -20,7 +20,7 @@ function NavBar() {
 				<h3 className = 'child'>
 				<Link to="/firstpage">
 					<h1 className="homepageimage">
-          				<img src={leaderboard} height="170" style ={{cursor:'pointer'}} />
+          				<img src={leaderboard} id = "leaderboard" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 				</h3>
@@ -28,7 +28,7 @@ function NavBar() {
 				<h3 className = 'child'>
 				<Link to="/chatpage">
 					<h1 className="homepageimage">
-          				<img src={match} height="170" style ={{cursor:'pointer'}} />
+          				<img src={match} id = "chat" height="170" style ={{cursor:'pointer'}} />
         			</h1>
 				</Link>
 				</h3>

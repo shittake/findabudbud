@@ -198,12 +198,12 @@ const Account = ({ session }) => {
       <br></br>
       <br></br>
       {/* Welcome Message */}
-      <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
+      <div className="welcome-outer" id="welcome-message" style={{ margin: "0 0 10px 0" }}>
         <Welcome username={username}></Welcome>
       </div>
 
       {/* Instructions to user */}
-      <h2>Please key in your profile details: </h2>
+      <h2 id="profile1">Please key in your profile details: </h2>
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
@@ -245,7 +245,7 @@ const Account = ({ session }) => {
 
       {/* First Category - GAMES */}
 
-      <h1 className="clickableText">
+      <h1 className="clickableText" id="profile2">
         <strong>
           <button2 onClick={() => toggleGames()} style={{ color: "red" }}>
             {" "}
@@ -260,6 +260,7 @@ const Account = ({ session }) => {
           <div>
             <RedButton
               onClick={() => handleBrawlStarsChange()}
+              id = "profile4"
               variant={brawlStarsVariant}
               text="Brawl Stars"
             ></RedButton>
@@ -372,7 +373,7 @@ const Account = ({ session }) => {
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
         <div>
-          <button className="button block primary" disabled={loading}>
+          <button id ="profile3" className="button block primary" disabled={loading}>
             Update profile now
           </button>
         </div>
@@ -409,7 +410,7 @@ const Account = ({ session }) => {
         </Routes>
       </BrowserRouter>
 
-      <h1 className="parent">
+      <h1 className="parent" id = "share">
         <h2 className="child">
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
@@ -441,6 +442,11 @@ const Account = ({ session }) => {
       {/* Sign out button */}
       <div>
         <br></br>
+        
+      <div className = "corner" id = "livechat">
+        Here
+      </div>
+
         <hr></hr>
 
         <button
@@ -450,6 +456,8 @@ const Account = ({ session }) => {
           Sign Out
         </button>
       </div>
+
+
     </>
   );
 };
