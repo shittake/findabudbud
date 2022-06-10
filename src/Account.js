@@ -188,23 +188,15 @@ const Account = ({ session }) => {
 
   return (
     <>
-    <Header/>
-      <h1 className="pointSystem">
-        <div>
-          {" "}
-          <strong> Points: {points} </strong>
-        </div>
-        <div>
-          {" "}
-          <strong> Rank: Noob </strong>
-        </div>
-      </h1>
+    <Header session = {session}/>
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
       <div className="App">
         <ChatwootWidget />
       </div>
 
+      <br></br>
+      <br></br>
       {/* Welcome Message */}
       <div className="welcome-outer" style={{ margin: "0 0 10px 0" }}>
         <Welcome username={username}></Welcome>

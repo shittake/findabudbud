@@ -1,6 +1,10 @@
-
-import { AppBar, Toolbar, Typography, makeStyles } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, makeStyles, Button } from "@material-ui/core";
+import { useState, useEffect } from "react";
 import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+import logo from "./Images/FindabudLogo.png";
+import { supabase } from "./supabaseClient";
+
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -14,11 +18,47 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Header() {
+export default function Header({session}) {
+  useEffect(() => {
+    getProfile();
+  }, [session]);
+
+  const [points, setPoints] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   const { header, logo } = useStyles();
 
+    const getProfile = async () => {
+    try {
+      setLoading(true);
+      const user = supabase.auth.user();
+
+      let { data, error, status } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setPoints(data.points);
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   const displayDesktop = () => {
-    return <Toolbar>{findabudLogo}</Toolbar>;
+    return (<Toolbar className = 'myToolbar'>
+    {findabudLogo}
+    {getMenuButtons()}
+    Hi!
+    </Toolbar>
+    );
   };
 
   const findabudLogo = (
@@ -26,6 +66,21 @@ export default function Header() {
       FINDABUD
     </Typography>
   );
+
+    const getMenuButtons = () => {
+    return (
+      <h1 className="pointSystem">
+        <div>
+          {" "}
+          <strong> Points: {points}</strong>
+        </div>
+        <div>
+          {" "}
+          <strong> Rank: Noob </strong>
+        </div>
+      </h1>
+    );
+  }
 
   return (
     <header>
