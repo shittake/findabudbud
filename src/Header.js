@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, makeStyles, Button } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, makeStyles, Button, Avatar } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
@@ -28,6 +28,7 @@ export default function Header({session}) {
 
   const { header, logo } = useStyles();
 
+
     const getProfile = async () => {
     try {
       setLoading(true);
@@ -54,9 +55,16 @@ export default function Header({session}) {
   };
   const displayDesktop = () => {
     return (<Toolbar className = 'myToolbar'>
+
     {findabudLogo}
+
     {getMenuButtons()}
-    Hi!
+
+    <div className = 'roundButton'
+      onClick={()=>alert("FAQ")}>
+      ?
+    </div>
+
     </Toolbar>
     );
   };

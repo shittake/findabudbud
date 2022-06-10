@@ -64,6 +64,19 @@ body {
   text-transform: none;
 }
 
+.roundButton{
+  height: 50px;
+  line-height: 50px;  
+  width: 50px;  
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: #4CAF50;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+
 .button:hover {
   background-color: rgba(255, 206, 107, 0.881);
 }
