@@ -19,7 +19,7 @@ export default function Router({ session }) {
             path="/"
             element={<Account key={session.user.id} session={session} />}
           />
-          <Route path="/videopage" element={<VideoPage />} />
+          <Route path="videopage" element={<VideoPage />} />
           <Route
             path="firstpage"
             element={<LeaderboardPage session={session} />}

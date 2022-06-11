@@ -3,7 +3,7 @@ import "./EventForm.css";
 
 export default function EventForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredId, setEnteredId] = useState(null);
+  const [enteredId, setEnteredId] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
