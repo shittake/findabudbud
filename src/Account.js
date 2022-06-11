@@ -5,6 +5,7 @@ import Layout from "./Pages/Layout";
 import LeaderboardPage from "./Pages/LeaderboardPage";
 import VideoPage from "./Pages/VideoPage";
 import ChatPage from "./Pages/ChatPage";
+import EventsPage from "./Pages/EventsPage";
 import Welcome from "./Components/Welcome/Welcome";
 import ChatwootWidget from "./chatwoot.js";
 import TextField from "@mui/material/TextField";
@@ -401,11 +402,9 @@ const Account = ({ session }) => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<VideoPage />} />
-            <Route
-              path="firstpage"
-              element={<LeaderboardPage session={session} />}
-            />
+            <Route path="firstpage" element={<LeaderboardPage session={session} />} />
             <Route path="chatpage" element={<ChatPage />} />
+            <Route path="eventspage" element={<EventsPage session={session} />} />
           </Route>
         </Routes>
       </BrowserRouter>

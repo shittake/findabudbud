@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 import videologo from "./Images/VideoOfTheDay.png";
 import leaderboard from "./Images/LeaderboardNew.png";
 import match from "./Images/Match.png";
-
+import events from "./Images/Events-2.png";
 
 function NavBar() {
 	return (	
@@ -30,6 +30,14 @@ function NavBar() {
 					<h1 className="homepageimage">
           				<img src={match} id = "chat" height="170" style ={{cursor:'pointer'}} />
         			</h1>
+				</Link>
+				</h3>
+
+				<h3 className = 'child'>
+				<Link to="/eventspage">
+					<h1 className="homepageimage">
+						<img src={events} id = "events" height="170" style={{cursor:'pointer'}} />
+					</h1>
 				</Link>
 				</h3>
 			
