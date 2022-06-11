@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
-import Layout from "./Pages/Layout";
-import LeaderboardPage from "./Pages/LeaderboardPage";
-import VideoPage from "./Pages/VideoPage";
-import ChatPage from "./Pages/ChatPage";
-import EventsPage from "./Pages/EventsPage";
+
 import Welcome from "./Components/Welcome/Welcome";
 import ChatwootWidget from "./chatwoot.js";
 import TextField from "@mui/material/TextField";
@@ -29,7 +24,6 @@ import {
 } from "./Components/Buttons/ColouredButtons";
 
 const Account = ({ session }) => {
-
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(false);
@@ -189,7 +183,7 @@ const Account = ({ session }) => {
 
   return (
     <>
-    <Header session = {session}/>
+      <Header session={session} />
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
       <div className="App">
@@ -199,7 +193,11 @@ const Account = ({ session }) => {
       <br></br>
       <br></br>
       {/* Welcome Message */}
-      <div className="welcome-outer" id="welcome-message" style={{ margin: "0 0 10px 0" }}>
+      <div
+        className="welcome-outer"
+        id="welcome-message"
+        style={{ margin: "0 0 10px 0" }}
+      >
         <Welcome username={username}></Welcome>
       </div>
 
@@ -261,7 +259,7 @@ const Account = ({ session }) => {
           <div>
             <RedButton
               onClick={() => handleBrawlStarsChange()}
-              id = "profile4"
+              id="profile4"
               variant={brawlStarsVariant}
               text="Brawl Stars"
             ></RedButton>
@@ -283,10 +281,10 @@ const Account = ({ session }) => {
       {/* This is shown if the GAMES heading is not clicked. */}
       {!clickGames && (
         <>
-          <div2>
+          <div>
             Click "Games" if you would like to see the different game
             subcategories!
-          </div2>
+          </div>
         </>
       )}
 
@@ -296,8 +294,7 @@ const Account = ({ session }) => {
       <h1 className="clickableText">
         <strong>
           <button2 onClick={() => toggleShows()} style={{ color: "green" }}>
-            {" "}
-            TV Shows/Movies{" "}
+            TV Shows/Movies
           </button2>
         </strong>
       </h1>
@@ -319,10 +316,10 @@ const Account = ({ session }) => {
       {/* This is shown if the TV Shows/Movies header is not clicked */}
       {!clickShows && (
         <>
-          <div2>
+          <div>
             Click "TV Shows{"/"}Movies" if you would like to see the different
             TV Shows or movie subcategories!
-          </div2>
+          </div>
         </>
       )}
 
@@ -362,10 +359,10 @@ const Account = ({ session }) => {
       {/* This is shown if the Languages heading is not clicked */}
       {!clickLanguages && (
         <>
-          <div2>
+          <div>
             Click "Languages" if you would like to see the different language
             subcategories!
-          </div2>
+          </div>
         </>
       )}
 
@@ -374,7 +371,11 @@ const Account = ({ session }) => {
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
         <div>
-          <button id ="profile3" className="button block primary" disabled={loading}>
+          <button
+            id="profile3"
+            className="button block primary"
+            disabled={loading}
+          >
             Update profile now
           </button>
         </div>
@@ -397,19 +398,7 @@ const Account = ({ session }) => {
         </div>
       </div>
 
-      {/* To link to to other pages using Router */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<VideoPage />} />
-            <Route path="firstpage" element={<LeaderboardPage session={session} />} />
-            <Route path="chatpage" element={<ChatPage />} />
-            <Route path="eventspage" element={<EventsPage session={session} />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
-      <h1 className="parent" id = "share">
+      <h1 className="parent" id="share">
         <h2 className="child">
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
@@ -441,10 +430,10 @@ const Account = ({ session }) => {
       {/* Sign out button */}
       <div>
         <br></br>
-        
-      <div className = "corner" id = "livechat">
-        Here
-      </div>
+
+        {/* <div className="corner" id="livechat">
+          Here
+        </div> */}
 
         <hr></hr>
 
@@ -455,8 +444,6 @@ const Account = ({ session }) => {
           Sign Out
         </button>
       </div>
-
-
     </>
   );
 };

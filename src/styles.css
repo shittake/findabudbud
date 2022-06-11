@@ -68,5 +68,9 @@
 }
 
 .myToolbar {
-  justify-content:space-between;
+  justify-content: space-between;
+}
+
+.active {
+  height: 200px;
 }

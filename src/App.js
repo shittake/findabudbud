@@ -5,6 +5,7 @@ import Auth from "./Auth";
 import Account from "./Account";
 import { ThemeProvider } from "@mui/material";
 import theme from "./Components/Buttons/ButtonStylingTheme";
+import Router from "./Components/Router";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -21,11 +22,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <div className="container" style={{ padding: "50px 0 50px 0" }}>
         {" "}
-        {!session ? (
-          <Auth />
-        ) : (
-          <Account key={session.user.id} session={session} />
-        )}
+        {!session ? <Auth /> : <Router session={session} />}
       </div>
     </ThemeProvider>
   );

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&family=Work+Sans&display=swap");
 
 html {
   height: 100%;
@@ -64,14 +64,14 @@ body {
   text-transform: none;
 }
 
-.roundButton{
+.roundButton {
   height: 50px;
-  line-height: 50px;  
-  width: 50px;  
+  line-height: 50px;
+  width: 50px;
   font-size: 2em;
   font-weight: bold;
   border-radius: 50%;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   text-align: center;
   cursor: pointer;
@@ -417,4 +417,14 @@ th {
 
 td {
   text-align: center;
+}
+
+.event-button {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  background-color: #ce64ff;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 0.5rem;
+  border-radius: 12px;
 }

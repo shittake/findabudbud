@@ -40,7 +40,7 @@ export default function Auth() {
         <h1 className="homepageimage">
           <img
             src={logo}
-            class="centerimage"
+            // class="centerimage"
             height="180"
             onClick={hoverClick}
             style={{ cursor: "pointer" }}
