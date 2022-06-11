@@ -19,13 +19,12 @@ const LeaderboardPage = ({ session }) => {
     fetchData();
   }, []);
 
-  var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
-  var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
-
   var i;
   const findTitle = (points) => {
+    var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
+    var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
+
     var answer = "";
-    console.log(points);
     for (i=0;i<pointCutoff.length-1;i++){
       if (points >= pointCutoff[i] && points < pointCutoff[i+1]) {
         answer = titles[i];
@@ -49,15 +48,6 @@ const LeaderboardPage = ({ session }) => {
     .filter((user) => user.id == session.user.id)
     .map((user) => user.points);
   var totalUsers = users.length;
-  const uniquePoints = [];
-
-  users.map((user) => {
-    if (uniquePoints.indexOf(user.points) == -1) {
-      uniquePoints.push(user.points);
-    }
-  });
-
-  uniquePoints.sort((a, b) => (a < b ? 1 : -1)); //sort in descending order
 
   return (
     <>

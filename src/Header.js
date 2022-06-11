@@ -79,14 +79,12 @@ export default function Header({session}) {
 
   const { header, logo } = useStyles();
 
-  var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
-  var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
-
-
   var i;
   const findTitle = (points) => {
     var answer = "";
-    console.log(points);
+    var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200]
+    var titles = ["New User", "Novice", "Warming Up", "Journeyman","Specialist", "Senior","Master","Grandmaster"]
+
     for (i=0;i<pointCutoff.length-1;i++){
       if (points >= pointCutoff[i] && points < pointCutoff[i+1]) {
         answer = titles[i];
