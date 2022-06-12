@@ -27,14 +27,21 @@ const EventsPage = ({ session }) => {
     return events;
   };
 
-  const addEventHandler = (event) => {
+  const addEventHandler = async (event) => {
     // console.log(event);
     setAllEvents([...allEvents, event]);
 
-    //add to backend
-    // const { data, error } = await supabase.from('events').insert([
-    //   { id: "hi", date:"bye", title:"hello", description:"event" },
-    // ]);
+    // const addToSupabase = async (event) => {
+    //   const { data, error } = await supabase
+    //     .from("events")
+    //     .insert([{ id: "3", title: "hello", description: "event" }]);
+    //   console.log("added in");
+    //   console.log(error);
+    //   console.log(typeof date);
+    // };
+
+    // await addToSupabase(event);
+    // console.log("added out");
   };
 
   const deleteFromSupabase = async (id) => {
@@ -53,10 +60,10 @@ const EventsPage = ({ session }) => {
       <div>
         <Header session={session} />
 
-      <div className="App">
-        <ChatwootWidget />
-      </div>
-      
+        <div className="App">
+          <ChatwootWidget />
+        </div>
+
         <h2 className="welcome-outer"> Welcome to the events page! </h2>
         <NewEvent onAddEvent={addEventHandler} />
         {allEvents.length == 0 && <div> No events found.</div>}
