@@ -100,11 +100,12 @@
     align-items: center;
     justify-content: center;
 }
+
 .home{
     box-sizing: border-box;
     height: 94vh;
     width: 100%;
-    gap: 25px;
+    gap: 2px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -120,6 +121,6 @@
     justify-content: center;
     align-items: center;
     color: white;
-    font-family: 'Zen Tokyo Zoo', cursive;
-    font-size: 35px;
+    font-family: Fantasy;
+    font-size: 25px;
 }

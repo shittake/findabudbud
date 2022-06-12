@@ -3,12 +3,48 @@ import Header from "./Header";
 import Footer from "./Footer";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import ChatwootWidget from "./chatwoot";
 
 const Account = ({ session }) => {
   const [sprite, setSprite] = useState("bottts");
   const [seed, setSeed] = useState(1000);
   const [loading, setLoading] = useState(true);
-      
+  const [users, setUsers] = useState([]);
+  const [avatar, setAvatarUrl] = useState(false);
+  const [actualAvatar, setAvatar] = useState(null);
+
+  const getProfile = async () => {
+    try {
+      setLoading(true);
+      const user = supabase.auth.user();
+
+      let { data, error, status } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", user.id)
+        .single();
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        if (data.avatar_url) {
+            setAvatarUrl(true);
+            setAvatar(data.avatar_url);
+        } 
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, [session]);
+
   const updateAvatar = async (link) => {
     setLoading(true);
     try {
@@ -46,46 +82,60 @@ const Account = ({ session }) => {
   
     return (
       <>
+      <div className="App">
+        <ChatwootWidget />
+      </div>
+
       <Header session={session} />
         <div className="container">
             <div className="nav">
-                <p>Choose an Avatar!</p>
+                {avatar == null 
+                ? <p>You have not chosen an Avatar before. Choose an Avatar! </p>
+                : <p>You have selected an Avatar before, but you may choose another one here if you wish. </p>
+                }
             </div>
+            <h1>
+                {avatar != null
+                    ? <center><p>Your previously selected Avatar is: <img src={actualAvatar} height={170}/></p></center>
+                    : <p></p>
+                }
+            </h1>
+            <br></br>
             <div className="home">
                 <div className="btns">
-                    <button onClick={() => { 
-                        handleSprite("avataaars") }}>Human</button>
-                    <button onClick={() => { 
-                        handleSprite("human") }}>Pixel</button>
-                    <button onClick={() => { 
-                        handleSprite("bottts") }}>Bots</button>
-                    <button onClick={() => { 
-                        handleSprite("jdenticon") }}>Vector</button>
-                    <button onClick={() => { 
-                        handleSprite("identicon") }}>Identi</button>
-                    <button onClick={() => { 
-                        handleSprite("gridy") }}>Alien</button>
-                    <button onClick={() => { 
-                        handleSprite("micah") }}>Avatars</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("avataaars") }}>Humans</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("micah") }}>Humans 2</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("human") }}>Pixels</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("bottts") }}>Robots</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("jdenticon") }}>Shapes</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("identicon") }}>Patterns</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("gridy") }}>Aliens</button>
+                    
                 </div>
                 <div className="avatar">
                     <img src=
 {`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`} alt="Sprite" />
                 </div>
                 <div className="generate">
-                    <button id="gen" onClick={() => { 
-                        handleGenerate() }}>Find another random avatar!</button>
-                    <button id="down" onClick={() => { 
-                        downloadImage(`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`) }}>Select this as Avatar!</button>
+                    <button className="button2" id="gen"onClick={() => { 
+                        handleGenerate() }}>Randomly generate another Avatar</button>
+                    <button className="button2" id="down" onClick={() => { 
+                        downloadImage(`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`) }}>Select this as my Avatar!</button>
                 </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
             </div>
         </div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
         <Footer />
         </>
     );
