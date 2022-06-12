@@ -41,6 +41,11 @@ const LeaderboardPage = ({ session }) => {
     }
   }
 
+  const findAvatar = (link) => {
+    if (link != null) return link;
+    else return "https://avatars.dicebear.com/api/bottts/1000.svg";
+  }
+
   /* Template code:
 	<p><center><strong> People who love brawl stars: </strong></center></p>
 	{users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
@@ -59,7 +64,7 @@ const LeaderboardPage = ({ session }) => {
       <div className="App">
         <ChatwootWidget />
       </div>
-      
+
       <div className="title">
         <center>
           <strong>Top 10 Users in Findabud</strong>
@@ -74,6 +79,7 @@ const LeaderboardPage = ({ session }) => {
             <th>Username</th>
             <th>Points</th>
             <th>Title</th>
+            <th>Avatar</th>
           </tr>
           {users
             .sort((a, b) => (a.points < b.points ? 1 : -1))
@@ -88,6 +94,7 @@ const LeaderboardPage = ({ session }) => {
                   <td>{val.username}</td>
                   <td>{val.points}</td>
                   <td>{findTitle(val.points)}</td>
+                  <td><img src={findAvatar(val.avatar_url)} /></td>
                 </tr>
               );
             })}
