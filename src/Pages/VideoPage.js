@@ -15,6 +15,8 @@ const VideoPage = ({ session }) => {
     var links = ["https://www.youtube.com/embed/G_wxQe2Litw","https://www.youtube.com/embed/FT5OYVyc7Sw"];
     var titles = ["Brawl Stars Tips", "Clash Royale Tips"];
 
+    var currMinute = new Date().getMinutes();
+
     const fetchData = async () => {
       const { data, error } = await supabase.from("profiles").select("*");
 
@@ -22,13 +24,6 @@ const VideoPage = ({ session }) => {
       setIndex(data.index);
       setLink(links[index]);
 
-      var currMinute = new Date().getMinutes();
-
-      if (currMinute != date) {
-        updateIndex(currMinute);
-        setDate(currMinute);
-        setLink(links[1]);
-      }
     };
 
     useEffect(() => {
@@ -55,6 +50,11 @@ const VideoPage = ({ session }) => {
       }
     };
 
+    const getLinkDiff = () => {
+      updateIndex(currMinute);
+      setDate(currMinute);
+      return links[1];
+    }
 
 
     return (
@@ -72,7 +72,7 @@ const VideoPage = ({ session }) => {
             <iframe
               width="1000"
               height="500"
-              src={link}
+              src= {(date == currMinute) ? links[0]: links[1]}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

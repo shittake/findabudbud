@@ -6,6 +6,7 @@ import Account from "./Account";
 import { ThemeProvider } from "@mui/material";
 import theme from "./Components/Buttons/ButtonStylingTheme";
 import Router from "./Components/Router";
+import axios from "axios";
 
 export default function App() {
   const [session, setSession] = useState(null);

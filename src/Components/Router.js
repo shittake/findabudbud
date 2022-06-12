@@ -12,10 +12,11 @@ import Account from "../Account";
 }
 
 export default function Router({ session }) {
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout session={session}/>}>
           <Route path="/" element={<Account key={session.user.id} session={session} />} />
           <Route path="profilepage" element={<ProfilePage session={session}/> } />
           <Route path="videopage" element={<VideoPage session={session}/>} />

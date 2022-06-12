@@ -27,6 +27,24 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Header({ session }) {
+
+  const [users, setUsers] = useState([]);
+
+  const fetchData = async () => {
+  const {data, error} = await supabase.from('profiles').select('*')
+  setUsers(data);
+    }
+
+  useEffect(() => {
+  fetchData();
+  },[])
+
+  const formatDate = (dateString) => {
+    const options = {hour12: false }
+    return new Date(dateString).toLocaleString(undefined, options)
+  }
+
+  
   const steps = [
     {
       selector: "#welcome-message",
@@ -193,8 +211,11 @@ export default function Header({ session }) {
     </Typography>
   );
 
+  var onlineUsers = users.filter(user => (new Date() - new Date(user.updated_at)) <= 3600000).length;
+
   const getMenuButtons = () => {
     return (
+    <>
       <h1 className="pointSystem">
         <div>
           {" "}
@@ -205,8 +226,12 @@ export default function Header({ session }) {
           <strong> Rank: {findTitle(points)} </strong>
         </div>
       </h1>
+      <p> Users Online now: {onlineUsers} </p>
+    </>
     );
   };
+
+  
 
   return (
     <header>
