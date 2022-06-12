@@ -4,12 +4,26 @@ import videologo from "./Images/VideoOfTheDay.png";
 import leaderboard from "./Images/LeaderboardNew.png";
 import match from "./Images/Match.png";
 import events from "./Images/Events-2.png";
+import profile from "./Images/MyProfile.png";
 import { ClassNames } from "@emotion/react";
 
 function NavBar() {
   return (
     <nav>
       <ul>
+        <h3 className="child">
+          <NavLink to="/profilepage">
+            <h1>
+              <img
+                src={profile}
+                id="profilepage"
+                height="170"
+                style={{ cursor: "pointer" }}
+              />
+            </h1>
+          </NavLink>
+        </h3>
+
         <h3 className="child">
           <NavLink to="/videopage">
             <h1>

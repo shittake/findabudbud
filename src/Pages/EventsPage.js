@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
+import Header from "../Header";
 import { supabase } from "../supabaseClient";
 import { RedButton } from "../Components/Buttons/ColouredButtons";
 import NewEvent from "../Components/EventComp/NewEvent";
@@ -48,6 +49,7 @@ const EventsPage = ({ session }) => {
   return (
     <>
       <div>
+        <Header session={session} />
         <h2 className="welcome-outer"> Welcome to the events page! </h2>
         <NewEvent onAddEvent={addEventHandler} />
         {allEvents.length == 0 && <div> No events found.</div>}

@@ -1,10 +1,10 @@
 import * as React from "react";
+import Header from "../Header";
 
-class VideoPage extends React.Component {
-    
-  render() {
+const VideoPage = ({ session }) => {
     return (
       <div>
+        <Header session={session} />
         <div>
           <h1 className="heading"><center>Brawl Stars Tips</center></h1>
         </div>
@@ -24,6 +24,5 @@ class VideoPage extends React.Component {
         </div>
       </div>
     );
-  }
 }
 export default VideoPage;
