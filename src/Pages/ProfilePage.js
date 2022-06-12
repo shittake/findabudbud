@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-
 import Welcome from "../Components/Welcome/Welcome";
 import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
 import Header from "../Header";
+import Footer from "../Footer";
 
 import {
   FacebookShareButton,
@@ -444,6 +444,13 @@ const ProfilePage = ({ session }) => {
           Sign Out
         </button>
       </div>
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Footer />
     </>
   );
 };

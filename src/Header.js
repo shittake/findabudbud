@@ -110,7 +110,7 @@ export default function Header({ session }) {
   const [loading, setLoading] = useState(true);
   const [click, setClick] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
-  const [firstTime, setFirstTime] = useState(true);
+  const [firstTime, setFirstTime] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
 
 
   const { header, logo } = useStyles();

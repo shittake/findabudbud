@@ -20,7 +20,7 @@
   font-size: 18px;
   text-align: center;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   background-color: white;
   color: black;
   box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px;
@@ -74,3 +74,4 @@
 .active {
   height: 200px;
 }
+

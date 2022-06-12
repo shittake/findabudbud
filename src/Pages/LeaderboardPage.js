@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { supabase } from "../supabaseClient";
+import ChatwootWidget from "../chatwoot.js";
 import Header from "../Header";
+import Footer from "../Footer";
 import "../styles.css";
 
 const LeaderboardPage = ({ session }) => {
@@ -53,6 +55,11 @@ const LeaderboardPage = ({ session }) => {
   return (
     <>
       <Header session={session} />
+
+      <div className="App">
+        <ChatwootWidget />
+      </div>
+      
       <div className="title">
         <center>
           <strong>Top 10 Users in Findabud</strong>
@@ -104,6 +111,13 @@ const LeaderboardPage = ({ session }) => {
           out of <strong> {totalUsers} </strong> buds!
         </center>
       </div>
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Footer />
     </>
   );
 };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import Header from "../Header";
+import Footer from "../Footer";
+import ChatwootWidget from "../chatwoot.js";
 import { supabase } from "../supabaseClient";
 import { RedButton } from "../Components/Buttons/ColouredButtons";
 import NewEvent from "../Components/EventComp/NewEvent";
@@ -50,6 +52,11 @@ const EventsPage = ({ session }) => {
     <>
       <div>
         <Header session={session} />
+
+      <div className="App">
+        <ChatwootWidget />
+      </div>
+      
         <h2 className="welcome-outer"> Welcome to the events page! </h2>
         <NewEvent onAddEvent={addEventHandler} />
         {allEvents.length == 0 && <div> No events found.</div>}
@@ -70,6 +77,13 @@ const EventsPage = ({ session }) => {
             );
           })}
       </div>
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <Footer />
     </>
   );
 };
