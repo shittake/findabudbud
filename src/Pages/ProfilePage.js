@@ -201,6 +201,11 @@ const ProfilePage = ({ session }) => {
         <Welcome username={username}></Welcome>
       </div>
 
+
+      <h1> 
+        <center><img src = {avatar_url} height="170"></img></center>
+      </h1>
+
       {/* Instructions to user */}
       <h2 id="profile1">Please key in your profile details: </h2>
       <div aria-live="polite">
@@ -427,23 +432,6 @@ const ProfilePage = ({ session }) => {
         </h2>
       </h1>
 
-      {/* Sign out button */}
-      <div>
-        <br></br>
-
-        {/* <div className="corner" id="livechat">
-          Here
-        </div> */}
-
-        <hr></hr>
-
-        <button
-          className="button block"
-          onClick={() => supabase.auth.signOut()}
-        >
-          Sign Out
-        </button>
-      </div>
 
       <br></br>
       <br></br>

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Tokyo+Zoo&display=swap');
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -75,3 +78,48 @@
   height: 200px;
 }
 
+#gen{
+    background-color: #4361ee;
+    color: white;
+}
+#down{
+    background-color: #EB3349;
+    color: white;
+}
+.avatar{
+    height: 60%;
+    width: 60%;
+    max-width: 40%;
+    max-height: 60%;
+    margin-top: 0%;
+    margin-bottom: 2%;
+}
+.btns{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+.home{
+    box-sizing: border-box;
+    height: 94vh;
+    width: 100%;
+    gap: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.nav{
+    height: 10vh;
+    width: 100%;
+    background-color: #313442;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: 'Zen Tokyo Zoo', cursive;
+    font-size: 35px;
+}
