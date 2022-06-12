@@ -88,10 +88,30 @@ export default function Header({ session }) {
     getProfile();
   }, [session]);
 
+  const updateFirstTime = async () => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ firsttime: false })
+        .eq("id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
   const [click, setClick] = useState(false);
-  const [isTourOpen, setIsTourOpen] = useState(true);
+  const [isTourOpen, setIsTourOpen] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
+
 
   const { header, logo } = useStyles();
 
@@ -144,6 +164,7 @@ export default function Header({ session }) {
 
       if (data) {
         setPoints(data.points);
+        if (data.firsttime) setIsTourOpen(true);
       }
     } catch (error) {
       alert(error.message);
@@ -194,7 +215,7 @@ export default function Header({ session }) {
         <Tour
           steps={steps}
           isOpen={isTourOpen}
-          onRequestClose={() => setIsTourOpen(false)}
+          onRequestClose={() => {setIsTourOpen(false); setFirstTime(false); updateFirstTime()}}
         />
       )}
     </header>

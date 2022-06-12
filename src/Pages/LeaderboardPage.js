@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { supabase } from "../supabaseClient";
+import Header from "../Header";
 import "../styles.css";
 
 const LeaderboardPage = ({ session }) => {
@@ -51,6 +52,7 @@ const LeaderboardPage = ({ session }) => {
 
   return (
     <>
+      <Header session={session} />
       <div className="title">
         <center>
           <strong>Top 10 Users in Findabud</strong>
