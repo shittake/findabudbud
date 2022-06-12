@@ -11,6 +11,17 @@ import EventForm from "../Components/EventComp/EventForm";
 import EventsItem from "../Components/EventComp/EventsItem";
 
 const EventsPage = ({ session }) => {
+  const [users, setUsers] = useState([]);
+
+  const fetchUserData = async () => {
+    const { data, error } = await supabase.from("profiles").select("*");
+    setUsers(data);
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   useEffect(() => {
     const getEvents = async () => {
       const existingEventsBackend = await fetchData();
@@ -28,20 +39,24 @@ const EventsPage = ({ session }) => {
   };
 
   const addEventHandler = async (event) => {
-    // console.log(event);
     setAllEvents([...allEvents, event]);
 
-    // const addToSupabase = async (event) => {
-    //   const { data, error } = await supabase
-    //     .from("events")
-    //     .insert([{ id: "3", title: "hello", description: "event" }]);
-    //   console.log("added in");
-    //   console.log(error);
-    //   console.log(typeof date);
-    // };
+    //delete from backend
+    const addToSupabase = async (event) => {
+      const { data, error } = await supabase.from("events").insert([
+        {
+          id: event.id,
+          date:
+            typeof event.date == "string"
+              ? event.date
+              : event.date.toISOString(),
+          title: event.title,
+          description: event.description,
+        },
+      ]);
+    };
 
-    // await addToSupabase(event);
-    // console.log("added out");
+    await addToSupabase(event);
   };
 
   const deleteFromSupabase = async (id) => {
@@ -49,12 +64,16 @@ const EventsPage = ({ session }) => {
   };
 
   const deleteItemHandler = (id) => {
-    setAllEvents(allEvents.filter((event) => event.id != id));
+    setAllEvents(
+      allEvents.filter((event) => {
+        event.id != id;
+      })
+    );
 
     //delete from backend
     deleteFromSupabase(id);
   };
-
+  const session2 = supabase.auth.session();
   return (
     <>
       <div>
@@ -71,6 +90,7 @@ const EventsPage = ({ session }) => {
           allEvents.map((event) => {
             return (
               <EventsItem
+                key={event.id}
                 title={event.title}
                 id={event.id}
                 description={event.description}
