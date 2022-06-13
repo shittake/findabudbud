@@ -13,6 +13,8 @@ const ChatPage = ({session}) => {
 
 
     const [users, setUsers] = useState([]);
+    const [click, setClick] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const fetchData = async () => {
         const {data, error} = await supabase.from('profiles').select('*')
@@ -24,6 +26,32 @@ const ChatPage = ({session}) => {
     fetchData();
     },[])
 
+    const addToFind = () => {
+      setClick(true);
+      updateClick();
+    }
+
+
+    const updateClick = async() => {
+      setLoading(true);
+      try {
+        const user = supabase.auth.user();
+
+        const { error } = await supabase
+          .from("profiles")
+          .update({click: true}) // go to this column
+          .eq('id', session.user.id)   // find the specific user
+
+        if (error) throw error;
+
+      } catch (error) {
+        alert(error.error_description || error.message);
+      } finally {
+        setLoading(false);
+        window.location.reload(false); // force the page to refresh
+      }
+    };
+
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
 
@@ -32,6 +60,14 @@ const ChatPage = ({session}) => {
       .filter(user => (new Date() - new Date(user.updated_at)) <= 36000000000) // currently have 4 extra 0s
       .filter(user => user.id != session.user.id) // can't match with myself!
       .map(user => user.id));
+
+    var clickedUsernames = Array.from(users
+      .filter(user => user.click)
+      .map(user => user.username));
+
+    var clickedAvatars = Array.from(users
+      .filter(user => user.click)
+      .map(user => (user.avatar_url!=null)?user.avatar_url:"https://avatars.dicebear.com/api/bottts/1000.svg"));
 
     // Parameters to filter by
     var parameters = ["brawl_stars","mobile_legends","anime","french","korean"];
@@ -100,15 +136,28 @@ const ChatPage = ({session}) => {
         <ChatwootWidget />
       </div>
 
-      {(onlineUsers.length <= 0)
+      <div className = "button4">
+        <button2 onClick = {addToFind}> Click to start matching! </button2>
+      </div>
+
+      {(clickedUsernames.length <= 0)
        ? 
-       <p> No one else online! </p> 
+       <p> No users waiting to be matched currently... </p> 
        : 
        <p> 
         
+        {/*
         <p><center><strong> People with the most common interests with you </strong></center></p>
         {displayCommon().map(user => <p><center> {user} </center></p>)}
 
+        */}
+
+        <p><center><strong> Users waiting to be matched now... </strong></center></p>
+
+        <center>{clickedAvatars.map(user => <img src={user} height="100"></img>)}</center>
+
+        
+        
 
        </p>
      }
