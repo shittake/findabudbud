@@ -142,7 +142,7 @@ const ChatPage = ({session}) => {
 
       {(clickedUsernames.length <= 0)
        ? 
-       <p> No users waiting to be matched currently... </p> 
+       <p className="loading"> No users waiting to be matched currently... </p> 
        : 
        <p> 
         
@@ -152,11 +152,14 @@ const ChatPage = ({session}) => {
 
         */}
 
-        <p><center><strong> Users waiting to be matched now... </strong></center></p>
+        <p className="loading"><strong> {clickedUsernames.length} 
+        {clickedUsernames.length == 1  && <t> user </t>}
+        {clickedUsernames.length > 1 && <t> users </t>} 
+        waiting to be matched now... </strong></p>
 
         <center>{clickedAvatars.map(user => <img src={user} height="100"></img>)}</center>
 
-        
+
         
 
        </p>
