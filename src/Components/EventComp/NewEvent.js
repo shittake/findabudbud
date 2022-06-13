@@ -3,6 +3,8 @@ import "./NewEvent.css";
 import EventForm from "./EventForm";
 import { RedButton } from "../Buttons/ColouredButtons";
 
+//add: created by user
+
 function NewEvent(props) {
   const saveEnteredEventHandler = (eventFormData) => {
     const events = eventFormData;
@@ -15,7 +17,10 @@ function NewEvent(props) {
         <div>id</div>
         <div>title</div>
         <div>description</div>
-        <div>date</div>
+        <div>date of event</div>
+        <div>time of event</div>
+        <div>created time</div>
+        <div>button</div>
       </div>
     </>
   );

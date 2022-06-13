@@ -39,7 +39,7 @@ const EventsPage = ({ session }) => {
   };
 
   const addEventHandler = async (event) => {
-    setAllEvents([...allEvents, event]);
+    setAllEvents([...allEvents, event]); //rerenders the entire thing
 
     //delete from backend
     const addToSupabase = async (event) => {
@@ -52,6 +52,10 @@ const EventsPage = ({ session }) => {
               : event.date.toISOString(),
           title: event.title,
           description: event.description,
+          time: event.time,
+          created_at: event.created_at
+            ? event.created_at
+            : new Date().toISOString(),
         },
       ]);
     };
@@ -69,10 +73,10 @@ const EventsPage = ({ session }) => {
         event.id != id;
       })
     );
-
     //delete from backend
     deleteFromSupabase(id);
   };
+
   const session2 = supabase.auth.session();
   return (
     <>
@@ -90,6 +94,9 @@ const EventsPage = ({ session }) => {
           allEvents.map((event) => {
             return (
               <EventsItem
+                createdTime={
+                  event.created_at ? event.created_at : new Date().toISOString()
+                }
                 key={event.id}
                 title={event.title}
                 id={event.id}
@@ -99,6 +106,7 @@ const EventsPage = ({ session }) => {
                     ? event.date
                     : event.date.toISOString()
                 }
+                time={event.time}
                 onDeleteItem={deleteItemHandler}
               ></EventsItem>
             );
