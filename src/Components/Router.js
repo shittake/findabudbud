@@ -4,6 +4,7 @@ import LeaderboardPage from "../Pages/LeaderboardPage";
 import ChatPage from "../Pages/ChatPage";
 import EventsPage from "../Pages/EventsPage";
 import ProfilePage from "../Pages/ProfilePage";
+import SecretPage from "../Pages/SecretPage";
 import Account from "../Account";
 
 {
@@ -21,6 +22,7 @@ export default function Router({ session }) {
           <Route path="firstpage" element={<LeaderboardPage session={session} />} />
           <Route path="chatpage" element={<ChatPage session={session}/>} />
           <Route path="eventspage" element={<EventsPage session={session} />} />
+          <Route path="secretpage" element={<SecretPage session={session} />} />
         </Route>
       </Routes>
     </BrowserRouter>
