@@ -26,6 +26,10 @@
         
         users.filter(user => user.id == session.user.id).map(user => user.points);
 
+        OR sometimes this works instead:
+
+        users.filter(user => user.id == session.user.id).map((val,key) => val.points)
+
 4. To add toggle button for any preference
 
 {/* Toggle button to change preference for Brawl Stars */}
