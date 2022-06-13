@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../Pages/Layout";
 import LeaderboardPage from "../Pages/LeaderboardPage";
-import VideoPage from "../Pages/VideoPage";
 import ChatPage from "../Pages/ChatPage";
 import EventsPage from "../Pages/EventsPage";
 import ProfilePage from "../Pages/ProfilePage";
@@ -19,9 +18,8 @@ export default function Router({ session }) {
         <Route path="/" element={<Layout session={session}/>}>
           <Route path="/" element={<Account key={session.user.id} session={session} />} />
           <Route path="profilepage" element={<ProfilePage session={session}/> } />
-          <Route path="videopage" element={<VideoPage session={session}/>} />
           <Route path="firstpage" element={<LeaderboardPage session={session} />} />
-          <Route path="chatpage" element={<ChatPage />} />
+          <Route path="chatpage" element={<ChatPage session={session}/>} />
           <Route path="eventspage" element={<EventsPage session={session} />} />
         </Route>
       </Routes>

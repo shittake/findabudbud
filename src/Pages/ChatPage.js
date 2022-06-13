@@ -3,52 +3,21 @@ require('./Chat/Login.css');
 
 import React from 'react';
 import ChatApp from './Chat/ChatApp';
+import Header from "../Header";
+import Footer from "../Footer";
 
-class ChatPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { username: '' };
+const ChatPage = ({session}) => {
+  return (
+      <>
 
-    // Bind 'this' to event handlers. React ES6 does not do this by default
-    this.usernameChangeHandler = this.usernameChangeHandler.bind(this);
-    this.usernameSubmitHandler = this.usernameSubmitHandler.bind(this);
-  }
+      <Header session={session} />
 
-  usernameChangeHandler(event) {
-    this.setState({ username: event.target.value });
-  }
+      <div> what? </div>
 
-  usernameSubmitHandler(event) {
-    event.preventDefault();
-    this.setState({ submitted: true, username: this.state.username });
-  }
+      <Footer />
+      </>
 
-  render() {
-    if (this.state.submitted) {
-      // Form was submitted, now show the main App
-      return (
-        <ChatApp username={this.state.username} />
-      );
-    }
-
-    // Initial page load, show a simple login form
-    return (
-      <form onSubmit={this.usernameSubmitHandler} className="username-container">
-        <h1>React Instant Chat</h1>
-        <div>
-          <input
-            type="text"
-            onChange={this.usernameChangeHandler}
-            placeholder="Enter a username..."
-            required />
-        </div>
-        <input type="submit" value="Submit" />
-      </form>
     );
-  }
-
 }
-ChatPage.defaultProps = {
-};
 
 export default ChatPage;
