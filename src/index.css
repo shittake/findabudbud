@@ -129,6 +129,16 @@ body {
   font-size: 16px;
   cursor: pointer;
 }
+.button4 {
+  background-color: rgb(255, 255, 152);
+  width: 100%;
+  margin-left: 0px; /*A positive value shifts the button right */
+  margin:  0px;
+  padding: 5px 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
 
 .button1:hover {
   background-color: #faebd7;
@@ -139,6 +149,10 @@ body {
 }
 
 .button3:hover {
+  background-color:  #faebd7;
+}
+
+.button4:hover {
   background-color:  #faebd7;
 }
 
@@ -456,4 +470,19 @@ td {
   border: 1px solid rgb(255, 255, 255);
   padding: 0.5rem;
   border-radius: 12px;
+}
+
+.loading {
+  font-weight: bold;
+  display:inline-block;
+  font-family: monospace;
+  font-size: 30px;
+  clip-path: inset(0 3ch 0 0);
+  animation: l 3s steps(4) infinite;
+}
+
+@keyframes l {
+  to {
+    clip-path: inset(0 -1ch 0 0)
+  }
 }

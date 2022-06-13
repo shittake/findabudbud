@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
-import videologo from "./Images/VideoOfTheDay.png";
 import leaderboard from "./Images/LeaderboardNew.png";
 import match from "./Images/Match.png";
 import events from "./Images/Events-2.png";
@@ -50,19 +49,6 @@ function NavBar({session}) {
                 height="170"
                 style={{ cursor: "pointer" }}
                 onClick={()=>triggerOnline()}
-              />
-            </h1>
-          </NavLink>
-        </h3>
-
-        <h3 className="child">
-          <NavLink to="/videopage">
-            <h1>
-              <img
-                src={videologo}
-                id="video"
-                height="170"
-                style={{ cursor: "pointer" }}
               />
             </h1>
           </NavLink>
