@@ -448,8 +448,22 @@ input[type="boolean"] {
   align-items: center;
 }
 
+.formatTablePopup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: up;
+}
+
 table {
   border: 2px solid forestgreen;
+  width: 400px;
+  height: 200px;
+}
+
+.table1{
+  border: 2px solid orange;
   width: 400px;
   height: 200px;
 }

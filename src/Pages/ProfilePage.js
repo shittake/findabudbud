@@ -34,6 +34,7 @@ const ProfilePage = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
+  const [pointHistory, setPointHistory] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
@@ -134,6 +135,7 @@ const ProfilePage = ({ session }) => {
         setAnime(data.anime);
         setKorean(data.korean);
         setFrench(data.french);
+        setPointHistory(data.point_history);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -164,6 +166,7 @@ const ProfilePage = ({ session }) => {
         french,
         avatar_url,
         points,
+        point_history,
         updated_at: new Date(),
       };
 
@@ -180,6 +183,11 @@ const ProfilePage = ({ session }) => {
       setLoading(false);
     }
   };
+
+  const shareClick = () => {
+    alert("2 points added!");
+    updatePoints(2);
+  }
 
   return (
     <>
@@ -408,6 +416,7 @@ const ProfilePage = ({ session }) => {
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
+            onClick={shareClick}
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
@@ -417,6 +426,7 @@ const ProfilePage = ({ session }) => {
           <EmailShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
+            onClick={shareClick}
           >
             <EmailIcon size={62} round={true} />
           </EmailShareButton>
@@ -426,6 +436,7 @@ const ProfilePage = ({ session }) => {
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
+            onClick={shareClick}
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>

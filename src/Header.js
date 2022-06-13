@@ -13,6 +13,7 @@ import logo from "./Images/FindabudLogo.png";
 import { supabase } from "./supabaseClient";
 import Joyride from "react-joyride";
 import Tour from "reactour";
+import Popup from "./Popup";
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles(() => ({
 export default function Header({ session }) {
 
   const [users, setUsers] = useState([]);
+  const [history, setHistory] = useState(false);
 
   const fetchData = async () => {
   const {data, error} = await supabase.from('profiles').select('*')
@@ -44,6 +46,9 @@ export default function Header({ session }) {
     return new Date(dateString).toLocaleString(undefined, options)
   }
 
+  const toggleHistory = () => {
+    setHistory(!history);
+  }
 
   
   const steps = [
@@ -213,11 +218,11 @@ export default function Header({ session }) {
   );
 
   var onlineUsers = users.filter(user => (new Date() - new Date(user.updated_at)) <= 3600000).length;
-
+  var myHistory = users.filter(user => user.id == session.user.id).map(user => user.point_history).toString().slice(1,-1).split(",");
   const getMenuButtons = () => {
     return (
     <>
-      <h1 className="pointSystem">
+      <h1 className="pointSystem" onClick={toggleHistory}>
         <div>
           {" "}
           <strong> Points: {points}</strong>
@@ -232,10 +237,43 @@ export default function Header({ session }) {
     );
   };
 
+
+
   
 
   return (
     <header>
+    {history && (
+          <Popup
+            content={
+              <>
+                <p><center><strong>Your Point History</strong></center></p>
+                <div className="formatTablePopup">
+                  <table className = "table1">
+                    <tr>
+                      <th>Delta</th>
+                      <th>Activity</th>
+                      <th>Date</th>
+                    </tr>
+                    {
+                      myHistory.map((value,key) =>{
+                        return (
+                      <tr key={key}>
+                        <td>{value.split(" ")[0]}</td>
+                        <td>{value.split(" ").slice(1,-1).join(" ")}</td>
+                        <td>{value.split(" ")[value.split(" ").length-1]}</td>
+                      </tr>
+                      );
+                      })
+                    }
+
+                  </table>
+                </div>
+              </>
+            }
+            handleClose={toggleHistory}
+          />
+        )}
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour

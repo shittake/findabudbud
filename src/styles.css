@@ -27,6 +27,7 @@
   background-color: white;
   color: black;
   box-shadow: rgba(0, 0, 0, 0.4) -5px 5px, rgba(0, 0, 0, 0.3) -10px 10px;
+  cursor: pointer;
 }
 
 .expandButton {
