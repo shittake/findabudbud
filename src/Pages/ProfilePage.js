@@ -9,10 +9,11 @@ import Footer from "../Footer";
 import {
   FacebookShareButton,
   FacebookIcon,
-  FacebookShareCount,
   WhatsappShareButton,
-  EmailShareButton,
-  EmailIcon,
+  TelegramShareButton,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TelegramIcon,
   WhatsappIcon,
 } from "react-share";
 
@@ -26,6 +27,7 @@ import {
 const ProfilePage = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
+  const [telegram_handle, setTelegramHandle] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(false);
   const [mobile_legends, setMobileLegends] = useState(false);
   const [anime, setAnime] = useState(false);
@@ -34,6 +36,7 @@ const ProfilePage = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
+  const [point_history, setPointHistory] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
@@ -84,6 +87,8 @@ const ProfilePage = ({ session }) => {
     updatePoints(4);
   };
 
+
+
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
 
@@ -95,6 +100,27 @@ const ProfilePage = ({ session }) => {
       const { error } = await supabase
         .from("profiles")
         .update({ points: points + number })
+        .eq("id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update point history that is stored in supabase
+  // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
+  // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
+  const updateHistory = async (message) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ point_history: point_history+message})
         .eq("id", session.user.id);
 
       if (error) throw error;
@@ -134,6 +160,8 @@ const ProfilePage = ({ session }) => {
         setAnime(data.anime);
         setKorean(data.korean);
         setFrench(data.french);
+        setPointHistory(data.point_history);
+        setTelegramHandle(data.telegram_handle);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -164,6 +192,8 @@ const ProfilePage = ({ session }) => {
         french,
         avatar_url,
         points,
+        point_history,
+        telegram_handle,
         updated_at: new Date(),
       };
 
@@ -180,6 +210,11 @@ const ProfilePage = ({ session }) => {
       setLoading(false);
     }
   };
+
+  const shareClick = () => {
+    updatePoints(2);
+    updateHistory(",+2 Shared using social media " + new Date().toDateString());
+  }
 
   return (
     <>
@@ -227,6 +262,20 @@ const ProfilePage = ({ session }) => {
                     placeholder="Your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <br></br>
+                <label htmlFor="username">Telegram Handle: </label>
+                <div style={{ padding: "7px 0 0 0" }}>
+                  <TextField
+                    margin="dense"
+                    size="small"
+                    required
+                    id="telegram_handle"
+                    label= "Required"
+                    placeholder="Your telegram handle"
+                    value={telegram_handle}
+                    onChange={(e) => setTelegramHandle(e.target.value)}
                   />
                 </div>
               </div>
@@ -388,47 +437,46 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
-      {/* Not sure what these 2 buttons will be changed to next time */}
-      <div style={{ display: "flex", flexFlow: "row nowrap" }}>
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}> Click for 4 points! </button2>
-          </center>
-        </div>
-
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}> Click for 4 points! </button2>
-          </center>
-        </div>
-      </div>
 
       <h1 className="parent" id="share">
         <h2 className="child">
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
+            onClick={shareClick}
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
         </h2>
 
         <h2 className="child">
-          <EmailShareButton
+          <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
+            onClick={shareClick}
           >
-            <EmailIcon size={62} round={true} />
-          </EmailShareButton>
+            <TelegramIcon size={62} round={true} />
+          </TelegramShareButton>
         </h2>
 
         <h2 className="child">
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
+            onClick={shareClick}
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
+        </h2>
+
+        <h2 className="child">
+          <LinkedinShareButton
+            url="https://findabud.herokuapp.com/"
+            quote={"Share"}
+            onClick={shareClick}
+          >
+            <LinkedinIcon size={62} round={true} />
+          </LinkedinShareButton>
         </h2>
       </h1>
 

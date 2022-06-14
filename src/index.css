@@ -448,14 +448,28 @@ input[type="boolean"] {
   align-items: center;
 }
 
+.formatTablePopup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: up;
+}
+
 table {
   border: 2px solid forestgreen;
   width: 400px;
   height: 200px;
 }
 
+.table1{
+  border: 2px solid orange;
+  width: 400px;
+  height: 100%;
+}
+
 th {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 td {
@@ -485,4 +499,17 @@ td {
   to {
     clip-path: inset(0 -1ch 0 0)
   }
+}
+
+.buttonTeleLink {
+  font: bold 16px Arial;
+  text-decoration: none;
+  background-color: yellow;
+  color: #333333;
+  cursor: pointer;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
 }
