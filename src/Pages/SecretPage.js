@@ -141,8 +141,10 @@ const SecretPage = ({ session }) => {
       return answer;
     }
 
+
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
     var selected = users.filter(user => user.id == besties[0]); //the row of the selected person! right now, is just the first person
+    var contact = selected.map(user => user.telegram_handle).toString()
 
 	return (
     <>
@@ -170,6 +172,9 @@ const SecretPage = ({ session }) => {
        
         <center>{hobbiesSimilar(selected).join(", ")}</center>
 
+        <br></br><br></br>
+        <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
+        Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
 
       
       <Footer />
