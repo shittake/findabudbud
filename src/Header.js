@@ -218,7 +218,7 @@ export default function Header({ session }) {
   );
 
   var onlineUsers = users.filter(user => (new Date() - new Date(user.updated_at)) <= 3600000).length;
-  var myHistory = users.filter(user => user.id == session.user.id).map(user => user.point_history).toString().slice(1,-1).split(",");
+  var myHistory = users.filter(user => user.id == session.user.id).map(user => user.point_history).toString().slice(1).split(",");
   const getMenuButtons = () => {
     return (
     <>
@@ -247,6 +247,7 @@ export default function Header({ session }) {
           <Popup
             content={
               <>
+                <p><center><strong>Total points: {points} </strong></center></p>
                 <p><center><strong>Your Point History</strong></center></p>
                 <div className="formatTablePopup">
                   <table className = "table1">
@@ -260,8 +261,8 @@ export default function Header({ session }) {
                         return (
                       <tr key={key}>
                         <td>{value.split(" ")[0]}</td>
-                        <td>{value.split(" ").slice(1,-1).join(" ")}</td>
-                        <td>{value.split(" ")[value.split(" ").length-1]}</td>
+                        <td>{value.split(" ").slice(1,-4).join(" ")}</td>
+                        <td>{value.split(" ").slice(-3).join(" ")}</td>
                       </tr>
                       );
                       })
@@ -269,6 +270,11 @@ export default function Header({ session }) {
 
                   </table>
                 </div>
+              
+            
+              
+
+
               </>
             }
             handleClose={toggleHistory}

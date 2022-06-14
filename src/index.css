@@ -465,11 +465,11 @@ table {
 .table1{
   border: 2px solid orange;
   width: 400px;
-  height: 200px;
+  height: 100%;
 }
 
 th {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 
 td {
