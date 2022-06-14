@@ -12,13 +12,16 @@ import { Navigate } from "react-router-dom";
 
 const ChatPage = ({session}) => {
 
-
     const [redirectNow, setRedirectNow] = useState(false);
-    setTimeout(() => setRedirectNow(true), 5000);
+    
+    setTimeout(() => 
+      {setRedirectNow(true);}
+      , 5000);
 
     const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [goToProfile, setGoToProfile] = useState(false);
 
     const fetchData = async () => {
         const {data, error} = await supabase.from('profiles').select('*')
@@ -31,19 +34,27 @@ const ChatPage = ({session}) => {
     },[])
 
     const addToFind = () => {
-      setClick(true);
-      updateClick();
+      var temp = mine.map(user => user.telegram_handle)[0];
+      if (temp == null || temp.localeCompare("null") == 0 || temp == "") {
+        alert("You have to provide your telegram handle in the Profile page before you can be matched with others!");
+        setGoToProfile(true);
+      }
+      else {
+        setClick(true);
+        updateClick(true);
+        
+      }
     }
 
 
-    const updateClick = async() => {
+    const updateClick = async(currState) => {
       setLoading(true);
       try {
         const user = supabase.auth.user();
 
         const { error } = await supabase
           .from("profiles")
-          .update({click: true}) // go to this column
+          .update({click: currState}) // go to this column
           .eq('id', session.user.id)   // find the specific user
 
         if (error) throw error;
@@ -74,6 +85,12 @@ const ChatPage = ({session}) => {
       .map(user => (user.avatar_url!=null)?user.avatar_url:"https://avatars.dicebear.com/api/bottts/1000.svg"));
 
   return (
+
+      goToProfile ? (
+        <>
+        <Navigate to="/profilepage" />
+        </>
+        ) :
 
       redirectNow ? (
         <>

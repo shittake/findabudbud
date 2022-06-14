@@ -7,7 +7,7 @@ import Footer from "../Footer";
 
 const SecretPage = ({ session }) => {
 
-	const [users, setUsers] = useState([]);
+	  const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -15,16 +15,13 @@ const SecretPage = ({ session }) => {
         const {data, error} = await supabase.from('profiles').select('*')
 
     setUsers(data);
+
     }
 
     useEffect(() => {
     fetchData();
     },[])
 
-    const addToFind = () => {
-      setClick(true);
-      updateClick();
-    }
 
     const updateClick = async() => {
       setLoading(true);
@@ -33,7 +30,7 @@ const SecretPage = ({ session }) => {
 
         const { error } = await supabase
           .from("profiles")
-          .update({click: true}) // go to this column
+          .update({click: false}) // go to this column
           .eq('id', session.user.id)   // find the specific user
 
         if (error) throw error;
@@ -42,9 +39,12 @@ const SecretPage = ({ session }) => {
         alert(error.error_description || error.message);
       } finally {
         setLoading(false);
-        window.location.reload(false); // force the page to refresh
       }
     };
+
+    useEffect(() => {
+      updateClick();
+    },[])
 
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
