@@ -167,8 +167,8 @@ const SecretPage = ({ session }) => {
 
        <p><center><strong>Both of you enjoy:</strong></center></p>
 
-       {hobbiesSimilar(selected).map(hobby => <p><center>{hobby}</center></p>)}
-      
+       
+        <center>{hobbiesSimilar(selected).join(", ")}</center>
 
 
       

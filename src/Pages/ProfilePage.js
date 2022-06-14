@@ -9,10 +9,11 @@ import Footer from "../Footer";
 import {
   FacebookShareButton,
   FacebookIcon,
-  FacebookShareCount,
   WhatsappShareButton,
-  EmailShareButton,
-  EmailIcon,
+  TelegramShareButton,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TelegramIcon,
   WhatsappIcon,
 } from "react-share";
 
@@ -34,7 +35,7 @@ const ProfilePage = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
-  const [pointHistory, setPointHistory] = useState(0);
+  const [point_history, setPointHistory] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
@@ -85,6 +86,8 @@ const ProfilePage = ({ session }) => {
     updatePoints(4);
   };
 
+
+
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
 
@@ -96,6 +99,27 @@ const ProfilePage = ({ session }) => {
       const { error } = await supabase
         .from("profiles")
         .update({ points: points + number })
+        .eq("id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update point history that is stored in supabase
+  // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
+  // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
+  const updateHistory = async (message) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ point_history: point_history+message})
         .eq("id", session.user.id);
 
       if (error) throw error;
@@ -185,8 +209,8 @@ const ProfilePage = ({ session }) => {
   };
 
   const shareClick = () => {
-    alert("2 points added!");
     updatePoints(2);
+    updateHistory(",+2 Shared using social media " + new Date().toDateString());
   }
 
   return (
@@ -396,20 +420,6 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
-      {/* Not sure what these 2 buttons will be changed to next time */}
-      <div style={{ display: "flex", flexFlow: "row nowrap" }}>
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}> Click for 4 points! </button2>
-          </center>
-        </div>
-
-        <div className="button2">
-          <center>
-            <button2 onClick={handleSinglePress}> Click for 4 points! </button2>
-          </center>
-        </div>
-      </div>
 
       <h1 className="parent" id="share">
         <h2 className="child">
@@ -423,13 +433,13 @@ const ProfilePage = ({ session }) => {
         </h2>
 
         <h2 className="child">
-          <EmailShareButton
+          <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
             onClick={shareClick}
           >
-            <EmailIcon size={62} round={true} />
-          </EmailShareButton>
+            <TelegramIcon size={62} round={true} />
+          </TelegramShareButton>
         </h2>
 
         <h2 className="child">
@@ -440,6 +450,16 @@ const ProfilePage = ({ session }) => {
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
+        </h2>
+
+        <h2 className="child">
+          <LinkedinShareButton
+            url="https://findabud.herokuapp.com/"
+            quote={"Share"}
+            onClick={shareClick}
+          >
+            <LinkedinIcon size={62} round={true} />
+          </LinkedinShareButton>
         </h2>
       </h1>
 
