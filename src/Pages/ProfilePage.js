@@ -27,6 +27,7 @@ import {
 const ProfilePage = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
+  const [telegram_handle, setTelegramHandle] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(false);
   const [mobile_legends, setMobileLegends] = useState(false);
   const [anime, setAnime] = useState(false);
@@ -160,6 +161,7 @@ const ProfilePage = ({ session }) => {
         setKorean(data.korean);
         setFrench(data.french);
         setPointHistory(data.point_history);
+        setTelegramHandle(data.telegram_handle);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -191,6 +193,7 @@ const ProfilePage = ({ session }) => {
         avatar_url,
         points,
         point_history,
+        telegram_handle,
         updated_at: new Date(),
       };
 
@@ -259,6 +262,20 @@ const ProfilePage = ({ session }) => {
                     placeholder="Your username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <br></br>
+                <label htmlFor="username">Telegram Handle: </label>
+                <div style={{ padding: "7px 0 0 0" }}>
+                  <TextField
+                    margin="dense"
+                    size="small"
+                    required
+                    id="telegram_handle"
+                    label= "Required"
+                    placeholder="Your telegram handle"
+                    value={telegram_handle}
+                    onChange={(e) => setTelegramHandle(e.target.value)}
                   />
                 </div>
               </div>
