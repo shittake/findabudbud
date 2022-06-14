@@ -38,14 +38,24 @@ const EventsPage = ({ session }) => {
     return events;
   };
 
+  const subscribeToInserts = async () => {
+    const subscribeEvents = supabase
+      .from("events")
+      .on("INSERT", (payload) => {
+        console.log("Change received!", payload);
+      })
+      .subscribe();
+  };
   const addEventHandler = async (event) => {
     setAllEvents([...allEvents, event]); //rerenders the entire thing
 
     //delete from backend
     const addToSupabase = async (event) => {
+      console.log("add handler");
+      console.log(event);
       const { data, error } = await supabase.from("events").insert([
         {
-          id: event.id,
+          //id: event.id, - when added supabase autogenerates
           date:
             typeof event.date == "string"
               ? event.date
@@ -56,11 +66,13 @@ const EventsPage = ({ session }) => {
           created_at: event.created_at
             ? event.created_at
             : new Date().toISOString(),
+          userid: session.user.id,
         },
       ]);
     };
 
     await addToSupabase(event);
+    subscribeToInserts();
   };
 
   const deleteFromSupabase = async (id) => {
@@ -69,15 +81,14 @@ const EventsPage = ({ session }) => {
 
   const deleteItemHandler = (id) => {
     setAllEvents(
-      allEvents.filter((event) => {
-        event.id != id;
-      })
+      allEvents.filter(
+        (event) => event.id != id && session.user.id != event.userid
+      )
     );
     //delete from backend
     deleteFromSupabase(id);
   };
 
-  const session2 = supabase.auth.session();
   return (
     <>
       <div>
@@ -92,14 +103,15 @@ const EventsPage = ({ session }) => {
         {allEvents.length == 0 && <div> No events found.</div>}
         {allEvents.length > 0 &&
           allEvents.map((event) => {
+            console.log(event);
             return (
               <EventsItem
                 createdTime={
                   event.created_at ? event.created_at : new Date().toISOString()
                 }
-                key={event.id}
+                key={event.id ? event.id : "5"} //realtime subscription
                 title={event.title}
-                id={event.id}
+                id={event.id ? event.id : "5"} //realtime subscription
                 description={event.description}
                 date={
                   typeof event.date == "string"
@@ -108,6 +120,8 @@ const EventsPage = ({ session }) => {
                 }
                 time={event.time}
                 onDeleteItem={deleteItemHandler}
+                session={session}
+                useridcreator={event.userid ? event.userid : session.user.id}
               ></EventsItem>
             );
           })}

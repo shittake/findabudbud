@@ -1,4 +1,7 @@
+// import { PanSession } from "framer-motion/types/gestures/PanSession";
 import React from "react";
+import { supabase } from "../../supabaseClient";
+
 import "./EventsItem.css";
 
 export default function EventsItem(props) {
@@ -9,15 +12,17 @@ export default function EventsItem(props) {
         <div>{props.title}</div>
         <div>{props.description}</div>
         <div>{props.date}</div>
-        <div>{props.time ? props.time : "null"}</div>
+        <div>{props.time}</div>
         <div>{props.createdTime}</div>
-        <button
-          onClick={() => {
-            props.onDeleteItem(props.id);
-          }}
-        >
-          x
-        </button>
+        {props.session.user.id == props.useridcreator && (
+          <button
+            onClick={() => {
+              props.onDeleteItem(props.id);
+            }}
+          >
+            x
+          </button>
+        )}
       </div>
     </>
   );

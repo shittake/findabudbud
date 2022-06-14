@@ -67,3 +67,11 @@ const updatePoints = async (number) => {
 
 */}
 
+//point system logic
+//point history
+//add more buttons (food, sports, academia)
+//tutorial walkthrough
+//matching waiting room
+//events --> creator capacity of each event
+//events --> indicate
+//events --> last min dw then penalty
