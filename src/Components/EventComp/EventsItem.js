@@ -14,7 +14,7 @@ export default function EventsItem(props) {
         <div>{props.date}</div>
         <div>{props.time}</div>
         <div>{props.createdTime}</div>
-        {props.session.user.id == props.useridcreator && (
+        {props.session.user.id == props.useridcreator && ( //real time
           <button
             onClick={() => {
               props.onDeleteItem(props.id);
