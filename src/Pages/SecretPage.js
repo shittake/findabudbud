@@ -4,12 +4,14 @@ import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import Header from "../Header";
 import Footer from "../Footer";
+import addToMatch from "./addToMatch";
 
 const SecretPage = ({ session }) => {
 
 	  const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
     const [loading, setLoading] = useState(false);
+
 
     const fetchData = async () => {
         const {data, error} = await supabase.from('profiles').select('*')
@@ -83,6 +85,7 @@ const SecretPage = ({ session }) => {
           mostInCommon.push(temp[2][index]);
         }
       }
+      addToMatch(69,session.user.id,mostInCommon[0]);
       return mostInCommon;
     }
 
@@ -95,7 +98,7 @@ const SecretPage = ({ session }) => {
       for (i = 0; i < onlineUsers.length; i++) {
         var currUser = users.filter(user => user.id == onlineUsers[i]);
         var currUserName = currUser.map(user => user.username);
-        var currID = currUser.map(user => user.id);
+        var currID = currUser.map(user => user.id)[0];
         if (who.indexOf(currUserName) == -1){
            who.push(currUserName);
            ids.push(currID);
@@ -153,6 +156,8 @@ const SecretPage = ({ session }) => {
       <div className="App">
         <ChatwootWidget />
       </div>
+
+   
 
       <p>
        Matching algorithm has completed. 
