@@ -4,7 +4,7 @@ import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import Header from "../Header";
 import Footer from "../Footer";
-import addToMatch from "./addToMatch";
+import addToMatch from "../Components/Match/addToMatch";
 
 const SecretPage = ({ session }) => {
 
@@ -85,7 +85,7 @@ const SecretPage = ({ session }) => {
           mostInCommon.push(temp[2][index]);
         }
       }
-      addToMatch(69,session.user.id,mostInCommon[0]);
+      addToMatch(369,session.user.id,mostInCommon[0]); // add to "Match" table in supabase
       return mostInCommon;
     }
 

@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import { Navigate } from "react-router-dom";
-import addToMatch from "./addToMatch";
 
 const ChatPage = ({session}) => {
 
