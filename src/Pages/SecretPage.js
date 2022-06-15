@@ -85,7 +85,7 @@ const SecretPage = ({ session }) => {
           mostInCommon.push(temp[2][index]);
         }
       }
-      addToMatch(369,session.user.id,mostInCommon[0]); // add to "Match" table in supabase
+      addToMatch(session.user.id,mostInCommon[0]); // add to "Match" table in supabase
       return mostInCommon;
     }
 
