@@ -27,6 +27,7 @@ const ChatPage = ({session}) => {
         const {data, error} = await supabase.from('profiles').select('*')
 
     setUsers(data);
+    setClick(data.click);
     }
 
     useEffect(() => {
@@ -107,9 +108,25 @@ const ChatPage = ({session}) => {
         <ChatwootWidget />
       </div>
 
-      <div className = "button4">
-        <button2 onClick = {addToFind}> Click to start matching! </button2>
-      </div>
+      {!(mine.map(user => user.click)[0]) && 
+        <>
+          <p class="warning">You are not in the waiting room yet. 
+          To join and get matched, click the button below.</p>
+
+          <p className="neutral"> If you stay on this page for more than a minute, you will
+          automatically be matched! </p>
+
+          <div className = "button4">
+            <button2 onClick = {addToFind}> Click to start matching! </button2>
+          </div>
+        </>
+      }
+
+      {mine.map(user => user.click)[0] && 
+
+        <p className="success"> You are in the waiting room now! Estimated time: 5 seconds</p>
+
+      }
 
       {(clickedUsernames.length <= 0)
        ? 
@@ -129,9 +146,6 @@ const ChatPage = ({session}) => {
         waiting to be matched now... </strong></p>
 
         <center>{clickedAvatars.map(user => <img src={user} height="100"></img>)}</center>
-
-
-        
 
        </p>
      }
