@@ -158,6 +158,8 @@ const SecretPage = ({ session }) => {
       </div>
 
    
+      {besties.length > 0 && 
+        <>
 
       <p>
        Matching algorithm has completed. 
@@ -178,8 +180,28 @@ const SecretPage = ({ session }) => {
         <center>{hobbiesSimilar(selected).join(", ")}</center>
 
         <br></br><br></br>
-        <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
-        Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
+
+        {contact.length >= 1 && 
+          <>
+          <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
+          Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
+          </>
+        }
+
+        {(contact == null || contact.length) == 0 &&
+          <p>
+            This user does not have a valid telegram handle!
+          </p>
+        }
+        
+        </>
+      }
+
+      {besties.length == 0 && 
+        <p>
+          Nobody at the moment. Try again later!
+        </p>
+      }
 
       
       <Footer />
