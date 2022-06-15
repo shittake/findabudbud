@@ -3,7 +3,6 @@ import "./EventForm.css";
 
 export default function EventForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
-  // const [enteredId, setEnteredId] = useState("");
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredTime, setEnteredTime] = useState("");
@@ -11,9 +10,7 @@ export default function EventForm(props) {
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
   };
-  // const IdChangeHandler = (event) => {
-  //   setEnteredId(event.target.value);
-  // };
+
   const decriptionChangeHandler = (event) => {
     setEnteredDescription(event.target.value);
   };
@@ -24,18 +21,12 @@ export default function EventForm(props) {
   const TimeChangeHandler = (event) => {
     setEnteredTime(event.target.value);
   };
-  useEffect(() => {
-    console.log("type of time");
-    console.log(typeof enteredTime);
-    console.log(enteredTime);
-  }, [enteredTime]);
 
   const initialise = () => {
     setEnteredDate("");
     setEnteredTime("");
     setEnteredTitle("");
     setEnteredDescription("");
-    // setEnteredId("");
   };
 
   const submitHandler = (event) => {
@@ -43,7 +34,6 @@ export default function EventForm(props) {
 
     const eventData = {
       title: enteredTitle,
-      // id: enteredId,
       description: enteredDescription,
       date: new Date(enteredDate),
       time: enteredTime + ":00",
@@ -58,6 +48,7 @@ export default function EventForm(props) {
         <div className="event-form__control">
           <label>Title: </label>
           <input
+            htmlFor="title"
             required
             type="text"
             value={enteredTitle}
@@ -68,6 +59,7 @@ export default function EventForm(props) {
         <div className="event-form__control">
           <label> Description: </label>
           <input
+            htmlFor="description"
             required
             type="text"
             value={enteredDescription}
@@ -78,6 +70,7 @@ export default function EventForm(props) {
         <div className="event-form__control">
           <label>Date:</label>
           <input
+            htmlFor="date"
             required
             type="date"
             value={enteredDate}
@@ -89,6 +82,7 @@ export default function EventForm(props) {
         <div className="event-form__control">
           <label>Time:</label>
           <input
+            htmlFor="time"
             required
             type="time"
             value={enteredTime}
@@ -96,16 +90,7 @@ export default function EventForm(props) {
             id="time"
           />
         </div>
-        {/* <div className="event-form__control">
-          <label> id: </label>
-          <input
-            required
-            type="number"
-            value={enteredId}
-            onChange={IdChangeHandler}
-            id="id"
-          />
-        </div> */}
+
         <button type="submit" className="event-button">
           Add event
         </button>

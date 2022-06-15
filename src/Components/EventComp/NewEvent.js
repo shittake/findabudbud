@@ -21,6 +21,7 @@ function NewEvent(props) {
         <div>time of event</div>
         <div>created time</div>
         <div>button</div>
+        <div>click on event</div>
       </div>
     </>
   );

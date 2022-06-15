@@ -12,6 +12,8 @@ import EventsItem from "../Components/EventComp/EventsItem";
 
 const EventsPage = ({ session }) => {
   const [users, setUsers] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchUserData = async () => {
     const { data, error } = await supabase.from("profiles").select("*");
@@ -28,8 +30,7 @@ const EventsPage = ({ session }) => {
       setAllEvents(existingEventsBackend);
     };
     getEvents();
-  }, []);
-  const [allEvents, setAllEvents] = useState([]);
+  }, [allEvents]);
   const fetchData = async () => {
     const { data: events, error } = await supabase
       .from("events")
@@ -38,41 +39,31 @@ const EventsPage = ({ session }) => {
     return events;
   };
 
-  const subscribeToInserts = async () => {
-    const subscribeEvents = supabase
-      .from("events")
-      .on("INSERT", (payload) => {
-        console.log("Change received!", payload);
-      })
-      .subscribe();
+  //delete from backend
+  const addToSupabase = async (event) => {
+    setIsLoading(true);
+    const { data, error } = await supabase.from("events").insert([
+      {
+        //id: event.id, - when added supabase autogenerates
+        date:
+          typeof event.date == "string" ? event.date : event.date.toISOString(),
+        title: event.title,
+        description: event.description,
+        time: event.time,
+        created_at: event.created_at
+          ? event.created_at
+          : new Date().toISOString(),
+        userid: session.user.id,
+      },
+    ]);
+    setIsLoading(false);
+    return data;
   };
+
   const addEventHandler = async (event) => {
-    setAllEvents([...allEvents, event]); //rerenders the entire thing
-
-    //delete from backend
-    const addToSupabase = async (event) => {
-      console.log("add handler");
-      console.log(event);
-      const { data, error } = await supabase.from("events").insert([
-        {
-          //id: event.id, - when added supabase autogenerates
-          date:
-            typeof event.date == "string"
-              ? event.date
-              : event.date.toISOString(),
-          title: event.title,
-          description: event.description,
-          time: event.time,
-          created_at: event.created_at
-            ? event.created_at
-            : new Date().toISOString(),
-          userid: session.user.id,
-        },
-      ]);
-    };
-
-    await addToSupabase(event);
-    subscribeToInserts();
+    const newEvent = await addToSupabase(event);
+    setAllEvents([...allEvents, ...newEvent]);
+    // subscribeToInserts();
   };
 
   const deleteFromSupabase = async (id) => {
@@ -81,9 +72,9 @@ const EventsPage = ({ session }) => {
 
   const deleteItemHandler = (id) => {
     setAllEvents(
-      allEvents.filter(
-        (event) => event.id != id && session.user.id != event.userid
-      )
+      allEvents.filter((event) => {
+        return event.id !== id || session.user.id !== event.userid;
+      })
     );
     //delete from backend
     deleteFromSupabase(id);
@@ -101,30 +92,28 @@ const EventsPage = ({ session }) => {
         <h2 className="welcome-outer"> Welcome to the events page! </h2>
         <NewEvent onAddEvent={addEventHandler} />
         {allEvents.length == 0 && <div> No events found.</div>}
-        {allEvents.length > 0 &&
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
           allEvents.map((event) => {
-            console.log(event);
             return (
               <EventsItem
                 createdTime={
                   event.created_at ? event.created_at : new Date().toISOString()
                 }
-                key={event.id ? event.id : "5"} //realtime subscription
+                key={event.id} //realtime subscription
                 title={event.title}
-                id={event.id ? event.id : "5"} //realtime subscription
+                id={event.id} //realtime subscription
                 description={event.description}
-                date={
-                  typeof event.date == "string"
-                    ? event.date
-                    : event.date.toISOString()
-                }
+                date={event.date}
                 time={event.time}
                 onDeleteItem={deleteItemHandler}
                 session={session}
                 useridcreator={event.userid ? event.userid : session.user.id}
               ></EventsItem>
             );
-          })}
+          })
+        )}
       </div>
 
       <br></br>
