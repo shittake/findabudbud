@@ -513,3 +513,27 @@ td {
   border-bottom: 1px solid #333333;
   border-left: 1px solid #CCCCCC;
 }
+
+.warning {
+  padding: 20px;
+  background-color: red; 
+  color: white;
+  margin-bottom: 0px;
+  text-align:  center;
+}
+
+.neutral {
+  padding: 20px;
+  background-color: grey; 
+  color: white;
+  margin-bottom: 15px;
+  text-align:  center;
+}
+
+.success {
+  padding: 20px;
+  background-color: green; 
+  color: white;
+  margin-bottom: 15px;
+  text-align:  center;
+}

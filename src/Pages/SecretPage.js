@@ -4,12 +4,14 @@ import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import Header from "../Header";
 import Footer from "../Footer";
+import addToMatch from "../Components/Match/addToMatch";
 
 const SecretPage = ({ session }) => {
 
 	  const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
     const [loading, setLoading] = useState(false);
+
 
     const fetchData = async () => {
         const {data, error} = await supabase.from('profiles').select('*')
@@ -83,6 +85,7 @@ const SecretPage = ({ session }) => {
           mostInCommon.push(temp[2][index]);
         }
       }
+      addToMatch(session.user.id,mostInCommon[0]); // add to "Match" table in supabase
       return mostInCommon;
     }
 
@@ -95,7 +98,7 @@ const SecretPage = ({ session }) => {
       for (i = 0; i < onlineUsers.length; i++) {
         var currUser = users.filter(user => user.id == onlineUsers[i]);
         var currUserName = currUser.map(user => user.username);
-        var currID = currUser.map(user => user.id);
+        var currID = currUser.map(user => user.id)[0];
         if (who.indexOf(currUserName) == -1){
            who.push(currUserName);
            ids.push(currID);
@@ -154,6 +157,10 @@ const SecretPage = ({ session }) => {
         <ChatwootWidget />
       </div>
 
+   
+      {besties.length > 0 && 
+        <>
+
       <p>
        Matching algorithm has completed. 
       </p>
@@ -173,8 +180,28 @@ const SecretPage = ({ session }) => {
         <center>{hobbiesSimilar(selected).join(", ")}</center>
 
         <br></br><br></br>
-        <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
-        Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
+
+        {contact.length >= 1 && 
+          <>
+          <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
+          Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
+          </>
+        }
+
+        {(contact == null || contact.length) == 0 &&
+          <p>
+            This user does not have a valid telegram handle!
+          </p>
+        }
+        
+        </>
+      }
+
+      {besties.length == 0 && 
+        <p>
+          Nobody at the moment. Try again later!
+        </p>
+      }
 
       
       <Footer />
