@@ -70,7 +70,7 @@ body {
   text-align: center;
   border-radius: var(--custom-border-radius);
   padding: 0.5rem 1rem;
-  cursor: default;
+  cursor: pointer;
   text-align: center;
   font-size: 0.9rem;
   font-weight: 500;
@@ -92,6 +92,14 @@ body {
 
 .button:hover {
   background-color: rgba(255, 206, 107, 0.881);
+}
+
+.on {
+  color: #000;
+  cursor: pointer;
+}
+.off {
+  color: #ccc;
 }
 
 .button1 {
@@ -140,6 +148,16 @@ body {
   cursor: pointer;
 }
 
+.button5 {
+  width: 100%;
+  margin-left: 0px; /*A positive value shifts the button right */
+  margin:  0px;
+  padding: 5px 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .button1:hover {
   background-color: #faebd7;
 }
@@ -153,6 +171,22 @@ body {
 }
 
 .button4:hover {
+  background-color:  #faebd7;
+}
+
+
+.tableButton {
+  background-color: rgb(255, 255, 152);
+  width: 100%;
+  margin-left: 0px; /*A positive value shifts the button right */
+  margin:  0px;
+  padding: 5px 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tableButton:hover {
   background-color:  #faebd7;
 }
 
@@ -446,6 +480,8 @@ input[type="boolean"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px;
+  margin-left: -30px;
 }
 
 .formatTablePopup {
@@ -468,12 +504,22 @@ table {
   height: 100%;
 }
 
+.table2 { 
+  border: 3px solid darkblue;
+  width: 600px;
+  height: 100%;
+ }
+
 th {
   border-bottom: 2px solid black;
 }
 
 td {
   text-align: center;
+}
+
+.small {
+  font-size: 12px;
 }
 
 .event-button {
@@ -524,7 +570,7 @@ td {
 
 .neutral {
   padding: 20px;
-  background-color: grey; 
+  background-color: orange; 
   color: white;
   margin-bottom: 15px;
   text-align:  center;
@@ -537,3 +583,4 @@ td {
   margin-bottom: 15px;
   text-align:  center;
 }
+
