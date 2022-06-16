@@ -70,7 +70,7 @@ body {
   text-align: center;
   border-radius: var(--custom-border-radius);
   padding: 0.5rem 1rem;
-  cursor: default;
+  cursor: pointer;
   text-align: center;
   font-size: 0.9rem;
   font-weight: 500;
@@ -92,6 +92,14 @@ body {
 
 .button:hover {
   background-color: rgba(255, 206, 107, 0.881);
+}
+
+.on {
+  color: #000;
+  cursor: pointer;
+}
+.off {
+  color: #ccc;
 }
 
 .button1 {
@@ -140,6 +148,16 @@ body {
   cursor: pointer;
 }
 
+.button5 {
+  width: 100%;
+  margin-left: 0px; /*A positive value shifts the button right */
+  margin:  0px;
+  padding: 5px 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .button1:hover {
   background-color: #faebd7;
 }
@@ -153,6 +171,22 @@ body {
 }
 
 .button4:hover {
+  background-color:  #faebd7;
+}
+
+
+.tableButton {
+  background-color: rgb(255, 255, 152);
+  width: 100%;
+  margin-left: 0px; /*A positive value shifts the button right */
+  margin:  0px;
+  padding: 5px 16px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.tableButton:hover {
   background-color:  #faebd7;
 }
 

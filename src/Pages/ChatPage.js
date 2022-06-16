@@ -8,7 +8,7 @@ import Footer from "../Footer";
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ChatPage = ({session}) => {
 
@@ -34,6 +34,12 @@ const ChatPage = ({session}) => {
     fetchData();
     },[])
 
+    let navigate = useNavigate();
+    const moveToHistory = () => {
+      let path = '/historypage';
+      navigate(path);
+    }
+
     const addToFind = () => {
       var temp = mine.map(user => user.telegram_handle)[0];
       if (temp == null || temp.localeCompare("null") == 0 || temp == "") {
@@ -42,8 +48,7 @@ const ChatPage = ({session}) => {
       }
       else {
         setClick(true);
-        updateClick(true);
-        
+        updateClick(true);     
       }
     }
 
@@ -127,6 +132,13 @@ const ChatPage = ({session}) => {
         <p className="success"> You are in the waiting room now! Estimated time: 5 seconds</p>
 
       }
+
+      <br></br>
+      <p className = "success">
+      <div className = "button5">
+        <button2 onClick = {moveToHistory}> Click to view your past match history and leave your ratings!</button2>
+      </div>
+      </p>
 
       {(clickedUsernames.length <= 0)
        ? 
