@@ -134,7 +134,7 @@ const ChatPage = ({session}) => {
       }
 
       <br></br>
-      <p className = "success">
+      <p className = "neutral">
       <div className = "button5">
         <button2 onClick = {moveToHistory}> Click to view your past match history and leave your ratings!</button2>
       </div>
@@ -158,6 +158,7 @@ const ChatPage = ({session}) => {
         waiting to be matched now... </strong></p>
 
         <center>{clickedAvatars.map(user => <img src={user} height="100"></img>)}</center>
+        <br></br><br></br><br></br><br></br><br></br>
 
        </p>
      }

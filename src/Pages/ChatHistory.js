@@ -13,8 +13,12 @@ const ChatHistory = ({session}) => {
 	const [rating, setRating] = useState(0);
   	const [hover, setHover] = useState(0);
 
-	const toggleOpen = (id) => {
-		updateOpen(true, id);
+	const toggleOpenFirst = (id) => {
+		updateOpenFirst(true, id);
+	}
+
+	const toggleOpenSecond = (id) => {
+		updateOpenSecond(true, id);
 	}
 
 	const getSessionsFirst = async() => {
@@ -38,6 +42,30 @@ const ChatHistory = ({session}) => {
 		updateRatingForSecond(rating, id);
 	}
 
+	const updateRatingFirst = (rating, id) => {
+		updateRatingForFirst(rating, id);
+	}
+
+	const updateRatingForFirst = async (number, id) => {
+	    setLoading(true);
+	    try {
+	      const user = supabase.auth.user();
+
+	      const { error } = await supabase
+	        .from("match")
+	        .update({secondGive: number, secondRated: true}) // go to this column
+	        .eq('id', id)   // find the specific user
+
+	      if (error) throw error;
+
+	    } catch (error) {
+	      alert(error.error_description || error.message);
+	    } finally {
+	      setLoading(false);
+	       window.location.reload(false); // force the page to refresh
+	    }
+	  };
+
 	const updateRatingForSecond = async (number, id) => {
 	    setLoading(true);
 	    try {
@@ -58,14 +86,34 @@ const ChatHistory = ({session}) => {
 	    }
 	  };
 
-	  const updateOpen = async (currState, id) => {
+	  const updateOpenFirst = async (currState, id) => {
 	    setLoading(true);
 	    try {
 	      const user = supabase.auth.user();
 
 	      const { error } = await supabase
 	        .from("match")
-	        .update({openUp: currState}) // go to this column
+	        .update({openUpFirst: currState}) // go to this column
+	        .eq('id', id)   // find the specific user
+
+	      if (error) throw error;
+
+	    } catch (error) {
+	      alert(error.error_description || error.message);
+	    } finally {
+	      setLoading(false);
+	      window.location.reload(false); // force the page to refresh
+	    }
+	  };
+
+	  const updateOpenSecond = async (currState, id) => {
+	    setLoading(true);
+	    try {
+	      const user = supabase.auth.user();
+
+	      const { error } = await supabase
+	        .from("match")
+	        .update({openUpSecond: currState}) // go to this column
 	        .eq('id', id)   // find the specific user
 
 	      if (error) throw error;
@@ -102,12 +150,13 @@ const ChatHistory = ({session}) => {
 		<div className="success"><center><strong> Chats initiated by you </strong></center></div>
 
 		<div className="formatTable">
-        <table>
+        <table className = "table2">
           <tr>
-            <th>Bud</th>
-            <th>Date</th>
-            <th>Give Rating!</th>
+            <th width = "30%">Bud</th>
+            <th width = "40%">Date</th>
+            <th width = "30%">Give Rating!</th>
           </tr>
+
           {matchWithOthers
             .map((val, key) => {
               return (
@@ -116,9 +165,9 @@ const ChatHistory = ({session}) => {
                   <td>{val.date}</td>
                   <td>{!val.firstRated && 
                   	<>
-                  	{!val.openUp && <button className="tableButton" onClick={() => toggleOpen(val.id)}>Give Rating</button>}
+                  	{!val.openUpFirst && <button className="tableButton" onClick={() => toggleOpenFirst(val.id)}>Give Rating</button>}
 
-                  	{val.openUp && 
+                  	{val.openUpFirst && 
                   		<div className="star-rating">
 					      {[...Array(5)].map((star, index) => {
 					        index += 1;
@@ -136,15 +185,78 @@ const ChatHistory = ({session}) => {
 					        );
 					      })}
 					    </div>
-}
+						}
                   	</>
                   }
-                  {val.firstRated && <p> You gave {val.secondName} {val.firstGive} points!</p>}</td>
+                  {val.firstRated && 
+                  	<>
+                  	{val.firstGive == 1 && <p> You gave {val.secondName} 1 point!</p>}
+                  	{val.firstGive > 1 && <p> You gave {val.secondName} {val.firstGive} points!</p>}
+                  	</>
+                  }
+                  </td>
                 </tr>
               );
             })}
         </table>
       </div>
+
+
+      <div className="success"><center><strong> Chats initiated by other people </strong></center></div>
+
+		<div className="formatTable">
+        <table className = "table2">
+          <tr>
+            <th width = "30%">Bud</th>
+            <th width = "40%">Date</th>
+            <th width = "30%">Give Rating!</th>
+          </tr>
+          {matched
+            .map((val, key) => {
+              return (
+                <tr key={key}>                
+                  <td>{val.firstName}</td>
+                  <td className = "small">{val.date}</td>
+                  <td>{!val.secondRated && 
+                  	<>
+                  	{!val.openUpSecond && <button className="tableButton" onClick={() => toggleOpenSecond(val.id)}>Give Rating</button>}
+
+                  	{val.openUpSecond && 
+                  		<div className="star-rating">
+					      {[...Array(5)].map((star, index) => {
+					        index += 1;
+					        return (
+					          <button
+					            type="button"
+					            key={index}
+					            className={index <= (hover || rating) ? "on" : "off"}
+					            onClick={() => updateRatingFirst(index, val.id)}
+					            onMouseEnter={() => setHover(index)}
+					            onMouseLeave={() => setHover(rating)}
+					          >
+					            <span className="star">&#9733;</span>
+					          </button>
+					        );
+					      })}
+					    </div>
+						}
+                  	</>
+                  }
+
+                  {val.secondRated && 
+                  	<>
+                  	{val.secondGive == 1 && <p> You gave {val.firstName} 1 point!</p>}
+                  	{val.secondGive > 1 && <p> You gave {val.firstName} {val.secondGive} points!</p>}
+                  	</>
+                  }
+                  </td>          
+                </tr>
+              );
+            })}
+        </table>       
+      </div>
+
+      <br></br><br></br>
 		<Footer />
 
 		</>
