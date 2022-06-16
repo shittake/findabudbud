@@ -1,14 +1,23 @@
 .events-item {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  height: 152px;
+  flex-direction: column;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  padding: 0.5rem;
+  padding: 1rem;
   margin: 1rem 0;
   border-radius: 12px;
   background-color: #57a459;
+  font-size: 17px;
 }
 
+.event-footer {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  padding: 0.8vw;
+}
 .backdrop {
   position: fixed;
   top: 0;
@@ -39,13 +48,14 @@
 }
 
 .content {
-  padding: 1rem;
+  padding: "2rem 0 0 2rem";
 }
 
 .actions {
-  padding: 1rem;
+  padding: "0 0 1rem 0";
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media (min-width: 768px) {

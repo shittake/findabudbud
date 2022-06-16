@@ -80,7 +80,7 @@ export default function EventForm(props) {
           />
         </div>
         <div className="event-form__control">
-          <label>Time:</label>
+          <label>Time (24-hour format):</label>
           <input
             htmlFor="time"
             required

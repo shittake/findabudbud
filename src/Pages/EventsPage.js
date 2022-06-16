@@ -9,6 +9,7 @@ import NewEvent from "../Components/EventComp/NewEvent";
 import { textAlign } from "@mui/system";
 import EventForm from "../Components/EventComp/EventForm";
 import EventsItem from "../Components/EventComp/EventsItem";
+import Grid from "@mui/material/Grid";
 
 const EventsPage = ({ session }) => {
   const [users, setUsers] = useState([]);
@@ -95,24 +96,36 @@ const EventsPage = ({ session }) => {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          allEvents.map((event) => {
-            return (
-              <EventsItem
-                createdTime={
-                  event.created_at ? event.created_at : new Date().toISOString()
-                }
-                key={event.id} //realtime subscription
-                title={event.title}
-                id={event.id} //realtime subscription
-                description={event.description}
-                date={event.date}
-                time={event.time}
-                onDeleteItem={deleteItemHandler}
-                session={session}
-                useridcreator={event.userid ? event.userid : session.user.id}
-              ></EventsItem>
-            );
-          })
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            {allEvents.map((event) => {
+              return (
+                <Grid item xs={6}>
+                  <EventsItem
+                    createdTime={
+                      event.created_at
+                        ? event.created_at
+                        : new Date().toISOString()
+                    }
+                    key={event.id} //realtime subscription
+                    title={event.title}
+                    id={event.id} //realtime subscription
+                    description={event.description}
+                    date={event.date}
+                    time={event.time}
+                    onDeleteItem={deleteItemHandler}
+                    session={session}
+                    useridcreator={
+                      event.userid ? event.userid : session.user.id
+                    }
+                  ></EventsItem>
+                </Grid>
+              );
+            })}
+          </Grid>
         )}
       </div>
 

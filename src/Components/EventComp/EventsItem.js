@@ -15,27 +15,35 @@ export default function EventsItem(props) {
     <>
       {!buttonPressed && (
         <div>
-          <div className="events-item">
-            <div>{props.id}</div>
-            <div>{props.title}</div>
-            <div>{props.description}</div>
-            <div>{props.date}</div>
-            <div>{props.time}</div>
-            <div>{props.createdTime}</div>
-            {props.session.user.id == props.useridcreator && ( //real time
-              <RedButton
-                onClick={() => {
-                  props.onDeleteItem(props.id);
-                }}
-                text="Delete Event"
-                variant="contained"
-              ></RedButton>
-            )}
-            <RedButton
-              text="View This Event"
-              variant="contained"
-              onClick={onClickHandler}
-            ></RedButton>
+          <div className="events-item" style={{ padding: "20px 0 0 0" }}>
+            <div>id: {props.id}</div>
+            <div>title: {props.title}</div>
+            {/* <div>{props.description}</div> */}
+            <div>date: {props.date}</div>
+            <div>time: {props.time}</div>
+            {/* <div>{props.createdTime}</div> */}
+            <div className="event-footer">
+              <div style={{ padding: "0 10px 0 10px" }}>
+                {props.session.user.id == props.useridcreator ? ( //real time
+                  <RedButton
+                    onClick={() => {
+                      props.onDeleteItem(props.id);
+                    }}
+                    text="Delete Event"
+                    variant="contained"
+                  ></RedButton>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div>
+                <RedButton
+                  text="View This Event"
+                  variant="contained"
+                  onClick={onClickHandler}
+                ></RedButton>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -47,22 +55,33 @@ export default function EventsItem(props) {
               <h2>id: {props.id}</h2>
               <h2>title: {props.title}</h2>
             </header>
-            <div className={classes.content}>
+            <div
+              className={classes.content}
+              style={{ padding: "20px 0 5px 30px" }}
+            >
               <div>Description: {props.description}</div>
               <div>Date: {props.date}</div>
-              <div>Time: {props.time}</div>
-              <div>Created Time: {props.createdTime}</div>
+              <div>
+                Time of event (24-hour format): {props.time.slice(0, 5)}
+              </div>
+              <div>
+                Created Date, Time: {props.createdTime.slice(0, 10)}
+                {", "}
+                {props.createdTime.slice(11, 16)}
+              </div>
             </div>
             <footer className={classes.actions}>
-              {props.session.user.id == props.useridcreator && ( //real time
-                <RedButton
-                  onClick={() => {
-                    props.onDeleteItem(props.id);
-                  }}
-                  text="Delete Event"
-                  variant="contained"
-                ></RedButton>
-              )}
+              <div style={{ padding: "0 10px" }}>
+                {props.session.user.id == props.useridcreator && ( //real time
+                  <RedButton
+                    onClick={() => {
+                      props.onDeleteItem(props.id);
+                    }}
+                    text="Delete Event"
+                    variant="contained"
+                  ></RedButton>
+                )}
+              </div>
               <RedButton
                 text="View other events"
                 variant="contained"
