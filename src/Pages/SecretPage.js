@@ -74,6 +74,7 @@ const SecretPage = ({ session }) => {
     const displayCommon = () => {
       var temp = mapCommon();
       var mostInCommon = [];
+      var mostInCommonNames = [];
       var index;
       var largest = 0;
 
@@ -81,11 +82,14 @@ const SecretPage = ({ session }) => {
         if (temp[1][index] > largest) {
           largest = temp[1][index];
           mostInCommon = [temp[2][index]];
+          mostInCommonNames = [temp[0]][index];
         } else if (temp[1][index] == largest) {
           mostInCommon.push(temp[2][index]);
+          mostInCommonNames.push(temp[0][index]);
         }
       }
-      addToMatch(session.user.id,mostInCommon[0]); // add to "Match" table in supabase
+      addToMatch(session.user.id,mostInCommon[0],
+      mine.map(user => user.username)[0],mostInCommonNames[0]); // add to "Match" table in supabase
       return mostInCommon;
     }
 
@@ -97,7 +101,7 @@ const SecretPage = ({ session }) => {
       var totalCommon = [];
       for (i = 0; i < onlineUsers.length; i++) {
         var currUser = users.filter(user => user.id == onlineUsers[i]);
-        var currUserName = currUser.map(user => user.username);
+        var currUserName = currUser.map(user => user.username)[0];
         var currID = currUser.map(user => user.id)[0];
         if (who.indexOf(currUserName) == -1){
            who.push(currUserName);
