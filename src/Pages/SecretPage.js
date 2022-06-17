@@ -158,10 +158,11 @@ const SecretPage = ({ session }) => {
     setLoading(true);
     try {
       const user = supabase.auth.user();
+      var previous = users.filter(user=>user.id==ID).map(user=>user.points)[0]
 
       const { error } = await supabase
         .from("profiles")
-        .update({ points: points + number })
+        .update({ points: previous + number})
         .eq("id", ID);
 
       if (error) throw error;
@@ -179,10 +180,10 @@ const SecretPage = ({ session }) => {
     setLoading(true);
     try {
       const user = supabase.auth.user();
-
+      var previous = users.filter(user=>user.id==ID).map(user=>user.point_history)[0];
       const { error } = await supabase
         .from("profiles")
-        .update({ point_history: point_history+message})
+        .update({ point_history: previous+message})
         .eq("id", ID);
 
       if (error) throw error;
@@ -193,11 +194,11 @@ const SecretPage = ({ session }) => {
     }
   };
 
-    const initiateConvo = (otherUserID) => {
+    const initiateConvo = (otherUsername, otherUserID) => {
       updatePoints(9, session.user.id);
-      updateHistory(",+9 Initiate conversation " + new Date().toDateString(), session.user.id);
-      updatePoints(0, otherUserID);
-      updateHistory(",+9 Someone else initiated conversation with you! " + new Date().toDateString(), otherUserID);
+      updateHistory(",+9 Initiate conversation with " + otherUsername + " " + new Date().toDateString(), session.user.id);
+      updatePoints(9, otherUserID);
+      updateHistory(",+9 " + myUsername + " initiated conversation with you! " + new Date().toDateString(), otherUserID);
     }
 
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
@@ -238,7 +239,7 @@ const SecretPage = ({ session }) => {
 
         {contact.length >= 1 && 
           <>
-          <center><a href={"https://telegram.me/" + contact}  class="buttonTeleLink" target="_blank">
+          <center><a href={"https://telegram.me/" + contact} onClick={() => initiateConvo(contact, besties[0])} class="buttonTeleLink" target="_blank">
           Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
           </>
         }
