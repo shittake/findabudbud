@@ -494,7 +494,7 @@ input[type="boolean"] {
 
 table {
   border: 2px solid forestgreen;
-  width: 400px;
+  width: 600px;
   height: 200px;
 }
 
@@ -506,7 +506,7 @@ table {
 
 .table2 { 
   border: 3px solid darkblue;
-  width: 600px;
+  width: 800px;
   height: 100%;
  }
 

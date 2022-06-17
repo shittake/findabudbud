@@ -11,7 +11,21 @@ const ChatHistory = ({session}) => {
 	const [matched, setMatched] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [rating, setRating] = useState(0);
-  	const [hover, setHover] = useState(0);
+  const [hover, setHover] = useState(0);  
+  const [users, setUsers] = useState([]);
+
+        const fetchData = async () => {
+                const {data, error} = await supabase
+                .from('profiles')
+                .select('*')
+
+                setUsers(data);
+
+        }
+
+        useEffect(() => {
+                fetchData();
+        },[])
 
 	const toggleOpenFirst = (id) => {
 		updateOpenFirst(true, id);
@@ -38,19 +52,34 @@ const ChatHistory = ({session}) => {
   		setMatched(data);
 	}
 
-	const updateRating = (rating, id) => {
-		updateRatingForSecond(rating, id);
+	const updateRating = (rating, id, person) => {
+		updateRatingForSecond(rating, id, person);
+		if (users != [] || users != null){
+			updateTotalRating(
+				parseInt((users.filter(user => user.id == person).map(user => user.total_rating))[0]) + rating,
+				person,
+				parseInt((users.filter(user => user.id == person).map(user => user.matches))[0]) + 1
+				)
+		}
+
 	}
 
-	const updateRatingFirst = (rating, id) => {
-		updateRatingForFirst(rating, id);
+	const updateRatingFirst = (rating, id, person) => {
+		updateRatingForFirst(rating, id, person);	
+		if (users != [] || users != null){
+			updateTotalRating(
+				parseInt((users.filter(user => user.id == person).map(user => user.total_rating))[0]) + rating,
+				person,
+				parseInt((users.filter(user => user.id == person).map(user => user.matches))[0]) + 1
+				)
+		}
 	}
 
-	const updateRatingForFirst = async (number, id) => {
+	const updateRatingForFirst = async (number, id, person) => {
 	    setLoading(true);
 	    try {
 	      const user = supabase.auth.user();
-
+	      
 	      const { error } = await supabase
 	        .from("match")
 	        .update({secondGive: number, secondRated: true}) // go to this column
@@ -62,27 +91,43 @@ const ChatHistory = ({session}) => {
 	      alert(error.error_description || error.message);
 	    } finally {
 	      setLoading(false);
-	       window.location.reload(false); // force the page to refresh
+	      window.location.reload(false);
 	    }
 	  };
 
-	const updateRatingForSecond = async (number, id) => {
+	  const updateTotalRating= async (number, person, number2) => {
 	    setLoading(true);
 	    try {
 	      const user = supabase.auth.user();
+	      
+	      const { error } = await supabase
+	        .from("profiles")
+	        .update({total_rating: number, matches: number2}) // go to this column
+	        .eq('id', person)   // find the specific user
 
+	      if (error) return;
+
+	    } finally {
+	      setLoading(false);
+	      window.location.reload(false);
+	    }
+	  };
+
+	const updateRatingForSecond = async (number, id, person) => {
+	    setLoading(true);
+	    try {
+	      const user = supabase.auth.user();
+	      
 	      const { error } = await supabase
 	        .from("match")
 	        .update({firstGive: number, firstRated: true}) // go to this column
 	        .eq('id', id)   // find the specific user
 
-	      if (error) throw error;
+	      if (error) return;
 
-	    } catch (error) {
-	      alert(error.error_description || error.message);
 	    } finally {
 	      setLoading(false);
-	       window.location.reload(false); // force the page to refresh
+	      window.location.reload(false);
 	    }
 	  };
 
@@ -96,10 +141,8 @@ const ChatHistory = ({session}) => {
 	        .update({openUpFirst: currState}) // go to this column
 	        .eq('id', id)   // find the specific user
 
-	      if (error) throw error;
+	      if (error) return;
 
-	    } catch (error) {
-	      alert(error.error_description || error.message);
 	    } finally {
 	      setLoading(false);
 	      window.location.reload(false); // force the page to refresh
@@ -126,10 +169,6 @@ const ChatHistory = ({session}) => {
 	    }
 	  };
 
-	const rate = (id) => {
-		updateRatingForSecond(1,id);
-	}
-
 	useEffect(() => {
 		getSessionsFirst();
 	}, [])
@@ -152,9 +191,10 @@ const ChatHistory = ({session}) => {
 		<div className="formatTable">
         <table className = "table2">
           <tr>
-            <th width = "30%">Bud</th>
-            <th width = "40%">Date</th>
-            <th width = "30%">Give Rating!</th>
+            <th width = "20%">Bud</th>
+            <th width = "35%">Matched Date</th>
+            <th width = "25%">Give Rating!</th>
+            <th width = "20%">Rating received</th>
           </tr>
 
           {matchWithOthers
@@ -176,7 +216,7 @@ const ChatHistory = ({session}) => {
 					            type="button"
 					            key={index}
 					            className={index <= (hover || rating) ? "on" : "off"}
-					            onClick={() => updateRating(index, val.id)}
+					            onClick={() => updateRating(index, val.id,val.seconduser)}
 					            onMouseEnter={() => setHover(index)}
 					            onMouseLeave={() => setHover(rating)}
 					          >
@@ -195,6 +235,19 @@ const ChatHistory = ({session}) => {
                   	</>
                   }
                   </td>
+
+                 	<td>{val.secondRated && 
+                 		<>
+                 		{val.secondGive == 1 && <p>{val.secondName} gave you 1 point!</p>}
+                 		{val.secondGive > 1 && <p>{val.secondName} gave you {val.secondGive} points!</p>}
+                 		</>
+                 	}
+                 	{!val.secondRated && 
+                 		<>
+                 		{val.secondName} has not rated you yet!
+                 		</>
+                 	}
+                 	</td>
                 </tr>
               );
             })}
@@ -207,9 +260,10 @@ const ChatHistory = ({session}) => {
 		<div className="formatTable">
         <table className = "table2">
           <tr>
-            <th width = "30%">Bud</th>
-            <th width = "40%">Date</th>
-            <th width = "30%">Give Rating!</th>
+            <th width = "20%">Bud</th>
+            <th width = "35%">Matched Date</th>
+            <th width = "25%">Give Rating!</th>
+            <th width = "20%">Rating received</th>
           </tr>
           {matched
             .map((val, key) => {
@@ -230,7 +284,7 @@ const ChatHistory = ({session}) => {
 					            type="button"
 					            key={index}
 					            className={index <= (hover || rating) ? "on" : "off"}
-					            onClick={() => updateRatingFirst(index, val.id)}
+					            onClick={() => updateRatingFirst(index, val.id, val.firstuser)}
 					            onMouseEnter={() => setHover(index)}
 					            onMouseLeave={() => setHover(rating)}
 					          >
@@ -249,7 +303,21 @@ const ChatHistory = ({session}) => {
                   	{val.secondGive > 1 && <p> You gave {val.firstName} {val.secondGive} points!</p>}
                   	</>
                   }
-                  </td>          
+                  </td>  
+
+                  <td>
+                  {val.firstRated && 
+                  	<>
+                  	{val.firstGive == 1 && <p> {val.firstName} gave you 1 point! </p>}
+                  	{val.firstGive > 1 && <p> {val.firstName} gave you {val.firstGive} points! </p>}
+                  	</>
+                  }    
+                  {!val.firstRated && 
+                  	<>
+                  	{val.firstName} has not rated you yet!
+                  	</>
+                  }
+                  </td>    
                 </tr>
               );
             })}

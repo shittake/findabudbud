@@ -47,9 +47,9 @@ const LeaderboardPage = ({ session }) => {
   }
 
   /* Template code:
-	<p><center><strong> People who love brawl stars: </strong></center></p>
-	{users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
-	*/
+  <p><center><strong> People who love brawl stars: </strong></center></p>
+  {users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
+  */
 
   // To get the current user's number of points:
   var number = users
@@ -80,6 +80,8 @@ const LeaderboardPage = ({ session }) => {
             <th>Points</th>
             <th>Title</th>
             <th>Avatar</th>
+            <th>Total Matches</th>
+            <th>Average Rating</th>
           </tr>
           {users
             .sort((a, b) => (a.points < b.points ? 1 : -1))
@@ -95,9 +97,14 @@ const LeaderboardPage = ({ session }) => {
                   <td>{val.points}</td>
                   <td>{findTitle(val.points)}</td>
                   <td><img src={findAvatar(val.avatar_url)} /></td>
+                  <td>{val.matches}</td>
+                  <td>
+                  {val.matches >= 1 && <p>{(val.total_rating/val.matches).toFixed(2)} stars </p>}
+                  {val.matches == 0 && <p>Nothing yet!</p>}</td>
                 </tr>
               );
             })}
+
         </table>
       </div>
 
