@@ -50,6 +50,7 @@ const SecretPage = ({ session }) => {
 
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
+    var myUsername = mine.map(user => user.username)[0];
 
     // Find the user.id of all the people who are currently online (updated < 1 hour ago) 
     var onlineUsers = Array.from(users
@@ -82,14 +83,16 @@ const SecretPage = ({ session }) => {
         if (temp[1][index] > largest) {
           largest = temp[1][index];
           mostInCommon = [temp[2][index]];
-          mostInCommonNames = [temp[0]][index];
+          mostInCommonNames = [temp[0][index]];
         } else if (temp[1][index] == largest) {
           mostInCommon.push(temp[2][index]);
           mostInCommonNames.push(temp[0][index]);
         }
       }
-      addToMatch(session.user.id,mostInCommon[0],
-      mine.map(user => user.username)[0],mostInCommonNames[0]); // add to "Match" table in supabase
+
+      if (mostInCommon.length >= 1) {
+        addToMatch(session.user.id, mostInCommon[0],myUsername,mostInCommonNames[0]); // add to "Match" table in supabase
+      }
       return mostInCommon;
     }
 
@@ -148,6 +151,54 @@ const SecretPage = ({ session }) => {
       return answer;
     }
 
+  // Method to update a user's points in database
+  // Input --> an integer representing the number of points added
+
+  const updatePoints = async (number, ID) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ points: points + number })
+        .eq("id", ID);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Update point history that is stored in supabase
+  // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
+  // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
+  const updateHistory = async (message, ID) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ point_history: point_history+message})
+        .eq("id", ID);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+    const initiateConvo = (otherUserID) => {
+      updatePoints(9, session.user.id);
+      updateHistory(",+9 Initiate conversation " + new Date().toDateString(), session.user.id);
+      updatePoints(0, otherUserID);
+      updateHistory(",+9 Someone else initiated conversation with you! " + new Date().toDateString(), otherUserID);
+    }
 
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
     var selected = users.filter(user => user.id == besties[0]); //the row of the selected person! right now, is just the first person
@@ -187,7 +238,7 @@ const SecretPage = ({ session }) => {
 
         {contact.length >= 1 && 
           <>
-          <center><a href={"https://telegram.me/" + contact} class="buttonTeleLink" target="_blank">
+          <center><a href={"https://telegram.me/" + contact}  class="buttonTeleLink" target="_blank">
           Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
           </>
         }
