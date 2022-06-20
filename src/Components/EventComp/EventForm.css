@@ -46,6 +46,11 @@
   text-align: left;
 }
 
+.event-form__label {
+  display: flex;
+  flex-direction: column;
+}
+
 .event-form__control label {
   font-weight: bold;
   display: flex;

@@ -17,11 +17,9 @@ export default function EventsItem(props) {
         <div>
           <div className="events-item" style={{ padding: "20px 0 0 0" }}>
             <div>id: {props.id}</div>
-            <div>title: {props.title}</div>
-            {/* <div>{props.description}</div> */}
+            <div className="events-item-title">title: {props.title}</div>
             <div>date: {props.date}</div>
-            <div>time: {props.time}</div>
-            {/* <div>{props.createdTime}</div> */}
+            <div>time (24-hour): {props.time.slice(0, 5)}</div>
             <div className="event-footer">
               <div style={{ padding: "0 10px 0 10px" }}>
                 {props.session.user.id == props.useridcreator ? ( //real time
@@ -57,15 +55,25 @@ export default function EventsItem(props) {
             </header>
             <div
               className={classes.content}
-              style={{ padding: "20px 0 5px 30px" }}
+              style={{ padding: "20px 0px 5px 30px" }}
             >
-              <div>Description: {props.description}</div>
-              <div>Date: {props.date}</div>
               <div>
-                Time of event (24-hour format): {props.time.slice(0, 5)}
+                <strong>Description: </strong>
+                <div style={{ padding: "0 100px 0 0" }}>
+                  {props.description}
+                </div>
               </div>
               <div>
-                Created Date, Time: {props.createdTime.slice(0, 10)}
+                <strong>Date: </strong>
+                {props.date}
+              </div>
+              <div>
+                <strong>Time of event (24-hour format): </strong>
+                {props.time.slice(0, 5)}
+              </div>
+              <div>
+                <strong>Created Date, Time: </strong>
+                {props.createdTime.slice(0, 10)}
                 {", "}
                 {props.createdTime.slice(11, 16)}
               </div>

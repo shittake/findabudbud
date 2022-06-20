@@ -1,6 +1,5 @@
 .events-item {
   display: flex;
-  /* justify-content: space-between; */
   height: 152px;
   flex-direction: column;
   align-items: center;
@@ -10,12 +9,12 @@
   border-radius: 12px;
   background-color: #57a459;
   font-size: 17px;
+  font-weight: 500;
 }
 
 .event-footer {
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
   padding: 0.8vw;
 }
 .backdrop {
