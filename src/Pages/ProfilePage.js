@@ -22,6 +22,8 @@ import {
   RedButton,
   BlueButton,
   GreenButton,
+  PinkButton,
+  OrangeButton
 } from "../Components/Buttons/ColouredButtons";
 
 const ProfilePage = ({ session }) => {
@@ -42,6 +44,7 @@ const ProfilePage = ({ session }) => {
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
   const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
   const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
+  
   useEffect(() => {
     getProfile();
   }, [session]);
