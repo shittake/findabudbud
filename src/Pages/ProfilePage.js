@@ -22,8 +22,7 @@ import {
   RedButton,
   BlueButton,
   GreenButton,
-  PinkButton,
-  OrangeButton
+  PurpleButton
 } from "../Components/Buttons/ColouredButtons";
 
 const ProfilePage = ({ session }) => {
@@ -35,6 +34,8 @@ const ProfilePage = ({ session }) => {
   const [anime, setAnime] = useState(false);
   const [french, setFrench] = useState(false);
   const [korean, setKorean] = useState(false);
+  const [badminton, setBadminton] = useState(false);
+  const [soccer, setSoccer] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -42,9 +43,11 @@ const ProfilePage = ({ session }) => {
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
+  const [clickSports, setClickSports] = useState("false"); //check if user clicked on the "Sports" header
+  const [clickOthers, setClickOthers] = useState("false"); //check if user clicked on the "Others" header
   const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
   const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
-  
+
   useEffect(() => {
     getProfile();
   }, [session]);
@@ -66,11 +69,19 @@ const ProfilePage = ({ session }) => {
   };
 
   const handleKoreanChange = () => {
-    setKorean(!korean);
+    return setKorean(!korean);
   };
 
   const handleFrenchChange = () => {
     return setFrench(!french);
+  };
+
+  const handleBadmintonChange = () => {
+    return setBadminton(!badminton);
+  };
+
+  const handleSoccerChange = () => {
+    return setSoccer(!soccer);
   };
 
   const toggleGames = () => {
@@ -85,12 +96,13 @@ const ProfilePage = ({ session }) => {
     return setClickLanguages(!clickLanguages);
   };
 
-  const handleSinglePress = () => {
-    alert("4 points added!");
-    updatePoints(4);
+  const toggleOthers = () => {
+    return setClickOthers(!clickOthers);
   };
 
-
+  const toggleSports = () => {
+    return setClickSports(!clickSports);
+  };
 
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
@@ -165,9 +177,13 @@ const ProfilePage = ({ session }) => {
         setFrench(data.french);
         setPointHistory(data.point_history);
         setTelegramHandle(data.telegram_handle);
+        setBadminton(data.badminton);
+        setSoccer(data.soccer);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
+        setClickSports(false); //default set to false to avoid overwhelming user
+        setClickOthers(false); //default set to false to avoid overwhelming user
       }
     } catch (error) {
       alert(error.message);
@@ -193,6 +209,8 @@ const ProfilePage = ({ session }) => {
         anime,
         korean,
         french,
+        badminton,
+        soccer,
         avatar_url,
         points,
         point_history,
@@ -418,6 +436,50 @@ const ProfilePage = ({ session }) => {
         <>
           <div>
             Click "Languages" if you would like to see the different language
+            subcategories!
+          </div>
+        </>
+      )}
+
+      <br></br>
+
+      {/* Fourth heading - Sports */}
+      <h1 className="clickableText">
+        <strong>
+          <button2 onClick={() => toggleSports()} style={{ color: "purple" }}>
+            {" "}
+            Sports{" "}
+          </button2>
+        </strong>
+      </h1>
+
+      {clickSports && (
+        <>
+          {/* Toggle button to change preference for Badminton */}
+          <div>
+            <PurpleButton
+              variant={badminton ? "contained" : "outlined"}
+              onClick={() => handleBadmintonChange()}
+              text="Badminton"
+            ></PurpleButton>
+          </div>
+          <br></br>
+        {/* Toggle button to change preference for Soccer */}
+          <div>
+            <PurpleButton
+              variant={soccer ? "contained" : "outlined"}
+              onClick={() => handleSoccerChange()}
+              text="Soccer"
+            ></PurpleButton>
+          </div>
+        </>
+      )}
+
+      {/* This is shown if the Sports heading is not clicked */}
+      {!clickSports && (
+        <>
+          <div>
+            Click "Sports" if you would like to see the different sports
             subcategories!
           </div>
         </>
