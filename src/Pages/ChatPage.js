@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useBeforeunload } from 'react-beforeunload';
 
 const ChatPage = ({session}) => {
 
@@ -16,7 +17,18 @@ const ChatPage = ({session}) => {
     
     setTimeout(() => 
       {setRedirectNow(true);}
-      , 5000);
+      , 30000);
+
+    useEffect(() => {
+      const unloadCallback = (event) => {
+        event.preventDefault();
+        event.returnValue = "You will be removed from the waiting room";
+        return updateOnline();
+      };
+
+      window.addEventListener("beforeunload", unloadCallback);
+      return () => window.removeEventListener("beforeunload", unloadCallback);
+    }, []);
 
     const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
@@ -34,8 +46,28 @@ const ChatPage = ({session}) => {
     fetchData();
     },[])
 
+  const updateOnline = async() => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({click: false, online: false}) // go to this column
+        .eq('id', session.user.id)   // find the specific user
+
+      if (error) throw error;
+
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
     let navigate = useNavigate();
     const moveToHistory = () => {
+      updateOnline();
       let path = '/historypage';
       navigate(path);
     }
@@ -51,27 +83,6 @@ const ChatPage = ({session}) => {
         updateClick(true);     
       }
     }
-
-
-    const updateClick = async(currState) => {
-      setLoading(true);
-      try {
-        const user = supabase.auth.user();
-
-        const { error } = await supabase
-          .from("profiles")
-          .update({click: currState}) // go to this column
-          .eq('id', session.user.id)   // find the specific user
-
-        if (error) throw error;
-
-      } catch (error) {
-        alert(error.error_description || error.message);
-      } finally {
-        setLoading(false);
-        window.location.reload(false); // force the page to refresh
-      }
-    };
 
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
@@ -116,20 +127,14 @@ const ChatPage = ({session}) => {
       {!(mine.map(user => user.click)[0]) && 
         <>
           <p class="warning">You are not in the waiting room yet. 
-          To join and get matched, click the button below.</p>
+          To make your profile visible to others, click on another tab, and then the "Match now!" tab again. </p>
 
-          <p className="neutral"> If you stay on this page for more than a minute, you will
-          automatically be matched! </p>
-
-          <div className = "button4">
-            <button2 onClick = {addToFind}> Click to start matching! </button2>
-          </div>
         </>
       }
 
       {mine.map(user => user.click)[0] && 
 
-        <p className="success"> You are in the waiting room now! Estimated time: 5 seconds</p>
+        <p className="success"> You are in the waiting room now! Estimated time for a match: 30 seconds</p>
 
       }
 

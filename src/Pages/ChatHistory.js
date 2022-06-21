@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import Header from "../Header";
+import HeaderHistory from "../Components/Header/HeaderHistory";
 import Footer from "../Footer";
 import ChatwootWidget from "../chatwoot.js";
 import React from 'react';
@@ -179,14 +179,14 @@ const ChatHistory = ({session}) => {
 
 	return (
 		<>
-		<Header session={session} />
+		<HeaderHistory session={session} />
 
 	    <div className="App">
 	      <ChatwootWidget />
 	    </div>
 
-		<div className="neutral"><center><strong> Your Chat History </strong></center></div>
-		<div className="success"><center><strong> Chats initiated by you </strong></center></div>
+		<div className="neutral" id="chatHistory"><center><strong> Your Chat History </strong></center></div>
+		<div className="success" id="chatHistory2"><center><strong> Chats initiated by you </strong></center></div>
 
 		<div className="formatTable">
         <table className = "table2">

@@ -38,7 +38,7 @@ const useStyles2 = makeStyles(() => ({
   },
 }));
 
-export default function HeaderMatch({ session }) {
+export default function HeaderHistory({ session }) {
 
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState(false);
@@ -64,16 +64,12 @@ export default function HeaderMatch({ session }) {
   
   const steps = [
     {
-      selector: "#chat",
-      content: "Here, you can find people of similar interests to match with! To join the waiting room, follow the instructions given on this page."
+      selector: "#chatHistory",
+      content: "Here, you can view the people who had matched with you. Leave a review (out of 5 stars) for the other user."
     },
     {
-      selector: "#chat2",
-      content: "You will automatically be placed in the waiting room every time you click on the Match Now! tab. Avoid refreshing the page at this point or you would be removed from the waiting room to prevent bot activity. If you find yourself outside the waiting room, click on another tab above and then return to this page!"    
-    },
-    {
-      selector: "#history",
-      content: "If you wish to see your past match history, as well as leave a rating for your previous matches (and see their ratings of you), click here!"
+      selector: "#chatHistory2",
+      content: "Only unique users matched with you will be shown here, to avoid cluttering up the page."
     }
   ];
 
@@ -88,7 +84,7 @@ export default function HeaderMatch({ session }) {
 
       const { error } = await supabase
         .from("profiles")
-        .update({ firstTimeMatch: false })
+        .update({ firstTimeHistory: false })
         .eq("id", session.user.id);
 
       if (error) throw error;
@@ -103,7 +99,7 @@ export default function HeaderMatch({ session }) {
   const [loading, setLoading] = useState(true);
   const [click, setClick] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
-  const [firstTimeMatch, setFirstTimeMatch] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
+  const [firstTimeHistory, setFirstTimeHistory] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
 
 
   const { header, logo } = useStyles();
@@ -159,7 +155,7 @@ export default function HeaderMatch({ session }) {
 
       if (data) {
         setPoints(data.points);
-        if (data.firstTimeMatch) setIsTourOpen(true);
+        if (data.firstTimeHistory) setIsTourOpen(true);
       }
     } catch (error) {
       alert(error.message);
@@ -188,7 +184,7 @@ export default function HeaderMatch({ session }) {
       FINDABUD
     </Typography>
     <Typography variant="h6" component="h1" className={logo2}>
-      WAITING ROOM
+      CHAT HISTORY
     </Typography>
     </>
   );
@@ -252,7 +248,7 @@ export default function HeaderMatch({ session }) {
         <Tour
           steps={steps}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTimeMatch(false); updateFirstTime()}}
+          onRequestClose={() => {setIsTourOpen(false); setFirstTimeHistory(false); updateFirstTime()}}
         />
       )}
     </header>

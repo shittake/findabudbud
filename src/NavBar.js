@@ -14,17 +14,17 @@ function NavBar({session}) {
 
   const triggerOnline = () => {
     setOnline(true);
-    updateOnline();
+    updateOnline(false);
   }
 
-  const updateOnline = async() => {
+  const updateOnline = async(currState) => {
     setLoading(true);
     try {
       const user = supabase.auth.user();
 
       const { error } = await supabase
         .from("profiles")
-        .update({online: true}) // go to this column
+        .update({click: currState}) // go to this column
         .eq('id', session.user.id)   // find the specific user
 
       if (error) throw error;
@@ -62,6 +62,7 @@ function NavBar({session}) {
                 id="leaderboard"
                 height="170"
                 style={{ cursor: "pointer" }}
+                onClick={()=>triggerOnline()}
               />
             </h1>
           </NavLink>
@@ -75,6 +76,7 @@ function NavBar({session}) {
                 id="chat"
                 height="170"
                 style={{ cursor: "pointer" }}
+                onClick={()=>updateOnline(true)}
               />
             </h1>
           </NavLink>
@@ -88,6 +90,7 @@ function NavBar({session}) {
                 id="events"
                 height="170"
                 style={{ cursor: "pointer" }}
+                onClick={()=>triggerOnline()}
               />
             </h1>
           </NavLink>
