@@ -6,6 +6,7 @@ export default function EventForm(props) {
   const [enteredDescription, setEnteredDescription] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
   const [enteredTime, setEnteredTime] = useState("");
+  const [enteredNumPeople, setEnteredNumPeople] = useState("");
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -22,11 +23,16 @@ export default function EventForm(props) {
     setEnteredTime(event.target.value);
   };
 
+  const numPeopleChangeHandler = (event) => {
+    setEnteredNumPeople(event.target.value);
+  };
+
   const initialise = () => {
     setEnteredDate("");
     setEnteredTime("");
     setEnteredTitle("");
     setEnteredDescription("");
+    setEnteredNumPeople("");
   };
 
   const submitHandler = (event) => {
@@ -37,6 +43,7 @@ export default function EventForm(props) {
       description: enteredDescription,
       date: new Date(enteredDate),
       time: enteredTime + ":00",
+      numpeople: enteredNumPeople,
     };
     props.onSaveEnteredEvent(eventData);
     initialise();
@@ -46,8 +53,10 @@ export default function EventForm(props) {
     <div className="event-form">
       <form onSubmit={submitHandler} className="event-form__controls">
         <div className="event-form__control">
-          <label>Title: </label>
+          <label>Title: </label>{" "}
+          <div>{20 - enteredTitle.length} characters left!</div>
           <input
+            maxlength="20"
             htmlFor="title"
             required
             type="text"
@@ -58,7 +67,9 @@ export default function EventForm(props) {
         </div>
         <div className="event-form__control">
           <label> Description: </label>
+          <div>{1000 - enteredDescription.length} characters left!</div>
           <input
+            maxlength="1000"
             htmlFor="description"
             required
             type="text"
@@ -80,7 +91,7 @@ export default function EventForm(props) {
           />
         </div>
         <div className="event-form__control">
-          <label>Time (24-hour format):</label>
+          <label>Time: </label>
           <input
             htmlFor="time"
             required
@@ -88,6 +99,18 @@ export default function EventForm(props) {
             value={enteredTime}
             onChange={TimeChangeHandler}
             id="time"
+          />
+        </div>
+        <div className="event-form__control">
+          <label>Number of people (including yourself!):</label>
+          <input
+            htmlFor="number"
+            required
+            type="number"
+            value={enteredNumPeople}
+            min="1"
+            onChange={numPeopleChangeHandler}
+            id="numpeople"
           />
         </div>
 

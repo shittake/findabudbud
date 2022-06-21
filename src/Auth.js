@@ -33,7 +33,7 @@ export default function Auth() {
     <div className="auth-formatting">
       <br></br>
       <div>
-        <h1 className="header">
+        <h1 style={{ background: "transparent" }}>
           <center>hello! you have arrived at findabud's login page :D</center>
         </h1>
 
