@@ -36,6 +36,8 @@ const ProfilePage = ({ session }) => {
   const [korean, setKorean] = useState(false);
   const [badminton, setBadminton] = useState(false);
   const [soccer, setSoccer] = useState(false);
+  const [food, setFood] = useState(false);
+  const [study, setStudy] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -82,6 +84,14 @@ const ProfilePage = ({ session }) => {
 
   const handleSoccerChange = () => {
     return setSoccer(!soccer);
+  };
+
+  const handleFoodChange = () => {
+    return setFood(!food);
+  };
+
+  const handleStudyChange = () => {
+    return setStudy(!study);
   };
 
   const toggleGames = () => {
@@ -179,6 +189,8 @@ const ProfilePage = ({ session }) => {
         setTelegramHandle(data.telegram_handle);
         setBadminton(data.badminton);
         setSoccer(data.soccer);
+        setFood(data.food);
+        setStudy(data.study);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -211,6 +223,8 @@ const ProfilePage = ({ session }) => {
         french,
         badminton,
         soccer,
+        food,
+        study,
         avatar_url,
         points,
         point_history,
@@ -229,6 +243,7 @@ const ProfilePage = ({ session }) => {
       alert(error.message);
     } finally {
       setLoading(false);
+      alert("Profile updated!");
     }
   };
 
@@ -487,6 +502,53 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
+      {/* Fifth Category - Others */}
+
+      <h1 className="clickableText" id="profile2">
+        <strong>
+          <button2 onClick={() => toggleOthers()} style={{ color: "red" }}>
+            {" "}
+            Others{" "}
+          </button2>
+        </strong>
+      </h1>
+
+      {clickOthers && (
+        <>
+          {/* Toggle button to change preference for Food */}
+          <div>
+            <RedButton
+              onClick={() => handleFoodChange()}
+              variant={food ? "contained" : "outlined"}
+              text="Food"
+            ></RedButton>
+          </div>
+          <br></br>
+
+          {/* Toggle button to change preference for Study */}
+          <div>
+            <RedButton
+              variant={study ? "contained" : "outlined"}
+              onClick={() => handleStudyChange()}
+              text="Study"
+            ></RedButton>
+          </div>
+          <br></br>
+        </>
+      )}
+
+      {/* This is shown if the Others heading is not clicked. */}
+      {!clickOthers && (
+        <>
+          <div>
+            Click "Others" if you would like to see more
+            subcategories!
+          </div>
+        </>
+      )}
+
+      <br></br><br></br>
+
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
         <div>
@@ -502,6 +564,7 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
+      
 
       <h1 className="parent" id="share">
         <h2 className="child">
@@ -546,11 +609,8 @@ const ProfilePage = ({ session }) => {
       </h1>
 
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <br></br><br></br><br></br><br></br><br></br>
+
       <Footer />
     </>
   );
