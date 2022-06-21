@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
-import Header from "../Header";
+import HeaderLeaderboard from "../Components/Header/HeaderLeaderboard";
 import Footer from "../Footer";
 import "../styles.css";
 
@@ -59,7 +59,7 @@ const LeaderboardPage = ({ session }) => {
 
   return (
     <>
-      <Header session={session} />
+      <HeaderLeaderboard session={session} />
 
       <div className="App">
         <ChatwootWidget />
@@ -72,7 +72,7 @@ const LeaderboardPage = ({ session }) => {
       </div>
       <br></br>
 
-      <div className="formatTable">
+      <div className="formatTable" id = "table">
         <table>
           <tr>
             <th>Rank</th>
@@ -109,7 +109,7 @@ const LeaderboardPage = ({ session }) => {
       </div>
 
       <br></br>
-      <div>
+      <div id="standing">
         <center>
           {" "}
           You have{" "}
@@ -126,11 +126,8 @@ const LeaderboardPage = ({ session }) => {
         </center>
       </div>
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <br></br><br></br><br></br><br></br><br></br>
+      
       <Footer />
     </>
   );

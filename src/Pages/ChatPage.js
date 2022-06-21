@@ -3,7 +3,7 @@ require('./Chat/Login.css');
 
 import React from 'react';
 import ChatApp from './Chat/ChatApp';
-import Header from "../Header";
+import HeaderMatch from "../Components/Header/HeaderMatch";
 import Footer from "../Footer";
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
@@ -107,7 +107,7 @@ const ChatPage = ({session}) => {
 
       <>
 
-      <Header session={session} />
+      <HeaderMatch session={session} />
 
       <div className="App">
         <ChatwootWidget />
@@ -135,14 +135,16 @@ const ChatPage = ({session}) => {
 
       <br></br>
       <p className = "neutral">
-      <div className = "button5">
+      <div className = "button5" id="history">
         <button2 onClick = {moveToHistory}> Click to view your past match history and leave your ratings!</button2>
       </div>
       </p>
 
       {(clickedUsernames.length <= 0)
        ? 
+       <>
        <p className="loading"> No users waiting to be matched currently... </p> 
+       </>
        : 
        <p> 
         
@@ -162,6 +164,7 @@ const ChatPage = ({session}) => {
 
        </p>
      }
+
 
       <Footer />
       </>

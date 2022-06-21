@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 import Welcome from "../Components/Welcome/Welcome";
 import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
-import Header from "../Header";
+import HeaderProfile from "../Components/Header/HeaderProfile";
 import Footer from "../Footer";
 
 import {
@@ -254,7 +254,7 @@ const ProfilePage = ({ session }) => {
 
   return (
     <>
-      <Header session={session} />
+      <HeaderProfile session={session} />
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
       <div className="App">
@@ -564,7 +564,7 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
-      
+
 
       <h1 className="parent" id="share">
         <h2 className="child">
