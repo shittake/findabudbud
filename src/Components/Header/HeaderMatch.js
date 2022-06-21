@@ -69,7 +69,7 @@ export default function HeaderMatch({ session }) {
     },
     {
       selector: "#chat2",
-      content: "Click this button to join the waiting room. Otherwise, Your profile will not be visible to other users who are finding a match now, which may lower your chances of meeting new people. If you navigate to any another page, you will be taken out of the waiting room automatically! This is to ensure that every matched user is ready to start chatting :) However, if you stay on this page long enough without joining the waiting room, we will still try to help you find a match!"
+      content: "You will automatically be placed in the waiting room every time you click on the Match Now! tab. Avoid refreshing the page at this point or you would be removed from the waiting room to prevent bot activity. If you find yourself outside the waiting room, click on another tab above and then return to this page!"    
     },
     {
       selector: "#history",

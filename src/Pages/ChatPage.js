@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useBeforeunload } from 'react-beforeunload';
 
 const ChatPage = ({session}) => {
 
@@ -16,7 +17,18 @@ const ChatPage = ({session}) => {
     
     setTimeout(() => 
       {setRedirectNow(true);}
-      , 50000);
+      , 30000);
+
+    useEffect(() => {
+      const unloadCallback = (event) => {
+        event.preventDefault();
+        event.returnValue = "You will be removed from the waiting room";
+        return updateOnline();
+      };
+
+      window.addEventListener("beforeunload", unloadCallback);
+      return () => window.removeEventListener("beforeunload", unloadCallback);
+    }, []);
 
     const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
@@ -41,7 +53,7 @@ const ChatPage = ({session}) => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({click: false}) // go to this column
+        .update({click: false, online: false}) // go to this column
         .eq('id', session.user.id)   // find the specific user
 
       if (error) throw error;
@@ -71,27 +83,6 @@ const ChatPage = ({session}) => {
         updateClick(true);     
       }
     }
-
-
-    const updateClick = async(currState) => {
-      setLoading(true);
-      try {
-        const user = supabase.auth.user();
-
-        const { error } = await supabase
-          .from("profiles")
-          .update({click: currState}) // go to this column
-          .eq('id', session.user.id)   // find the specific user
-
-        if (error) throw error;
-
-      } catch (error) {
-        alert(error.error_description || error.message);
-      } finally {
-        setLoading(false);
-        window.location.reload(false); // force the page to refresh
-      }
-    };
 
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
@@ -136,19 +127,14 @@ const ChatPage = ({session}) => {
       {!(mine.map(user => user.click)[0]) && 
         <>
           <p class="warning">You are not in the waiting room yet. 
-          To make your profile visible to others, click on the button below. </p>
+          To make your profile visible to others, click on another tab, and then the "Match now!" tab again. </p>
 
-          <br></br>
-
-          <div className = "squareButton" id = "chat2">
-            <center><button2 onClick = {addToFind}> JOIN WAITING ROOM</button2></center>
-          </div>
         </>
       }
 
       {mine.map(user => user.click)[0] && 
 
-        <p className="success"> You are in the waiting room now! Estimated time for a match: 5 seconds</p>
+        <p className="success"> You are in the waiting room now! Estimated time for a match: 30 seconds</p>
 
       }
 
