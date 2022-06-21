@@ -24,7 +24,7 @@ function NavBar({session}) {
 
       const { error } = await supabase
         .from("profiles")
-        .update({online: true}) // go to this column
+        .update({click: false}) // go to this column
         .eq('id', session.user.id)   // find the specific user
 
       if (error) throw error;
@@ -62,6 +62,7 @@ function NavBar({session}) {
                 id="leaderboard"
                 height="170"
                 style={{ cursor: "pointer" }}
+                onClick={()=>triggerOnline()}
               />
             </h1>
           </NavLink>
@@ -88,6 +89,7 @@ function NavBar({session}) {
                 id="events"
                 height="170"
                 style={{ cursor: "pointer" }}
+                onClick={()=>triggerOnline()}
               />
             </h1>
           </NavLink>

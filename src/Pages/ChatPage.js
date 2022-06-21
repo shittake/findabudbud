@@ -16,7 +16,7 @@ const ChatPage = ({session}) => {
     
     setTimeout(() => 
       {setRedirectNow(true);}
-      , 5000);
+      , 50000);
 
     const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
@@ -34,8 +34,28 @@ const ChatPage = ({session}) => {
     fetchData();
     },[])
 
+  const updateOnline = async() => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({click: false}) // go to this column
+        .eq('id', session.user.id)   // find the specific user
+
+      if (error) throw error;
+
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
     let navigate = useNavigate();
     const moveToHistory = () => {
+      updateOnline();
       let path = '/historypage';
       navigate(path);
     }
@@ -116,20 +136,19 @@ const ChatPage = ({session}) => {
       {!(mine.map(user => user.click)[0]) && 
         <>
           <p class="warning">You are not in the waiting room yet. 
-          To join and get matched, click the button below.</p>
+          To make your profile visible to others, click on the button below. </p>
 
-          <p className="neutral"> If you stay on this page for more than a minute, you will
-          automatically be matched! </p>
+          <br></br>
 
-          <div className = "button4">
-            <button2 onClick = {addToFind}> Click to start matching! </button2>
+          <div className = "squareButton" id = "chat2">
+            <center><button2 onClick = {addToFind}> JOIN WAITING ROOM</button2></center>
           </div>
         </>
       }
 
       {mine.map(user => user.click)[0] && 
 
-        <p className="success"> You are in the waiting room now! Estimated time: 5 seconds</p>
+        <p className="success"> You are in the waiting room now! Estimated time for a match: 5 seconds</p>
 
       }
 

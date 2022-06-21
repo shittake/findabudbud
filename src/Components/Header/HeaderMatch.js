@@ -68,6 +68,10 @@ export default function HeaderMatch({ session }) {
       content: "Here, you can find people of similar interests to match with! To join the waiting room, follow the instructions given on this page."
     },
     {
+      selector: "#chat2",
+      content: "Click this button to join the waiting room. Otherwise, Your profile will not be visible to other users who are finding a match now, which may lower your chances of meeting new people. If you navigate to any another page, you will be taken out of the waiting room automatically! This is to ensure that every matched user is ready to start chatting :) However, if you stay on this page long enough without joining the waiting room, we will still try to help you find a match!"
+    },
+    {
       selector: "#history",
       content: "If you wish to see your past match history, as well as leave a rating for your previous matches (and see their ratings of you), click here!"
     }

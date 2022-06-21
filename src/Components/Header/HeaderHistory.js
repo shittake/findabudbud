@@ -66,6 +66,10 @@ export default function HeaderHistory({ session }) {
     {
       selector: "#chatHistory",
       content: "Here, you can view the people who had matched with you. Leave a review (out of 5 stars) for the other user."
+    },
+    {
+      selector: "#chatHistory2",
+      content: "Only unique users matched with you will be shown here, to avoid cluttering up the page."
     }
   ];
 

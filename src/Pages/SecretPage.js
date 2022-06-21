@@ -51,6 +51,7 @@ const SecretPage = ({ session }) => {
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
     var myUsername = mine.map(user => user.username)[0];
+    var clickStatus = mine.map(user => user.click)[0];
 
     // Find the user.id of all the people who are currently online (updated < 1 hour ago) 
     var onlineUsers = Array.from(users
@@ -212,7 +213,6 @@ const SecretPage = ({ session }) => {
       <div className="App">
         <ChatwootWidget />
       </div>
-
    
       {besties.length > 0 && 
         <>

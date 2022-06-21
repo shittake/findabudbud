@@ -186,7 +186,7 @@ const ChatHistory = ({session}) => {
 	    </div>
 
 		<div className="neutral" id="chatHistory"><center><strong> Your Chat History </strong></center></div>
-		<div className="success"><center><strong> Chats initiated by you </strong></center></div>
+		<div className="success" id="chatHistory2"><center><strong> Chats initiated by you </strong></center></div>
 
 		<div className="formatTable">
         <table className = "table2">
