@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
-import Header from "../Header";
+import HeaderMatched from "../Components/Header/HeaderMatched";
 import Footer from "../Footer";
 import addToMatch from "../Components/Match/addToMatch";
 
@@ -207,7 +207,7 @@ const SecretPage = ({ session }) => {
 
 	return (
     <>
-      <Header session={session} />
+      <HeaderMatched session={session} />
 
       <div className="App">
         <ChatwootWidget />
@@ -224,7 +224,7 @@ const SecretPage = ({ session }) => {
       <p><center><strong> People with the most common interests with you </strong></center></p>
        {besties.map(user => <p><center> {users.filter(a=>a.id==user).map(a=>a.username)} </center></p>)}
 
-       <p>
+       <p id="outcome">
        		You have matched with......
        		{selected.map(user => user.username)}
        		!!
@@ -254,7 +254,7 @@ const SecretPage = ({ session }) => {
       }
 
       {besties.length == 0 && 
-        <p>
+        <p id="outcome">
           Nobody at the moment. Try again later!
         </p>
       }
