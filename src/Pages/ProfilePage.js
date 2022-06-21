@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 import Welcome from "../Components/Welcome/Welcome";
 import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
-import Header from "../Header";
+import HeaderProfile from "../Components/Header/HeaderProfile";
 import Footer from "../Footer";
 
 import {
@@ -22,6 +22,7 @@ import {
   RedButton,
   BlueButton,
   GreenButton,
+  PurpleButton
 } from "../Components/Buttons/ColouredButtons";
 
 const ProfilePage = ({ session }) => {
@@ -33,6 +34,10 @@ const ProfilePage = ({ session }) => {
   const [anime, setAnime] = useState(false);
   const [french, setFrench] = useState(false);
   const [korean, setKorean] = useState(false);
+  const [badminton, setBadminton] = useState(false);
+  const [soccer, setSoccer] = useState(false);
+  const [food, setFood] = useState(false);
+  const [study, setStudy] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -40,8 +45,11 @@ const ProfilePage = ({ session }) => {
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
+  const [clickSports, setClickSports] = useState("false"); //check if user clicked on the "Sports" header
+  const [clickOthers, setClickOthers] = useState("false"); //check if user clicked on the "Others" header
   const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
   const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
+
   useEffect(() => {
     getProfile();
   }, [session]);
@@ -63,11 +71,27 @@ const ProfilePage = ({ session }) => {
   };
 
   const handleKoreanChange = () => {
-    setKorean(!korean);
+    return setKorean(!korean);
   };
 
   const handleFrenchChange = () => {
     return setFrench(!french);
+  };
+
+  const handleBadmintonChange = () => {
+    return setBadminton(!badminton);
+  };
+
+  const handleSoccerChange = () => {
+    return setSoccer(!soccer);
+  };
+
+  const handleFoodChange = () => {
+    return setFood(!food);
+  };
+
+  const handleStudyChange = () => {
+    return setStudy(!study);
   };
 
   const toggleGames = () => {
@@ -82,12 +106,13 @@ const ProfilePage = ({ session }) => {
     return setClickLanguages(!clickLanguages);
   };
 
-  const handleSinglePress = () => {
-    alert("4 points added!");
-    updatePoints(4);
+  const toggleOthers = () => {
+    return setClickOthers(!clickOthers);
   };
 
-
+  const toggleSports = () => {
+    return setClickSports(!clickSports);
+  };
 
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
@@ -162,9 +187,15 @@ const ProfilePage = ({ session }) => {
         setFrench(data.french);
         setPointHistory(data.point_history);
         setTelegramHandle(data.telegram_handle);
+        setBadminton(data.badminton);
+        setSoccer(data.soccer);
+        setFood(data.food);
+        setStudy(data.study);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
+        setClickSports(false); //default set to false to avoid overwhelming user
+        setClickOthers(false); //default set to false to avoid overwhelming user
       }
     } catch (error) {
       alert(error.message);
@@ -190,6 +221,10 @@ const ProfilePage = ({ session }) => {
         anime,
         korean,
         french,
+        badminton,
+        soccer,
+        food,
+        study,
         avatar_url,
         points,
         point_history,
@@ -208,6 +243,7 @@ const ProfilePage = ({ session }) => {
       alert(error.message);
     } finally {
       setLoading(false);
+      alert("Profile updated!");
     }
   };
 
@@ -218,7 +254,7 @@ const ProfilePage = ({ session }) => {
 
   return (
     <>
-      <Header session={session} />
+      <HeaderProfile session={session} />
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
       <div className="App">
@@ -422,6 +458,97 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
+      {/* Fourth heading - Sports */}
+      <h1 className="clickableText">
+        <strong>
+          <button2 onClick={() => toggleSports()} style={{ color: "purple" }}>
+            {" "}
+            Sports{" "}
+          </button2>
+        </strong>
+      </h1>
+
+      {clickSports && (
+        <>
+          {/* Toggle button to change preference for Badminton */}
+          <div>
+            <PurpleButton
+              variant={badminton ? "contained" : "outlined"}
+              onClick={() => handleBadmintonChange()}
+              text="Badminton"
+            ></PurpleButton>
+          </div>
+          <br></br>
+        {/* Toggle button to change preference for Soccer */}
+          <div>
+            <PurpleButton
+              variant={soccer ? "contained" : "outlined"}
+              onClick={() => handleSoccerChange()}
+              text="Soccer"
+            ></PurpleButton>
+          </div>
+        </>
+      )}
+
+      {/* This is shown if the Sports heading is not clicked */}
+      {!clickSports && (
+        <>
+          <div>
+            Click "Sports" if you would like to see the different sports
+            subcategories!
+          </div>
+        </>
+      )}
+
+      <br></br>
+
+      {/* Fifth Category - Others */}
+
+      <h1 className="clickableText" id="profile2">
+        <strong>
+          <button2 onClick={() => toggleOthers()} style={{ color: "red" }}>
+            {" "}
+            Others{" "}
+          </button2>
+        </strong>
+      </h1>
+
+      {clickOthers && (
+        <>
+          {/* Toggle button to change preference for Food */}
+          <div>
+            <RedButton
+              onClick={() => handleFoodChange()}
+              variant={food ? "contained" : "outlined"}
+              text="Food"
+            ></RedButton>
+          </div>
+          <br></br>
+
+          {/* Toggle button to change preference for Study */}
+          <div>
+            <RedButton
+              variant={study ? "contained" : "outlined"}
+              onClick={() => handleStudyChange()}
+              text="Study"
+            ></RedButton>
+          </div>
+          <br></br>
+        </>
+      )}
+
+      {/* This is shown if the Others heading is not clicked. */}
+      {!clickOthers && (
+        <>
+          <div>
+            Click "Others" if you would like to see more
+            subcategories!
+          </div>
+        </>
+      )}
+
+      <br></br><br></br>
+
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
         <div>
@@ -436,6 +563,7 @@ const ProfilePage = ({ session }) => {
       </form>
 
       <br></br>
+
 
 
       <h1 className="parent" id="share">
@@ -481,11 +609,8 @@ const ProfilePage = ({ session }) => {
       </h1>
 
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+      <br></br><br></br><br></br><br></br><br></br>
+
       <Footer />
     </>
   );
