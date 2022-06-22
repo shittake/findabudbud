@@ -9,7 +9,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useBeforeunload } from 'react-beforeunload';
 
 const ChatPage = ({session}) => {
 

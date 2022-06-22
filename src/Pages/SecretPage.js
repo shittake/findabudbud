@@ -205,6 +205,8 @@ const SecretPage = ({ session }) => {
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
     var selected = users.filter(user => user.id == besties[0]); //the row of the selected person! right now, is just the first person
     var contact = selected.map(user => user.telegram_handle).toString()
+    var average = (selected.map(user => user.matches)[0] == 0) ? "5.00" : 
+    (selected.map(user => user.total_rating)[0]/selected.map(user => user.matches)[0]).toFixed(2).toString()
 
 	return (
     <>
@@ -226,7 +228,7 @@ const SecretPage = ({ session }) => {
 
        <p id="outcome">
        		You have matched with......
-       		{selected.map(user => user.username)}
+       		{selected.map(user => user.username)} with an average rating of {average}
        		!!
        </p>
 

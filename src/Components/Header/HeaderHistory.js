@@ -31,16 +31,9 @@ export default function HeaderHistory({ session }) {
   fetchData();
   },[])
 
-  const formatDate = (dateString) => {
-    const options = {hour12: false }
-    return new Date(dateString).toLocaleString(undefined, options)
-  }
-
   const toggleHistory = () => {
     setHistory(!history);
   }
-
-
 
   useEffect(() => {
     getProfile();
