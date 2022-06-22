@@ -13,30 +13,9 @@ import { supabase } from "../../supabaseClient";
 import Joyride from "react-joyride";
 import Tour from "reactour";
 import Popup from "../../Popup";
-
-const useStyles = makeStyles(() => ({
-  header: {
-    backgroundColor: "#400CCC",
-  },
-  logo: {
-    fontFamily: "Work Sans, sans-serif",
-    fontWeight: 600,
-    color: "#FFFEFE",
-    textAlign: "left",
-  },
-}));
-
-const useStyles2 = makeStyles(() => ({
-  header: {
-    backgroundColor: "#400CCC",
-  },
-  logo2: {
-    fontFamily: "Work Sans, sans-serif",
-    fontWeight: 600,
-    color: "yellow",
-    textAlign: "left",
-  },
-}));
+import findTitle from "../Methods/findTitle";
+import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
+import { HeaderLeaderboardTutorial } from "../Welcome/Tutorial";
 
 export default function HeaderLeaderboard({ session }) {
 
@@ -61,17 +40,6 @@ export default function HeaderLeaderboard({ session }) {
     setHistory(!history);
   }
 
-  
-  const steps = [
-    {
-      selector: "#leaderboard",
-      content: "Here, you can see how you fare compared to other users based on your points!"
-    },
-    {
-      selector: "#table",
-      content: "The top 10 users are shown here. You can see other title(s) or special username effects that these users have unlocked as well."
-    }
-  ];
 
   useEffect(() => {
     getProfile();
@@ -104,35 +72,6 @@ export default function HeaderLeaderboard({ session }) {
 
   const { header, logo } = useStyles();
   const { logo2 } = useStyles2();
-
-
-  var i;
-  const findTitle = (points) => {
-    var answer = "";
-    var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200];
-    var titles = [
-      "New User",
-      "Novice",
-      "Warming Up",
-      "Journeyman",
-      "Specialist",
-      "Senior",
-      "Master",
-      "Grandmaster",
-    ];
-
-    for (i = 0; i < pointCutoff.length - 1; i++) {
-      if (points >= pointCutoff[i] && points < pointCutoff[i + 1]) {
-        answer = titles[i];
-        break;
-      }
-    }
-    if (answer == "") {
-      return "God";
-    } else {
-      return answer;
-    }
-  };
 
   const clickFAQ = () => {
     setIsTourOpen(true);
@@ -246,7 +185,7 @@ export default function HeaderLeaderboard({ session }) {
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour
-          steps={steps}
+          steps={HeaderLeaderboardTutorial()}
           isOpen={isTourOpen}
           onRequestClose={() => {setIsTourOpen(false); setFirstTimeLeaderboard(false); updateFirstTime()}}
         />

@@ -13,30 +13,9 @@ import { supabase } from "../../supabaseClient";
 import Joyride from "react-joyride";
 import Tour from "reactour";
 import Popup from "../../Popup";
-
-const useStyles = makeStyles(() => ({
-  header: {
-    backgroundColor: "#400CCC",
-  },
-  logo: {
-    fontFamily: "Work Sans, sans-serif",
-    fontWeight: 600,
-    color: "#FFFEFE",
-    textAlign: "left",
-  },
-}));
-
-const useStyles2 = makeStyles(() => ({
-  header: {
-    backgroundColor: "#400CCC",
-  },
-  logo2: {
-    fontFamily: "Work Sans, sans-serif",
-    fontWeight: 600,
-    color: "yellow",
-    textAlign: "left",
-  },
-}));
+import findTitle from "../Methods/findTitle";
+import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
+import { HeaderProfileTutorial } from "../Welcome/Tutorial";
 
 export default function HeaderProfile({ session }) {
 
@@ -52,47 +31,10 @@ export default function HeaderProfile({ session }) {
   fetchData();
   },[])
 
-  const formatDate = (dateString) => {
-    const options = {hour12: false }
-    return new Date(dateString).toLocaleString(undefined, options)
-  }
-
   const toggleHistory = () => {
     setHistory(!history);
   }
 
-  
-  const steps = [
-    {
-      selector: "#welcome-message",
-      content:
-        "Welcome to findabud! You may wish to watch this tutorial if this is your first time here.",
-    },
-    {
-      selector: "#profile1",
-      content: "If you have not done so yet, please update your profile!",
-    },
-    {
-      selector: "#username",
-      content: "Key in your username here. This will be shown on the leaderboard and to other users once a successful match is made!",
-    },
-    {
-      selector: "#telegram_handle",
-      content: "Key in your telegram handle here without the @ symbol in front. You will need to provide your handle before you can be matched with others!",
-    },
-    {
-      selector: "#profile2",
-      content: "Click on any of the five main headings below to show the specific subcategories. A filled box indicates that you'll like to include that as one of your matching criteria. Click on the respective boxes to toggle.",
-    },
-    {
-      selector: "#profile3",
-      content: "Click on this once you are done to save any changes made to your profile. You will also be recorded to have an ONLINE status for one hour only after clicking on this button.",
-    },
-    {
-      selector: "#share",
-      content: "Share this app with your friends and earn some points as you do so!",
-    }
-  ];
 
   useEffect(() => {
     getProfile();
@@ -125,35 +67,6 @@ export default function HeaderProfile({ session }) {
 
   const { header, logo } = useStyles();
   const { logo2 } = useStyles2();
-
-
-  var i;
-  const findTitle = (points) => {
-    var answer = "";
-    var pointCutoff = [0, 2, 10, 20, 30, 50, 75, 100, 140, 200];
-    var titles = [
-      "New User",
-      "Novice",
-      "Warming Up",
-      "Journeyman",
-      "Specialist",
-      "Senior",
-      "Master",
-      "Grandmaster",
-    ];
-
-    for (i = 0; i < pointCutoff.length - 1; i++) {
-      if (points >= pointCutoff[i] && points < pointCutoff[i + 1]) {
-        answer = titles[i];
-        break;
-      }
-    }
-    if (answer == "") {
-      return "God";
-    } else {
-      return answer;
-    }
-  };
 
   const clickFAQ = () => {
     setIsTourOpen(true);
@@ -267,7 +180,7 @@ export default function HeaderProfile({ session }) {
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour
-          steps={steps}
+          steps={HeaderProfileTutorial()}
           isOpen={isTourOpen}
           onRequestClose={() => {setIsTourOpen(false); setFirstTimeProfile(false); updateFirstTime()}}
         />
