@@ -8,16 +8,22 @@
   background: rgba(0, 0, 0, 0.75);
 }
 
+.eventsdescriptionbox {
+  word-wrap: break-word;
+}
+
 .modal {
   position: fixed;
-  top: 30vh;
+  top: 20vh;
   left: 10%;
   width: 80%;
   z-index: 100;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
+  max-height: calc(80vh - 210px);
+  overflow-y: auto;
 }
 
 .header {

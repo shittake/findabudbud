@@ -1,12 +1,49 @@
 // import { PanSession } from "framer-motion/types/gestures/PanSession";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
 import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";
 import classes from "./EventsItemModal.module.css";
 import "./EventsItem.css";
+import useUpdateEffect from "../../Hooks/useUpdateEffect";
 
 export default function EventsItem(props) {
   const [buttonPressed, setButtonPressed] = useState(false);
+  const [currentNumPeople, setCurrentNumPeople] = useState(0); //the person who created the event
+  const [interestedButtonPressed, setInterestedButtonPressed] = useState(false); //TODO: props.isInterested
+
+  const fetchEventData = async () => {
+    const { data, error } = await supabase
+      .from("events")
+      .select("currentnumpeople")
+      .eq("id", props.id);
+    setCurrentNumPeople(data[0].currentnumpeople);
+  };
+
+  useEffect(() => {
+    fetchEventData();
+  }, []);
+
+  useUpdateEffect(() => {
+    const updateCurrentNumPeople = async () => {
+      const { data, error } = await supabase
+        .from("events")
+        .update({ currentnumpeople: currentNumPeople })
+        .match({ id: props.id });
+    };
+    updateCurrentNumPeople();
+  }, [currentNumPeople]);
+
+  const currentnumpeopleClickHandler = () => {
+    if (!interestedButtonPressed && currentNumPeople == props.numpeople) {
+      return; //error because exceeded people capacity
+    }
+    setInterestedButtonPressed(!interestedButtonPressed);
+    if (interestedButtonPressed) {
+      setCurrentNumPeople((prevnum) => prevnum - 1);
+    } else {
+      setCurrentNumPeople((prevnum) => prevnum + 1);
+    }
+  };
 
   const onClickHandler = () => {
     setButtonPressed(!buttonPressed);
@@ -59,7 +96,10 @@ export default function EventsItem(props) {
             >
               <div>
                 <strong>Description: </strong>
-                <div style={{ padding: "0 100px 0 0" }}>
+                <div
+                  style={{ padding: "0 100px 0 0" }}
+                  className={classes.eventsdescriptionbox}
+                >
                   {props.description}
                 </div>
               </div>
@@ -77,6 +117,12 @@ export default function EventsItem(props) {
                 {", "}
                 {props.createdTime.slice(11, 16)}
               </div>
+              <div>
+                <strong>Number of people: </strong>
+                <div>
+                  {currentNumPeople}/{props.numpeople}
+                </div>
+              </div>
             </div>
             <footer className={classes.actions}>
               <div style={{ padding: "0 10px" }}>
@@ -90,6 +136,11 @@ export default function EventsItem(props) {
                   ></RedButton>
                 )}
               </div>
+              <RedButton
+                text={interestedButtonPressed ? "interested" : "not interested"}
+                variant={interestedButtonPressed ? "contained" : "outlined"}
+                onClick={currentnumpeopleClickHandler}
+              ></RedButton>
               <RedButton
                 text="View other events"
                 variant="contained"

@@ -55,6 +55,7 @@ const EventsPage = ({ session }) => {
           ? event.created_at
           : new Date().toISOString(),
         userid: session.user.id,
+        numpeople: event.numpeople,
       },
     ]);
     setIsLoading(false);
@@ -103,14 +104,14 @@ const EventsPage = ({ session }) => {
           >
             {allEvents.map((event) => {
               return (
-                <Grid item xs={6}>
+                <Grid item xs={6} key={event.id}>
                   <EventsItem
                     createdTime={
                       event.created_at
                         ? event.created_at
                         : new Date().toISOString()
                     }
-                    key={event.id} //realtime subscription
+                    // key={event.id} //realtime subscription
                     title={event.title}
                     id={event.id} //realtime subscription
                     description={event.description}
@@ -121,6 +122,9 @@ const EventsPage = ({ session }) => {
                     useridcreator={
                       event.userid ? event.userid : session.user.id
                     }
+                    numpeople={event.numpeople}
+                    currentnumpeople={event.currentnumpeople}
+                    isInterested={false}
                   ></EventsItem>
                 </Grid>
               );

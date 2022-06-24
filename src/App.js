@@ -9,6 +9,7 @@ import Router from "./Components/Router";
 import axios from "axios";
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [session, setSession] = useState(null);
 
   useEffect(() => {
@@ -17,13 +18,13 @@ export default function App() {
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
+    setIsLoading(false);
   }, []);
 
   return (
     <ThemeProvider theme={theme}>
       <div className="container" style={{ padding: "50px 0 50px 0" }}>
-        {" "}
-        {!session ? <Auth /> : <Router session={session} />}
+        {isLoading ? <></> : !session ? <Auth /> : <Router session={session} />}
       </div>
     </ThemeProvider>
   );
