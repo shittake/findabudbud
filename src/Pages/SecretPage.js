@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { supabase } from "../supabaseClient";
 import ChatwootWidget from "../chatwoot.js";
-import Header from "../Header";
+import HeaderMatched from "../Components/Header/HeaderMatched";
 import Footer from "../Footer";
 import addToMatch from "../Components/Match/addToMatch";
 
@@ -51,6 +51,7 @@ const SecretPage = ({ session }) => {
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
     var myUsername = mine.map(user => user.username)[0];
+    var clickStatus = mine.map(user => user.click)[0];
 
     // Find the user.id of all the people who are currently online (updated < 1 hour ago) 
     var onlineUsers = Array.from(users
@@ -204,15 +205,16 @@ const SecretPage = ({ session }) => {
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
     var selected = users.filter(user => user.id == besties[0]); //the row of the selected person! right now, is just the first person
     var contact = selected.map(user => user.telegram_handle).toString()
+    var average = (selected.map(user => user.matches)[0] == 0) ? "5.00" : 
+    (selected.map(user => user.total_rating)[0]/selected.map(user => user.matches)[0]).toFixed(2).toString()
 
 	return (
     <>
-      <Header session={session} />
+      <HeaderMatched session={session} />
 
       <div className="App">
         <ChatwootWidget />
       </div>
-
    
       {besties.length > 0 && 
         <>
@@ -224,9 +226,9 @@ const SecretPage = ({ session }) => {
       <p><center><strong> People with the most common interests with you </strong></center></p>
        {besties.map(user => <p><center> {users.filter(a=>a.id==user).map(a=>a.username)} </center></p>)}
 
-       <p>
+       <p id="outcome">
        		You have matched with......
-       		{selected.map(user => user.username)}
+       		{selected.map(user => user.username)} with an average rating of {average}
        		!!
        </p>
 
@@ -254,7 +256,7 @@ const SecretPage = ({ session }) => {
       }
 
       {besties.length == 0 && 
-        <p>
+        <p id="outcome">
           Nobody at the moment. Try again later!
         </p>
       }

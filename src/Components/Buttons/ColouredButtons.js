@@ -24,4 +24,12 @@ function GreenButton(props) {
   );
 }
 
-export { RedButton, BlueButton, GreenButton };
+function PurpleButton(props) {
+  return (
+    <Button color="secondary" variant={props.variant} onClick={props.onClick}>
+      {props.text}
+    </Button>
+  );
+}
+
+export { RedButton, BlueButton, GreenButton, PurpleButton };

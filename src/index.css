@@ -158,6 +158,21 @@ body {
   cursor: pointer;
 }
 
+.squareButton {
+   border: 1px outset blue;
+   background-color: lightBlue;
+   height:15%;
+   width:15%;
+   cursor:pointer;
+   text-align: center;
+   margin-left: 42%;
+}
+
+.squareButton:hover {
+   background-color: blue;
+   color:white;
+}
+
 .button1:hover {
   background-color: #faebd7;
 }
