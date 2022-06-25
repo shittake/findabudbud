@@ -80,3 +80,19 @@ export const HeaderProfileTutorial = () => { return ([
     }
   ])
 }
+
+export const HeaderEventsTutorial = () => { return ([
+    {
+      selector: "#events",
+      content: "Here, you can create events or join events hosted by other users!"
+    },
+    {
+      selector: "#form",
+      content: "Create your own event which other users can view and join!"
+    },
+    {
+      selector: "#all",
+      content: "View all events either created by you, or other users! Click on an event to express interest in joining. You can only delete events that are created by you."
+    }
+  ])
+}

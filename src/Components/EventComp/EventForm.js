@@ -50,7 +50,7 @@ export default function EventForm(props) {
   };
 
   return (
-    <div className="event-form">
+    <div id = "form" className="event-form">
       <form onSubmit={submitHandler} className="event-form__controls">
         <div className="event-form__control">
           <label>Title: </label>{" "}

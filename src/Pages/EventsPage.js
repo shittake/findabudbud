@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import Header from "../Header";
+import HeaderEvents from "../Components/Header/HeaderEvents";
 import Footer from "../Footer";
 import ChatwootWidget from "../chatwoot.js";
 import { supabase } from "../supabaseClient";
@@ -85,7 +85,7 @@ const EventsPage = ({ session }) => {
   return (
     <>
       <div>
-        <Header session={session} />
+        <HeaderEvents session={session} />
 
         <div className="App">
           <ChatwootWidget />
@@ -98,6 +98,7 @@ const EventsPage = ({ session }) => {
           <div>Loading...</div>
         ) : (
           <Grid
+            id = "all"
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
