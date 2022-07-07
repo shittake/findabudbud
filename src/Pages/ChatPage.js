@@ -16,7 +16,7 @@ const ChatPage = ({session}) => {
     
     setTimeout(() => 
       {setRedirectNow(true);}
-      , 30000);
+      , 5000);
 
     useEffect(() => {
       const unloadCallback = (event) => {

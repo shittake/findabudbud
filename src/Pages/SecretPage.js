@@ -11,6 +11,7 @@ const SecretPage = ({ session }) => {
 	  const [users, setUsers] = useState([]);
     const [click, setClick] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [linkClicked, setLinkClicked] = useState(false);
 
 
     const fetchData = async () => {
@@ -196,6 +197,8 @@ const SecretPage = ({ session }) => {
   };
 
     const initiateConvo = (otherUsername, otherUserID) => {
+      if (linkClicked) return;
+      setLinkClicked(true);
       updatePoints(9, session.user.id);
       updateHistory(",+9 Initiate conversation with " + otherUsername + " " + new Date().toDateString(), session.user.id);
       updatePoints(9, otherUserID);
