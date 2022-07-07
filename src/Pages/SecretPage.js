@@ -51,6 +51,7 @@ const SecretPage = ({ session }) => {
 
     // Obtain my particulars from the database
     var mine = users.filter(user => user.id == session.user.id);
+    var allContacts = mine.map(user => user.allContacts)[0];
     var myUsername = mine.map(user => user.username)[0];
     var clickStatus = mine.map(user => user.click)[0];
 
@@ -175,6 +176,23 @@ const SecretPage = ({ session }) => {
     }
   };
 
+  const updateContacts = async (newString, ID) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+      const { error } = await supabase
+        .from("profiles")
+        .update({ allContacts: newString})
+        .eq("id", ID);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Update point history that is stored in supabase
   // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
   // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
@@ -196,8 +214,12 @@ const SecretPage = ({ session }) => {
     }
   };
 
-    const initiateConvo = (otherUsername, otherUserID) => {
+    const initiateConvo = (tele, otherUsername, otherUserID) => {
       if (linkClicked) return;
+      if (allContacts && allContacts.split(",").indexOf(tele) != -1) {
+        return;
+      }
+      updateContacts(allContacts + "," + tele, session.user.id);
       setLinkClicked(true);
       updatePoints(9, session.user.id);
       updateHistory(",+9 Initiate conversation with " + otherUsername + " " + new Date().toDateString(), session.user.id);
@@ -244,7 +266,7 @@ const SecretPage = ({ session }) => {
 
         {contact.length >= 1 && 
           <>
-          <center><a href={"https://telegram.me/" + contact} onClick={() => initiateConvo(contact, besties[0])} class="buttonTeleLink" target="_blank">
+          <center><a href={"https://telegram.me/" + contact} onClick={() => initiateConvo(contact, selected.map(user=>user.username)[0],besties[0])} class="buttonTeleLink" target="_blank">
           Send a telegram message to {selected.map(user=>user.username)} now!</a></center>
           </>
         }
