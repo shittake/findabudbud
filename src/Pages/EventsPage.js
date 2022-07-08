@@ -56,6 +56,7 @@ const EventsPage = ({ session }) => {
           : new Date().toISOString(),
         userid: session.user.id,
         numpeople: event.numpeople,
+        category: event.category,
       },
     ]);
     setIsLoading(false);
@@ -98,7 +99,7 @@ const EventsPage = ({ session }) => {
           <div>Loading...</div>
         ) : (
           <Grid
-            id = "all"
+            id="all"
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -126,6 +127,7 @@ const EventsPage = ({ session }) => {
                     numpeople={event.numpeople}
                     currentnumpeople={event.currentnumpeople}
                     isInterested={false}
+                    category={event.category}
                   ></EventsItem>
                 </Grid>
               );
