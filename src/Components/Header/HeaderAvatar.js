@@ -16,6 +16,7 @@ import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
 import { HeaderAvatarTutorial } from "../Welcome/Tutorial";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 export default function HeaderAvatar({ session }) {
 
@@ -33,6 +34,10 @@ export default function HeaderAvatar({ session }) {
 
   const toggleHistory = () => {
     setHistory(!history);
+  }
+
+  const disableBody = (target) => {
+    disableBodyScroll(target);
   }
 
   useEffect(() => {
@@ -182,7 +187,8 @@ export default function HeaderAvatar({ session }) {
         <Tour
           steps= {HeaderAvatarTutorial()}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTimeAvatar(false); updateFirstTime()}}
+          onAfterOpen={disableBody}
+          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeAvatar(false); updateFirstTime()}}
         />
       )}
     </header>

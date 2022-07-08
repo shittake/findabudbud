@@ -16,6 +16,7 @@ import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
 import { HeaderLeaderboardTutorial } from "../Welcome/Tutorial";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 export default function HeaderLeaderboard({ session }) {
 
@@ -40,6 +41,9 @@ export default function HeaderLeaderboard({ session }) {
     setHistory(!history);
   }
 
+  const disableBody = (target) => {
+    disableBodyScroll(target);
+  }
 
   useEffect(() => {
     getProfile();
@@ -187,7 +191,8 @@ export default function HeaderLeaderboard({ session }) {
         <Tour
           steps={HeaderLeaderboardTutorial()}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTimeLeaderboard(false); updateFirstTime()}}
+          onAfterOpen={disableBody}
+          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeLeaderboard(false); updateFirstTime()}}
         />
       )}
     </header>

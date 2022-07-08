@@ -16,6 +16,7 @@ import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import {useStyles, useStylesName as useStyles2} from "../Methods/useStyles";
 import { HeaderMatchTutorial } from "../Welcome/Tutorial";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 export default function HeaderMatch({ session }) {
 
@@ -35,6 +36,9 @@ export default function HeaderMatch({ session }) {
     setHistory(!history);
   }
 
+  const disableBody = (target) => {
+    disableBodyScroll(target);
+  }
 
   useEffect(() => {
     getProfile();
@@ -182,7 +186,8 @@ export default function HeaderMatch({ session }) {
         <Tour
           steps={HeaderMatchTutorial()}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTimeMatch(false); updateFirstTime()}}
+          onAfterOpen={disableBody}
+          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeMatch(false); updateFirstTime()}}
         />
       )}
     </header>

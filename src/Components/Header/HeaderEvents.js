@@ -16,6 +16,7 @@ import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
 import { HeaderEventsTutorial } from "../Welcome/Tutorial";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
 export default function HeaderHistory({ session }) {
 
@@ -56,6 +57,10 @@ export default function HeaderHistory({ session }) {
       setLoading(false);
     }
   };
+
+  const disableBody = (target) => {
+    disableBodyScroll(target);
+  }
 
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -182,7 +187,8 @@ export default function HeaderHistory({ session }) {
         <Tour
           steps= {HeaderEventsTutorial()}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTimeEvents(false); updateFirstTime()}}
+          onAfterOpen={disableBody}
+          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeEvents(false); updateFirstTime()}}
         />
       )}
     </header>
