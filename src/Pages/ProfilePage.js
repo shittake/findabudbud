@@ -50,6 +50,16 @@ const ProfilePage = ({ session }) => {
   const [action, setAction] = useState(false);
   const [french, setFrench] = useState(false);
   const [korean, setKorean] = useState(false);
+  const [japanese, setJapanese] = useState(false);
+  const [mandarin, setMandarin] = useState(false);
+  const [arabic, setArabic] = useState(false);
+  const [indonesian, setIndonesian] = useState(false);
+  const [malay, setMalay] = useState(false);
+  const [hindi, setHindi] = useState(false);
+  const [russian, setRussian] = useState(false);
+  const [spanish, setSpanish] = useState(false);
+  const [german, setGerman] = useState(false);
+  const [otherlanguages, setOtherLanguages] = useState(false);
   const [badminton, setBadminton] = useState(false);
   const [soccer, setSoccer] = useState(false);
   const [food, setFood] = useState(false);
@@ -147,6 +157,46 @@ const ProfilePage = ({ session }) => {
 
   const handleFrenchChange = () => {
     return setFrench(!french);
+  };
+
+  const handleJapaneseChange = () => {
+    return setJapanese(!japanese);
+  };
+
+  const handleMandarinChange = () => {
+    return setMandarin(!mandarin);
+  };
+
+  const handleArabicChange = () => {
+    return setArabic(!arabic);
+  };
+
+  const handleIndonesianChange = () => {
+    return setIndonesian(!indonesian);
+  };
+
+  const handleMalayChange = () => {
+    return setMalay(!malay);
+  };
+
+  const handleHindiChange = () => {
+    return setHindi(!hindi);
+  };
+
+  const handleRussianChange = () => {
+    return setRussian(!russian);
+  };
+
+  const handleSpanishChange = () => {
+    return setSpanish(!spanish);
+  };
+
+  const handleGermanChange = () => {
+    return setGerman(!german);
+  };
+
+  const handleOtherLanguagesChange = () => {
+    return setOtherLanguages(!otherlanguages);
   };
 
   const handleBadmintonChange = () => {
@@ -288,6 +338,16 @@ const ProfilePage = ({ session }) => {
         setAction(data.action);
         setKorean(data.korean);
         setFrench(data.french);
+        setJapanese(data.japanese);
+        setMandarin(data.mandarin);
+        setArabic(data.arabic);
+        setIndonesian(data.indonesian);
+        setMalay(data.malay);
+        setHindi(data.hindi);
+        setRussian(data.russian);
+        setSpanish(data.spanish);
+        setGerman(data.german);
+        setOtherLanguages(data.otherlanguages);
         setPointHistory(data.point_history);
         setTelegramHandle(data.telegram_handle);
         setBadminton(data.badminton);
@@ -345,6 +405,16 @@ const ProfilePage = ({ session }) => {
         action,
         korean,
         french,
+        japanese,
+        mandarin,
+        arabic,
+        indonesian,
+        malay,
+        hindi,
+        russian,
+        spanish,
+        german,
+        otherlanguages,
         badminton,
         soccer,
         food,
@@ -701,22 +771,120 @@ const ProfilePage = ({ session }) => {
 
       {clickLanguages && (
         <>
-          {/* Toggle button to change preference for French */}
-          <div>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Arabic */}
+          <div className = "child">
+            <BlueButton
+              variant={arabic ? "contained" : "outlined"}
+              onClick={() => handleArabicChange()}
+              text="Arabic"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for French */}
+          <div className = "child">
             <BlueButton
               variant={french ? "contained" : "outlined"}
               onClick={() => handleFrenchChange()}
               text="French"
             ></BlueButton>
           </div>
-          <br></br>
-          <div>
+
+        {/* Toggle button to change preference for German */}
+          <div className = "child">
+            <BlueButton
+              variant={german ? "contained" : "outlined"}
+              onClick={() => handleGermanChange()}
+              text="German"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Hindi */}
+          <div className = "child">
+            <BlueButton
+              variant={hindi ? "contained" : "outlined"}
+              onClick={() => handleHindiChange()}
+              text="Hindi"
+            ></BlueButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Indonesian */}
+          <div className = "child">
+            <BlueButton
+              variant={indonesian ? "contained" : "outlined"}
+              onClick={() => handleIndonesianChange()}
+              text="Indonesian"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Japanese */}
+          <div className = "child">
+            <BlueButton
+              variant={japanese ? "contained" : "outlined"}
+              onClick={() => handleJapaneseChange()}
+              text="Japanese"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Korean */}
+          <div className = "child">
             <BlueButton
               variant={korean ? "contained" : "outlined"}
               onClick={() => handleKoreanChange()}
               text="Korean"
             ></BlueButton>
           </div>
+
+        {/* Toggle button to change preference for Malay */}
+          <div className = "child">
+            <BlueButton
+              variant={malay ? "contained" : "outlined"}
+              onClick={() => handleMalayChange()}
+              text="Malay"
+            ></BlueButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Mandarin */}
+          <div className = "child">
+            <BlueButton
+              variant={mandarin ? "contained" : "outlined"}
+              onClick={() => handleMandarinChange()}
+              text="Mandarin"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Russian */}
+          <div className = "child">
+            <BlueButton
+              variant={russian ? "contained" : "outlined"}
+              onClick={() => handleRussianChange()}
+              text="Russian"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Spanish */}
+          <div className = "child">
+            <BlueButton
+              variant={spanish ? "contained" : "outlined"}
+              onClick={() => handleSpanishChange()}
+              text="Spanish"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for other languages */}
+          <div className = "child">
+            <BlueButton
+              variant={otherlanguages ? "contained" : "outlined"}
+              onClick={() => handleOtherLanguagesChange()}
+              text="Other Languages"
+            ></BlueButton>
+          </div>
+        </h1>
         </>
       )}
 
