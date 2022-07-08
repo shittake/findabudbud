@@ -30,9 +30,24 @@ const ProfilePage = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [telegram_handle, setTelegramHandle] = useState(null);
-  const [brawl_stars, setBrawlStars] = useState(false);
-  const [mobile_legends, setMobileLegends] = useState(false);
+  const [boardgames, setBoardGames] = useState(false);
+  const [rpg, setRPG] = useState(false);
+  const [shooter, setShooter] = useState(false);
+  const [moba, setMOBA] = useState(false);
+  const [consoles, setConsoles] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const [cardgames, setCardGames] = useState(false);
+  const [computergames, setComputerGames] = useState(false);
   const [anime, setAnime] = useState(false);
+  const [cartoon, setCartoon] = useState(false);
+  const [comedy, setComedy] = useState(false);
+  const [romance, setRomance] = useState(false);
+  const [documentary, setDocumentary] = useState(false);
+  const [drama, setDrama] = useState(false);
+  const [reality, setReality] = useState(false);
+  const [fantasy, setFantasy] = useState(false);
+  const [horror, setHorror] = useState(false);
+  const [action, setAction] = useState(false);
   const [french, setFrench] = useState(false);
   const [korean, setKorean] = useState(false);
   const [badminton, setBadminton] = useState(false);
@@ -49,27 +64,81 @@ const ProfilePage = ({ session }) => {
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
   const [clickSports, setClickSports] = useState("false"); //check if user clicked on the "Sports" header
   const [clickOthers, setClickOthers] = useState("false"); //check if user clicked on the "Others" header
-  const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
-  const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
 
   useEffect(() => {
     getProfile();
   }, [session]);
 
-  const handleMobileLegendsChange = () => {
-    setMobileLegends(!mobile_legends);
-    mobile_legends && setMobileLegendsVariant("outlined");
-    !mobile_legends && setMobileLegendsVariant("contained");
+  const handleBoardGamesChange = () => {
+    return setBoardGames(!boardgames);
   };
 
-  const handleBrawlStarsChange = () => {
-    setBrawlStars(!brawl_stars);
-    brawl_stars && setBrawlStarsVariant("outlined");
-    !brawl_stars && setBrawlStarsVariant("contained");
+  const handleRPGChange = () => {
+    return setRPG(!rpg);
+  };
+
+  const handleShooterChange = () => {
+    return setShooter(!shooter);
+  };
+
+  const handleMOBAChange = () => {
+    return setMOBA(!moba);
+  };
+
+  const handleConsolesChange = () => {
+    return setConsoles(!consoles);
+  };
+
+  const handleMobileChange = () => {
+    return setMobile(!mobile);
+  };
+
+  const handleCardGamesChange = () => {
+    return setCardGames(!cardgames);
+  };
+
+  const handleComputerGamesChange = () => {
+    return setComputerGames(!computergames);
   };
 
   const handleAnimeChange = () => {
     return setAnime(!anime);
+  };
+
+  const handleCartoonChange = () => {
+    return setCartoon(!cartoon);
+  };
+
+  const handleComedyChange = () => {
+    return setComedy(!comedy);
+  };
+
+  const handleRomanceChange = () => {
+    return setRomance(!romance);
+  };
+
+  const handleDocumentaryChange = () => {
+    return setDocumentary(!documentary);
+  };
+
+  const handleDramaChange = () => {
+    return setDrama(!drama);
+  };
+
+  const handleRealityChange = () => {
+    return setReality(!reality);
+  };
+
+  const handleFantasyChange = () => {
+    return setFantasy(!fantasy);
+  };
+
+  const handleHorrorChange = () => {
+    return setHorror(!horror);
+  };
+
+  const handleActionChange = () => {
+    return setAction(!action);
   };
 
   const handleKoreanChange = () => {
@@ -196,14 +265,27 @@ const ProfilePage = ({ session }) => {
 
       if (data) {
         setUsername(data.username);
-        setBrawlStars(data.brawl_stars);
-        setBrawlStarsVariant(data.brawl_stars ? "contained" : "outlined");
-        setMobileLegends(data.mobile_legends);
-        setMobileLegendsVariant(data.mobile_legends ? "contained" : "outlined");
+        setBoardGames(data.boardgames);
+        setRPG(data.rpg);
+        setShooter(data.shooter);
+        setMOBA(data.moba);
+        setConsoles(data.consoles);
+        setMobile(data.mobile);
+        setCardGames(data.cardgames);
+        setComputerGames(data.computergames);
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
         setShares(data.shares);
         setAnime(data.anime);
+        setCartoon(data.cartoon);
+        setComedy(data.comedy);
+        setRomance(data.romance);
+        setDocumentary(data.documentary);
+        setDrama(data.drama);
+        setReality(data.reality);
+        setFantasy(data.fantasy);
+        setHorror(data.horror);
+        setAction(data.action);
         setKorean(data.korean);
         setFrench(data.french);
         setPointHistory(data.point_history);
@@ -243,9 +325,24 @@ const ProfilePage = ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        brawl_stars,
-        mobile_legends,
+        boardgames,
+        rpg,
+        shooter,
+        moba,
+        consoles,
+        mobile,
+        cardgames,
+        computergames,
         anime,
+        cartoon,
+        comedy,
+        romance,
+        documentary,
+        drama,
+        reality,
+        fantasy,
+        horror,
+        action,
         korean,
         french,
         badminton,
@@ -378,23 +475,82 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
-          {/* Toggle button to change preference for Brawl Stars */}
+          {/* Toggle button to change preference for Board Games */}
           <div>
             <RedButton
-              onClick={() => handleBrawlStarsChange()}
-              id="profile4"
-              variant={brawlStarsVariant}
-              text="Brawl Stars"
+              onClick={() => handleBoardGamesChange()}
+              variant={boardgames ? "contained" : "outlined"}
+              text="Board Games"
             ></RedButton>
           </div>
           <br></br>
 
-          {/* Toggle button to change preference for Mobile Legends */}
+          {/* Toggle button to change preference for Card Games */}
           <div>
             <RedButton
-              variant={mobileLegendsVariant}
-              onClick={() => handleMobileLegendsChange()}
-              text="Mobile legends"
+              onClick={() => handleCardGamesChange()}
+              variant={cardgames ? "contained" : "outlined"}
+              text="Card Games"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Mobile Games */}
+          <div>
+            <RedButton
+              onClick={() => handleMobileChange()}
+              variant={mobile ? "contained" : "outlined"}
+              text="Mobile Games"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Computer Games */}
+          <div>
+            <RedButton
+              onClick={() => handleComputerGamesChange()}
+              variant={computergames ? "contained" : "outlined"}
+              text="Computer (PC) Games"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Console Games */}
+          <div>
+            <RedButton
+              onClick={() => handleConsolesChange()}
+              variant={consoles ? "contained" : "outlined"}
+              text="Console Games"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for RPG */}
+          <div>
+            <RedButton
+              onClick={() => handleRPGChange()}
+              variant={rpg ? "contained" : "outlined"}
+              text="Role-Playing Games (RPG)"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Shooter Games */}
+          <div>
+            <RedButton
+              onClick={() => handleShooterChange()}
+              variant={shooter ? "contained" : "outlined"}
+              text="Shooter Games"
+            ></RedButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for MOBA */}
+          <div>
+            <RedButton
+              onClick={() => handleMOBAChange()}
+              variant={moba ? "contained" : "outlined"}
+              text="Multiplayer Online Battle Arena (MOBA) games"
             ></RedButton>
           </div>
           <br></br>
@@ -433,6 +589,97 @@ const ProfilePage = ({ session }) => {
             ></GreenButton>
           </div>
           <br></br>
+
+          {/* Toggle button to change preference for Action */}
+          <div>
+            <GreenButton
+              onClick={() => handleActionChange()}
+              variant={action ? "contained" : "outlined"}
+              text="Action"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Cartoon */}
+          <div>
+            <GreenButton
+              onClick={() => handleCartoonChange()}
+              variant={cartoon ? "contained" : "outlined"}
+              text="Cartoon"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Comedy */}
+          <div>
+            <GreenButton
+              onClick={() => handleComedyChange()}
+              variant={comedy ? "contained" : "outlined"}
+              text="Comedy"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Drama */}
+          <div>
+            <GreenButton
+              onClick={() => handleDramaChange()}
+              variant={drama ? "contained" : "outlined"}
+              text="Drama"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Documentary */}
+          <div>
+            <GreenButton
+              onClick={() => handleDocumentaryChange()}
+              variant={documentary ? "contained" : "outlined"}
+              text="Documentary"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Fantasy */}
+          <div>
+            <GreenButton
+              onClick={() => handleFantasyChange()}
+              variant={fantasy ? "contained" : "outlined"}
+              text="Fantasy/Adventure"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Horror */}
+          <div>
+            <GreenButton
+              onClick={() => handleHorrorChange()}
+              variant={horror ? "contained" : "outlined"}
+              text="Horror"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Reality */}
+          <div>
+            <GreenButton
+              onClick={() => handleRealityChange()}
+              variant={reality ? "contained" : "outlined"}
+              text="Reality TV"
+            ></GreenButton>
+          </div>
+          <br></br>
+
+        {/* Toggle button to change preference for Romance */}
+          <div>
+            <GreenButton
+              onClick={() => handleRomanceChange()}
+              variant={romance ? "contained" : "outlined"}
+              text="Romance"
+            ></GreenButton>
+          </div>
+          <br></br>
+
         </>
       )}
 
@@ -441,7 +688,7 @@ const ProfilePage = ({ session }) => {
         <>
           <div>
             Click "TV Shows{"/"}Movies" if you would like to see the different
-            TV Shows or movie subcategories!
+            TV Shows or movie subcategories and genres!
           </div>
         </>
       )}
