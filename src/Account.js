@@ -12,6 +12,7 @@ const Account = ({ session }) => {
   const [users, setUsers] = useState([]);
   const [avatar, setAvatarUrl] = useState(false);
   const [actualAvatar, setAvatar] = useState(null);
+  const [points, setPoints] = useState(0);
 
   const getProfile = async () => {
     try {
@@ -32,6 +33,7 @@ const Account = ({ session }) => {
         if (data.avatar_url) {
             setAvatarUrl(true);
             setAvatar(data.avatar_url);
+            setPoints(data.points);
         } 
       }
     } catch (error) {
@@ -103,9 +105,9 @@ const Account = ({ session }) => {
             <br></br>
             <div className="home">
                 <div className="btns" id="options">
-                    <button className="button3" onClick={() => { 
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
                         handleSprite("avataaars") }}>Humans</button>
-                    <button className="button3" onClick={() => { 
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
                         handleSprite("micah") }}>Humans 2</button>
                     <button className="button3" onClick={() => { 
                         handleSprite("human") }}>Pixels</button>

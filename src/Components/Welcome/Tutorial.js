@@ -100,7 +100,7 @@ export const HeaderEventsTutorial = () => { return ([
 export const HeaderAvatarTutorial = () => { return ([
     {
       selector: "#options",
-      content: "Select any of these categories to find an Avatar which you like!",
+      content: "Select any of these categories to find an Avatar which you like! Some categories are only unlocked when you have achieved a certain number of points!",
     },
     {
       selector: "#picture",
