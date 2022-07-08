@@ -42,6 +42,7 @@ const ProfilePage = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
+  const [shares, setShares] = useState(0);
   const [point_history, setPointHistory] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
@@ -136,6 +137,25 @@ const ProfilePage = ({ session }) => {
     }
   };
 
+  const updateShares = async (number) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ shares: number })
+        .eq("id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+      window.location.reload(false); // force the page to refresh
+    }
+  };
+
   // Update point history that is stored in supabase
   // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
   // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
@@ -154,7 +174,6 @@ const ProfilePage = ({ session }) => {
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
-      window.location.reload(false); // force the page to refresh
     }
   };
 
@@ -183,6 +202,7 @@ const ProfilePage = ({ session }) => {
         setMobileLegendsVariant(data.mobile_legends ? "contained" : "outlined");
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
+        setShares(data.shares);
         setAnime(data.anime);
         setKorean(data.korean);
         setFrench(data.french);
@@ -257,6 +277,12 @@ const ProfilePage = ({ session }) => {
   const shareClick = () => {
     updatePoints(2);
     updateHistory(",+2 Shared using social media " + new Date().toDateString());
+    setShares(shares+1);
+    updateShares(shares+1);
+  }
+
+  const shareCap = () => {
+    alert("Note: You can still share but you will no longer gain any more points from sharing. (capped at 10 times)");
   }
 
   return (
@@ -578,7 +604,7 @@ const ProfilePage = ({ session }) => {
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
@@ -588,7 +614,7 @@ const ProfilePage = ({ session }) => {
           <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <TelegramIcon size={62} round={true} />
           </TelegramShareButton>
@@ -598,7 +624,7 @@ const ProfilePage = ({ session }) => {
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
@@ -608,7 +634,7 @@ const ProfilePage = ({ session }) => {
           <LinkedinShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <LinkedinIcon size={62} round={true} />
           </LinkedinShareButton>
