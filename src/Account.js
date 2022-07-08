@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import Header from "./Header";
+import HeaderAvatar from "./Components/Header/HeaderAvatar";
 import Footer from "./Footer";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
@@ -12,6 +12,7 @@ const Account = ({ session }) => {
   const [users, setUsers] = useState([]);
   const [avatar, setAvatarUrl] = useState(false);
   const [actualAvatar, setAvatar] = useState(null);
+  const [points, setPoints] = useState(0);
 
   const getProfile = async () => {
     try {
@@ -32,6 +33,7 @@ const Account = ({ session }) => {
         if (data.avatar_url) {
             setAvatarUrl(true);
             setAvatar(data.avatar_url);
+            setPoints(data.points);
         } 
       }
     } catch (error) {
@@ -86,7 +88,7 @@ const Account = ({ session }) => {
         <ChatwootWidget />
       </div>
 
-      <Header session={session} />
+      <HeaderAvatar session={session} />
         <div className="container">
             <div className="nav">
                 {avatar == null 
@@ -102,10 +104,10 @@ const Account = ({ session }) => {
             </h1>
             <br></br>
             <div className="home">
-                <div className="btns">
-                    <button className="button3" onClick={() => { 
+                <div className="btns" id="options">
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
                         handleSprite("avataaars") }}>Humans</button>
-                    <button className="button3" onClick={() => { 
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
                         handleSprite("micah") }}>Humans 2</button>
                     <button className="button3" onClick={() => { 
                         handleSprite("human") }}>Pixels</button>
@@ -119,7 +121,7 @@ const Account = ({ session }) => {
                         handleSprite("gridy") }}>Aliens</button>
                     
                 </div>
-                <div className="avatar">
+                <div className="avatar" id="picture">
                     <img src=
 {`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`} alt="Sprite" />
                 </div>

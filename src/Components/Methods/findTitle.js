@@ -13,6 +13,7 @@
       "Senior",
       "Master",
       "Grandmaster",
+      "Legendary"
     ];
 
     for (i = 0; i < pointCutoff.length - 1; i++) {

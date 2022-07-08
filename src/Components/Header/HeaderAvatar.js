@@ -15,10 +15,10 @@ import Tour from "reactour";
 import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
-import { HeaderLeaderboardTutorial } from "../Welcome/Tutorial";
+import { HeaderAvatarTutorial } from "../Welcome/Tutorial";
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 
-export default function HeaderLeaderboard({ session }) {
+export default function HeaderAvatar({ session }) {
 
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState(false);
@@ -31,11 +31,6 @@ export default function HeaderLeaderboard({ session }) {
   useEffect(() => {
   fetchData();
   },[])
-
-  const formatDate = (dateString) => {
-    const options = {hour12: false }
-    return new Date(dateString).toLocaleString(undefined, options)
-  }
 
   const toggleHistory = () => {
     setHistory(!history);
@@ -56,7 +51,7 @@ export default function HeaderLeaderboard({ session }) {
 
       const { error } = await supabase
         .from("profiles")
-        .update({ firstTimeLeaderboard: false })
+        .update({ firstTimeAvatar: false })
         .eq("id", session.user.id);
 
       if (error) throw error;
@@ -71,11 +66,12 @@ export default function HeaderLeaderboard({ session }) {
   const [loading, setLoading] = useState(true);
   const [click, setClick] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(false);
-  const [firstTimeLeaderboard, setFirstTimeLeaderboard] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
+  const [firstTimeAvatar, setFirstTimeAvatar] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
 
 
   const { header, logo } = useStyles();
   const { logo2 } = useStyles2();
+
 
   const clickFAQ = () => {
     setIsTourOpen(true);
@@ -98,7 +94,7 @@ export default function HeaderLeaderboard({ session }) {
 
       if (data) {
         setPoints(data.points);
-        if (data.firstTimeLeaderboard) setIsTourOpen(true);
+        if (data.firstTimeAvatar) setIsTourOpen(true);
       }
     } catch (error) {
       alert(error.message);
@@ -127,7 +123,7 @@ export default function HeaderLeaderboard({ session }) {
       FINDABUD
     </Typography>
     <Typography variant="h6" component="h1" className={logo2}>
-      LEADERBOARD
+      SELECT AVATAR
     </Typography>
     </>
   );
@@ -189,10 +185,10 @@ export default function HeaderLeaderboard({ session }) {
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour
-          steps={HeaderLeaderboardTutorial()}
+          steps= {HeaderAvatarTutorial()}
           isOpen={isTourOpen}
           onAfterOpen={disableBody}
-          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeLeaderboard(false); updateFirstTime()}}
+          onRequestClose={(target) => {enableBodyScroll(target); setIsTourOpen(false); setFirstTimeAvatar(false); updateFirstTime()}}
         />
       )}
     </header>

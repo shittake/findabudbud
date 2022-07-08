@@ -236,17 +236,27 @@ const ChatHistory = ({session}) => {
                   }
                   </td>
 
-                 	<td>{val.secondRated && 
+                 	<td>
+
+                 	{val.secondRated && val.firstRated && 
                  		<>
                  		{val.secondGive == 1 && <p>{val.secondName} gave you 1 point!</p>}
                  		{val.secondGive > 1 && <p>{val.secondName} gave you {val.secondGive} points!</p>}
                  		</>
                  	}
+
+                 	{val.secondRated && !val.firstRated &&
+                 		<>
+                 		Hidden until you give your rating!
+                 		</>
+                 	}
+
                  	{!val.secondRated && 
                  		<>
                  		{val.secondName} has not rated you yet!
                  		</>
                  	}
+
                  	</td>
                 </tr>
               );
@@ -306,17 +316,25 @@ const ChatHistory = ({session}) => {
                   </td>  
 
                   <td>
-                  {val.firstRated && 
+                  {val.firstRated && val.secondRated &&
                   	<>
                   	{val.firstGive == 1 && <p> {val.firstName} gave you 1 point! </p>}
                   	{val.firstGive > 1 && <p> {val.firstName} gave you {val.firstGive} points! </p>}
                   	</>
-                  }    
+                  } 
+
+                  {val.firstRated && !val.secondRated && 
+                  	<>
+                  	Hidden until you give your rating!
+                  	</>
+                  }
+
                   {!val.firstRated && 
                   	<>
                   	{val.firstName} has not rated you yet!
                   	</>
                   }
+
                   </td>    
                 </tr>
               );

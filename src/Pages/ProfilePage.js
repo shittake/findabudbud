@@ -5,6 +5,7 @@ import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
 import HeaderProfile from "../Components/Header/HeaderProfile";
 import Footer from "../Footer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import {
   FacebookShareButton,
@@ -29,11 +30,36 @@ const ProfilePage = ({ session }) => {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [telegram_handle, setTelegramHandle] = useState(null);
-  const [brawl_stars, setBrawlStars] = useState(false);
-  const [mobile_legends, setMobileLegends] = useState(false);
+  const [boardgames, setBoardGames] = useState(false);
+  const [rpg, setRPG] = useState(false);
+  const [shooter, setShooter] = useState(false);
+  const [moba, setMOBA] = useState(false);
+  const [consoles, setConsoles] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const [cardgames, setCardGames] = useState(false);
+  const [computergames, setComputerGames] = useState(false);
   const [anime, setAnime] = useState(false);
+  const [cartoon, setCartoon] = useState(false);
+  const [comedy, setComedy] = useState(false);
+  const [romance, setRomance] = useState(false);
+  const [documentary, setDocumentary] = useState(false);
+  const [drama, setDrama] = useState(false);
+  const [reality, setReality] = useState(false);
+  const [fantasy, setFantasy] = useState(false);
+  const [horror, setHorror] = useState(false);
+  const [action, setAction] = useState(false);
   const [french, setFrench] = useState(false);
   const [korean, setKorean] = useState(false);
+  const [japanese, setJapanese] = useState(false);
+  const [mandarin, setMandarin] = useState(false);
+  const [arabic, setArabic] = useState(false);
+  const [indonesian, setIndonesian] = useState(false);
+  const [malay, setMalay] = useState(false);
+  const [hindi, setHindi] = useState(false);
+  const [russian, setRussian] = useState(false);
+  const [spanish, setSpanish] = useState(false);
+  const [german, setGerman] = useState(false);
+  const [otherlanguages, setOtherLanguages] = useState(false);
   const [badminton, setBadminton] = useState(false);
   const [soccer, setSoccer] = useState(false);
   const [food, setFood] = useState(false);
@@ -41,33 +67,88 @@ const ProfilePage = ({ session }) => {
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
+  const [shares, setShares] = useState(0);
   const [point_history, setPointHistory] = useState(0);
   const [clickGames, setClickGames] = useState("false"); //check if user clicked on the "Games" header
   const [clickShows, setClickShows] = useState("false"); //check if user clicked on the "TV Shows/Movies" header
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
   const [clickSports, setClickSports] = useState("false"); //check if user clicked on the "Sports" header
   const [clickOthers, setClickOthers] = useState("false"); //check if user clicked on the "Others" header
-  const [brawlStarsVariant, setBrawlStarsVariant] = useState("outlined");
-  const [mobileLegendsVariant, setMobileLegendsVariant] = useState("outlined");
 
   useEffect(() => {
     getProfile();
   }, [session]);
 
-  const handleMobileLegendsChange = () => {
-    setMobileLegends(!mobile_legends);
-    mobile_legends && setMobileLegendsVariant("outlined");
-    !mobile_legends && setMobileLegendsVariant("contained");
+  const handleBoardGamesChange = () => {
+    return setBoardGames(!boardgames);
   };
 
-  const handleBrawlStarsChange = () => {
-    setBrawlStars(!brawl_stars);
-    brawl_stars && setBrawlStarsVariant("outlined");
-    !brawl_stars && setBrawlStarsVariant("contained");
+  const handleRPGChange = () => {
+    return setRPG(!rpg);
+  };
+
+  const handleShooterChange = () => {
+    return setShooter(!shooter);
+  };
+
+  const handleMOBAChange = () => {
+    return setMOBA(!moba);
+  };
+
+  const handleConsolesChange = () => {
+    return setConsoles(!consoles);
+  };
+
+  const handleMobileChange = () => {
+    return setMobile(!mobile);
+  };
+
+  const handleCardGamesChange = () => {
+    return setCardGames(!cardgames);
+  };
+
+  const handleComputerGamesChange = () => {
+    return setComputerGames(!computergames);
   };
 
   const handleAnimeChange = () => {
     return setAnime(!anime);
+  };
+
+  const handleCartoonChange = () => {
+    return setCartoon(!cartoon);
+  };
+
+  const handleComedyChange = () => {
+    return setComedy(!comedy);
+  };
+
+  const handleRomanceChange = () => {
+    return setRomance(!romance);
+  };
+
+  const handleDocumentaryChange = () => {
+    return setDocumentary(!documentary);
+  };
+
+  const handleDramaChange = () => {
+    return setDrama(!drama);
+  };
+
+  const handleRealityChange = () => {
+    return setReality(!reality);
+  };
+
+  const handleFantasyChange = () => {
+    return setFantasy(!fantasy);
+  };
+
+  const handleHorrorChange = () => {
+    return setHorror(!horror);
+  };
+
+  const handleActionChange = () => {
+    return setAction(!action);
   };
 
   const handleKoreanChange = () => {
@@ -76,6 +157,46 @@ const ProfilePage = ({ session }) => {
 
   const handleFrenchChange = () => {
     return setFrench(!french);
+  };
+
+  const handleJapaneseChange = () => {
+    return setJapanese(!japanese);
+  };
+
+  const handleMandarinChange = () => {
+    return setMandarin(!mandarin);
+  };
+
+  const handleArabicChange = () => {
+    return setArabic(!arabic);
+  };
+
+  const handleIndonesianChange = () => {
+    return setIndonesian(!indonesian);
+  };
+
+  const handleMalayChange = () => {
+    return setMalay(!malay);
+  };
+
+  const handleHindiChange = () => {
+    return setHindi(!hindi);
+  };
+
+  const handleRussianChange = () => {
+    return setRussian(!russian);
+  };
+
+  const handleSpanishChange = () => {
+    return setSpanish(!spanish);
+  };
+
+  const handleGermanChange = () => {
+    return setGerman(!german);
+  };
+
+  const handleOtherLanguagesChange = () => {
+    return setOtherLanguages(!otherlanguages);
   };
 
   const handleBadmintonChange = () => {
@@ -135,6 +256,25 @@ const ProfilePage = ({ session }) => {
     }
   };
 
+  const updateShares = async (number) => {
+    setLoading(true);
+    try {
+      const user = supabase.auth.user();
+
+      const { error } = await supabase
+        .from("profiles")
+        .update({ shares: number })
+        .eq("id", session.user.id);
+
+      if (error) throw error;
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+      window.location.reload(false); // force the page to refresh
+    }
+  };
+
   // Update point history that is stored in supabase
   // The input "message" MUST be of the form: {comma} + {point change} (space) + {Activity} (space) + {current date}
   // For example, the string ",+2 Shared using social media 14/6/2022" is in the correct format
@@ -153,7 +293,6 @@ const ProfilePage = ({ session }) => {
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
-      window.location.reload(false); // force the page to refresh
     }
   };
 
@@ -176,15 +315,39 @@ const ProfilePage = ({ session }) => {
 
       if (data) {
         setUsername(data.username);
-        setBrawlStars(data.brawl_stars);
-        setBrawlStarsVariant(data.brawl_stars ? "contained" : "outlined");
-        setMobileLegends(data.mobile_legends);
-        setMobileLegendsVariant(data.mobile_legends ? "contained" : "outlined");
+        setBoardGames(data.boardgames);
+        setRPG(data.rpg);
+        setShooter(data.shooter);
+        setMOBA(data.moba);
+        setConsoles(data.consoles);
+        setMobile(data.mobile);
+        setCardGames(data.cardgames);
+        setComputerGames(data.computergames);
         setAvatarUrl(data.avatar_url);
         setPoints(data.points);
+        setShares(data.shares);
         setAnime(data.anime);
+        setCartoon(data.cartoon);
+        setComedy(data.comedy);
+        setRomance(data.romance);
+        setDocumentary(data.documentary);
+        setDrama(data.drama);
+        setReality(data.reality);
+        setFantasy(data.fantasy);
+        setHorror(data.horror);
+        setAction(data.action);
         setKorean(data.korean);
         setFrench(data.french);
+        setJapanese(data.japanese);
+        setMandarin(data.mandarin);
+        setArabic(data.arabic);
+        setIndonesian(data.indonesian);
+        setMalay(data.malay);
+        setHindi(data.hindi);
+        setRussian(data.russian);
+        setSpanish(data.spanish);
+        setGerman(data.german);
+        setOtherLanguages(data.otherlanguages);
         setPointHistory(data.point_history);
         setTelegramHandle(data.telegram_handle);
         setBadminton(data.badminton);
@@ -204,6 +367,12 @@ const ProfilePage = ({ session }) => {
     }
   };
 
+  let navigate = useNavigate();
+    const moveToAvatar = () => {
+      let path = '/';
+      navigate(path);
+    }
+
   // Method to update all columns for a user once he clicks on "update profile"
 
   const updateProfile = async (e) => {
@@ -216,11 +385,36 @@ const ProfilePage = ({ session }) => {
       const updates = {
         id: user.id,
         username,
-        brawl_stars,
-        mobile_legends,
+        boardgames,
+        rpg,
+        shooter,
+        moba,
+        consoles,
+        mobile,
+        cardgames,
+        computergames,
         anime,
+        cartoon,
+        comedy,
+        romance,
+        documentary,
+        drama,
+        reality,
+        fantasy,
+        horror,
+        action,
         korean,
         french,
+        japanese,
+        mandarin,
+        arabic,
+        indonesian,
+        malay,
+        hindi,
+        russian,
+        spanish,
+        german,
+        otherlanguages,
         badminton,
         soccer,
         food,
@@ -250,6 +444,12 @@ const ProfilePage = ({ session }) => {
   const shareClick = () => {
     updatePoints(2);
     updateHistory(",+2 Shared using social media " + new Date().toDateString());
+    setShares(shares+1);
+    updateShares(shares+1);
+  }
+
+  const shareCap = () => {
+    alert("Note: You can still share but you will no longer gain any more points from sharing. (capped at 10 times)");
   }
 
   return (
@@ -274,7 +474,7 @@ const ProfilePage = ({ session }) => {
 
 
       <h1> 
-        <center><img src = {avatar_url} height="170"></img></center>
+        <center><img src = {avatar_url} style={{ cursor: "pointer" }} onClick = {moveToAvatar} height="170"></img></center>
       </h1>
 
       {/* Instructions to user */}
@@ -282,7 +482,7 @@ const ProfilePage = ({ session }) => {
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
-        ) : (
+        ) : ( 
           <form onSubmit={updateProfile} className="form-widget">
             <p>Email: {session.user.email}</p>
             <p>
@@ -345,26 +545,82 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
-          {/* Toggle button to change preference for Brawl Stars */}
-          <div>
+          <h1 className = "parent">
+          {/* Toggle button to change preference for Board Games */}
+          <div className = "child">
             <RedButton
-              onClick={() => handleBrawlStarsChange()}
-              id="profile4"
-              variant={brawlStarsVariant}
-              text="Brawl Stars"
+              onClick={() => handleBoardGamesChange()}
+              variant={boardgames ? "contained" : "outlined"}
+              text="Board Games"
             ></RedButton>
           </div>
-          <br></br>
 
-          {/* Toggle button to change preference for Mobile Legends */}
-          <div>
+          {/* Toggle button to change preference for Card Games */}
+          <div className = "child">
             <RedButton
-              variant={mobileLegendsVariant}
-              onClick={() => handleMobileLegendsChange()}
-              text="Mobile legends"
+              onClick={() => handleCardGamesChange()}
+              variant={cardgames ? "contained" : "outlined"}
+              text="Card Games"
             ></RedButton>
           </div>
-          <br></br>
+
+        {/* Toggle button to change preference for Mobile Games */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleMobileChange()}
+              variant={mobile ? "contained" : "outlined"}
+              text="Mobile Games"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Computer Games */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleComputerGamesChange()}
+              variant={computergames ? "contained" : "outlined"}
+              text="Computer (PC) Games"
+            ></RedButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+
+        {/* Toggle button to change preference for Console Games */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleConsolesChange()}
+              variant={consoles ? "contained" : "outlined"}
+              text="Console Games"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for RPG */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleRPGChange()}
+              variant={rpg ? "contained" : "outlined"}
+              text="Role-Playing Games (RPG)"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Shooter Games */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleShooterChange()}
+              variant={shooter ? "contained" : "outlined"}
+              text="Shooter Games"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for MOBA */}
+          <div className = "child">
+            <RedButton
+              onClick={() => handleMOBAChange()}
+              variant={moba ? "contained" : "outlined"}
+              text="Multiplayer Online Battle Arena (MOBA) games"
+            ></RedButton>
+          </div>
+        </h1>
         </>
       )}
 
@@ -391,15 +647,103 @@ const ProfilePage = ({ session }) => {
 
       {clickShows && (
         <>
+          <h1 className = "parent">
           {/* Toggle button to change preference for Anime */}
-          <div>
+          <div className = "child">
             <GreenButton
               onClick={() => handleAnimeChange()}
               variant={anime ? "contained" : "outlined"}
               text="Anime"
             ></GreenButton>
           </div>
-          <br></br>
+
+          {/* Toggle button to change preference for Action */}
+          <div className = "child">
+            <GreenButton
+              onClick={() => handleActionChange()}
+              variant={action ? "contained" : "outlined"}
+              text="Action"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Cartoon */}
+          <div className = "child">
+            <GreenButton
+              onClick={() => handleCartoonChange()}
+              variant={cartoon ? "contained" : "outlined"}
+              text="Cartoon"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Comedy */}
+          <div className = "child">
+            <GreenButton
+              onClick={() => handleComedyChange()}
+              variant={comedy ? "contained" : "outlined"}
+              text="Comedy"
+            ></GreenButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+
+        {/* Toggle button to change preference for Drama */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleDramaChange()}
+              variant={drama ? "contained" : "outlined"}
+              text="Drama"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Documentary */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleDocumentaryChange()}
+              variant={documentary ? "contained" : "outlined"}
+              text="Documentary"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Fantasy */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleFantasyChange()}
+              variant={fantasy ? "contained" : "outlined"}
+              text="Fantasy/Adventure"
+            ></GreenButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Horror */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleHorrorChange()}
+              variant={horror ? "contained" : "outlined"}
+              text="Horror"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Reality */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleRealityChange()}
+              variant={reality ? "contained" : "outlined"}
+              text="Reality TV"
+            ></GreenButton>
+          </div>
+
+        {/* Toggle button to change preference for Romance */}
+          <div className = "otherchild">
+            <GreenButton
+              onClick={() => handleRomanceChange()}
+              variant={romance ? "contained" : "outlined"}
+              text="Romance"
+            ></GreenButton>
+          </div>
+        </h1>
+
         </>
       )}
 
@@ -408,7 +752,7 @@ const ProfilePage = ({ session }) => {
         <>
           <div>
             Click "TV Shows{"/"}Movies" if you would like to see the different
-            TV Shows or movie subcategories!
+            TV Shows or movie subcategories and genres!
           </div>
         </>
       )}
@@ -427,22 +771,120 @@ const ProfilePage = ({ session }) => {
 
       {clickLanguages && (
         <>
-          {/* Toggle button to change preference for French */}
-          <div>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Arabic */}
+          <div className = "child">
+            <BlueButton
+              variant={arabic ? "contained" : "outlined"}
+              onClick={() => handleArabicChange()}
+              text="Arabic"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for French */}
+          <div className = "child">
             <BlueButton
               variant={french ? "contained" : "outlined"}
               onClick={() => handleFrenchChange()}
               text="French"
             ></BlueButton>
           </div>
-          <br></br>
-          <div>
+
+        {/* Toggle button to change preference for German */}
+          <div className = "child">
+            <BlueButton
+              variant={german ? "contained" : "outlined"}
+              onClick={() => handleGermanChange()}
+              text="German"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Hindi */}
+          <div className = "child">
+            <BlueButton
+              variant={hindi ? "contained" : "outlined"}
+              onClick={() => handleHindiChange()}
+              text="Hindi"
+            ></BlueButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Indonesian */}
+          <div className = "child">
+            <BlueButton
+              variant={indonesian ? "contained" : "outlined"}
+              onClick={() => handleIndonesianChange()}
+              text="Indonesian"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Japanese */}
+          <div className = "child">
+            <BlueButton
+              variant={japanese ? "contained" : "outlined"}
+              onClick={() => handleJapaneseChange()}
+              text="Japanese"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Korean */}
+          <div className = "child">
             <BlueButton
               variant={korean ? "contained" : "outlined"}
               onClick={() => handleKoreanChange()}
               text="Korean"
             ></BlueButton>
           </div>
+
+        {/* Toggle button to change preference for Malay */}
+          <div className = "child">
+            <BlueButton
+              variant={malay ? "contained" : "outlined"}
+              onClick={() => handleMalayChange()}
+              text="Malay"
+            ></BlueButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Mandarin */}
+          <div className = "child">
+            <BlueButton
+              variant={mandarin ? "contained" : "outlined"}
+              onClick={() => handleMandarinChange()}
+              text="Mandarin"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Russian */}
+          <div className = "child">
+            <BlueButton
+              variant={russian ? "contained" : "outlined"}
+              onClick={() => handleRussianChange()}
+              text="Russian"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for Spanish */}
+          <div className = "child">
+            <BlueButton
+              variant={spanish ? "contained" : "outlined"}
+              onClick={() => handleSpanishChange()}
+              text="Spanish"
+            ></BlueButton>
+          </div>
+
+        {/* Toggle button to change preference for other languages */}
+          <div className = "child">
+            <BlueButton
+              variant={otherlanguages ? "contained" : "outlined"}
+              onClick={() => handleOtherLanguagesChange()}
+              text="Other Languages"
+            ></BlueButton>
+          </div>
+        </h1>
         </>
       )}
 
@@ -571,7 +1013,7 @@ const ProfilePage = ({ session }) => {
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
@@ -581,7 +1023,7 @@ const ProfilePage = ({ session }) => {
           <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <TelegramIcon size={62} round={true} />
           </TelegramShareButton>
@@ -591,7 +1033,7 @@ const ProfilePage = ({ session }) => {
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
@@ -601,7 +1043,7 @@ const ProfilePage = ({ session }) => {
           <LinkedinShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={shareClick}
+            onClick={(shares<10) ? shareClick : shareCap}
           >
             <LinkedinIcon size={62} round={true} />
           </LinkedinShareButton>
