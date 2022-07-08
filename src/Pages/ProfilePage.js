@@ -5,6 +5,7 @@ import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
 import HeaderProfile from "../Components/Header/HeaderProfile";
 import Footer from "../Footer";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import {
   FacebookShareButton,
@@ -204,6 +205,12 @@ const ProfilePage = ({ session }) => {
     }
   };
 
+  let navigate = useNavigate();
+    const moveToAvatar = () => {
+      let path = '/';
+      navigate(path);
+    }
+
   // Method to update all columns for a user once he clicks on "update profile"
 
   const updateProfile = async (e) => {
@@ -274,7 +281,7 @@ const ProfilePage = ({ session }) => {
 
 
       <h1> 
-        <center><img src = {avatar_url} height="170"></img></center>
+        <center><img src = {avatar_url} style={{ cursor: "pointer" }} onClick = {moveToAvatar} height="170"></img></center>
       </h1>
 
       {/* Instructions to user */}
@@ -282,7 +289,7 @@ const ProfilePage = ({ session }) => {
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
-        ) : (
+        ) : ( 
           <form onSubmit={updateProfile} className="form-widget">
             <p>Email: {session.user.email}</p>
             <p>
