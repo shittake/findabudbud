@@ -475,85 +475,82 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
+          <h1 className = "parent">
           {/* Toggle button to change preference for Board Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleBoardGamesChange()}
               variant={boardgames ? "contained" : "outlined"}
               text="Board Games"
             ></RedButton>
           </div>
-          <br></br>
 
           {/* Toggle button to change preference for Card Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleCardGamesChange()}
               variant={cardgames ? "contained" : "outlined"}
               text="Card Games"
             ></RedButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Mobile Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleMobileChange()}
               variant={mobile ? "contained" : "outlined"}
               text="Mobile Games"
             ></RedButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Computer Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleComputerGamesChange()}
               variant={computergames ? "contained" : "outlined"}
               text="Computer (PC) Games"
             ></RedButton>
           </div>
-          <br></br>
+        </h1>
+
+        <h1 className = "parent">
 
         {/* Toggle button to change preference for Console Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleConsolesChange()}
               variant={consoles ? "contained" : "outlined"}
               text="Console Games"
             ></RedButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for RPG */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleRPGChange()}
               variant={rpg ? "contained" : "outlined"}
               text="Role-Playing Games (RPG)"
             ></RedButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Shooter Games */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleShooterChange()}
               variant={shooter ? "contained" : "outlined"}
               text="Shooter Games"
             ></RedButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for MOBA */}
-          <div>
+          <div className = "child">
             <RedButton
               onClick={() => handleMOBAChange()}
               variant={moba ? "contained" : "outlined"}
               text="Multiplayer Online Battle Arena (MOBA) games"
             ></RedButton>
           </div>
-          <br></br>
+        </h1>
         </>
       )}
 
@@ -580,105 +577,102 @@ const ProfilePage = ({ session }) => {
 
       {clickShows && (
         <>
+          <h1 className = "parent">
           {/* Toggle button to change preference for Anime */}
-          <div>
+          <div className = "child">
             <GreenButton
               onClick={() => handleAnimeChange()}
               variant={anime ? "contained" : "outlined"}
               text="Anime"
             ></GreenButton>
           </div>
-          <br></br>
 
           {/* Toggle button to change preference for Action */}
-          <div>
+          <div className = "child">
             <GreenButton
               onClick={() => handleActionChange()}
               variant={action ? "contained" : "outlined"}
               text="Action"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Cartoon */}
-          <div>
+          <div className = "child">
             <GreenButton
               onClick={() => handleCartoonChange()}
               variant={cartoon ? "contained" : "outlined"}
               text="Cartoon"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Comedy */}
-          <div>
+          <div className = "child">
             <GreenButton
               onClick={() => handleComedyChange()}
               variant={comedy ? "contained" : "outlined"}
               text="Comedy"
             ></GreenButton>
           </div>
-          <br></br>
+        </h1>
+
+        <h1 className = "parent">
 
         {/* Toggle button to change preference for Drama */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleDramaChange()}
               variant={drama ? "contained" : "outlined"}
               text="Drama"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Documentary */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleDocumentaryChange()}
               variant={documentary ? "contained" : "outlined"}
               text="Documentary"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Fantasy */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleFantasyChange()}
               variant={fantasy ? "contained" : "outlined"}
               text="Fantasy/Adventure"
             ></GreenButton>
           </div>
-          <br></br>
+        </h1>
 
+        <h1 className = "parent">
         {/* Toggle button to change preference for Horror */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleHorrorChange()}
               variant={horror ? "contained" : "outlined"}
               text="Horror"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Reality */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleRealityChange()}
               variant={reality ? "contained" : "outlined"}
               text="Reality TV"
             ></GreenButton>
           </div>
-          <br></br>
 
         {/* Toggle button to change preference for Romance */}
-          <div>
+          <div className = "otherchild">
             <GreenButton
               onClick={() => handleRomanceChange()}
               variant={romance ? "contained" : "outlined"}
               text="Romance"
             ></GreenButton>
           </div>
-          <br></br>
+        </h1>
 
         </>
       )}
