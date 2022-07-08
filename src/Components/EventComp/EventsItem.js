@@ -57,6 +57,7 @@ export default function EventsItem(props) {
             <div className="events-item-title">title: {props.title}</div>
             <div>date: {props.date}</div>
             <div>time (24-hour): {props.time.slice(0, 5)}</div>
+            <div>Category: {props.category}</div>
             <div className="event-footer">
               <div style={{ padding: "0 10px 0 10px" }}>
                 {props.session.user.id == props.useridcreator ? ( //real time
@@ -84,7 +85,7 @@ export default function EventsItem(props) {
       )}
       {buttonPressed && (
         <div>
-          <div className={classes.backdrop}></div>
+          <div className={classes.backdrop} onClick={onClickHandler}></div>
           <div className={classes.modal}>
             <header className={classes.header} style={{ color: "white" }}>
               <h2>id: {props.id}</h2>
@@ -122,6 +123,10 @@ export default function EventsItem(props) {
                 <div>
                   {currentNumPeople}/{props.numpeople}
                 </div>
+              </div>
+              <div>
+                <strong>Category: </strong>
+                {props.category}
               </div>
             </div>
             <footer className={classes.actions}>
