@@ -84,15 +84,27 @@ export const HeaderProfileTutorial = () => { return ([
 export const HeaderEventsTutorial = () => { return ([
     {
       selector: "#events",
-      content: "Here, you can create events or join events hosted by other users!"
+      content: "Here, you can create events or join events hosted by other users!",
     },
     {
       selector: "#form",
-      content: "Create your own event which other users can view and join!"
+      content: "Create your own event which other users can view and join!",
     },
     {
       selector: "#all",
-      content: "View all events either created by you, or other users! Click on an event to express interest in joining. You can only delete events that are created by you."
+      content: "View all events either created by you, or other users! Click on an event to express interest in joining. You can only delete events that are created by you.",
     }
+  ])
+}
+
+export const HeaderAvatarTutorial = () => { return ([
+    {
+      selector: "#options",
+      content: "Select any of these categories to find an Avatar which you like!",
+    },
+    {
+      selector: "#picture",
+      content: "If you like this Avatar shown here, confirm your choice by clicking on the confirmation button below!",
+    },
   ])
 }
