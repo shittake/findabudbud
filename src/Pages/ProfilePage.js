@@ -46,6 +46,7 @@ const ProfilePage = ({ session }) => {
   const [drama, setDrama] = useState(false);
   const [reality, setReality] = useState(false);
   const [fantasy, setFantasy] = useState(false);
+  const [sportsTV, setSportsTV] = useState(false);
   const [horror, setHorror] = useState(false);
   const [action, setAction] = useState(false);
   const [french, setFrench] = useState(false);
@@ -121,6 +122,10 @@ const ProfilePage = ({ session }) => {
 
   const handleComedyChange = () => {
     return setComedy(!comedy);
+  };
+
+  const handleSportsTVChange = () => {
+    return setSportsTV(!sportsTV);
   };
 
   const handleRomanceChange = () => {
@@ -334,6 +339,7 @@ const ProfilePage = ({ session }) => {
         setDrama(data.drama);
         setReality(data.reality);
         setFantasy(data.fantasy);
+        setSportsTV(data.sportsTV);
         setHorror(data.horror);
         setAction(data.action);
         setKorean(data.korean);
@@ -402,6 +408,7 @@ const ProfilePage = ({ session }) => {
         reality,
         fantasy,
         horror,
+        sportsTV,
         action,
         korean,
         french,
@@ -687,8 +694,17 @@ const ProfilePage = ({ session }) => {
 
         <h1 className = "parent">
 
+        {/* Toggle button to change preference for SportsTV */}
+          <div className = "child">
+            <GreenButton
+              onClick={() => handleSportsTVChange()}
+              variant={sportsTV ? "contained" : "outlined"}
+              text="Sports"
+            ></GreenButton>
+          </div>
+
         {/* Toggle button to change preference for Drama */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleDramaChange()}
               variant={drama ? "contained" : "outlined"}
@@ -697,7 +713,7 @@ const ProfilePage = ({ session }) => {
           </div>
 
         {/* Toggle button to change preference for Documentary */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleDocumentaryChange()}
               variant={documentary ? "contained" : "outlined"}
@@ -706,7 +722,7 @@ const ProfilePage = ({ session }) => {
           </div>
 
         {/* Toggle button to change preference for Fantasy */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleFantasyChange()}
               variant={fantasy ? "contained" : "outlined"}
