@@ -17,6 +17,7 @@
   cursor: pointer;
 }
 
+
 .pointSystem {
   height: 50px;
   width: 20%;
@@ -61,7 +62,13 @@
   width: 33%;
   background: none;
   text-align: center;
+}
 
+.halfchild {
+  float: left;
+  width: 50%;
+  background: none;
+  text-align: center;
 }
 
 .left {

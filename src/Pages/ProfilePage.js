@@ -46,6 +46,7 @@ const ProfilePage = ({ session }) => {
   const [drama, setDrama] = useState(false);
   const [reality, setReality] = useState(false);
   const [fantasy, setFantasy] = useState(false);
+  const [sportsTV, setSportsTV] = useState(false);
   const [horror, setHorror] = useState(false);
   const [action, setAction] = useState(false);
   const [french, setFrench] = useState(false);
@@ -61,9 +62,23 @@ const ProfilePage = ({ session }) => {
   const [german, setGerman] = useState(false);
   const [otherlanguages, setOtherLanguages] = useState(false);
   const [badminton, setBadminton] = useState(false);
+  const [basketball, setBasketball] = useState(false);
+  const [floorball, setFloorball] = useState(false);
+  const [golf, setGolf] = useState(false);
+  const [iceskating, setIceSkating] = useState(false);
+  const [tabletennis, setTableTennis] = useState(false);
+  const [tennis, setTennis] = useState(false);
+  const [volleyball, setVolleyball] = useState(false);
+  const [watersports, setWaterSports] = useState(false);
+  const [yoga, setYoga] = useState(false);
+  const [generalexercise, setGeneralExercise] = useState(false);
   const [soccer, setSoccer] = useState(false);
   const [food, setFood] = useState(false);
   const [study, setStudy] = useState(false);
+  const [coding, setCoding] = useState(false);
+  const [dance, setDance] = useState(false);
+  const [music, setMusic] = useState(false);
+  const [cooking, setCooking] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -121,6 +136,10 @@ const ProfilePage = ({ session }) => {
 
   const handleComedyChange = () => {
     return setComedy(!comedy);
+  };
+
+  const handleSportsTVChange = () => {
+    return setSportsTV(!sportsTV);
   };
 
   const handleRomanceChange = () => {
@@ -207,12 +226,68 @@ const ProfilePage = ({ session }) => {
     return setSoccer(!soccer);
   };
 
+  const handleYogaChange = () => {
+    return setYoga(!yoga);
+  };
+
+  const handleFloorballChange = () => {
+    return setFloorball(!floorball);
+  };
+
+  const handleTennisChange = () => {
+    return setTennis(!tennis);
+  };
+
+  const handleTableTennisChange = () => {
+    return setTableTennis(!tabletennis);
+  };
+
+  const handleWaterSportsChange = () => {
+    return setWaterSports(!watersports);
+  };
+
+  const handleBasketballChange = () => {
+    return setBasketball(!basketball);
+  };
+
+  const handleVolleyballChange = () => {
+    return setVolleyball(!volleyball);
+  };
+
+  const handleIceSkatingChange = () => {
+    return setIceSkating(!iceskating);
+  };
+
+  const handleGolfChange = () => {
+    return setGolf(!golf);
+  };
+
+  const handleGeneralExerciseChange = () => {
+    return setGeneralExercise(!generalexercise);
+  };
+
   const handleFoodChange = () => {
     return setFood(!food);
   };
 
   const handleStudyChange = () => {
     return setStudy(!study);
+  };
+
+  const handleCodingChange = () => {
+    return setCoding(!coding);
+  };
+
+  const handleMusicChange = () => {
+    return setMusic(!music);
+  };
+
+  const handleDanceChange = () => {
+    return setDance(!dance);
+  };
+
+  const handleCookingChange = () => {
+    return setCooking(!cooking);
   };
 
   const toggleGames = () => {
@@ -234,6 +309,135 @@ const ProfilePage = ({ session }) => {
   const toggleSports = () => {
     return setClickSports(!clickSports);
   };
+
+  const clearGames = () => {
+    if (boardgames) setBoardGames(false);
+    if (rpg) setRPG(false);
+    if (shooter) setShooter(false);
+    if (moba) setMOBA(false);
+    if (consoles) setConsoles(false);
+    if (mobile) setMobile(false);
+    if (cardgames) setCardGames(false);
+    if (computergames) setComputerGames(false);
+  }
+
+  const addGames = () => {
+    if (!boardgames) setBoardGames(true);
+    if (!rpg) setRPG(true);
+    if (!shooter) setShooter(true);
+    if (!moba) setMOBA(true);
+    if (!consoles) setConsoles(true);
+    if (!mobile) setMobile(true);
+    if (!cardgames) setCardGames(true);
+    if (!computergames) setComputerGames(true);
+  }
+
+  const clearShows = () => {
+    if (anime) setAnime(false);
+    if (cartoon) setCartoon(false);
+    if (comedy) setComedy(false);
+    if (romance) setRomance(false);
+    if (documentary) setDocumentary(false);
+    if (drama) setDrama(false);
+    if (reality) setReality(false);
+    if (fantasy) setFantasy(false);
+    if (horror) setHorror(false);
+    if (action) setAction(false);
+    if (sportsTV) setSportsTV(false);
+  }
+
+  const addShows = () => {
+    if (!anime) setAnime(true);
+    if (!cartoon) setCartoon(true);
+    if (!comedy) setComedy(true);
+    if (!romance) setRomance(true);
+    if (!documentary) setDocumentary(true);
+    if (!drama) setDrama(true);
+    if (!reality) setReality(true);
+    if (!fantasy) setFantasy(true);
+    if (!horror) setHorror(true);
+    if (!action) setAction(true);
+    if (!sportsTV) setSportsTV(true);
+  }
+
+  const clearLanguages = () => {
+    if (japanese) setJapanese(false);
+    if (mandarin) setMandarin(false);
+    if (arabic) setArabic(false);
+    if (indonesian) setIndonesian(false);
+    if (malay) setMalay(false);
+    if (hindi) setHindi(false);
+    if (russian) setRussian(false);
+    if (spanish) setSpanish(false);
+    if (german) setGerman(false);
+    if (french) setFrench(false);
+    if (korean) setKorean(false);
+    if (otherlanguages) setOtherLanguages(false);
+  }
+
+  const addLanguages = () => {
+    if (!japanese) setJapanese(true);
+    if (!mandarin) setMandarin(true);
+    if (!arabic) setArabic(true);
+    if (!indonesian) setIndonesian(true);
+    if (!malay) setMalay(true);
+    if (!hindi) setHindi(true);
+    if (!russian) setRussian(true);
+    if (!spanish) setSpanish(true);
+    if (!german) setGerman(true);
+    if (!french) setFrench(true);
+    if (!korean) setKorean(true);
+    if (!otherlanguages) setOtherLanguages(true);
+  }
+
+  const clearSports = () => {
+    if (badminton) setBadminton(false);
+    if (soccer) setSoccer(false);
+    if (yoga) setYoga(false);
+    if (floorball) setFloorball(false);
+    if (tennis) setTennis(false);
+    if (tabletennis) setTableTennis(false);
+    if (watersports) setWaterSports(false);
+    if (basketball) setBasketball(false);
+    if (volleyball) setVolleyball(false);
+    if (iceskating) setIceSkating(false);
+    if (golf) setGolf(false);
+    if (generalexercise) setGeneralExercise(false);
+  }
+
+  const addSports = () => {
+    if (!badminton) setBadminton(true);
+    if (!soccer) setSoccer(true);
+    if (!yoga) setYoga(true);
+    if (!floorball) setFloorball(true);
+    if (!tennis) setTennis(true);
+    if (!tabletennis) setTableTennis(true);
+    if (!watersports) setWaterSports(true);
+    if (!basketball) setBasketball(true);
+    if (!volleyball) setVolleyball(true);
+    if (!iceskating) setIceSkating(true);
+    if (!golf) setGolf(true);
+    if (!generalexercise) setGeneralExercise(true);
+  }
+
+  const clearOthers = () => {
+    if (coding) setCoding(false);
+    if (study) setStudy(false);
+    if (food) setFood(false);
+    if (dance) setDance(false);
+    if (music) setMusic(false);
+    if (cooking) setCooking(false);
+  }
+
+  const addOthers = () => {
+    if (!coding) setCoding(true);
+    if (!study) setStudy(true);
+    if (!food) setFood(true);
+    if (!dance) setDance(true);
+    if (!music) setMusic(true);
+    if (!cooking) setCooking(true);
+  }
+
 
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
@@ -334,6 +538,7 @@ const ProfilePage = ({ session }) => {
         setDrama(data.drama);
         setReality(data.reality);
         setFantasy(data.fantasy);
+        setSportsTV(data.sportsTV);
         setHorror(data.horror);
         setAction(data.action);
         setKorean(data.korean);
@@ -352,8 +557,22 @@ const ProfilePage = ({ session }) => {
         setTelegramHandle(data.telegram_handle);
         setBadminton(data.badminton);
         setSoccer(data.soccer);
+        setYoga(data.yoga);
+        setFloorball(data.floorball);
+        setTennis(data.tennis);
+        setTableTennis(data.tabletennis);
+        setWaterSports(data.watersports);
+        setBasketball(data.basketball);
+        setVolleyball(data.volleyball);
+        setIceSkating(data.iceskating);
+        setGolf(data.golf);
+        setGeneralExercise(data.generalexercise);
         setFood(data.food);
         setStudy(data.study);
+        setCoding(data.coding);
+        setDance(data.dance);
+        setMusic(data.music);
+        setCooking(data.cooking);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -402,6 +621,7 @@ const ProfilePage = ({ session }) => {
         reality,
         fantasy,
         horror,
+        sportsTV,
         action,
         korean,
         french,
@@ -417,8 +637,22 @@ const ProfilePage = ({ session }) => {
         otherlanguages,
         badminton,
         soccer,
+        yoga,
+        floorball,
+        tennis,
+        tabletennis,
+        watersports,
+        basketball,
+        volleyball,
+        iceskating,
+        golf,
+        generalexercise,
         food,
         study,
+        coding,
+        dance,
+        music,
+        cooking,
         avatar_url,
         points,
         point_history,
@@ -545,6 +779,32 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addGames()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearGames()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
           <h1 className = "parent">
           {/* Toggle button to change preference for Board Games */}
           <div className = "child">
@@ -647,6 +907,32 @@ const ProfilePage = ({ session }) => {
 
       {clickShows && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addShows()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearShows()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
           <h1 className = "parent">
           {/* Toggle button to change preference for Anime */}
           <div className = "child">
@@ -687,8 +973,17 @@ const ProfilePage = ({ session }) => {
 
         <h1 className = "parent">
 
+        {/* Toggle button to change preference for SportsTV */}
+          <div className = "child">
+            <GreenButton
+              onClick={() => handleSportsTVChange()}
+              variant={sportsTV ? "contained" : "outlined"}
+              text="Sports"
+            ></GreenButton>
+          </div>
+
         {/* Toggle button to change preference for Drama */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleDramaChange()}
               variant={drama ? "contained" : "outlined"}
@@ -697,7 +992,7 @@ const ProfilePage = ({ session }) => {
           </div>
 
         {/* Toggle button to change preference for Documentary */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleDocumentaryChange()}
               variant={documentary ? "contained" : "outlined"}
@@ -706,7 +1001,7 @@ const ProfilePage = ({ session }) => {
           </div>
 
         {/* Toggle button to change preference for Fantasy */}
-          <div className = "otherchild">
+          <div className = "child">
             <GreenButton
               onClick={() => handleFantasyChange()}
               variant={fantasy ? "contained" : "outlined"}
@@ -771,6 +1066,31 @@ const ProfilePage = ({ session }) => {
 
       {clickLanguages && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addLanguages()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearLanguages()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
 
         <h1 className = "parent">
         {/* Toggle button to change preference for Arabic */}
@@ -912,23 +1232,145 @@ const ProfilePage = ({ session }) => {
 
       {clickSports && (
         <>
-          {/* Toggle button to change preference for Badminton */}
-          <div>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addSports()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearSports()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Badminton */}
+          <div className = "child">
             <PurpleButton
               variant={badminton ? "contained" : "outlined"}
               onClick={() => handleBadmintonChange()}
               text="Badminton"
             ></PurpleButton>
           </div>
-          <br></br>
+
+        {/* Toggle button to change preference for Basketball */}
+          <div className = "child">
+            <PurpleButton
+              variant={basketball ? "contained" : "outlined"}
+              onClick={() => handleBasketballChange()}
+              text="Basketball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Floorball */}
+          <div className = "child">
+            <PurpleButton
+              variant={floorball ? "contained" : "outlined"}
+              onClick={() => handleFloorballChange()}
+              text="Floorball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Golf */}
+          <div className = "child">
+            <PurpleButton
+              variant={golf ? "contained" : "outlined"}
+              onClick={() => handleGolfChange()}
+              text="Golf"
+            ></PurpleButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Ice Skating */}
+          <div className = "child">
+            <PurpleButton
+              variant={iceskating ? "contained" : "outlined"}
+              onClick={() => handleIceSkatingChange()}
+              text="Ice Skating"
+            ></PurpleButton>
+          </div>
+
         {/* Toggle button to change preference for Soccer */}
-          <div>
+          <div className = "child">
             <PurpleButton
               variant={soccer ? "contained" : "outlined"}
               onClick={() => handleSoccerChange()}
               text="Soccer"
             ></PurpleButton>
           </div>
+
+        {/* Toggle button to change preference for Table Tennis */}
+          <div className = "child">
+            <PurpleButton
+              variant={tabletennis ? "contained" : "outlined"}
+              onClick={() => handleTableTennisChange()}
+              text="Table Tennis"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Tennis */}
+          <div className = "child">
+            <PurpleButton
+              variant={tennis ? "contained" : "outlined"}
+              onClick={() => handleTennisChange()}
+              text="Tennis"
+            ></PurpleButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Volleyball */}
+          <div className = "child">
+            <PurpleButton
+              variant={volleyball ? "contained" : "outlined"}
+              onClick={() => handleVolleyballChange()}
+              text="Volleyball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Water Sports */}
+          <div className = "child">
+            <PurpleButton
+              variant={watersports ? "contained" : "outlined"}
+              onClick={() => handleWaterSportsChange()}
+              text="Water Sports"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Yoga */}
+          <div className = "child">
+            <PurpleButton
+              variant={yoga ? "contained" : "outlined"}
+              onClick={() => handleYogaChange()}
+              text="Yoga"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for General Exercise */}
+          <div className = "child">
+            <PurpleButton
+              variant={generalexercise ? "contained" : "outlined"}
+              onClick={() => handleGeneralExerciseChange()}
+              text="General Exercise"
+            ></PurpleButton>
+          </div>
+        </h1>
         </>
       )}
 
@@ -957,24 +1399,90 @@ const ProfilePage = ({ session }) => {
 
       {clickOthers && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addOthers()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearOthers()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
+          <h1 className = "parent">
           {/* Toggle button to change preference for Food */}
-          <div>
+          <div className = "otherchild">
             <RedButton
               onClick={() => handleFoodChange()}
               variant={food ? "contained" : "outlined"}
               text="Food"
             ></RedButton>
           </div>
-          <br></br>
 
           {/* Toggle button to change preference for Study */}
-          <div>
+          <div className = "otherchild">
             <RedButton
               variant={study ? "contained" : "outlined"}
               onClick={() => handleStudyChange()}
               text="Study"
             ></RedButton>
           </div>
+
+        {/* Toggle button to change preference for Coding */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleCodingChange()}
+              variant={coding ? "contained" : "outlined"}
+              text="Coding"
+            ></RedButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Dance */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleDanceChange()}
+              variant={dance ? "contained" : "outlined"}
+              text="Dance"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Music */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleMusicChange()}
+              variant={music ? "contained" : "outlined"}
+              text="Music"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Cooking */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleCookingChange()}
+              variant={cooking ? "contained" : "outlined"}
+              text="Cooking"
+            ></RedButton>
+          </div>
+        </h1>
+
           <br></br>
         </>
       )}
