@@ -62,9 +62,23 @@ const ProfilePage = ({ session }) => {
   const [german, setGerman] = useState(false);
   const [otherlanguages, setOtherLanguages] = useState(false);
   const [badminton, setBadminton] = useState(false);
+  const [basketball, setBasketball] = useState(false);
+  const [floorball, setFloorball] = useState(false);
+  const [golf, setGolf] = useState(false);
+  const [iceskating, setIceSkating] = useState(false);
+  const [tabletennis, setTableTennis] = useState(false);
+  const [tennis, setTennis] = useState(false);
+  const [volleyball, setVolleyball] = useState(false);
+  const [watersports, setWaterSports] = useState(false);
+  const [yoga, setYoga] = useState(false);
+  const [generalexercise, setGeneralExercise] = useState(false);
   const [soccer, setSoccer] = useState(false);
   const [food, setFood] = useState(false);
   const [study, setStudy] = useState(false);
+  const [coding, setCoding] = useState(false);
+  const [dance, setDance] = useState(false);
+  const [music, setMusic] = useState(false);
+  const [cooking, setCooking] = useState(false);
   const [avatar_url, setAvatarUrl] = useState(null);
   const [isActive, setActive] = useState("false");
   const [points, setPoints] = useState(0);
@@ -212,12 +226,68 @@ const ProfilePage = ({ session }) => {
     return setSoccer(!soccer);
   };
 
+  const handleYogaChange = () => {
+    return setYoga(!yoga);
+  };
+
+  const handleFloorballChange = () => {
+    return setFloorball(!floorball);
+  };
+
+  const handleTennisChange = () => {
+    return setTennis(!tennis);
+  };
+
+  const handleTableTennisChange = () => {
+    return setTableTennis(!tabletennis);
+  };
+
+  const handleWaterSportsChange = () => {
+    return setWaterSports(!watersports);
+  };
+
+  const handleBasketballChange = () => {
+    return setBasketball(!basketball);
+  };
+
+  const handleVolleyballChange = () => {
+    return setVolleyball(!volleyball);
+  };
+
+  const handleIceSkatingChange = () => {
+    return setIceSkating(!iceskating);
+  };
+
+  const handleGolfChange = () => {
+    return setGolf(!golf);
+  };
+
+  const handleGeneralExerciseChange = () => {
+    return setGeneralExercise(!generalexercise);
+  };
+
   const handleFoodChange = () => {
     return setFood(!food);
   };
 
   const handleStudyChange = () => {
     return setStudy(!study);
+  };
+
+  const handleCodingChange = () => {
+    return setCoding(!coding);
+  };
+
+  const handleMusicChange = () => {
+    return setMusic(!music);
+  };
+
+  const handleDanceChange = () => {
+    return setDance(!dance);
+  };
+
+  const handleCookingChange = () => {
+    return setCooking(!cooking);
   };
 
   const toggleGames = () => {
@@ -358,8 +428,22 @@ const ProfilePage = ({ session }) => {
         setTelegramHandle(data.telegram_handle);
         setBadminton(data.badminton);
         setSoccer(data.soccer);
+        setYoga(data.yoga);
+        setFloorball(data.floorball);
+        setTennis(data.tennis);
+        setTableTennis(data.tabletennis);
+        setWaterSports(data.watersports);
+        setBasketball(data.basketball);
+        setVolleyball(data.volleyball);
+        setIceSkating(data.iceskating);
+        setGolf(data.golf);
+        setGeneralExercise(data.generalexercise);
         setFood(data.food);
         setStudy(data.study);
+        setCoding(data.coding);
+        setDance(data.dance);
+        setMusic(data.music);
+        setCooking(data.cooking);
         setClickGames(false); //default set to false to avoid overwhelming user
         setClickShows(false); //default set to false to avoid overwhelming user
         setClickLanguages(false); //default set to false to avoid overwhelming user
@@ -424,8 +508,22 @@ const ProfilePage = ({ session }) => {
         otherlanguages,
         badminton,
         soccer,
+        yoga,
+        floorball,
+        tennis,
+        tabletennis,
+        watersports,
+        basketball,
+        volleyball,
+        iceskating,
+        golf,
+        generalexercise,
         food,
         study,
+        coding,
+        dance,
+        music,
+        cooking,
         avatar_url,
         points,
         point_history,
@@ -928,23 +1026,120 @@ const ProfilePage = ({ session }) => {
 
       {clickSports && (
         <>
-          {/* Toggle button to change preference for Badminton */}
-          <div>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Badminton */}
+          <div className = "child">
             <PurpleButton
               variant={badminton ? "contained" : "outlined"}
               onClick={() => handleBadmintonChange()}
               text="Badminton"
             ></PurpleButton>
           </div>
-          <br></br>
+
+        {/* Toggle button to change preference for Basketball */}
+          <div className = "child">
+            <PurpleButton
+              variant={basketball ? "contained" : "outlined"}
+              onClick={() => handleBasketballChange()}
+              text="Basketball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Floorball */}
+          <div className = "child">
+            <PurpleButton
+              variant={floorball ? "contained" : "outlined"}
+              onClick={() => handleFloorballChange()}
+              text="Floorball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Golf */}
+          <div className = "child">
+            <PurpleButton
+              variant={golf ? "contained" : "outlined"}
+              onClick={() => handleGolfChange()}
+              text="Golf"
+            ></PurpleButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Ice Skating */}
+          <div className = "child">
+            <PurpleButton
+              variant={iceskating ? "contained" : "outlined"}
+              onClick={() => handleIceSkatingChange()}
+              text="Ice Skating"
+            ></PurpleButton>
+          </div>
+
         {/* Toggle button to change preference for Soccer */}
-          <div>
+          <div className = "child">
             <PurpleButton
               variant={soccer ? "contained" : "outlined"}
               onClick={() => handleSoccerChange()}
               text="Soccer"
             ></PurpleButton>
           </div>
+
+        {/* Toggle button to change preference for Table Tennis */}
+          <div className = "child">
+            <PurpleButton
+              variant={tabletennis ? "contained" : "outlined"}
+              onClick={() => handleTableTennisChange()}
+              text="Table Tennis"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Tennis */}
+          <div className = "child">
+            <PurpleButton
+              variant={tennis ? "contained" : "outlined"}
+              onClick={() => handleTennisChange()}
+              text="Tennis"
+            ></PurpleButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Volleyball */}
+          <div className = "child">
+            <PurpleButton
+              variant={volleyball ? "contained" : "outlined"}
+              onClick={() => handleVolleyballChange()}
+              text="Volleyball"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Water Sports */}
+          <div className = "child">
+            <PurpleButton
+              variant={watersports ? "contained" : "outlined"}
+              onClick={() => handleWaterSportsChange()}
+              text="Water Sports"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for Yoga */}
+          <div className = "child">
+            <PurpleButton
+              variant={yoga ? "contained" : "outlined"}
+              onClick={() => handleYogaChange()}
+              text="Yoga"
+            ></PurpleButton>
+          </div>
+
+        {/* Toggle button to change preference for General Exercise */}
+          <div className = "child">
+            <PurpleButton
+              variant={generalexercise ? "contained" : "outlined"}
+              onClick={() => handleGeneralExerciseChange()}
+              text="General Exercise"
+            ></PurpleButton>
+          </div>
+        </h1>
         </>
       )}
 
@@ -973,24 +1168,65 @@ const ProfilePage = ({ session }) => {
 
       {clickOthers && (
         <>
+
+          <h1 className = "parent">
           {/* Toggle button to change preference for Food */}
-          <div>
+          <div className = "otherchild">
             <RedButton
               onClick={() => handleFoodChange()}
               variant={food ? "contained" : "outlined"}
               text="Food"
             ></RedButton>
           </div>
-          <br></br>
 
           {/* Toggle button to change preference for Study */}
-          <div>
+          <div className = "otherchild">
             <RedButton
               variant={study ? "contained" : "outlined"}
               onClick={() => handleStudyChange()}
               text="Study"
             ></RedButton>
           </div>
+
+        {/* Toggle button to change preference for Coding */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleCodingChange()}
+              variant={coding ? "contained" : "outlined"}
+              text="Coding"
+            ></RedButton>
+          </div>
+        </h1>
+
+        <h1 className = "parent">
+        {/* Toggle button to change preference for Dance */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleDanceChange()}
+              variant={dance ? "contained" : "outlined"}
+              text="Dance"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Music */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleMusicChange()}
+              variant={music ? "contained" : "outlined"}
+              text="Music"
+            ></RedButton>
+          </div>
+
+        {/* Toggle button to change preference for Cooking */}
+          <div className = "otherchild">
+            <RedButton
+              onClick={() => handleCookingChange()}
+              variant={cooking ? "contained" : "outlined"}
+              text="Cooking"
+            ></RedButton>
+          </div>
+        </h1>
+
           <br></br>
         </>
       )}
