@@ -55,16 +55,12 @@ export const HeaderProfileTutorial = () => { return ([
         "Welcome to findabud! You may wish to watch this tutorial if this is your first time here.",
     },
     {
-      selector: "#profile1",
-      content: "If you have not done so yet, please update your profile!",
-    },
-    {
       selector: "#username",
       content: "Key in your username here. This will be shown on the leaderboard and to other users once a successful match is made!",
     },
     {
       selector: "#telegram_handle",
-      content: "Key in your telegram handle here without the @ symbol in front. You will need to provide your handle before you can be matched with others!",
+      content: "Key in your telegram handle here with or without the @ symbol in front. You will need to provide your handle before you can be matched with others!",
     },
     {
       selector: "#profile2",
