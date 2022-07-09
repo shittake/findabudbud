@@ -70,8 +70,22 @@ const SecretPage = ({ session }) => {
       .map(user => (user.avatar_url!=null)?user.avatar_url:"https://avatars.dicebear.com/api/bottts/1000.svg"));
 
     // Parameters to filter by
-    var parameters = ["brawl_stars","mobile_legends","anime","french","korean"];
-    var preferences = ["Brawl Stars", "Mobile Legends", "Anime", "French", "Korean"]
+    var parameters = ["boardgames", "rpg","shooter","moba","mobile","cardgames","consoles",
+    "computergames","cartoon","comedy","romance","documentary","drama","reality","fantasy",
+    "horror","action","anime","sportsTV","french","korean","japanese","mandarin","arabic",
+    "indonesian","malay","hindi","russian","spanish","german","otherlanguages",
+    "badminton","soccer","basketball","floorball","golf","iceskating","tabletennis",
+    "tennis","volleyball","watersports","yoga","generalexercise","study","food","coding",
+    "dance","music","cooking"];
+
+    var preferences = ["Board Games", "Role-Playing Games", "Shooter Games", "MOBA Games",
+    "Mobile Games", "Card Games", "Console Games", "Computer Games", "Cartoons", "Comedy",
+    "Romance Shows", "Documentaries", "Dramas", "Reality Shows", "Fantasy/Adventure Shows",
+    "Horror Shows", "Action Films", "Anime", "Sports Shows", "French", "Korean", "Japanese",
+    "Mandarin", "Arabic", "Indonesian", "Malay", "Hindi", "Russian", "Spanish", "German",
+    "Other Languages", "Badminton", "Soccer", "Basketball", "Floorball", "Golf", "Ice Skating",
+    "Table Tennis", "Tennis", "Volleyball", "Water Sports", "Yoga", "General Exercise",
+    "Study", "Food", "Coding", "Dance", "Music", "Cooking"];
 
     // This method finds the people who have the most number of mutual interests with myself
     // Return type: An array consisting of the IDs of those people
