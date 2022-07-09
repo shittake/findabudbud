@@ -310,6 +310,135 @@ const ProfilePage = ({ session }) => {
     return setClickSports(!clickSports);
   };
 
+  const clearGames = () => {
+    if (boardgames) setBoardGames(false);
+    if (rpg) setRPG(false);
+    if (shooter) setShooter(false);
+    if (moba) setMOBA(false);
+    if (consoles) setConsoles(false);
+    if (mobile) setMobile(false);
+    if (cardgames) setCardGames(false);
+    if (computergames) setComputerGames(false);
+  }
+
+  const addGames = () => {
+    if (!boardgames) setBoardGames(true);
+    if (!rpg) setRPG(true);
+    if (!shooter) setShooter(true);
+    if (!moba) setMOBA(true);
+    if (!consoles) setConsoles(true);
+    if (!mobile) setMobile(true);
+    if (!cardgames) setCardGames(true);
+    if (!computergames) setComputerGames(true);
+  }
+
+  const clearShows = () => {
+    if (anime) setAnime(false);
+    if (cartoon) setCartoon(false);
+    if (comedy) setComedy(false);
+    if (romance) setRomance(false);
+    if (documentary) setDocumentary(false);
+    if (drama) setDrama(false);
+    if (reality) setReality(false);
+    if (fantasy) setFantasy(false);
+    if (horror) setHorror(false);
+    if (action) setAction(false);
+    if (sportsTV) setSportsTV(false);
+  }
+
+  const addShows = () => {
+    if (!anime) setAnime(true);
+    if (!cartoon) setCartoon(true);
+    if (!comedy) setComedy(true);
+    if (!romance) setRomance(true);
+    if (!documentary) setDocumentary(true);
+    if (!drama) setDrama(true);
+    if (!reality) setReality(true);
+    if (!fantasy) setFantasy(true);
+    if (!horror) setHorror(true);
+    if (!action) setAction(true);
+    if (!sportsTV) setSportsTV(true);
+  }
+
+  const clearLanguages = () => {
+    if (japanese) setJapanese(false);
+    if (mandarin) setMandarin(false);
+    if (arabic) setArabic(false);
+    if (indonesian) setIndonesian(false);
+    if (malay) setMalay(false);
+    if (hindi) setHindi(false);
+    if (russian) setRussian(false);
+    if (spanish) setSpanish(false);
+    if (german) setGerman(false);
+    if (french) setFrench(false);
+    if (korean) setKorean(false);
+    if (otherlanguages) setOtherLanguages(false);
+  }
+
+  const addLanguages = () => {
+    if (!japanese) setJapanese(true);
+    if (!mandarin) setMandarin(true);
+    if (!arabic) setArabic(true);
+    if (!indonesian) setIndonesian(true);
+    if (!malay) setMalay(true);
+    if (!hindi) setHindi(true);
+    if (!russian) setRussian(true);
+    if (!spanish) setSpanish(true);
+    if (!german) setGerman(true);
+    if (!french) setFrench(true);
+    if (!korean) setKorean(true);
+    if (!otherlanguages) setOtherLanguages(true);
+  }
+
+  const clearSports = () => {
+    if (badminton) setBadminton(false);
+    if (soccer) setSoccer(false);
+    if (yoga) setYoga(false);
+    if (floorball) setFloorball(false);
+    if (tennis) setTennis(false);
+    if (tabletennis) setTableTennis(false);
+    if (watersports) setWaterSports(false);
+    if (basketball) setBasketball(false);
+    if (volleyball) setVolleyball(false);
+    if (iceskating) setIceSkating(false);
+    if (golf) setGolf(false);
+    if (generalexercise) setGeneralExercise(false);
+  }
+
+  const addSports = () => {
+    if (!badminton) setBadminton(true);
+    if (!soccer) setSoccer(true);
+    if (!yoga) setYoga(true);
+    if (!floorball) setFloorball(true);
+    if (!tennis) setTennis(true);
+    if (!tabletennis) setTableTennis(true);
+    if (!watersports) setWaterSports(true);
+    if (!basketball) setBasketball(true);
+    if (!volleyball) setVolleyball(true);
+    if (!iceskating) setIceSkating(true);
+    if (!golf) setGolf(true);
+    if (!generalexercise) setGeneralExercise(true);
+  }
+
+  const clearOthers = () => {
+    if (coding) setCoding(false);
+    if (study) setStudy(false);
+    if (food) setFood(false);
+    if (dance) setDance(false);
+    if (music) setMusic(false);
+    if (cooking) setCooking(false);
+  }
+
+  const addOthers = () => {
+    if (!coding) setCoding(true);
+    if (!study) setStudy(true);
+    if (!food) setFood(true);
+    if (!dance) setDance(true);
+    if (!music) setMusic(true);
+    if (!cooking) setCooking(true);
+  }
+
+
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
 
@@ -650,6 +779,32 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addGames()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearGames()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
           <h1 className = "parent">
           {/* Toggle button to change preference for Board Games */}
           <div className = "child">
@@ -752,6 +907,32 @@ const ProfilePage = ({ session }) => {
 
       {clickShows && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addShows()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearShows()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
           <h1 className = "parent">
           {/* Toggle button to change preference for Anime */}
           <div className = "child">
@@ -885,6 +1066,31 @@ const ProfilePage = ({ session }) => {
 
       {clickLanguages && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addLanguages()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearLanguages()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
 
         <h1 className = "parent">
         {/* Toggle button to change preference for Arabic */}
@@ -1027,6 +1233,31 @@ const ProfilePage = ({ session }) => {
       {clickSports && (
         <>
 
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addSports()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearSports()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
+
         <h1 className = "parent">
         {/* Toggle button to change preference for Badminton */}
           <div className = "child">
@@ -1168,6 +1399,31 @@ const ProfilePage = ({ session }) => {
 
       {clickOthers && (
         <>
+
+        <h className = "parent">
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => addOthers()} style={{ color: "green" }}>
+              {" "}
+              Select All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+
+        <temp className = "halfchild">
+        <h1 className="clickableText">
+          <strong>
+            <button2 onClick={() => clearOthers()} style={{ color: "red" }}>
+              {" "}
+              Deselect All{" "}
+            </button2>
+          </strong>
+        </h1>
+        </temp>
+        </h>
 
           <h1 className = "parent">
           {/* Toggle button to change preference for Food */}
