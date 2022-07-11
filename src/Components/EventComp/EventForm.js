@@ -51,7 +51,7 @@ export default function EventForm(props) {
     setEnteredTitle("");
     setEnteredDescription("");
     setEnteredNumPeople("");
-    setCategory("games");
+    setCategory("Games");
   };
 
   const submitHandler = (event) => {
@@ -135,6 +135,7 @@ export default function EventForm(props) {
             type="number"
             value={enteredNumPeople}
             min="1"
+            max="100"
             onChange={numPeopleChangeHandler}
             id="numpeople"
           />
@@ -158,12 +159,12 @@ export default function EventForm(props) {
                 onChange={handleCategoryChange}
                 className={classes.root}
               >
-                <MenuItem value="games">Games</MenuItem>
-                <MenuItem value="movies">Movies</MenuItem>
-                <MenuItem value="sports">Sports</MenuItem>
-                <MenuItem value="study">Study</MenuItem>
-                <MenuItem value="eat">Eat</MenuItem>
-                <MenuItem value="others">Others</MenuItem>
+                <MenuItem value="Games">Games</MenuItem>
+                <MenuItem value="Movies">Movies</MenuItem>
+                <MenuItem value="Sports">Sports</MenuItem>
+                <MenuItem value="Study">Study</MenuItem>
+                <MenuItem value="Eat">Eat</MenuItem>
+                <MenuItem value="Others">Others</MenuItem>
               </Select>
             </FormControl>
           </Box>
