@@ -69,7 +69,7 @@ export default function EventForm(props) {
     initialise();
   };
 
-  const [category, setCategory] = useState("games");
+  const [category, setCategory] = useState("Games");
 
   const handleCategoryChange = (event) => {
     setCategory(event.target.value);

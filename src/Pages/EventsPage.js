@@ -31,7 +31,7 @@ const EventsPage = ({ session }) => {
       setAllEvents(existingEventsBackend);
     };
     getEvents();
-  }, [allEvents]);
+  }, []);
   const fetchData = async () => {
     const { data: events, error } = await supabase
       .from("events")
@@ -111,11 +111,13 @@ const EventsPage = ({ session }) => {
         {console.log("hello")}
         {filterOn &&
           allEvents.filter((event) => {
-            console.log(filterCategory.includes(event.category));
-            return (
-              event.id == filterEventId &&
-              filterCategory.includes(event.category)
-            );
+            // console.log(event.category);
+            // console.log(event.id);
+            // console.log(filterCategory.includes(event.category));
+            return filterEventId == ""
+              ? filterCategory.includes(event.category)
+              : event.id == filterEventId &&
+                  filterCategory.includes(event.category);
           }).length == 0 && <div> No events found.</div>}
         {!filterOn && allEvents.length == 0 && <div> No events found.</div>}
         {isLoading ? (
@@ -129,8 +131,13 @@ const EventsPage = ({ session }) => {
           >
             {allEvents
               .filter((event) => {
-                event.id == filterEventId &&
-                  filterCategory.includes(event.category);
+                console.log(event.category);
+                console.log(event.id);
+                console.log(filterCategory.includes(event.category));
+                return filterEventId == ""
+                  ? filterCategory.includes(event.category)
+                  : event.id == filterEventId &&
+                      filterCategory.includes(event.category);
               })
               .map((event) => {
                 return (

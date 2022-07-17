@@ -47,7 +47,6 @@ function NewEvent(props) {
   };
 
   const onClickFilterHandler = (event) => {
-    console.log("reachedhere");
     const filterData = {
       category: category,
       eventid: eventId,
