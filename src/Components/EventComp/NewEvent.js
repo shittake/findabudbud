@@ -26,7 +26,7 @@ function NewEvent(props) {
     },
   };
   const [category, setCategory] = React.useState([]);
-  const categorylist = ["All", "Games", "Movies", "Sports", "Study", "Eat"];
+  const categorylist = ["Games", "Movies", "Sports", "Study", "Eat", "Others"];
   const handleChange = (event) => {
     const {
       target: { value },
@@ -47,6 +47,16 @@ function NewEvent(props) {
   };
 
   const onClickFilterHandler = (event) => {
+    const filterData = {
+      category: category,
+      eventid: eventId,
+    };
+
+    props.onSaveFilterData(filterData);
+  };
+
+  const onClickResetHandler = (event) => {
+    setCategory(categorylist);
     const filterData = {
       category: category,
       eventid: eventId,
@@ -92,6 +102,12 @@ function NewEvent(props) {
           variant="contained"
           onClick={onClickFilterHandler}
         ></GreenButton>
+        <RedButton
+          type="submit"
+          text="Reset Filters!"
+          variant="contained"
+          onClick={onClickResetHandler}
+        ></RedButton>
       </div>
     </>
   );
