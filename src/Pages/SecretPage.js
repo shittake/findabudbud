@@ -242,8 +242,11 @@ const SecretPage = ({ session }) => {
     }
 
     var besties = displayCommon(); //the IDs of all the people with most number of mutual interests
-    var selected = users.filter(user => user.id == besties[0]); //the row of the selected person! right now, is just the first person
+    var selected = users.filter(user => user.id == besties[0]); //the row of the selected person!
     var tempContact = selected.map(user => user.telegram_handle).toString();
+    var pictureFind = selected.map(user => user.avatar_url)[0];
+    var picture = (pictureFind == null) ? "https://avatars.dicebear.com/api/bottts/1000.svg" : pictureFind;
+    console.log(picture);
     var contact = (tempContact.charAt(0) == '@') ? tempContact.substring(1) : tempContact;
     var average = (selected.map(user => user.matches)[0] == 0) ? "5.00" : 
     (selected.map(user => user.total_rating)[0]/selected.map(user => user.matches)[0]).toFixed(2).toString()
@@ -260,17 +263,20 @@ const SecretPage = ({ session }) => {
         <>
 
       <p>
-       Matching algorithm has completed. 
+      <center>
+       Matching algorithm has completed.
+      </center> 
       </p>
 
-      <p><center><strong> People with the most common interests with you </strong></center></p>
-       {besties.map(user => <p><center> {users.filter(a=>a.id==user).map(a=>a.username)} </center></p>)}
-
+      <center>
        <p id="outcome">
        		You have matched with......
        		{selected.map(user => user.username)} with an average rating of {average}
        		!!
        </p>
+       </center>
+
+        <center><img src = {picture} height = "180"></img></center>
 
        <p><center><strong>Both of you enjoy:</strong></center></p>
 
