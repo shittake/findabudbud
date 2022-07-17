@@ -99,6 +99,8 @@ const EventsPage = ({ session }) => {
     setFilterOn(true);
     setFilterEventId(filterData.eventid);
     setFilterCategory(filterData.category);
+    console.log("in savefilter handler");
+    console.log(filterData);
   };
 
   const deleteFromSupabase = async (id) => {
