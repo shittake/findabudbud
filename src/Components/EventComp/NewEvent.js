@@ -58,7 +58,7 @@ function NewEvent(props) {
   const onClickResetHandler = (event) => {
     setCategory(categorylist);
     const filterData = {
-      category: category,
+      category: categorylist, //not in time for async setCategory
       eventid: eventId,
     };
 
