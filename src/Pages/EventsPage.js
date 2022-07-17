@@ -32,15 +32,13 @@ const EventsPage = ({ session }) => {
 
       if (existingEventsBackend.length > 0) {
         var validDateIndex = 0;
-        console.log("not empty");
-        console.log(validDateIndex);
-        console.log(existingEventsBackend.length);
         while (validDateIndex < existingEventsBackend.length) {
           if (
             existingEventsBackend[validDateIndex].date <=
             new Date().toISOString()
           ) {
-            console.log("outdated");
+            var invalidEventId = existingEventsBackend[validDateIndex].id;
+            deleteFromSupabase(invalidEventId);
             validDateIndex++;
           } else {
             break;
@@ -49,7 +47,6 @@ const EventsPage = ({ session }) => {
         existingEventsBackend.splice(0, validDateIndex);
       }
 
-      console.log(existingEventsBackend);
       setAllEvents(existingEventsBackend);
     };
     getEvents();
