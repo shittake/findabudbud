@@ -108,7 +108,7 @@ const EventsPage = ({ session }) => {
           onAddEvent={addEventHandler}
           onSaveFilterData={saveFilterDataHandler}
         />
-        {/* {console.log("hello")} */}
+        {console.log("hello")}
         {filterOn &&
           allEvents.filter((event) => {
             console.log(filterCategory.includes(event.category));
