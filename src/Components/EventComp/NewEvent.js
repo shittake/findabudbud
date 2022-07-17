@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NewEvent.css";
 import EventForm from "./EventForm";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -8,6 +8,9 @@ import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";
 
 //add: created by user
 
@@ -33,9 +36,24 @@ function NewEvent(props) {
       typeof value === "string" ? value.split(",") : value
     );
   };
+  const [eventId, setEventId] = useState("");
+
+  const eventIdChangeHandler = (event) => {
+    setEventId(event.target.value);
+  };
   const saveEnteredEventHandler = (eventFormData) => {
     const events = eventFormData;
     props.onAddEvent(events);
+  };
+
+  const onClickFilterHandler = (event) => {
+    console.log("reachedhere");
+    const filterData = {
+      category: category,
+      eventid: eventId,
+    };
+
+    props.onSaveFilterData(filterData);
   };
   return (
     <>
@@ -62,6 +80,19 @@ function NewEvent(props) {
             ))}
           </Select>
         </FormControl>
+        <TextField
+          type="number"
+          id="event id"
+          label="Event Id"
+          onChange={eventIdChangeHandler}
+          value={eventId}
+        />
+        <GreenButton
+          type="submit"
+          text="Filter Now!"
+          variant="contained"
+          onClick={onClickFilterHandler}
+        ></GreenButton>
       </div>
     </>
   );

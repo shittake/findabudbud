@@ -2,7 +2,12 @@ import Button from "@mui/material/Button";
 
 function RedButton(props) {
   return (
-    <Button color="red" variant={props.variant} onClick={props.onClick}>
+    <Button
+      color="red"
+      variant={props.variant}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.text}
     </Button>
   );
@@ -10,7 +15,12 @@ function RedButton(props) {
 
 function BlueButton(props) {
   return (
-    <Button color="blue" variant={props.variant} onClick={props.onClick}>
+    <Button
+      color="blue"
+      variant={props.variant}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.text}
     </Button>
   );
@@ -18,7 +28,12 @@ function BlueButton(props) {
 
 function GreenButton(props) {
   return (
-    <Button color="green" variant={props.variant} onClick={props.onClick}>
+    <Button
+      color="green"
+      variant={props.variant}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.text}
     </Button>
   );
@@ -26,7 +41,12 @@ function GreenButton(props) {
 
 function PurpleButton(props) {
   return (
-    <Button color="secondary" variant={props.variant} onClick={props.onClick}>
+    <Button
+      color="secondary"
+      variant={props.variant}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.text}
     </Button>
   );

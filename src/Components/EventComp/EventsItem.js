@@ -5,6 +5,7 @@ import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";
 import classes from "./EventsItemModal.module.css";
 import "./EventsItem.css";
 import useUpdateEffect from "../../Hooks/useUpdateEffect";
+import { color } from "@mui/system";
 
 export default function EventsItem(props) {
   const [buttonPressed, setButtonPressed] = useState(false);
@@ -48,11 +49,27 @@ export default function EventsItem(props) {
   const onClickHandler = () => {
     setButtonPressed(!buttonPressed);
   };
+  let categoryColor = "light green"; //Others
+  if (props.category == "Games") {
+    categoryColor = "green";
+  } else if (props.category == "Movies") {
+    categoryColor = "orange";
+  } else if (props.category == "Sports") {
+    categoryColor = "purple";
+  } else if (props.category == "Eat") {
+    categoryColor = "yellow";
+  } else if (props.category == "Study") {
+    categoryColor = "red";
+  }
+
   return (
     <>
       {!buttonPressed && (
         <div>
-          <div className="events-item" style={{ padding: "20px 0 0 0" }}>
+          <div
+            className="events-item"
+            style={{ padding: "20px 0 0 0", backgroundColor: categoryColor }}
+          >
             <div>id: {props.id}</div>
             <div className="events-item-title">title: {props.title}</div>
             <div>date: {props.date}</div>

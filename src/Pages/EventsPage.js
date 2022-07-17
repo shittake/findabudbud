@@ -69,6 +69,19 @@ const EventsPage = ({ session }) => {
     // subscribeToInserts();
   };
 
+  const [filterOn, setFilterOn] = useState(false);
+  const [filterEventId, setFilterEventId] = useState("");
+  const [filterCategory, setFilterCategory] = useState([]);
+
+  const saveFilterDataHandler = (filterData) => {
+    setFilterOn(true);
+    setFilterEventId(filterData.eventid);
+    setFilterCategory(filterData.category);
+    console.log(filterData);
+    console.log(filterData.eventid);
+    console.log(filterData.category);
+  };
+
   const deleteFromSupabase = async (id) => {
     const { data: error } = await supabase.from("events").delete().eq("id", id);
   };
@@ -87,16 +100,67 @@ const EventsPage = ({ session }) => {
     <>
       <div>
         <HeaderEvents session={session} />
-
         <div className="App">
           <ChatwootWidget />
         </div>
-
         <h2 className="welcome-outer"> Welcome to the events page! </h2>
-        <NewEvent onAddEvent={addEventHandler} />
-        {allEvents.length == 0 && <div> No events found.</div>}
+        <NewEvent
+          onAddEvent={addEventHandler}
+          onSaveFilterData={saveFilterDataHandler}
+        />
+        {/* {console.log("hello")} */}
+        {filterOn &&
+          allEvents.filter((event) => {
+            console.log(filterCategory.includes(event.category));
+            return (
+              event.id == filterEventId &&
+              filterCategory.includes(event.category)
+            );
+          }).length == 0 && <div> No events found.</div>}
+        {!filterOn && allEvents.length == 0 && <div> No events found.</div>}
         {isLoading ? (
           <div>Loading...</div>
+        ) : filterOn ? (
+          <Grid
+            id="filter"
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          >
+            {allEvents
+              .filter((event) => {
+                event.id == filterEventId &&
+                  filterCategory.includes(event.category);
+              })
+              .map((event) => {
+                return (
+                  <Grid item xs={6} key={event.id}>
+                    <EventsItem
+                      createdTime={
+                        event.created_at
+                          ? event.created_at
+                          : new Date().toISOString()
+                      }
+                      // key={event.id} //realtime subscription
+                      title={event.title}
+                      id={event.id} //realtime subscription
+                      description={event.description}
+                      date={event.date}
+                      time={event.time}
+                      onDeleteItem={deleteItemHandler}
+                      session={session}
+                      useridcreator={
+                        event.userid ? event.userid : session.user.id
+                      }
+                      numpeople={event.numpeople}
+                      currentnumpeople={event.currentnumpeople}
+                      isInterested={false}
+                      category={event.category}
+                    ></EventsItem>
+                  </Grid>
+                );
+              })}
+          </Grid>
         ) : (
           <Grid
             id="all"
