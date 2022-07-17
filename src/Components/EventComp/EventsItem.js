@@ -49,17 +49,17 @@ export default function EventsItem(props) {
   const onClickHandler = () => {
     setButtonPressed(!buttonPressed);
   };
-  let categoryColor = "light green"; //Others
+  let categoryColor = "#C3B7FF"; //Others
   if (props.category == "Games") {
-    categoryColor = "green";
+    categoryColor = "#F98E86";
   } else if (props.category == "Movies") {
-    categoryColor = "orange";
+    categoryColor = "#FFC464";
   } else if (props.category == "Sports") {
-    categoryColor = "purple";
+    categoryColor = "#F0F093";
   } else if (props.category == "Eat") {
-    categoryColor = "yellow";
+    categoryColor = "#87E779";
   } else if (props.category == "Study") {
-    categoryColor = "red";
+    categoryColor = "#86E1F9";
   }
 
   return (

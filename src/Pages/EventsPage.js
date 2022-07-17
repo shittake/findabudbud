@@ -36,7 +36,7 @@ const EventsPage = ({ session }) => {
     const { data: events, error } = await supabase
       .from("events")
       .select("*")
-      .order("date", { ascending: false });
+      .order("date", { ascending: true });
     return events;
   };
 
@@ -118,7 +118,7 @@ const EventsPage = ({ session }) => {
               ? filterCategory.includes(event.category)
               : event.id == filterEventId &&
                   filterCategory.includes(event.category);
-          }).length == 0 && <div> No events found.</div>}
+          }).length == 0 && <div> No events found here.</div>}
         {!filterOn && allEvents.length == 0 && <div> No events found.</div>}
         {isLoading ? (
           <div>Loading...</div>
