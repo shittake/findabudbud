@@ -10,6 +10,7 @@ import { textAlign } from "@mui/system";
 import EventForm from "../Components/EventComp/EventForm";
 import EventsItem from "../Components/EventComp/EventsItem";
 import Grid from "@mui/material/Grid";
+import { FormControlUnstyledContext } from "@mui/base";
 
 const EventsPage = ({ session }) => {
   const [users, setUsers] = useState([]);
@@ -28,6 +29,27 @@ const EventsPage = ({ session }) => {
   useEffect(() => {
     const getEvents = async () => {
       const existingEventsBackend = await fetchData();
+
+      if (existingEventsBackend.length > 0) {
+        var validDateIndex = 0;
+        console.log("not empty");
+        console.log(validDateIndex);
+        console.log(existingEventsBackend.length);
+        while (validDateIndex < existingEventsBackend.length) {
+          if (
+            existingEventsBackend[validDateIndex].date <=
+            new Date().toISOString()
+          ) {
+            console.log("outdated");
+            validDateIndex++;
+          } else {
+            break;
+          }
+        }
+        existingEventsBackend.splice(0, validDateIndex);
+      }
+
+      console.log(existingEventsBackend);
       setAllEvents(existingEventsBackend);
     };
     getEvents();
@@ -77,9 +99,6 @@ const EventsPage = ({ session }) => {
     setFilterOn(true);
     setFilterEventId(filterData.eventid);
     setFilterCategory(filterData.category);
-    console.log(filterData);
-    console.log(filterData.eventid);
-    console.log(filterData.category);
   };
 
   const deleteFromSupabase = async (id) => {
@@ -108,12 +127,8 @@ const EventsPage = ({ session }) => {
           onAddEvent={addEventHandler}
           onSaveFilterData={saveFilterDataHandler}
         />
-        {console.log("hello")}
         {filterOn &&
           allEvents.filter((event) => {
-            // console.log(event.category);
-            // console.log(event.id);
-            // console.log(filterCategory.includes(event.category));
             return filterEventId == ""
               ? filterCategory.includes(event.category)
               : event.id == filterEventId &&
@@ -131,9 +146,9 @@ const EventsPage = ({ session }) => {
           >
             {allEvents
               .filter((event) => {
-                console.log(event.category);
-                console.log(event.id);
-                console.log(filterCategory.includes(event.category));
+                // console.log(event.category);
+                // console.log(event.id);
+                // console.log(filterCategory.includes(event.category));
                 return filterEventId == ""
                   ? filterCategory.includes(event.category)
                   : event.id == filterEventId &&

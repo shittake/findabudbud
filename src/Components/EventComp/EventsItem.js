@@ -55,7 +55,7 @@ export default function EventsItem(props) {
   } else if (props.category == "Movies") {
     categoryColor = "#FFC464";
   } else if (props.category == "Sports") {
-    categoryColor = "#F0F093";
+    categoryColor = "#8AE7C2";
   } else if (props.category == "Eat") {
     categoryColor = "#87E779";
   } else if (props.category == "Study") {
