@@ -48,7 +48,12 @@ export default function EventsItem(props) {
 
   const onClickHandler = () => {
     setButtonPressed(!buttonPressed);
+    console.log("im clicked");
   };
+
+  // const onChangeHandler = () => {
+  //   console.log("im changed");
+  // };
   let categoryColor = "#C3B7FF"; //Others
   if (props.category == "Games") {
     categoryColor = "#F98E86";
@@ -65,7 +70,7 @@ export default function EventsItem(props) {
   return (
     <>
       {!buttonPressed && (
-        <div>
+        <div onClick={onClickHandler}>
           <div
             className="events-item"
             style={{ padding: "20px 0 0 0", backgroundColor: categoryColor }}
@@ -90,11 +95,11 @@ export default function EventsItem(props) {
                 )}
               </div>
               <div>
-                <RedButton
+                {/* <RedButton
                   text="View This Event"
                   variant="contained"
                   onClick={onClickHandler}
-                ></RedButton>
+                ></RedButton> */}
               </div>
             </div>
           </div>

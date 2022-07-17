@@ -26,31 +26,31 @@ const EventsPage = ({ session }) => {
     fetchUserData();
   }, []);
 
-  useEffect(() => {
-    const getEvents = async () => {
-      const existingEventsBackend = await fetchData();
+  const getEvents = async () => {
+    const existingEventsBackend = await fetchData();
 
-      if (existingEventsBackend.length > 0) {
-        var validDateIndex = 0;
-        while (validDateIndex < existingEventsBackend.length) {
-          if (
-            existingEventsBackend[validDateIndex].date <=
-            new Date().toISOString()
-          ) {
-            var invalidEventId = existingEventsBackend[validDateIndex].id;
-            deleteFromSupabase(invalidEventId);
-            validDateIndex++;
-          } else {
-            break;
-          }
+    if (existingEventsBackend.length > 0) {
+      var validDateIndex = 0;
+      while (validDateIndex < existingEventsBackend.length) {
+        if (
+          existingEventsBackend[validDateIndex].date <= new Date().toISOString()
+        ) {
+          var invalidEventId = existingEventsBackend[validDateIndex].id;
+          deleteFromSupabase(invalidEventId);
+          validDateIndex++;
+        } else {
+          break;
         }
-        existingEventsBackend.splice(0, validDateIndex);
       }
+      existingEventsBackend.splice(0, validDateIndex);
+    }
 
-      setAllEvents(existingEventsBackend);
-    };
+    setAllEvents(existingEventsBackend);
+  };
+  useEffect(() => {
     getEvents();
   }, []);
+
   const fetchData = async () => {
     const { data: events, error } = await supabase
       .from("events")
@@ -84,7 +84,10 @@ const EventsPage = ({ session }) => {
 
   const addEventHandler = async (event) => {
     const newEvent = await addToSupabase(event);
-    setAllEvents([...allEvents, ...newEvent]);
+    // console.log("new event");
+    // console.log(newEvent);
+    getEvents();
+    // setAllEvents([...allEvents, ...newEvent]);
     // subscribeToInserts();
   };
 
