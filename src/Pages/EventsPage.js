@@ -59,6 +59,17 @@ const EventsPage = ({ session }) => {
     return events;
   };
 
+  const fetchJoinData = async () => {
+    const { data: join, error } = await supabase
+      .from("join")
+      .select("eventid")
+      // Filters
+      .eq("userid", session.user.id);
+    // console.log("fetching join data now");
+    // console.log(join);
+    return join;
+  };
+
   //delete from backend
   const addToSupabase = async (event) => {
     setIsLoading(true);
@@ -95,12 +106,31 @@ const EventsPage = ({ session }) => {
   const [filterEventId, setFilterEventId] = useState("");
   const [filterCategory, setFilterCategory] = useState([]);
 
+  const [viewEventsOn, setViewEventsOn] = useState(false);
+  const [myEvents, setMyEvents] = useState([]);
+
   const saveFilterDataHandler = (filterData) => {
+    setViewEventsOn(false);
     setFilterOn(true);
     setFilterEventId(filterData.eventid);
     setFilterCategory(filterData.category);
     console.log("in savefilter handler");
     console.log(filterData);
+  };
+
+  const viewEventsHandler = async (userid) => {
+    //off the filter function since viewEvents is completely different
+    setFilterOn(false);
+    setViewEventsOn(true);
+    console.log("in viewmyevents");
+    const tempMyEvents = await fetchJoinData();
+    console.log(tempMyEvents);
+    const finalMyEvents = [];
+    for (var i = 0; i < tempMyEvents.length; i++) {
+      finalMyEvents.push(tempMyEvents[i].eventid);
+    }
+    console.log(finalMyEvents);
+    setMyEvents(finalMyEvents);
   };
 
   const deleteFromSupabase = async (id) => {
@@ -136,7 +166,10 @@ const EventsPage = ({ session }) => {
         <NewEvent
           onAddEvent={addEventHandler}
           onSaveFilterData={saveFilterDataHandler}
+          onViewMyEvents={viewEventsHandler}
+          session={session}
         />
+
         {filterOn &&
           allEvents.filter((event) => {
             return filterEventId == ""
@@ -145,11 +178,98 @@ const EventsPage = ({ session }) => {
                   filterCategory.includes(event.category);
           }).length == 0 && <div> No events found here.</div>}
         {!filterOn && allEvents.length == 0 && <div> No events found.</div>}
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : filterOn ? (
+        {!viewEventsOn &&
+          (isLoading ? (
+            <div>Loading...</div>
+          ) : filterOn ? (
+            <Grid
+              id="filter"
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              {allEvents
+                .filter((event) => {
+                  // console.log(event.category);
+                  // console.log(event.id);
+                  // console.log(filterCategory.includes(event.category));
+                  return filterEventId == ""
+                    ? filterCategory.includes(event.category)
+                    : event.id == filterEventId &&
+                        filterCategory.includes(event.category);
+                })
+                .map((event) => {
+                  return (
+                    <Grid item xs={6} key={event.id}>
+                      <EventsItem
+                        createdTime={
+                          event.created_at
+                            ? event.created_at
+                            : new Date().toISOString()
+                        }
+                        // key={event.id} //realtime subscription
+                        title={event.title}
+                        id={event.id} //realtime subscription
+                        description={event.description}
+                        date={event.date}
+                        time={event.time}
+                        onDeleteItem={deleteItemHandler}
+                        session={session}
+                        useridcreator={
+                          event.userid ? event.userid : session.user.id
+                        }
+                        numpeople={event.numpeople}
+                        currentnumpeople={event.currentnumpeople}
+                        isInterested={false}
+                        category={event.category}
+                      ></EventsItem>
+                    </Grid>
+                  );
+                })}
+            </Grid>
+          ) : (
+            <Grid
+              id="all"
+              container
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              {allEvents.map((event) => {
+                return (
+                  <Grid item xs={6} key={event.id}>
+                    <EventsItem
+                      createdTime={
+                        event.created_at
+                          ? event.created_at
+                          : new Date().toISOString()
+                      }
+                      // key={event.id} //realtime subscription
+                      title={event.title}
+                      id={event.id} //realtime subscription
+                      description={event.description}
+                      date={event.date}
+                      time={event.time}
+                      onDeleteItem={deleteItemHandler}
+                      session={session}
+                      useridcreator={
+                        event.userid ? event.userid : session.user.id
+                      }
+                      numpeople={event.numpeople}
+                      currentnumpeople={event.currentnumpeople}
+                      isInterested={false}
+                      category={event.category}
+                    ></EventsItem>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          ))}
+        {viewEventsOn && myEvents.length == 0 && (
+          <div> No events here. Register for one!</div>
+        )}
+        {viewEventsOn && myEvents.length > 0 && (
           <Grid
-            id="filter"
+            id="viewEvents"
             container
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -159,10 +279,7 @@ const EventsPage = ({ session }) => {
                 // console.log(event.category);
                 // console.log(event.id);
                 // console.log(filterCategory.includes(event.category));
-                return filterEventId == ""
-                  ? filterCategory.includes(event.category)
-                  : event.id == filterEventId &&
-                      filterCategory.includes(event.category);
+                return myEvents.includes(event.id);
               })
               .map((event) => {
                 return (
@@ -192,42 +309,6 @@ const EventsPage = ({ session }) => {
                   </Grid>
                 );
               })}
-          </Grid>
-        ) : (
-          <Grid
-            id="all"
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          >
-            {allEvents.map((event) => {
-              return (
-                <Grid item xs={6} key={event.id}>
-                  <EventsItem
-                    createdTime={
-                      event.created_at
-                        ? event.created_at
-                        : new Date().toISOString()
-                    }
-                    // key={event.id} //realtime subscription
-                    title={event.title}
-                    id={event.id} //realtime subscription
-                    description={event.description}
-                    date={event.date}
-                    time={event.time}
-                    onDeleteItem={deleteItemHandler}
-                    session={session}
-                    useridcreator={
-                      event.userid ? event.userid : session.user.id
-                    }
-                    numpeople={event.numpeople}
-                    currentnumpeople={event.currentnumpeople}
-                    isInterested={false}
-                    category={event.category}
-                  ></EventsItem>
-                </Grid>
-              );
-            })}
           </Grid>
         )}
       </div>

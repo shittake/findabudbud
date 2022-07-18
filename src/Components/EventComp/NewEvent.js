@@ -65,9 +65,11 @@ function NewEvent(props) {
     props.onSaveFilterData(filterData);
   };
 
-  // const onClickViewMyEventsHandler = (event) => {
-
-  // }
+  const onClickViewMyEventsHandler = (event) => {
+    console.log(props.session.user.id);
+    setCategory([]);
+    props.onViewMyEvents(props.session.user.id);
+  };
   return (
     <>
       <EventForm onSaveEnteredEvent={saveEnteredEventHandler}></EventForm>
