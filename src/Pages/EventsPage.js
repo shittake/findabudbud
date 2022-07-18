@@ -104,7 +104,15 @@ const EventsPage = ({ session }) => {
   };
 
   const deleteFromSupabase = async (id) => {
-    const { data: error } = await supabase.from("events").delete().eq("id", id);
+    const { data, error } = await supabase.from("events").delete().eq("id", id);
+    //delete all data from join table as well:
+    // console.log("hopefully deleting from supabase");
+    //error 409:
+    const { data: join, error: err } = await supabase
+      .from("join")
+      .delete()
+      .eq("eventid", id);
+    // console.log("hopefully deleted from supabase");
   };
 
   const deleteItemHandler = (id) => {

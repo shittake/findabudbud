@@ -64,6 +64,10 @@ function NewEvent(props) {
 
     props.onSaveFilterData(filterData);
   };
+
+  // const onClickViewMyEventsHandler = (event) => {
+
+  // }
   return (
     <>
       <EventForm onSaveEnteredEvent={saveEnteredEventHandler}></EventForm>
@@ -108,6 +112,12 @@ function NewEvent(props) {
           variant="contained"
           onClick={onClickResetHandler}
         ></RedButton>
+        <BlueButton
+          type="submit"
+          text="View My Events!"
+          variant="contained"
+          onClick={onClickViewMyEventsHandler}
+        ></BlueButton>
       </div>
     </>
   );
