@@ -41,19 +41,34 @@ export default function EventsItem(props) {
     setInterestedButtonPressed(!interestedButtonPressed);
     if (interestedButtonPressed) {
       setCurrentNumPeople((prevnum) => prevnum - 1);
+      deleteJoinRowHandler();
     } else {
       setCurrentNumPeople((prevnum) => prevnum + 1);
+      insertJoinRowHandler();
     }
+  };
+
+  const deleteJoinRowHandler = async () => {
+    console.log("going to delete");
+    const { data, error } = await supabase
+      .from("join")
+      .delete()
+      .eq("eventid", props.id)
+      .eq("userid", props.session.user.id);
+  };
+  const insertJoinRowHandler = async () => {
+    console.log(props.id);
+    console.log(props.session.user.id);
+    const { data, error } = await supabase
+      .from("join")
+      .insert([{ eventid: props.id, userid: props.session.user.id }]);
   };
 
   const onClickHandler = () => {
     setButtonPressed(!buttonPressed);
-    console.log("im clicked");
+    // console.log("im clicked");
   };
 
-  // const onChangeHandler = () => {
-  //   console.log("im changed");
-  // };
   let categoryColor = "#C3B7FF"; //Others
   if (props.category == "Games") {
     categoryColor = "#F98E86";

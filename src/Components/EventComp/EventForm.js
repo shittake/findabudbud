@@ -134,7 +134,7 @@ export default function EventForm(props) {
             required
             type="number"
             value={enteredNumPeople}
-            min="1"
+            min="2"
             max="100"
             onChange={numPeopleChangeHandler}
             id="numpeople"
