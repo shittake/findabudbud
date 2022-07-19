@@ -10,29 +10,49 @@ import { color } from "@mui/system";
 export default function EventsItem(props) {
   const [buttonPressed, setButtonPressed] = useState(false);
   const [currentNumPeople, setCurrentNumPeople] = useState(0); //the person who created the event
-  const [interestedButtonPressed, setInterestedButtonPressed] = useState(false); //TODO: props.isInterested
+  const [interestedButtonPressed, setInterestedButtonPressed] = useState(); //TODO: props.isInterested
 
   const fetchEventData = async () => {
-    const { data, error } = await supabase
-      .from("events")
-      .select("currentnumpeople")
-      .eq("id", props.id);
-    setCurrentNumPeople(data[0].currentnumpeople);
+    // const { data, error } = await supabase
+    //   .from("events")
+    //   .select("currentnumpeople")
+    //   .eq("id", props.id);
+    // setCurrentNumPeople(data[0].currentnumpeople);
+    // Fetching currentnumpeople from join table:
+    const { data: join, error } = await supabase
+      .from("join")
+      .select("*")
+
+      // Filters
+      .eq("eventid", props.id);
+    setCurrentNumPeople(join.length);
+    const { data: alreadyinterested, error: err } = await supabase
+      .from("join")
+      .select("*")
+
+      // Filters
+      .eq("eventid", props.id)
+      .eq("userid", props.session.user.id);
+    // console.log("is user already interested in event?");
+    // console.log(alreadyinterested);
+    alreadyinterested.length == 0
+      ? setInterestedButtonPressed(false)
+      : setInterestedButtonPressed(true);
   };
 
   useEffect(() => {
     fetchEventData();
   }, []);
 
-  useUpdateEffect(() => {
-    const updateCurrentNumPeople = async () => {
-      const { data, error } = await supabase
-        .from("events")
-        .update({ currentnumpeople: currentNumPeople })
-        .match({ id: props.id });
-    };
-    updateCurrentNumPeople();
-  }, [currentNumPeople]);
+  // useUpdateEffect(() => {
+  //   const updateCurrentNumPeople = async () => {
+  //     const { data, error } = await supabase
+  //       .from("events")
+  //       .update({ currentnumpeople: currentNumPeople })
+  //       .match({ id: props.id });
+  //   };
+  //   updateCurrentNumPeople();
+  // }, [currentNumPeople]);
 
   const currentnumpeopleClickHandler = () => {
     if (!interestedButtonPressed && currentNumPeople == props.numpeople) {
