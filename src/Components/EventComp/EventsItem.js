@@ -208,6 +208,13 @@ export default function EventsItem(props) {
                 variant="contained"
                 onClick={onClickHandler}
               ></RedButton>
+              {interestedButtonPressed && (
+                <RedButton
+                  text="Chat!"
+                  variant={"contained"}
+                  // onClick={openEventChatHandler}
+                ></RedButton>
+              )}
             </footer>
           </div>
         </div>

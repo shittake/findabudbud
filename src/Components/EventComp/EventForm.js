@@ -82,7 +82,7 @@ export default function EventForm(props) {
           <label>Title: </label>
           <div>{20 - enteredTitle.length} characters left!</div>
           <input
-            maxlength="20"
+            maxLength="20"
             htmlFor="title"
             required
             type="text"
@@ -95,7 +95,7 @@ export default function EventForm(props) {
           <label> Description: </label>
           <div>{1000 - enteredDescription.length} characters left!</div>
           <input
-            maxlength="1000"
+            maxLength="1000"
             htmlFor="description"
             required
             type="text"
