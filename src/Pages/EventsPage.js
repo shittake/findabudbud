@@ -15,7 +15,7 @@ import { FormControlUnstyledContext } from "@mui/base";
 const EventsPage = ({ session }) => {
   const [users, setUsers] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchUserData = async () => {
     const { data, error } = await supabase.from("profiles").select("*");
@@ -27,6 +27,7 @@ const EventsPage = ({ session }) => {
   }, []);
 
   const getEvents = async () => {
+    setIsLoading(true);
     const existingEventsBackend = await fetchData();
 
     if (existingEventsBackend.length > 0) {
@@ -46,6 +47,7 @@ const EventsPage = ({ session }) => {
     }
 
     setAllEvents(existingEventsBackend);
+    setIsLoading(false);
   };
   useEffect(() => {
     getEvents();
@@ -119,6 +121,7 @@ const EventsPage = ({ session }) => {
   };
 
   const viewEventsHandler = async (userid) => {
+    setIsLoading(true);
     //off the filter function since viewEvents is completely different
     setFilterOn(false);
     setViewEventsOn(true);
@@ -131,6 +134,7 @@ const EventsPage = ({ session }) => {
     }
     console.log(finalMyEvents);
     setMyEvents(finalMyEvents);
+    setIsLoading(false);
   };
 
   const deleteFromSupabase = async (id) => {
@@ -171,13 +175,16 @@ const EventsPage = ({ session }) => {
         />
 
         {filterOn &&
+          !isLoading &&
           allEvents.filter((event) => {
             return filterEventId == ""
               ? filterCategory.includes(event.category)
               : event.id == filterEventId &&
                   filterCategory.includes(event.category);
           }).length == 0 && <div> No events found here.</div>}
-        {!filterOn && allEvents.length == 0 && <div> No events found.</div>}
+        {!filterOn && !isLoading && allEvents.length == 0 && (
+          <div> No events found.</div>
+        )}
         {!viewEventsOn &&
           (isLoading ? (
             <div>Loading...</div>
@@ -264,10 +271,11 @@ const EventsPage = ({ session }) => {
               })}
             </Grid>
           ))}
-        {viewEventsOn && myEvents.length == 0 && (
+        {viewEventsOn && isLoading && <div>Loading... </div>}
+        {viewEventsOn && !isLoading && myEvents.length == 0 && (
           <div> No events here. Register for one!</div>
         )}
-        {viewEventsOn && myEvents.length > 0 && (
+        {viewEventsOn && !isLoading && myEvents.length > 0 && (
           <Grid
             id="viewEvents"
             container
