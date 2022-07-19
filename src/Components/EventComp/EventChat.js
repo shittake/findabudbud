@@ -36,7 +36,7 @@ export default function EventsChat(props) {
           className={classes.content}
           style={{ padding: "20px 30px 20px 30px" }}
         >
-          <ChatContent />
+          <ChatContent eventid={props.eventid} userid={props.userid} />
         </div>
         {/* <footer className={classes.actions}>
           <RedButton text="Submit" variant="contained"></RedButton>
