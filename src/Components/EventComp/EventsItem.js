@@ -6,6 +6,7 @@ import classes from "./EventsItemModal.module.css";
 import "./EventsItem.css";
 import useUpdateEffect from "../../Hooks/useUpdateEffect";
 import { color } from "@mui/system";
+import EventsChat from "./EventChat";
 
 export default function EventsItem(props) {
   const [buttonPressed, setButtonPressed] = useState(false);
@@ -89,6 +90,17 @@ export default function EventsItem(props) {
     // console.log("im clicked");
   };
 
+  const [openEventChat, setOpenEventChat] = useState(false);
+  const openEventChatHandler = () => {
+    console.log("open event chat");
+    setOpenEventChat(true);
+  };
+
+  const closeEventChatHandler = () => {
+    console.log("close event chat");
+    setOpenEventChat(false);
+  };
+
   let categoryColor = "#C3B7FF"; //Others
   if (props.category == "Games") {
     categoryColor = "#F98E86";
@@ -104,7 +116,7 @@ export default function EventsItem(props) {
 
   return (
     <>
-      {!buttonPressed && (
+      {!openEventChat && !buttonPressed && (
         <div onClick={onClickHandler}>
           <div
             className="events-item"
@@ -140,7 +152,8 @@ export default function EventsItem(props) {
           </div>
         </div>
       )}
-      {buttonPressed && (
+      {((!openEventChat && buttonPressed) ||
+        (!openEventChat && buttonPressed)) && (
         <div>
           <div className={classes.backdrop} onClick={onClickHandler}></div>
           <div className={classes.modal}>
@@ -212,12 +225,20 @@ export default function EventsItem(props) {
                 <RedButton
                   text="Chat!"
                   variant={"contained"}
-                  // onClick={openEventChatHandler}
+                  onClick={openEventChatHandler}
                 ></RedButton>
               )}
             </footer>
           </div>
         </div>
+      )}
+      {openEventChat && buttonPressed && (
+        <EventsChat
+          eventid={props.id}
+          eventtitle={props.title}
+          userid={props.session.user.id}
+          onClick={closeEventChatHandler}
+        />
       )}
     </>
   );
