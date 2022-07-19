@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
 import classes from "./EventsItemModal.module.css";
 import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
+import ChatContent from "./ChatContent";
 
 export default function EventsChat(props) {
   const [backPressed, setBackPressed] = useState(false);
@@ -33,13 +34,13 @@ export default function EventsChat(props) {
         </header>
         <div
           className={classes.content}
-          style={{ padding: "20px 0px 5px 30px" }}
+          style={{ padding: "20px 30px 20px 30px" }}
         >
-          <div> middle </div>
+          <ChatContent />
         </div>
-        <footer className={classes.actions}>
+        {/* <footer className={classes.actions}>
           <RedButton text="Submit" variant="contained"></RedButton>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );
