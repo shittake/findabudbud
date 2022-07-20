@@ -3,7 +3,7 @@ import { supabase } from "../../supabaseClient";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
 import classes from "./EventsItemModal.module.css";
-import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
+import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";
 import ChatContent from "./ChatContent";
 
 export default function EventsChat(props) {
@@ -11,11 +11,15 @@ export default function EventsChat(props) {
   const onClickBackHandler = () => {
     setBackPressed(true);
   };
+
   return (
     <div>
       <div className={classes.backdrop}></div>
       <div className={classes.modal}>
-        <header className={classes.headerChat} style={{ color: "white" }}>
+        <header
+          className={classes.headerChat}
+          style={{ color: "white" /*position:"fixed"*/ }}
+        >
           <BlueButton
             text="Back"
             variant="contained"

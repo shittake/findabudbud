@@ -7,6 +7,7 @@ import "./EventsItem.css";
 import useUpdateEffect from "../../Hooks/useUpdateEffect";
 import { color } from "@mui/system";
 import EventsChat from "./EventChat";
+import WhosInPage from "./WhosInPage";
 
 export default function EventsItem(props) {
   const [buttonPressed, setButtonPressed] = useState(false);
@@ -101,6 +102,14 @@ export default function EventsItem(props) {
     setOpenEventChat(false);
   };
 
+  const [whosInPageOpen, setWhosInPageOpen] = useState(false);
+  const whosInHandler = () => {
+    setWhosInPageOpen(true);
+  };
+  const closewhosInHandler = () => {
+    setWhosInPageOpen(false);
+  };
+
   let categoryColor = "#C3B7FF"; //Others
   if (props.category == "Games") {
     categoryColor = "#F98E86";
@@ -152,8 +161,7 @@ export default function EventsItem(props) {
           </div>
         </div>
       )}
-      {((!openEventChat && buttonPressed) ||
-        (!openEventChat && buttonPressed)) && (
+      {!openEventChat && !whosInPageOpen && buttonPressed && (
         <div>
           <div className={classes.backdrop} onClick={onClickHandler}></div>
           <div className={classes.modal}>
@@ -228,6 +236,13 @@ export default function EventsItem(props) {
                   onClick={openEventChatHandler}
                 ></RedButton>
               )}
+              {interestedButtonPressed && (
+                <RedButton
+                  text="Who's in?"
+                  variant={"contained"}
+                  onClick={whosInHandler}
+                ></RedButton>
+              )}
             </footer>
           </div>
         </div>
@@ -238,6 +253,14 @@ export default function EventsItem(props) {
           eventtitle={props.title}
           userid={props.session.user.id}
           onClick={closeEventChatHandler}
+        />
+      )}
+      {whosInPageOpen && buttonPressed && (
+        <WhosInPage
+          id={props.id}
+          title={props.title}
+          userid={props.session.user.id}
+          onClick={closewhosInHandler}
         />
       )}
     </>
