@@ -1,18 +1,15 @@
-describe("events", () => {
-  //add events
+describe("At Events Page", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/eventspage");
   });
 
-  // it("add events", () => {
-  //   cy.findByRole("button", {
-  //     name: /category ​/i,
-  //   }).type("Games");
-  // });
-});
-
-describe("My First Test", () => {
-  it("Does not do much!", () => {
-    expect(true).to.equal(true);
+  it("test", () => {
+    cy.findByText(/welcome to the events page/i).should("exist");
   });
 });
+
+// describe("My First Test", () => {
+//   it("Does not do much!", () => {
+//     expect(true).to.equal(true);
+//   });
+// });

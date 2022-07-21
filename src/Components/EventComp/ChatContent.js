@@ -56,7 +56,9 @@ export default function ChatContent(props) {
     console.log("in");
     console.log(sub.current);
     if (sub.current) {
-      return;
+      return () => {
+        console.log("here");
+      };
     }
     sub.current = supabase
       .from("eventsmessages")
@@ -65,12 +67,13 @@ export default function ChatContent(props) {
         fetchAllMessages();
       })
       .subscribe();
+    console.log(sub.current);
 
     console.log("after in");
-    console.log(sub.current);
 
     return () => {
       supabase.removeSubscription(sub);
+      console.log("removing");
     };
   }, []);
 

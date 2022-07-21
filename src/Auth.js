@@ -3,14 +3,25 @@ import { supabase } from "./supabaseClient";
 import logo from "./Images/FindabudLogo.png";
 import TextField from "@mui/material/TextField";
 import Popup from "./Popup";
+import { BlueButton } from "./Components/Buttons/ColouredButtons";
+import AdminLogInPage from "./AdminLogInPage";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [adminLogIn, setAdminLogIn] = useState(false);
 
   const hoverClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const adminLogInHandler = () => {
+    setAdminLogIn(true);
+  };
+
+  const closeAdminLogInHandler = () => {
+    setAdminLogIn(false);
   };
 
   const handleLogin = async (e) => {
@@ -129,6 +140,24 @@ export default function Auth() {
             </div>
           </form>
         )}
+        <div
+          style={{
+            padding: "50px 0 0 0",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {!adminLogIn && (
+            <BlueButton
+              text="Admin Sign In"
+              variant="contained"
+              onClick={adminLogInHandler}
+            ></BlueButton>
+          )}
+          {adminLogIn && (
+            <AdminLogInPage onClick={closeAdminLogInHandler}></AdminLogInPage>
+          )}
+        </div>
       </div>
     </div>
   );

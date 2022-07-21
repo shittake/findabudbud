@@ -18,5 +18,5 @@
     "jsx": "react-jsx",
     "baseUrl": "./"
   },
-  "include": ["src"]
+  "include": ["src", "node_modules/cypress", "./cypress/**/*.js"]
 }
