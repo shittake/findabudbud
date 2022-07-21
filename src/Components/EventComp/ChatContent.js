@@ -59,9 +59,10 @@ export default function ChatContent(props) {
       return;
     }
     sub.current = supabase
-      .from("*")
-      .on("*", (payload) => {
+      .from("eventsmessages")
+      .on("INSERT", (payload) => {
         console.log("Change received!", payload);
+        fetchAllMessages();
       })
       .subscribe();
 
