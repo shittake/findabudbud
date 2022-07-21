@@ -27,16 +27,49 @@ export default function ChatContent(props) {
     console.log("hello");
   }, []);
 
+  const sub = useRef(null);
+
+  // useEffect(() => {
+  //   console.log("in");
+
+  //   console.log(mySubscription);
+
+  //   const mySubscription = supabase
+  //     .from("*")
+  //     .on("*", (payload) => {
+  //       console.log("Change received!", payload);
+  //     })
+  //     .subscribe();
+
+  //   console.log("after in");
+  //   console.log(mySubscription);
+
+  //   // return () => {
+  //   //   supabase.removeSubscription(mySubscription);
+  //   //   // setTimeout(() => {
+  //   //   //   console.log("Hello, World!");
+  //   //   // }, 3000);
+  //   // };
+  // }, []);
+
   useEffect(() => {
     console.log("in");
-    const mySubscription = supabase
+    console.log(sub.current);
+    if (sub.current) {
+      return;
+    }
+    sub.current = supabase
       .from("*")
       .on("*", (payload) => {
         console.log("Change received!", payload);
       })
       .subscribe();
+
+    console.log("after in");
+    console.log(sub.current);
+
     return () => {
-      supabase.removeSubscription(mySubscription);
+      supabase.removeSubscription(sub);
     };
   }, []);
 
