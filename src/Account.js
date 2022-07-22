@@ -88,16 +88,56 @@ const Account = ({ session }) => {
       </div>
 
       <HeaderAvatar session={session} />
-      <div className="container">
-        <div className="nav">
-          {avatar == null ? (
-            <p>You have not chosen an Avatar before. Choose an Avatar! </p>
-          ) : (
-            <p>
-              You have selected an Avatar before, but you may choose another one
-              here if you wish.{" "}
-            </p>
-          )}
+
+        <div className="container">
+            <div className="nav">
+                {avatar == null 
+                ? <p>You have not chosen an Avatar before. Choose an Avatar! </p>
+                : <p>You have selected an Avatar before, but you may choose another one here if you wish. </p>
+                }
+            </div>
+            <h1>
+                {avatar != null
+                    ? <center><p>Your previously selected Avatar is: <img src={actualAvatar} height={170}/></p></center>
+                    : <p></p>
+                }
+            </h1>
+            <br></br><br></br><br></br><br></br>
+            <div className="home">
+                <div className="btns" id="options">
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
+                        handleSprite("avataaars") }}>Humans</button>
+                    <button className="button3" disabled = {points < 200} onClick={() => { 
+                        handleSprite("micah") }}>Humans 2</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("human") }}>Pixels</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("bottts") }}>Robots</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("jdenticon") }}>Shapes</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("identicon") }}>Patterns</button>
+                    <button className="button3" onClick={() => { 
+                        handleSprite("gridy") }}>Aliens</button>
+                    
+                </div>
+                <div className="avatar" id="picture">
+                    <img src=
+{`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`} height = "500" alt="Sprite" />
+                </div>
+                <br></br><br></br><br></br>
+                <div className="generate">
+                    <button className="button2" id="gen"onClick={() => { 
+                        handleGenerate() }}>Randomly generate another Avatar</button>
+                    <button className="button2" id="down" onClick={() => { 
+                        downloadImage(`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`) }}>Select this as my Avatar!</button>
+                </div>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+            </div>
         </div>
         <h1>
           {avatar != null ? (

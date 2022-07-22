@@ -497,6 +497,7 @@ input[type="boolean"] {
   align-items: center;
   padding: 30px;
   margin-left: -30px;
+  text-align: center;
 }
 
 .formatTablePopup {
@@ -505,6 +506,7 @@ input[type="boolean"] {
   display: flex;
   justify-content: center;
   align-items: up;
+  text-align: center;
 }
 
 table {
