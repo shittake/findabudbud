@@ -505,6 +505,7 @@ input[type="boolean"] {
   display: flex;
   justify-content: center;
   align-items: up;
+  text-align: center;
 }
 
 table {
