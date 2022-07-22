@@ -102,7 +102,7 @@ const Account = ({ session }) => {
                     : <p></p>
                 }
             </h1>
-            <br></br>
+            <br></br><br></br><br></br><br></br>
             <div className="home">
                 <div className="btns" id="options">
                     <button className="button3" disabled = {points < 200} onClick={() => { 
@@ -123,8 +123,9 @@ const Account = ({ session }) => {
                 </div>
                 <div className="avatar" id="picture">
                     <img src=
-{`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`} alt="Sprite" />
+{`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`} height="500" alt="Sprite" />
                 </div>
+                <br></br><br></br><br></br>
                 <div className="generate">
                     <button className="button2" id="gen"onClick={() => { 
                         handleGenerate() }}>Randomly generate another Avatar</button>
