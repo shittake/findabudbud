@@ -7,7 +7,7 @@ import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
 import useUpdateEffect from "../../Hooks/useUpdateEffect.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import "./bootstrap-iso.css";
+// import "./bootstrap-iso.css";
 export default function ChatContent(props) {
   const [text, setText] = useState("");
   const lastMessageRef = useRef();
