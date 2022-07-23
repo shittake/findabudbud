@@ -5,7 +5,7 @@ import { Input } from "@material-ui/core";
 import { StepContext } from "@mui/material";
 import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
 import useUpdateEffect from "../../Hooks/useUpdateEffect.js";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./bootstrap-iso.css";
 export default function ChatContent(props) {

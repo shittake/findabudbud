@@ -3,7 +3,7 @@ import classes from "./EventsItemModal.module.css";
 import { supabase } from "../../supabaseClient";
 import "./EventsItem.css";
 import { BlueButton } from "../Buttons/ColouredButtons";
-import "./bootstrap-iso.css";
+// import "./bootstrap-iso.css";
 
 export default function WhosInPage(props) {
   const [whosIn, setWhosIn] = useState([]);
