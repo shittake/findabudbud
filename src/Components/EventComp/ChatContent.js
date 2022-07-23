@@ -6,8 +6,8 @@ import { StepContext } from "@mui/material";
 import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
 import useUpdateEffect from "../../Hooks/useUpdateEffect.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 // import "./bootstrap-iso.css";
+
 export default function ChatContent(props) {
   const [text, setText] = useState("");
   const lastMessageRef = useRef();
@@ -178,7 +178,7 @@ export default function ChatContent(props) {
                   <div
                     ref={lastMessage ? setRef : null}
                     key={message.id}
-                    className={`my-2 d-flex flex-column ${
+                    className={`my-1 d-flex flex-column ${
                       message.userid === props.userid ? "align-self-end" : ""
                     }`}
                   >
@@ -210,7 +210,7 @@ export default function ChatContent(props) {
       </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <InputGroup style={{ padding: "10px 0 0 0" }}>
+          <InputGroup style={{ padding: "5px 0 0 0" }}>
             <Form.Control
               as="textarea"
               required
