@@ -3,7 +3,7 @@ import classes from "./EventsItemModal.module.css";
 import { supabase } from "../../supabaseClient";
 import "./EventsItem.css";
 import { BlueButton } from "../Buttons/ColouredButtons";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "./bootstrap-iso.css";
 
 export default function WhosInPage(props) {
   const [whosIn, setWhosIn] = useState([]);
@@ -26,7 +26,7 @@ export default function WhosInPage(props) {
   const number = useRef(0);
 
   return (
-    <>
+    <div className="bootstrap-iso">
       <div className={classes.backdrop}></div>
       <div className={classes.modal}>
         <header className={classes.headerChat} style={{ color: "white" }}>
@@ -63,6 +63,6 @@ export default function WhosInPage(props) {
           })}
         </div>
       </div>
-    </>
+    </div>
   );
 }

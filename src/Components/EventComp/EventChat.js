@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal } from "react-bootstrap";
 import classes from "./EventsItemModal.module.css";
 import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";

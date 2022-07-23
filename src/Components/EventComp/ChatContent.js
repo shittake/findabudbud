@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "../../supabaseClient";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import { Input } from "@material-ui/core";
 import { StepContext } from "@mui/material";
 import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
 import useUpdateEffect from "../../Hooks/useUpdateEffect.js";
+// import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./bootstrap-iso.css";
 export default function ChatContent(props) {
   const [text, setText] = useState("");
   const lastMessageRef = useRef();
@@ -158,55 +160,57 @@ export default function ChatContent(props) {
   };
 
   return (
-    <div className="d-flex flex-column flex-grow-1">
-      <div className="flex-grow-1 overflow-auto">
-        {console.log(allMessages)}
-        <div className="h-100 d-flex flex-column align-items-start justify-content-end">
-          {allMessages &&
-            allMessages.map((message) => {
-              const lastMessage = allMessages.length - 1 === message.index;
-              const input = message.userid;
-              const username = async (input) => {
-                const result = await fetchUsername(input);
-                return result;
-              };
+    <div className="bootstrap-iso">
+      <div className="d-flex flex-column flex-grow-1">
+        <div className="flex-grow-1 overflow-auto">
+          {console.log(allMessages)}
+          <div className="h-100 d-flex flex-column align-items-start justify-content-end">
+            {allMessages &&
+              allMessages.map((message) => {
+                const lastMessage = allMessages.length - 1 === message.index;
+                const input = message.userid;
+                const username = async (input) => {
+                  const result = await fetchUsername(input);
+                  return result;
+                };
 
-              return (
-                <div
-                  ref={lastMessage ? setRef : null}
-                  key={message.id}
-                  className={`my-1 d-flex flex-column ${
-                    message.userid === props.userid ? "align-self-end" : ""
-                  }`}
-                >
+                return (
                   <div
-                    className={`rounded px-2 py-1 ${
-                      message.userid === props.userid
-                        ? "bg-primary text-white"
-                        : "border"
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                  <div
-                    className={`text-muted small ${
+                    ref={lastMessage ? setRef : null}
+                    key={message.id}
+                    className={`my-2 d-flex flex-column ${
                       message.userid === props.userid ? "align-self-end" : ""
                     }`}
                   >
-                    {
-                      message.userid === props.userid
-                        ? "You"
-                        : message.userid /*await username(input)*/
-                    }
+                    <div
+                      className={`rounded px-2 py-2 ${
+                        message.userid === props.userid
+                          ? "bg-primary text-white"
+                          : "border"
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                    <div
+                      className={`text-muted small ${
+                        message.userid === props.userid ? "align-self-end" : ""
+                      }`}
+                    >
+                      {
+                        message.userid === props.userid
+                          ? "You"
+                          : message.userid /*await username(input)*/
+                      }
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+          </div>
         </div>
       </div>
       <Form onSubmit={handleSubmit}>
         <Form.Group>
-          <InputGroup>
+          <InputGroup style={{ padding: "10px 0 0 0" }}>
             <Form.Control
               as="textarea"
               required
