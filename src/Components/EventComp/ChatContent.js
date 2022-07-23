@@ -37,43 +37,43 @@ export default function ChatContent(props) {
     setTestState(true);
   };
 
-  // useEffect(() => {
-  //   console.log("in");
+  useEffect(() => {
+    console.log("in");
 
-  //   console.log(mySubscription);
+    console.log(mySubscription);
 
-  // const mySubscription = supabase
-  //   .from("*")
-  //   .on("*", (payload) => {
-  //     console.log("Change received!", payload);
-  //   })
-  //   .subscribe();
-
-  //   console.log("after in");
-  //   console.log(mySubscription);
-
-  // return () => {
-  //   supabase.removeSubscription(mySubscription);
-  //   // setTimeout(() => {
-  //   //   console.log("Hello, World!");
-  //   // }, 3000);
-  // };
-  // }, []);
-  useUpdateEffect(() => {
-    console.log("useUpdateEffect runs");
     const mySubscription = supabase
       .from("*")
       .on("*", (payload) => {
         console.log("Change received!", payload);
-        fetchAllMessages();
       })
       .subscribe();
+
+    console.log("after in");
     console.log(mySubscription);
 
     return () => {
       supabase.removeSubscription(mySubscription);
+      // setTimeout(() => {
+      //   console.log("Hello, World!");
+      // }, 3000);
     };
-  }, [testState]);
+  }, []);
+  // useUpdateEffect(() => {
+  //   console.log("useUpdateEffect runs");
+  //   const mySubscription = supabase
+  //     .from("*")
+  //     .on("*", (payload) => {
+  //       console.log("Change received!", payload);
+  //       fetchAllMessages();
+  //     })
+  //     .subscribe();
+  //   console.log(mySubscription);
+
+  //   return () => {
+  //     supabase.removeSubscription(mySubscription);
+  //   };
+  // }, [testState]);
 
   // useEffect(() => {
   //   console.log("in");
