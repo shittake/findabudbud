@@ -10,10 +10,14 @@ describe("At profile page", () => {
 
     cy.get("#password-required").type("password");
     cy.findByRole("button", { name: /sign in/i }).click();
+    cy.get('#profilepage').click();
   });
 
   it("test", () => {
     cy.findByText(/users online now/i).should("exist");
-    //write code for click on profile image action. etc.
+    cy.findByRole('heading', {
+      name: /please key in your profile details:/i
+    }).should("exist");
+    cy.findByText(/email: felibunbun13\+test1@gmail\.com/i);
   });
 });

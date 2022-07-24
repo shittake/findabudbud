@@ -282,8 +282,7 @@ const SecretPage = ({ session }) => {
 
        
         <center>{hobbiesSimilar(selected).join(", ")}</center>
-
-        <br></br><br></br>
+        <br></br>
 
         {contact.length >= 1 && 
           <>
@@ -307,7 +306,9 @@ const SecretPage = ({ session }) => {
         </p>
       }
 
-      
+      <br></br>
+      <br></br>
+      <br></br>
       <Footer />
 
     </>
