@@ -10,10 +10,13 @@ describe("At matching page", () => {
 
     cy.get("#password-required").type("password");
     cy.findByRole("button", { name: /sign in/i }).click();
+    cy.get('#chat').click();
   });
 
   it("test", () => {
     cy.findByText(/users online now/i).should("exist");
-    //write code for click on match now image action. etc.
+    cy.get('[src="https://avatars.dicebear.com/api/bottts/1000.svg"]').should("exist");
+    cy.wait(6000);
+    cy.findByText(/matching algorithm has completed./i).should("exist");
   });
 });
