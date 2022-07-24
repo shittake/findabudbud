@@ -47,12 +47,13 @@ const LeaderboardPage = ({ session }) => {
         <ChatwootWidget />
       </div>
 
+      <br></br>
+
       <div className="title">
         <center>
           <strong>Top 10 Users in Findabud</strong>
         </center>
       </div>
-      <br></br>
 
       <div className="formatTable" id = "table">
         <table>
