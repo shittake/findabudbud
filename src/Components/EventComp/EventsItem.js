@@ -82,15 +82,13 @@ export default function EventsItem(props) {
   const insertJoinRowHandler = async () => {
     console.log(props.id);
     console.log(props.session.user.id);
-    const { data, error } = await supabase
-      .from("join")
-      .insert([
-        {
-          eventid: props.id,
-          userid: props.session.user.id,
-          joinedAt: new Date().toISOString(),
-        },
-      ]);
+    const { data, error } = await supabase.from("join").insert([
+      {
+        eventid: props.id,
+        userid: props.session.user.id,
+        joinedAt: new Date().toISOString(),
+      },
+    ]);
   };
 
   const onClickHandler = () => {
@@ -215,7 +213,7 @@ export default function EventsItem(props) {
               </div>
             </div>
             <footer className={classes.actions}>
-              <div style={{ padding: "0 10px" }}>
+              <div style={{ padding: "0 4px" }}>
                 {props.session.user.id == props.useridcreator && ( //real time
                   <RedButton
                     onClick={() => {
@@ -226,29 +224,39 @@ export default function EventsItem(props) {
                   ></RedButton>
                 )}
               </div>
-              <RedButton
-                text={interestedButtonPressed ? "interested" : "not interested"}
-                variant={interestedButtonPressed ? "contained" : "outlined"}
-                onClick={currentnumpeopleClickHandler}
-              ></RedButton>
-              <RedButton
-                text="View other events"
-                variant="contained"
-                onClick={onClickHandler}
-              ></RedButton>
-              {interestedButtonPressed && (
+              <div style={{ padding: "0 4px" }}>
                 <RedButton
-                  text="Chat!"
-                  variant={"contained"}
-                  onClick={openEventChatHandler}
+                  text={
+                    interestedButtonPressed ? "interested" : "not interested"
+                  }
+                  variant={interestedButtonPressed ? "contained" : "outlined"}
+                  onClick={currentnumpeopleClickHandler}
                 ></RedButton>
+              </div>
+              <div style={{ padding: "0 3px" }}>
+                <RedButton
+                  text="View other events"
+                  variant="contained"
+                  onClick={onClickHandler}
+                ></RedButton>
+              </div>
+              {interestedButtonPressed && (
+                <div style={{ padding: "0 3px" }}>
+                  <RedButton
+                    text="Chat!"
+                    variant={"contained"}
+                    onClick={openEventChatHandler}
+                  ></RedButton>
+                </div>
               )}
               {interestedButtonPressed && (
-                <RedButton
-                  text="Who's in?"
-                  variant={"contained"}
-                  onClick={whosInHandler}
-                ></RedButton>
+                <div style={{ padding: "0 3px" }}>
+                  <RedButton
+                    text="Who's in?"
+                    variant={"contained"}
+                    onClick={whosInHandler}
+                  ></RedButton>
+                </div>
               )}
             </footer>
           </div>

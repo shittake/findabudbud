@@ -34,6 +34,7 @@ export default function ChatContent(props) {
       )
     `
       )
+      .eq("eventid", props.eventid)
       .order("createdAt", { ascending: true });
     console.log(message);
     // const temp = [];
@@ -243,11 +244,11 @@ export default function ChatContent(props) {
               text="Submit"
               variant="contained"
             ></RedButton>
-            <BlueButton
+            {/* <BlueButton
               text="Subscribe"
               variant="contained"
               onClick={testStateHandler}
-            ></BlueButton>
+            ></BlueButton> */}
           </InputGroup>
         </Form.Group>
       </Form>

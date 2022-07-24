@@ -37,7 +37,7 @@ const EventsPage = ({ session }) => {
           existingEventsBackend[validDateIndex].date <= new Date().toISOString()
         ) {
           var invalidEventId = existingEventsBackend[validDateIndex].id;
-          deleteFromSupabase(invalidEventId);
+          await deleteFromSupabase(invalidEventId);
           validDateIndex++;
         } else {
           break;
