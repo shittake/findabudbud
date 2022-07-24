@@ -105,7 +105,7 @@ export default function EventForm(props) {
           />
         </div>
         <div className="event-form__control">
-          <label>Date:</label>
+          <label style={{ marginBottom: "0.5rem" }}>Date:</label>
           <input
             htmlFor="date"
             required
@@ -117,7 +117,7 @@ export default function EventForm(props) {
           />
         </div>
         <div className="event-form__control">
-          <label>Time: </label>
+          <label style={{ marginBottom: "0.5rem" }}>Time: </label>
           <input
             htmlFor="time"
             required
@@ -128,7 +128,9 @@ export default function EventForm(props) {
           />
         </div>
         <div className="event-form__control">
-          <label>Number of people (including yourself!):</label>
+          <label style={{ marginBottom: "0.5rem" }}>
+            Number of people (including yourself!):
+          </label>
           <input
             htmlFor="number"
             required
