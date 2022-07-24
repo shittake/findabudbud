@@ -2,10 +2,10 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../NavBar";
 
-const Layout = ({session}) => {
+const Layout = ({ session }) => {
   return (
     <>
-      <NavBar session={session}/>
+      <NavBar session={session} />
       <Outlet />
     </>
   );

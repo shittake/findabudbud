@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Link, NavLink } from "react-router-dom";
 import leaderboard from "./Images/LeaderboardNew.png";
 import match from "./Images/Match.png";
@@ -7,35 +7,32 @@ import profile from "./Images/MyProfile.png";
 import { ClassNames } from "@emotion/react";
 import { supabase } from "./supabaseClient";
 
-function NavBar({session}) {
-
+function NavBar({ session }) {
   const [online, setOnline] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const triggerOnline = () => {
     setOnline(true);
     updateOnline(false);
-  }
+  };
 
-  const updateOnline = async(currState) => {
+  const updateOnline = async (currState) => {
     setLoading(true);
     try {
       const user = supabase.auth.user();
 
       const { error } = await supabase
         .from("profiles")
-        .update({click: currState}) // go to this column
-        .eq('id', session.user.id)   // find the specific user
+        .update({ click: currState }) // go to this column
+        .eq("id", session.user.id); // find the specific user
 
       if (error) throw error;
-
     } catch (error) {
       alert(error.error_description || error.message);
     } finally {
       setLoading(false);
     }
   };
-
 
   return (
     <nav>
@@ -48,7 +45,7 @@ function NavBar({session}) {
                 id="profilepage"
                 height="170"
                 style={{ cursor: "pointer" }}
-                onClick={()=>triggerOnline()}
+                onClick={() => triggerOnline()}
               />
             </h1>
           </NavLink>
@@ -62,7 +59,7 @@ function NavBar({session}) {
                 id="leaderboard"
                 height="170"
                 style={{ cursor: "pointer" }}
-                onClick={()=>triggerOnline()}
+                onClick={() => triggerOnline()}
               />
             </h1>
           </NavLink>
@@ -76,7 +73,7 @@ function NavBar({session}) {
                 id="chat"
                 height="170"
                 style={{ cursor: "pointer" }}
-                onClick={()=>updateOnline(true)}
+                onClick={() => updateOnline(true)}
               />
             </h1>
           </NavLink>
@@ -90,7 +87,7 @@ function NavBar({session}) {
                 id="events"
                 height="170"
                 style={{ cursor: "pointer" }}
-                onClick={()=>triggerOnline()}
+                onClick={() => triggerOnline()}
               />
             </h1>
           </NavLink>

@@ -168,7 +168,11 @@ export default function EventsItem(props) {
       )}
       {!openEventChat && !whosInPageOpen && buttonPressed && (
         <div>
-          <div className={classes.backdrop} onClick={onClickHandler}></div>
+          <div
+            className={classes.backdrop}
+            onClick={onClickHandler}
+            style={{ cursor: "pointer" }}
+          ></div>
           <div className={classes.modal}>
             <header className={classes.header} style={{ color: "white" }}>
               <h2>id: {props.id}</h2>

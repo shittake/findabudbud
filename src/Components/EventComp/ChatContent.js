@@ -17,6 +17,9 @@ export default function ChatContent(props) {
   const [displayUsername, setDisplayUsername] = useState("");
 
   const fetchAllMessages = useCallback(async () => {
+    console.log("loading state");
+    console.log(isLoading);
+    // isLoading(true);
     // let { data: eventsmessages, error } = await supabase
     //   .from("eventsmessages")
     //   .select("*")
@@ -42,6 +45,7 @@ export default function ChatContent(props) {
     //   temp.push(result.profiles.username);
     // });
     setAllMessages(message);
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -186,14 +190,14 @@ export default function ChatContent(props) {
         <div className="flex-grow-1 overflow-auto">
           {console.log(allMessages)}
           <div className="h-100 d-flex flex-column align-items-start justify-content-end">
-            {!allMessages.length && (
+            {!isLoading && !allMessages.length && (
               <div style={{ padding: "5px 0 10px 0" }}>
                 No messages here. Starting chatting away!
               </div>
             )}
             {allMessages &&
               allMessages.map((message, index) => {
-                const lastMessage = allMessages.length - 1 === message.index;
+                const lastMessage = allMessages.length - 1 === index;
                 // const input = message.userid;
                 // const username = async (input) => {
                 //   const result = await fetchUsername(input);
