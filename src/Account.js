@@ -185,8 +185,16 @@ const Account = ({ session }) => {
           </div>
           <br></br>
           <br></br>
-          <br></br>
-          <div className="generate">
+          {/* <br></br> */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "10px",
+            }}
+          >
             <button
               className="button2"
               id="gen"
@@ -208,6 +216,7 @@ const Account = ({ session }) => {
               Select this as my Avatar!
             </button>
           </div>
+
           <br></br>
           <br></br>
           <br></br>

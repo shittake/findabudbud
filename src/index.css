@@ -29,12 +29,12 @@ body {
   font-family: var(--custom-font-family);
 }
 
-.footer{
-  width:100%;
-  height:8%; 
-  position:fixed;
-  bottom:0;
-  left:0;
+.footer {
+  width: 100%;
+  height: 8%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   padding: 0.6%;
   padding-left: 1%;
   background-color: green;
@@ -118,9 +118,9 @@ body {
 
 .button2 {
   background-color: rgb(255, 255, 152);
-  width: 90%;
+  width: 50vw;
   margin-left: 0px; /*A positive value shifts the button right */
-  margin:  10px;
+  margin: 9px;
   padding: 5px 16px;
   text-align: center;
   font-size: 16px;
@@ -130,7 +130,7 @@ body {
 .button3 {
   background-color: rgb(255, 255, 152);
   width: 20%;
-  margin-left: 10px; 
+  margin-left: 10px;
   margin: 5px;
   padding: 5px 16px;
   text-align: center;
@@ -141,7 +141,7 @@ body {
   background-color: rgb(255, 255, 152);
   width: 100%;
   margin-left: 0px; /*A positive value shifts the button right */
-  margin:  0px;
+  margin: 0px;
   padding: 5px 16px;
   text-align: center;
   font-size: 16px;
@@ -151,7 +151,7 @@ body {
 .button5 {
   width: 100%;
   margin-left: 0px; /*A positive value shifts the button right */
-  margin:  0px;
+  margin: 0px;
   padding: 5px 16px;
   text-align: center;
   font-size: 16px;
@@ -159,18 +159,18 @@ body {
 }
 
 .squareButton {
-   border: 1px outset blue;
-   background-color: lightBlue;
-   height:15%;
-   width:15%;
-   cursor:pointer;
-   text-align: center;
-   margin-left: 42%;
+  border: 1px outset blue;
+  background-color: lightBlue;
+  height: 15%;
+  width: 15%;
+  cursor: pointer;
+  text-align: center;
+  margin-left: 42%;
 }
 
 .squareButton:hover {
-   background-color: blue;
-   color:white;
+  background-color: blue;
+  color: white;
 }
 
 .button1:hover {
@@ -182,19 +182,18 @@ body {
 }
 
 .button3:hover {
-  background-color:  #faebd7;
+  background-color: #faebd7;
 }
 
 .button4:hover {
-  background-color:  #faebd7;
+  background-color: #faebd7;
 }
-
 
 .tableButton {
   background-color: rgb(255, 255, 152);
   width: 100%;
   margin-left: 0px; /*A positive value shifts the button right */
-  margin:  0px;
+  margin: 0px;
   padding: 5px 16px;
   text-align: center;
   font-size: 16px;
@@ -202,7 +201,7 @@ body {
 }
 
 .tableButton:hover {
-  background-color:  #faebd7;
+  background-color: #faebd7;
 }
 
 /* Grid */
@@ -514,17 +513,17 @@ table {
   height: 200px;
 }
 
-.table1{
+.table1 {
   border: 2px solid orange;
   width: 400px;
   height: 100%;
 }
 
-.table2 { 
+.table2 {
   border: 3px solid darkblue;
   width: 800px;
   height: 100%;
- }
+}
 
 th {
   border-bottom: 2px solid black;
@@ -550,7 +549,7 @@ td {
 
 .loading {
   font-weight: bold;
-  display:inline-block;
+  display: inline-block;
   font-family: monospace;
   font-size: 30px;
   clip-path: inset(0 3ch 0 0);
@@ -559,7 +558,7 @@ td {
 
 @keyframes l {
   to {
-    clip-path: inset(0 -1ch 0 0)
+    clip-path: inset(0 -1ch 0 0);
   }
 }
 
@@ -570,33 +569,32 @@ td {
   color: #333333;
   cursor: pointer;
   padding: 2px 6px 2px 6px;
-  border-top: 1px solid #CCCCCC;
+  border-top: 1px solid #cccccc;
   border-right: 1px solid #333333;
   border-bottom: 1px solid #333333;
-  border-left: 1px solid #CCCCCC;
+  border-left: 1px solid #cccccc;
 }
 
 .warning {
   padding: 20px;
-  background-color: red; 
+  background-color: red;
   color: white;
   margin-bottom: 0px;
-  text-align:  center;
+  text-align: center;
 }
 
 .neutral {
   padding: 20px;
-  background-color: orange; 
+  background-color: orange;
   color: white;
   margin-bottom: 15px;
-  text-align:  center;
+  text-align: center;
 }
 
 .success {
   padding: 20px;
-  background-color: green; 
+  background-color: green;
   color: white;
   margin-bottom: 15px;
-  text-align:  center;
+  text-align: center;
 }
-
