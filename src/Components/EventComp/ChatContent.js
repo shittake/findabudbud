@@ -12,16 +12,35 @@ export default function ChatContent(props) {
   const [text, setText] = useState("");
   const lastMessageRef = useRef();
   const [allMessages, setAllMessages] = useState([]);
+  const [messageUsername, setMessageUsername] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [displayUsername, setDisplayUsername] = useState("");
 
   const fetchAllMessages = useCallback(async () => {
-    let { data: eventsmessages, error } = await supabase
+    // let { data: eventsmessages, error } = await supabase
+    //   .from("eventsmessages")
+    //   .select("*")
+    //   .eq("eventid", props.eventid)
+    //   .order("createdAt", { ascending: true });
+    // console.log(eventsmessages);
+    // setAllMessages(eventsmessages);
+    const { data: message, error: err } = await supabase
       .from("eventsmessages")
-      .select("*")
-      .eq("eventid", props.eventid)
+      .select(
+        `
+      *,
+      profiles (
+        username
+      )
+    `
+      )
       .order("createdAt", { ascending: true });
-    setAllMessages(eventsmessages);
+    console.log(message);
+    // const temp = [];
+    // message.map((result) => {
+    //   temp.push(result.profiles.username);
+    // });
+    setAllMessages(message);
   }, []);
 
   useEffect(() => {
@@ -37,30 +56,11 @@ export default function ChatContent(props) {
     setTestState(true);
   };
 
-  // useEffect(() => {
-  //   console.log("in");
+  useEffect(() => {
+    console.log("in");
 
-  //   console.log(mySubscription);
+    console.log(mySubscription);
 
-  // const mySubscription = supabase
-  //   .from("*")
-  //   .on("*", (payload) => {
-  //     console.log("Change received!", payload);
-  //   })
-  //   .subscribe();
-
-  //   console.log("after in");
-  //   console.log(mySubscription);
-
-  // return () => {
-  //   supabase.removeSubscription(mySubscription);
-  //   // setTimeout(() => {
-  //   //   console.log("Hello, World!");
-  //   // }, 3000);
-  // };
-  // }, []);
-  useUpdateEffect(() => {
-    console.log("useUpdateEffect runs");
     const mySubscription = supabase
       .from("*")
       .on("*", (payload) => {
@@ -68,12 +68,32 @@ export default function ChatContent(props) {
         fetchAllMessages();
       })
       .subscribe();
+
+    console.log("after in");
     console.log(mySubscription);
 
     return () => {
       supabase.removeSubscription(mySubscription);
+      // setTimeout(() => {
+      //   console.log("Hello, World!");
+      // }, 3000);
     };
-  }, [testState]);
+  }, []);
+  // useUpdateEffect(() => {
+  //   console.log("useUpdateEffect runs");
+  //   const mySubscription = supabase
+  //     .from("*")
+  //     .on("*", (payload) => {
+  //       console.log("Change received!", payload);
+  //       fetchAllMessages();
+  //     })
+  //     .subscribe();
+  //   console.log(mySubscription);
+
+  //   return () => {
+  //     supabase.removeSubscription(mySubscription);
+  //   };
+  // }, [testState]);
 
   // useEffect(() => {
   //   console.log("in");
@@ -166,14 +186,14 @@ export default function ChatContent(props) {
           {console.log(allMessages)}
           <div className="h-100 d-flex flex-column align-items-start justify-content-end">
             {allMessages &&
-              allMessages.map((message) => {
+              allMessages.map((message, index) => {
                 const lastMessage = allMessages.length - 1 === message.index;
-                const input = message.userid;
-                const username = async (input) => {
-                  const result = await fetchUsername(input);
-                  return result;
-                };
-
+                // const input = message.userid;
+                // const username = async (input) => {
+                //   const result = await fetchUsername(input);
+                //   return result;
+                // };
+                // const messageSender = messageUsername[index];
                 return (
                   <div
                     ref={lastMessage ? setRef : null}
@@ -199,7 +219,7 @@ export default function ChatContent(props) {
                       {
                         message.userid === props.userid
                           ? "You"
-                          : message.userid /*await username(input)*/
+                          : message.profiles.username /*await username(input)*/
                       }
                     </div>
                   </div>

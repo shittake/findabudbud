@@ -43,6 +43,7 @@ export default function EventsItem(props) {
   };
 
   useEffect(() => {
+    console.log("in events item");
     fetchEventData();
   }, []);
 
@@ -83,7 +84,13 @@ export default function EventsItem(props) {
     console.log(props.session.user.id);
     const { data, error } = await supabase
       .from("join")
-      .insert([{ eventid: props.id, userid: props.session.user.id }]);
+      .insert([
+        {
+          eventid: props.id,
+          userid: props.session.user.id,
+          joinedAt: new Date().toISOString(),
+        },
+      ]);
   };
 
   const onClickHandler = () => {

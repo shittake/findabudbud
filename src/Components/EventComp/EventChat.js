@@ -7,6 +7,9 @@ import ChatContent from "./ChatContent";
 
 export default function EventsChat(props) {
   const [backPressed, setBackPressed] = useState(false);
+  useEffect(() => {
+    console.log("in events chat");
+  });
   const onClickBackHandler = () => {
     setBackPressed(true);
   };

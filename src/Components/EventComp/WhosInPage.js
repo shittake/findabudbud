@@ -10,15 +10,27 @@ export default function WhosInPage(props) {
 
   useEffect(() => {
     const fetchWhosInData = async () => {
-      const { data: join, error } = await supabase
+      const { data: user, error: err } = await supabase
         .from("join")
-        .select("userid")
-
-        // Filters
+        .select(
+          `
+      *,
+      profiles (
+        username
+      )
+    `
+        )
         .eq("eventid", props.id);
-      console.log(join);
-      setWhosIn(join);
-      return join;
+      console.log(user);
+      // const { data: join, error } = await supabase
+      //   .from("join")
+      //   .select("userid")
+
+      //   // Filters
+      //   .eq("eventid", props.id);
+      // console.log(join);
+      setWhosIn(user);
+      return user;
     };
     fetchWhosInData();
   }, []);
@@ -50,17 +62,19 @@ export default function WhosInPage(props) {
           className={classes.content}
           style={{ padding: "20px 0px 30px 30px" }}
         >
-          {whosIn.map((person, index) => {
-            // {
-            //   number.current += 1;
-            // }
-            return (
-              <div>
-                {index + 1} {": "}
-                {person.userid}{" "}
-              </div>
-            );
-          })}
+          {whosIn &&
+            whosIn.map((person, index) => {
+              // {
+              //   number.current += 1;
+              // }
+              return (
+                <div>
+                  {index + 1} {": "}
+                  {person.profiles.username}
+                  {props.userid == person.userid ? " (me!)" : ""}
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>
