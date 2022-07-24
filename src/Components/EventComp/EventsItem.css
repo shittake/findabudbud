@@ -16,7 +16,7 @@
 .event-footer {
   display: flex;
   flex-direction: row;
-  padding: 0.8vw;
+  padding: 0.5vw 0.8vw 0.8vw 0.8vw;
 }
 .backdrop {
   position: fixed;

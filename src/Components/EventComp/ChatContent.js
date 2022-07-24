@@ -186,6 +186,11 @@ export default function ChatContent(props) {
         <div className="flex-grow-1 overflow-auto">
           {console.log(allMessages)}
           <div className="h-100 d-flex flex-column align-items-start justify-content-end">
+            {!allMessages.length && (
+              <div style={{ padding: "5px 0 10px 0" }}>
+                No messages here. Starting chatting away!
+              </div>
+            )}
             {allMessages &&
               allMessages.map((message, index) => {
                 const lastMessage = allMessages.length - 1 === message.index;

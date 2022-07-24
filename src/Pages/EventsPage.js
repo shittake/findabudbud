@@ -163,7 +163,7 @@ const EventsPage = ({ session }) => {
 
   return (
     <>
-      <div>
+      <div style={{ padding: "10px 0 0 0" }}>
         <HeaderEvents session={session} />
         <div className="App">
           <ChatwootWidget />

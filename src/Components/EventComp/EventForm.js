@@ -147,7 +147,7 @@ export default function EventForm(props) {
           <Box className={classes.categoryPadding}>
             <FormControl
               sx={{
-                width: 97 / 100,
+                width: 95 / 100,
                 bgcolor: "background.paper",
                 borderRadius: "12px",
               }}
