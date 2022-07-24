@@ -75,3 +75,6 @@ const updatePoints = async (number) => {
 //events --> creator capacity of each event
 //events --> indicate
 //events --> last min dw then penalty
+
+//Felicia:
+// 1. uniform styling on NewEvent.js navbar
