@@ -35,6 +35,8 @@ function NavBar({ session }) {
   };
 
   return (
+    <>
+    <br></br>
     <nav>
       <ul>
         <h3 className="child">
@@ -94,6 +96,7 @@ function NavBar({ session }) {
         </h3>
       </ul>
     </nav>
+    </>
   );
 }
 
