@@ -58,16 +58,18 @@ describe("At Events Page", () => {
     cy.findByText(/games, movies/i).should("exist");
   });
 
-  it("test 4", () => {
-    cy.findByText(/users online now/i).should("exist");
-    cy.get("#events").click();
-    cy.findByText(/welcome to the events page/i).should("exist");
-    cy.get("#title").type("in cypress testing mode");
-    cy.get("#description").type("in description box");
-    cy.get("#date").type("20112022");
+  /*
+ // it("test 4", () => {
+  //   cy.findByText(/users online now/i).should("exist");
+  //   cy.get("#events").click();
+  //   cy.findByText(/welcome to the events page/i).should("exist");
+  //   cy.get("#title").type("in cypress testing mode");
+  //   cy.get("#description").type("in description box");
+  //   cy.get("#date").type("20112022");
 
-    // cy.get(".event-form-button").click();
-  });
+  //   // cy.get(".event-form-button").click();
+  // });
+  */
 });
 
 // describe("My First Test", () => {
