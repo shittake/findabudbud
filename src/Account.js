@@ -90,7 +90,7 @@ const Account = ({ session }) => {
       <HeaderAvatar session={session} />
       <div className="container">
         <div className="nav">
-          {avatar == null ? (
+          {avatar == false ? (
             <p>You have not chosen an Avatar before. Choose an Avatar! </p>
           ) : (
             <p>
@@ -100,7 +100,7 @@ const Account = ({ session }) => {
           )}
         </div>
         <h1>
-          {avatar != null ? (
+          {avatar != false ? (
             <center>
               <p>
                 Your previously selected Avatar is:{" "}

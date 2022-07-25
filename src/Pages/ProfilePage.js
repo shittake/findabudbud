@@ -23,7 +23,7 @@ import {
   RedButton,
   BlueButton,
   GreenButton,
-  PurpleButton
+  PurpleButton,
 } from "../Components/Buttons/ColouredButtons";
 
 const ProfilePage = ({ session }) => {
@@ -319,7 +319,7 @@ const ProfilePage = ({ session }) => {
     if (mobile) setMobile(false);
     if (cardgames) setCardGames(false);
     if (computergames) setComputerGames(false);
-  }
+  };
 
   const addGames = () => {
     if (!boardgames) setBoardGames(true);
@@ -330,7 +330,7 @@ const ProfilePage = ({ session }) => {
     if (!mobile) setMobile(true);
     if (!cardgames) setCardGames(true);
     if (!computergames) setComputerGames(true);
-  }
+  };
 
   const clearShows = () => {
     if (anime) setAnime(false);
@@ -344,7 +344,7 @@ const ProfilePage = ({ session }) => {
     if (horror) setHorror(false);
     if (action) setAction(false);
     if (sportsTV) setSportsTV(false);
-  }
+  };
 
   const addShows = () => {
     if (!anime) setAnime(true);
@@ -358,7 +358,7 @@ const ProfilePage = ({ session }) => {
     if (!horror) setHorror(true);
     if (!action) setAction(true);
     if (!sportsTV) setSportsTV(true);
-  }
+  };
 
   const clearLanguages = () => {
     if (japanese) setJapanese(false);
@@ -373,7 +373,7 @@ const ProfilePage = ({ session }) => {
     if (french) setFrench(false);
     if (korean) setKorean(false);
     if (otherlanguages) setOtherLanguages(false);
-  }
+  };
 
   const addLanguages = () => {
     if (!japanese) setJapanese(true);
@@ -388,7 +388,7 @@ const ProfilePage = ({ session }) => {
     if (!french) setFrench(true);
     if (!korean) setKorean(true);
     if (!otherlanguages) setOtherLanguages(true);
-  }
+  };
 
   const clearSports = () => {
     if (badminton) setBadminton(false);
@@ -403,7 +403,7 @@ const ProfilePage = ({ session }) => {
     if (iceskating) setIceSkating(false);
     if (golf) setGolf(false);
     if (generalexercise) setGeneralExercise(false);
-  }
+  };
 
   const addSports = () => {
     if (!badminton) setBadminton(true);
@@ -418,7 +418,7 @@ const ProfilePage = ({ session }) => {
     if (!iceskating) setIceSkating(true);
     if (!golf) setGolf(true);
     if (!generalexercise) setGeneralExercise(true);
-  }
+  };
 
   const clearOthers = () => {
     if (coding) setCoding(false);
@@ -427,7 +427,7 @@ const ProfilePage = ({ session }) => {
     if (dance) setDance(false);
     if (music) setMusic(false);
     if (cooking) setCooking(false);
-  }
+  };
 
   const addOthers = () => {
     if (!coding) setCoding(true);
@@ -436,8 +436,7 @@ const ProfilePage = ({ session }) => {
     if (!dance) setDance(true);
     if (!music) setMusic(true);
     if (!cooking) setCooking(true);
-  }
-
+  };
 
   // Method to update a user's points in database
   // Input --> an integer representing the number of points added
@@ -489,7 +488,7 @@ const ProfilePage = ({ session }) => {
 
       const { error } = await supabase
         .from("profiles")
-        .update({ point_history: point_history+message})
+        .update({ point_history: point_history + message })
         .eq("id", session.user.id);
 
       if (error) throw error;
@@ -527,7 +526,11 @@ const ProfilePage = ({ session }) => {
         setMobile(data.mobile);
         setCardGames(data.cardgames);
         setComputerGames(data.computergames);
-        setAvatarUrl(data.avatar_url);
+        setAvatarUrl(
+          data.avatar_url
+            ? data.avatar_url
+            : "https://avatars.dicebear.com/api/bottts/1000.svg"
+        );
         setPoints(data.points);
         setShares(data.shares);
         setAnime(data.anime);
@@ -587,10 +590,10 @@ const ProfilePage = ({ session }) => {
   };
 
   let navigate = useNavigate();
-    const moveToAvatar = () => {
-      let path = '/';
-      navigate(path);
-    }
+  const moveToAvatar = () => {
+    let path = "/";
+    navigate(path);
+  };
 
   // Method to update all columns for a user once he clicks on "update profile"
 
@@ -678,13 +681,15 @@ const ProfilePage = ({ session }) => {
   const shareClick = () => {
     updatePoints(2);
     updateHistory(",+2 Shared using social media " + new Date().toDateString());
-    setShares(shares+1);
-    updateShares(shares+1);
-  }
+    setShares(shares + 1);
+    updateShares(shares + 1);
+  };
 
   const shareCap = () => {
-    alert("Note: You can still share but you will no longer gain any more points from sharing. (capped at 10 times)");
-  }
+    alert(
+      "Note: You can still share but you will no longer gain any more points from sharing. (capped at 10 times)"
+    );
+  };
 
   return (
     <>
@@ -706,9 +711,15 @@ const ProfilePage = ({ session }) => {
         <Welcome username={username}></Welcome>
       </div>
 
-
-      <h1> 
-        <center><img src = {avatar_url} style={{ cursor: "pointer" }} onClick = {moveToAvatar} height="170"></img></center>
+      <h1>
+        <center>
+          <img
+            src={avatar_url}
+            style={{ cursor: "pointer" }}
+            onClick={moveToAvatar}
+            height="170"
+          ></img>
+        </center>
       </h1>
 
       {/* Instructions to user */}
@@ -716,7 +727,7 @@ const ProfilePage = ({ session }) => {
       <div aria-live="polite">
         {loading ? (
           "Saving ..."
-        ) : ( 
+        ) : (
           <form onSubmit={updateProfile} className="form-widget">
             <p>Email: {session.user.email}</p>
             <p>
@@ -742,7 +753,7 @@ const ProfilePage = ({ session }) => {
                     size="small"
                     required
                     id="telegram_handle"
-                    label= "Required"
+                    label="Required"
                     placeholder="Your telegram handle"
                     value={telegram_handle}
                     onChange={(e) => setTelegramHandle(e.target.value)}
@@ -779,108 +790,111 @@ const ProfilePage = ({ session }) => {
 
       {clickGames && (
         <>
+          <h className="parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => addGames()}
+                    style={{ color: "green" }}
+                  >
+                    {" "}
+                    Select All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
 
-        <h className = "parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => clearGames()}
+                    style={{ color: "red" }}
+                  >
+                    {" "}
+                    Deselect All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
+          </h>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => addGames()} style={{ color: "green" }}>
-              {" "}
-              Select All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Board Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleBoardGamesChange()}
+                variant={boardgames ? "contained" : "outlined"}
+                text="Board Games"
+              ></RedButton>
+            </div>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => clearGames()} style={{ color: "red" }}>
-              {" "}
-              Deselect All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        </h>
+            {/* Toggle button to change preference for Card Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleCardGamesChange()}
+                variant={cardgames ? "contained" : "outlined"}
+                text="Card Games"
+              ></RedButton>
+            </div>
 
-          <h1 className = "parent">
-          {/* Toggle button to change preference for Board Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleBoardGamesChange()}
-              variant={boardgames ? "contained" : "outlined"}
-              text="Board Games"
-            ></RedButton>
-          </div>
+            {/* Toggle button to change preference for Mobile Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleMobileChange()}
+                variant={mobile ? "contained" : "outlined"}
+                text="Mobile Games"
+              ></RedButton>
+            </div>
 
-          {/* Toggle button to change preference for Card Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleCardGamesChange()}
-              variant={cardgames ? "contained" : "outlined"}
-              text="Card Games"
-            ></RedButton>
-          </div>
+            {/* Toggle button to change preference for Computer Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleComputerGamesChange()}
+                variant={computergames ? "contained" : "outlined"}
+                text="Computer (PC) Games"
+              ></RedButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Mobile Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleMobileChange()}
-              variant={mobile ? "contained" : "outlined"}
-              text="Mobile Games"
-            ></RedButton>
-          </div>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Console Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleConsolesChange()}
+                variant={consoles ? "contained" : "outlined"}
+                text="Console Games"
+              ></RedButton>
+            </div>
 
-        {/* Toggle button to change preference for Computer Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleComputerGamesChange()}
-              variant={computergames ? "contained" : "outlined"}
-              text="Computer (PC) Games"
-            ></RedButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for RPG */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleRPGChange()}
+                variant={rpg ? "contained" : "outlined"}
+                text="Role-Playing Games (RPG)"
+              ></RedButton>
+            </div>
 
-        <h1 className = "parent">
+            {/* Toggle button to change preference for Shooter Games */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleShooterChange()}
+                variant={shooter ? "contained" : "outlined"}
+                text="Shooter Games"
+              ></RedButton>
+            </div>
 
-        {/* Toggle button to change preference for Console Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleConsolesChange()}
-              variant={consoles ? "contained" : "outlined"}
-              text="Console Games"
-            ></RedButton>
-          </div>
-
-        {/* Toggle button to change preference for RPG */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleRPGChange()}
-              variant={rpg ? "contained" : "outlined"}
-              text="Role-Playing Games (RPG)"
-            ></RedButton>
-          </div>
-
-        {/* Toggle button to change preference for Shooter Games */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleShooterChange()}
-              variant={shooter ? "contained" : "outlined"}
-              text="Shooter Games"
-            ></RedButton>
-          </div>
-
-        {/* Toggle button to change preference for MOBA */}
-          <div className = "child">
-            <RedButton
-              onClick={() => handleMOBAChange()}
-              variant={moba ? "contained" : "outlined"}
-              text="Multiplayer Online Battle Arena (MOBA) games"
-            ></RedButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for MOBA */}
+            <div className="child">
+              <RedButton
+                onClick={() => handleMOBAChange()}
+                variant={moba ? "contained" : "outlined"}
+                text="Multiplayer Online Battle Arena (MOBA) games"
+              ></RedButton>
+            </div>
+          </h1>
         </>
       )}
 
@@ -907,138 +921,140 @@ const ProfilePage = ({ session }) => {
 
       {clickShows && (
         <>
+          <h className="parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => addShows()}
+                    style={{ color: "green" }}
+                  >
+                    {" "}
+                    Select All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
 
-        <h className = "parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => clearShows()}
+                    style={{ color: "red" }}
+                  >
+                    {" "}
+                    Deselect All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
+          </h>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => addShows()} style={{ color: "green" }}>
-              {" "}
-              Select All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => clearShows()} style={{ color: "red" }}>
-              {" "}
-              Deselect All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        </h>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Anime */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleAnimeChange()}
+                variant={anime ? "contained" : "outlined"}
+                text="Anime"
+              ></GreenButton>
+            </div>
 
-          <h1 className = "parent">
-          {/* Toggle button to change preference for Anime */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleAnimeChange()}
-              variant={anime ? "contained" : "outlined"}
-              text="Anime"
-            ></GreenButton>
-          </div>
+            {/* Toggle button to change preference for Action */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleActionChange()}
+                variant={action ? "contained" : "outlined"}
+                text="Action"
+              ></GreenButton>
+            </div>
 
-          {/* Toggle button to change preference for Action */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleActionChange()}
-              variant={action ? "contained" : "outlined"}
-              text="Action"
-            ></GreenButton>
-          </div>
+            {/* Toggle button to change preference for Cartoon */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleCartoonChange()}
+                variant={cartoon ? "contained" : "outlined"}
+                text="Cartoon"
+              ></GreenButton>
+            </div>
 
-        {/* Toggle button to change preference for Cartoon */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleCartoonChange()}
-              variant={cartoon ? "contained" : "outlined"}
-              text="Cartoon"
-            ></GreenButton>
-          </div>
+            {/* Toggle button to change preference for Comedy */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleComedyChange()}
+                variant={comedy ? "contained" : "outlined"}
+                text="Comedy"
+              ></GreenButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Comedy */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleComedyChange()}
-              variant={comedy ? "contained" : "outlined"}
-              text="Comedy"
-            ></GreenButton>
-          </div>
-        </h1>
+          <h1 className="parent">
+            {/* Toggle button to change preference for SportsTV */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleSportsTVChange()}
+                variant={sportsTV ? "contained" : "outlined"}
+                text="Sports"
+              ></GreenButton>
+            </div>
 
-        <h1 className = "parent">
+            {/* Toggle button to change preference for Drama */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleDramaChange()}
+                variant={drama ? "contained" : "outlined"}
+                text="Drama"
+              ></GreenButton>
+            </div>
 
-        {/* Toggle button to change preference for SportsTV */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleSportsTVChange()}
-              variant={sportsTV ? "contained" : "outlined"}
-              text="Sports"
-            ></GreenButton>
-          </div>
+            {/* Toggle button to change preference for Documentary */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleDocumentaryChange()}
+                variant={documentary ? "contained" : "outlined"}
+                text="Documentary"
+              ></GreenButton>
+            </div>
 
-        {/* Toggle button to change preference for Drama */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleDramaChange()}
-              variant={drama ? "contained" : "outlined"}
-              text="Drama"
-            ></GreenButton>
-          </div>
+            {/* Toggle button to change preference for Fantasy */}
+            <div className="child">
+              <GreenButton
+                onClick={() => handleFantasyChange()}
+                variant={fantasy ? "contained" : "outlined"}
+                text="Fantasy/Adventure"
+              ></GreenButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Documentary */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleDocumentaryChange()}
-              variant={documentary ? "contained" : "outlined"}
-              text="Documentary"
-            ></GreenButton>
-          </div>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Horror */}
+            <div className="otherchild">
+              <GreenButton
+                onClick={() => handleHorrorChange()}
+                variant={horror ? "contained" : "outlined"}
+                text="Horror"
+              ></GreenButton>
+            </div>
 
-        {/* Toggle button to change preference for Fantasy */}
-          <div className = "child">
-            <GreenButton
-              onClick={() => handleFantasyChange()}
-              variant={fantasy ? "contained" : "outlined"}
-              text="Fantasy/Adventure"
-            ></GreenButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for Reality */}
+            <div className="otherchild">
+              <GreenButton
+                onClick={() => handleRealityChange()}
+                variant={reality ? "contained" : "outlined"}
+                text="Reality TV"
+              ></GreenButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Horror */}
-          <div className = "otherchild">
-            <GreenButton
-              onClick={() => handleHorrorChange()}
-              variant={horror ? "contained" : "outlined"}
-              text="Horror"
-            ></GreenButton>
-          </div>
-
-        {/* Toggle button to change preference for Reality */}
-          <div className = "otherchild">
-            <GreenButton
-              onClick={() => handleRealityChange()}
-              variant={reality ? "contained" : "outlined"}
-              text="Reality TV"
-            ></GreenButton>
-          </div>
-
-        {/* Toggle button to change preference for Romance */}
-          <div className = "otherchild">
-            <GreenButton
-              onClick={() => handleRomanceChange()}
-              variant={romance ? "contained" : "outlined"}
-              text="Romance"
-            ></GreenButton>
-          </div>
-        </h1>
-
+            {/* Toggle button to change preference for Romance */}
+            <div className="otherchild">
+              <GreenButton
+                onClick={() => handleRomanceChange()}
+                variant={romance ? "contained" : "outlined"}
+                text="Romance"
+              ></GreenButton>
+            </div>
+          </h1>
         </>
       )}
 
@@ -1066,145 +1082,149 @@ const ProfilePage = ({ session }) => {
 
       {clickLanguages && (
         <>
+          <h className="parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => addLanguages()}
+                    style={{ color: "green" }}
+                  >
+                    {" "}
+                    Select All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
 
-        <h className = "parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => clearLanguages()}
+                    style={{ color: "red" }}
+                  >
+                    {" "}
+                    Deselect All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
+          </h>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => addLanguages()} style={{ color: "green" }}>
-              {" "}
-              Select All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => clearLanguages()} style={{ color: "red" }}>
-              {" "}
-              Deselect All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        </h>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Arabic */}
+            <div className="child">
+              <BlueButton
+                variant={arabic ? "contained" : "outlined"}
+                onClick={() => handleArabicChange()}
+                text="Arabic"
+              ></BlueButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Arabic */}
-          <div className = "child">
-            <BlueButton
-              variant={arabic ? "contained" : "outlined"}
-              onClick={() => handleArabicChange()}
-              text="Arabic"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for French */}
+            <div className="child">
+              <BlueButton
+                variant={french ? "contained" : "outlined"}
+                onClick={() => handleFrenchChange()}
+                text="French"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for French */}
-          <div className = "child">
-            <BlueButton
-              variant={french ? "contained" : "outlined"}
-              onClick={() => handleFrenchChange()}
-              text="French"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for German */}
+            <div className="child">
+              <BlueButton
+                variant={german ? "contained" : "outlined"}
+                onClick={() => handleGermanChange()}
+                text="German"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for German */}
-          <div className = "child">
-            <BlueButton
-              variant={german ? "contained" : "outlined"}
-              onClick={() => handleGermanChange()}
-              text="German"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Hindi */}
+            <div className="child">
+              <BlueButton
+                variant={hindi ? "contained" : "outlined"}
+                onClick={() => handleHindiChange()}
+                text="Hindi"
+              ></BlueButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Hindi */}
-          <div className = "child">
-            <BlueButton
-              variant={hindi ? "contained" : "outlined"}
-              onClick={() => handleHindiChange()}
-              text="Hindi"
-            ></BlueButton>
-          </div>
-        </h1>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Indonesian */}
+            <div className="child">
+              <BlueButton
+                variant={indonesian ? "contained" : "outlined"}
+                onClick={() => handleIndonesianChange()}
+                text="Indonesian"
+              ></BlueButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Indonesian */}
-          <div className = "child">
-            <BlueButton
-              variant={indonesian ? "contained" : "outlined"}
-              onClick={() => handleIndonesianChange()}
-              text="Indonesian"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Japanese */}
+            <div className="child">
+              <BlueButton
+                variant={japanese ? "contained" : "outlined"}
+                onClick={() => handleJapaneseChange()}
+                text="Japanese"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for Japanese */}
-          <div className = "child">
-            <BlueButton
-              variant={japanese ? "contained" : "outlined"}
-              onClick={() => handleJapaneseChange()}
-              text="Japanese"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Korean */}
+            <div className="child">
+              <BlueButton
+                variant={korean ? "contained" : "outlined"}
+                onClick={() => handleKoreanChange()}
+                text="Korean"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for Korean */}
-          <div className = "child">
-            <BlueButton
-              variant={korean ? "contained" : "outlined"}
-              onClick={() => handleKoreanChange()}
-              text="Korean"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Malay */}
+            <div className="child">
+              <BlueButton
+                variant={malay ? "contained" : "outlined"}
+                onClick={() => handleMalayChange()}
+                text="Malay"
+              ></BlueButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Malay */}
-          <div className = "child">
-            <BlueButton
-              variant={malay ? "contained" : "outlined"}
-              onClick={() => handleMalayChange()}
-              text="Malay"
-            ></BlueButton>
-          </div>
-        </h1>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Mandarin */}
+            <div className="child">
+              <BlueButton
+                variant={mandarin ? "contained" : "outlined"}
+                onClick={() => handleMandarinChange()}
+                text="Mandarin"
+              ></BlueButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Mandarin */}
-          <div className = "child">
-            <BlueButton
-              variant={mandarin ? "contained" : "outlined"}
-              onClick={() => handleMandarinChange()}
-              text="Mandarin"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Russian */}
+            <div className="child">
+              <BlueButton
+                variant={russian ? "contained" : "outlined"}
+                onClick={() => handleRussianChange()}
+                text="Russian"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for Russian */}
-          <div className = "child">
-            <BlueButton
-              variant={russian ? "contained" : "outlined"}
-              onClick={() => handleRussianChange()}
-              text="Russian"
-            ></BlueButton>
-          </div>
+            {/* Toggle button to change preference for Spanish */}
+            <div className="child">
+              <BlueButton
+                variant={spanish ? "contained" : "outlined"}
+                onClick={() => handleSpanishChange()}
+                text="Spanish"
+              ></BlueButton>
+            </div>
 
-        {/* Toggle button to change preference for Spanish */}
-          <div className = "child">
-            <BlueButton
-              variant={spanish ? "contained" : "outlined"}
-              onClick={() => handleSpanishChange()}
-              text="Spanish"
-            ></BlueButton>
-          </div>
-
-        {/* Toggle button to change preference for other languages */}
-          <div className = "child">
-            <BlueButton
-              variant={otherlanguages ? "contained" : "outlined"}
-              onClick={() => handleOtherLanguagesChange()}
-              text="Other Languages"
-            ></BlueButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for other languages */}
+            <div className="child">
+              <BlueButton
+                variant={otherlanguages ? "contained" : "outlined"}
+                onClick={() => handleOtherLanguagesChange()}
+                text="Other Languages"
+              ></BlueButton>
+            </div>
+          </h1>
         </>
       )}
 
@@ -1232,145 +1252,149 @@ const ProfilePage = ({ session }) => {
 
       {clickSports && (
         <>
+          <h className="parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => addSports()}
+                    style={{ color: "green" }}
+                  >
+                    {" "}
+                    Select All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
 
-        <h className = "parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => clearSports()}
+                    style={{ color: "red" }}
+                  >
+                    {" "}
+                    Deselect All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
+          </h>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => addSports()} style={{ color: "green" }}>
-              {" "}
-              Select All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => clearSports()} style={{ color: "red" }}>
-              {" "}
-              Deselect All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        </h>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Badminton */}
+            <div className="child">
+              <PurpleButton
+                variant={badminton ? "contained" : "outlined"}
+                onClick={() => handleBadmintonChange()}
+                text="Badminton"
+              ></PurpleButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Badminton */}
-          <div className = "child">
-            <PurpleButton
-              variant={badminton ? "contained" : "outlined"}
-              onClick={() => handleBadmintonChange()}
-              text="Badminton"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Basketball */}
+            <div className="child">
+              <PurpleButton
+                variant={basketball ? "contained" : "outlined"}
+                onClick={() => handleBasketballChange()}
+                text="Basketball"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Basketball */}
-          <div className = "child">
-            <PurpleButton
-              variant={basketball ? "contained" : "outlined"}
-              onClick={() => handleBasketballChange()}
-              text="Basketball"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Floorball */}
+            <div className="child">
+              <PurpleButton
+                variant={floorball ? "contained" : "outlined"}
+                onClick={() => handleFloorballChange()}
+                text="Floorball"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Floorball */}
-          <div className = "child">
-            <PurpleButton
-              variant={floorball ? "contained" : "outlined"}
-              onClick={() => handleFloorballChange()}
-              text="Floorball"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Golf */}
+            <div className="child">
+              <PurpleButton
+                variant={golf ? "contained" : "outlined"}
+                onClick={() => handleGolfChange()}
+                text="Golf"
+              ></PurpleButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Golf */}
-          <div className = "child">
-            <PurpleButton
-              variant={golf ? "contained" : "outlined"}
-              onClick={() => handleGolfChange()}
-              text="Golf"
-            ></PurpleButton>
-          </div>
-        </h1>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Ice Skating */}
+            <div className="child">
+              <PurpleButton
+                variant={iceskating ? "contained" : "outlined"}
+                onClick={() => handleIceSkatingChange()}
+                text="Ice Skating"
+              ></PurpleButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Ice Skating */}
-          <div className = "child">
-            <PurpleButton
-              variant={iceskating ? "contained" : "outlined"}
-              onClick={() => handleIceSkatingChange()}
-              text="Ice Skating"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Soccer */}
+            <div className="child">
+              <PurpleButton
+                variant={soccer ? "contained" : "outlined"}
+                onClick={() => handleSoccerChange()}
+                text="Soccer"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Soccer */}
-          <div className = "child">
-            <PurpleButton
-              variant={soccer ? "contained" : "outlined"}
-              onClick={() => handleSoccerChange()}
-              text="Soccer"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Table Tennis */}
+            <div className="child">
+              <PurpleButton
+                variant={tabletennis ? "contained" : "outlined"}
+                onClick={() => handleTableTennisChange()}
+                text="Table Tennis"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Table Tennis */}
-          <div className = "child">
-            <PurpleButton
-              variant={tabletennis ? "contained" : "outlined"}
-              onClick={() => handleTableTennisChange()}
-              text="Table Tennis"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Tennis */}
+            <div className="child">
+              <PurpleButton
+                variant={tennis ? "contained" : "outlined"}
+                onClick={() => handleTennisChange()}
+                text="Tennis"
+              ></PurpleButton>
+            </div>
+          </h1>
 
-        {/* Toggle button to change preference for Tennis */}
-          <div className = "child">
-            <PurpleButton
-              variant={tennis ? "contained" : "outlined"}
-              onClick={() => handleTennisChange()}
-              text="Tennis"
-            ></PurpleButton>
-          </div>
-        </h1>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Volleyball */}
+            <div className="child">
+              <PurpleButton
+                variant={volleyball ? "contained" : "outlined"}
+                onClick={() => handleVolleyballChange()}
+                text="Volleyball"
+              ></PurpleButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Volleyball */}
-          <div className = "child">
-            <PurpleButton
-              variant={volleyball ? "contained" : "outlined"}
-              onClick={() => handleVolleyballChange()}
-              text="Volleyball"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Water Sports */}
+            <div className="child">
+              <PurpleButton
+                variant={watersports ? "contained" : "outlined"}
+                onClick={() => handleWaterSportsChange()}
+                text="Water Sports"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Water Sports */}
-          <div className = "child">
-            <PurpleButton
-              variant={watersports ? "contained" : "outlined"}
-              onClick={() => handleWaterSportsChange()}
-              text="Water Sports"
-            ></PurpleButton>
-          </div>
+            {/* Toggle button to change preference for Yoga */}
+            <div className="child">
+              <PurpleButton
+                variant={yoga ? "contained" : "outlined"}
+                onClick={() => handleYogaChange()}
+                text="Yoga"
+              ></PurpleButton>
+            </div>
 
-        {/* Toggle button to change preference for Yoga */}
-          <div className = "child">
-            <PurpleButton
-              variant={yoga ? "contained" : "outlined"}
-              onClick={() => handleYogaChange()}
-              text="Yoga"
-            ></PurpleButton>
-          </div>
-
-        {/* Toggle button to change preference for General Exercise */}
-          <div className = "child">
-            <PurpleButton
-              variant={generalexercise ? "contained" : "outlined"}
-              onClick={() => handleGeneralExerciseChange()}
-              text="General Exercise"
-            ></PurpleButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for General Exercise */}
+            <div className="child">
+              <PurpleButton
+                variant={generalexercise ? "contained" : "outlined"}
+                onClick={() => handleGeneralExerciseChange()}
+                text="General Exercise"
+              ></PurpleButton>
+            </div>
+          </h1>
         </>
       )}
 
@@ -1399,89 +1423,93 @@ const ProfilePage = ({ session }) => {
 
       {clickOthers && (
         <>
+          <h className="parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => addOthers()}
+                    style={{ color: "green" }}
+                  >
+                    {" "}
+                    Select All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
 
-        <h className = "parent">
+            <temp className="halfchild">
+              <h1 className="clickableText">
+                <strong>
+                  <button2
+                    onClick={() => clearOthers()}
+                    style={{ color: "red" }}
+                  >
+                    {" "}
+                    Deselect All{" "}
+                  </button2>
+                </strong>
+              </h1>
+            </temp>
+          </h>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => addOthers()} style={{ color: "green" }}>
-              {" "}
-              Select All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Food */}
+            <div className="otherchild">
+              <RedButton
+                onClick={() => handleFoodChange()}
+                variant={food ? "contained" : "outlined"}
+                text="Food"
+              ></RedButton>
+            </div>
 
-        <temp className = "halfchild">
-        <h1 className="clickableText">
-          <strong>
-            <button2 onClick={() => clearOthers()} style={{ color: "red" }}>
-              {" "}
-              Deselect All{" "}
-            </button2>
-          </strong>
-        </h1>
-        </temp>
-        </h>
+            {/* Toggle button to change preference for Study */}
+            <div className="otherchild">
+              <RedButton
+                variant={study ? "contained" : "outlined"}
+                onClick={() => handleStudyChange()}
+                text="Study"
+              ></RedButton>
+            </div>
 
-          <h1 className = "parent">
-          {/* Toggle button to change preference for Food */}
-          <div className = "otherchild">
-            <RedButton
-              onClick={() => handleFoodChange()}
-              variant={food ? "contained" : "outlined"}
-              text="Food"
-            ></RedButton>
-          </div>
+            {/* Toggle button to change preference for Coding */}
+            <div className="otherchild">
+              <RedButton
+                onClick={() => handleCodingChange()}
+                variant={coding ? "contained" : "outlined"}
+                text="Coding"
+              ></RedButton>
+            </div>
+          </h1>
 
-          {/* Toggle button to change preference for Study */}
-          <div className = "otherchild">
-            <RedButton
-              variant={study ? "contained" : "outlined"}
-              onClick={() => handleStudyChange()}
-              text="Study"
-            ></RedButton>
-          </div>
+          <h1 className="parent">
+            {/* Toggle button to change preference for Dance */}
+            <div className="otherchild">
+              <RedButton
+                onClick={() => handleDanceChange()}
+                variant={dance ? "contained" : "outlined"}
+                text="Dance"
+              ></RedButton>
+            </div>
 
-        {/* Toggle button to change preference for Coding */}
-          <div className = "otherchild">
-            <RedButton
-              onClick={() => handleCodingChange()}
-              variant={coding ? "contained" : "outlined"}
-              text="Coding"
-            ></RedButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for Music */}
+            <div className="otherchild">
+              <RedButton
+                onClick={() => handleMusicChange()}
+                variant={music ? "contained" : "outlined"}
+                text="Music"
+              ></RedButton>
+            </div>
 
-        <h1 className = "parent">
-        {/* Toggle button to change preference for Dance */}
-          <div className = "otherchild">
-            <RedButton
-              onClick={() => handleDanceChange()}
-              variant={dance ? "contained" : "outlined"}
-              text="Dance"
-            ></RedButton>
-          </div>
-
-        {/* Toggle button to change preference for Music */}
-          <div className = "otherchild">
-            <RedButton
-              onClick={() => handleMusicChange()}
-              variant={music ? "contained" : "outlined"}
-              text="Music"
-            ></RedButton>
-          </div>
-
-        {/* Toggle button to change preference for Cooking */}
-          <div className = "otherchild">
-            <RedButton
-              onClick={() => handleCookingChange()}
-              variant={cooking ? "contained" : "outlined"}
-              text="Cooking"
-            ></RedButton>
-          </div>
-        </h1>
+            {/* Toggle button to change preference for Cooking */}
+            <div className="otherchild">
+              <RedButton
+                onClick={() => handleCookingChange()}
+                variant={cooking ? "contained" : "outlined"}
+                text="Cooking"
+              ></RedButton>
+            </div>
+          </h1>
 
           <br></br>
         </>
@@ -1490,14 +1518,12 @@ const ProfilePage = ({ session }) => {
       {/* This is shown if the Others heading is not clicked. */}
       {!clickOthers && (
         <>
-          <div>
-            Click "Others" if you would like to see more
-            subcategories!
-          </div>
+          <div>Click "Others" if you would like to see more subcategories!</div>
         </>
       )}
 
-      <br></br><br></br>
+      <br></br>
+      <br></br>
 
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
@@ -1514,14 +1540,12 @@ const ProfilePage = ({ session }) => {
 
       <br></br>
 
-
-
       <h1 className="parent" id="share">
         <h2 className="child">
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
-            onClick={(shares<10) ? shareClick : shareCap}
+            onClick={shares < 10 ? shareClick : shareCap}
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
@@ -1531,7 +1555,7 @@ const ProfilePage = ({ session }) => {
           <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={(shares<10) ? shareClick : shareCap}
+            onClick={shares < 10 ? shareClick : shareCap}
           >
             <TelegramIcon size={62} round={true} />
           </TelegramShareButton>
@@ -1541,7 +1565,7 @@ const ProfilePage = ({ session }) => {
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={(shares<10) ? shareClick : shareCap}
+            onClick={shares < 10 ? shareClick : shareCap}
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
@@ -1551,15 +1575,18 @@ const ProfilePage = ({ session }) => {
           <LinkedinShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
-            onClick={(shares<10) ? shareClick : shareCap}
+            onClick={shares < 10 ? shareClick : shareCap}
           >
             <LinkedinIcon size={62} round={true} />
           </LinkedinShareButton>
         </h2>
       </h1>
 
-
-      <br></br><br></br><br></br><br></br><br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
 
       <Footer />
     </>
