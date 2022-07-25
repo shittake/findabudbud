@@ -115,6 +115,8 @@ const Account = ({ session }) => {
         <br></br>
         <br></br>
         <br></br>
+        <br></br>
+        <br></br>
         <div className="home">
           <div className="btns" id="options">
             <button
@@ -183,8 +185,6 @@ const Account = ({ session }) => {
               alt="Sprite"
             />
           </div>
-          <br></br>
-          <br></br>
           {/* <br></br> */}
           <div
             style={{
@@ -217,6 +217,7 @@ const Account = ({ session }) => {
             </button>
           </div>
 
+          <br></br>
           <br></br>
           <br></br>
           <br></br>
