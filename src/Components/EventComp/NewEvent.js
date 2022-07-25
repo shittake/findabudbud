@@ -26,7 +26,14 @@ function NewEvent(props) {
       },
     },
   };
-  const [category, setCategory] = React.useState([]);
+  const [category, setCategory] = React.useState([
+    "Games",
+    "Movies",
+    "Sports",
+    "Study",
+    "Eat",
+    "Others",
+  ]);
   const categorylist = ["Games", "Movies", "Sports", "Study", "Eat", "Others"];
   const handleChange = (event) => {
     const {
