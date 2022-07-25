@@ -6,6 +6,8 @@ import { StepContext } from "@mui/material";
 import { BlueButton, RedButton } from "../Buttons/ColouredButtons";
 import useUpdateEffect from "../../Hooks/useUpdateEffect.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import classes from "./EventsItemModal.module.css";
+
 // import "./bootstrap-iso.css";
 
 export default function ChatContent(props) {
@@ -186,76 +188,83 @@ export default function ChatContent(props) {
 
   return (
     <div className="bootstrap-iso">
-      <div className="d-flex flex-column flex-grow-1">
-        <div className="flex-grow-1 overflow-auto">
-          {console.log(allMessages)}
-          <div className="h-100 d-flex flex-column align-items-start justify-content-end">
-            {!isLoading && !allMessages.length && (
-              <div style={{ padding: "5px 0 10px 0" }}>
-                No messages here. Starting chatting away!
-              </div>
-            )}
-            {allMessages &&
-              allMessages.map((message, index) => {
-                const lastMessage = allMessages.length - 1 === index;
-                // const input = message.userid;
-                // const username = async (input) => {
-                //   const result = await fetchUsername(input);
-                //   return result;
-                // };
-                // const messageSender = messageUsername[index];
-                return (
-                  <div
-                    ref={lastMessage ? setRef : null}
-                    key={message.id}
-                    className={`my-1 d-flex flex-column ${
-                      message.userid === props.userid ? "align-self-end" : ""
-                    }`}
-                  >
+      <div className={classes.chatcontent}>
+        <div className="d-flex flex-column flex-grow-1">
+          <div className="flex-grow-1 overflow-auto">
+            {console.log(allMessages)}
+            <div className="h-100 d-flex flex-column align-items-start justify-content-end">
+              {!isLoading && !allMessages.length && (
+                <div style={{ padding: "5px 0 10px 0" }}>
+                  No messages here. Starting chatting away!
+                </div>
+              )}
+              {allMessages &&
+                allMessages.map((message, index) => {
+                  const lastMessage = allMessages.length - 1 === index;
+                  // const input = message.userid;
+                  // const username = async (input) => {
+                  //   const result = await fetchUsername(input);
+                  //   return result;
+                  // };
+                  // const messageSender = messageUsername[index];
+                  return (
                     <div
-                      className={`rounded px-2 py-2 ${
-                        message.userid === props.userid
-                          ? "bg-primary text-white"
-                          : "border"
-                      }`}
-                    >
-                      {message.content}
-                    </div>
-                    <div
-                      className={`text-muted small ${
+                      ref={lastMessage ? setRef : null}
+                      key={message.id}
+                      className={`my-1 d-flex flex-column ${
                         message.userid === props.userid ? "align-self-end" : ""
                       }`}
                     >
-                      {
-                        message.userid === props.userid
-                          ? "You"
-                          : message.profiles.username /*await username(input)*/
-                      }
+                      <div
+                        className={`rounded px-2 py-2 ${
+                          message.userid === props.userid
+                            ? "bg-primary text-white"
+                            : "border"
+                        }`}
+                      >
+                        {message.content}
+                      </div>
+                      <div
+                        className={`text-muted small ${
+                          message.userid === props.userid
+                            ? "align-self-end"
+                            : ""
+                        }`}
+                      >
+                        {
+                          message.userid === props.userid
+                            ? "You"
+                            : message.profiles
+                                .username /*await username(input)*/
+                        }
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-          <InputGroup style={{ padding: "5px 0 0 0" }}>
-            <Form.Control
-              as="textarea"
-              required
-              value={text}
-              onChange={textInputHandler}
-              style={{ height: "45px", resize: "none" }}
-            />
-            <RedButton
-              type="submit"
-              text="Submit"
-              variant="contained"
-            ></RedButton>
-          </InputGroup>
-        </Form.Group>
-      </Form>
+      <div style={{ padding: "10px" }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <InputGroup style={{ padding: "5px 0 0 0" }}>
+              <Form.Control
+                as="textarea"
+                required
+                value={text}
+                onChange={textInputHandler}
+                style={{ height: "45px", resize: "none" }}
+              />
+              <RedButton
+                type="submit"
+                text="Submit"
+                variant="contained"
+              ></RedButton>
+            </InputGroup>
+          </Form.Group>
+        </Form>
+      </div>
     </div>
   );
 }

@@ -173,7 +173,7 @@ export default function EventsItem(props) {
             onClick={onClickHandler}
             style={{ cursor: "pointer" }}
           ></div>
-          <div className={classes.modal} autofocus>
+          <div className={classes.modal} autoFocus>
             <header className={classes.header} style={{ color: "white" }}>
               <h2>id: {props.id}</h2>
               <h2>title: {props.title}</h2>

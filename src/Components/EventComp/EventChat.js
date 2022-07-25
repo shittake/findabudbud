@@ -40,14 +40,11 @@ export default function EventsChat(props) {
             chat - id {props.eventid}: {props.eventtitle}
           </div>
         </header>
-        <div
-          className={classes.content}
-          style={{ padding: "20px 30px 20px 30px" }}
-        >
+        <div>
           <ChatContent eventid={props.eventid} userid={props.userid} />
         </div>
-        <footer className={classes.actions}>
-          {/* <Form onSubmit={handleSubmit}>
+        {/* <footer className={classes.actions}> */}
+        {/* <Form onSubmit={handleSubmit}>
         <Form.Group>
           <InputGroup style={{ padding: "5px 0 0 0" }}>
             <Form.Control
@@ -65,7 +62,7 @@ export default function EventsChat(props) {
           </InputGroup>
         </Form.Group>
       </Form> */}
-        </footer>
+        {/* </footer> */}
       </div>
     </div>
   );
