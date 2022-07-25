@@ -22,7 +22,7 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 10px;
-  max-height: calc(80vh - 210px);
+  max-height: calc(83vh - 210px);
   overflow-y: auto;
 }
 
