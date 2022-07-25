@@ -161,6 +161,12 @@ const EventsPage = ({ session }) => {
     deleteFromSupabase(id);
   };
 
+  const viewMyEventsDataHandler = (viewMyEventsOn) => {
+    console.log("executing child to parent data passing");
+    console.log(viewMyEventsOn);
+    setViewEventsOn(viewMyEventsOn);
+  };
+
   return (
     <>
       <div style={{ padding: "10px 0 0 0" }}>
@@ -174,6 +180,7 @@ const EventsPage = ({ session }) => {
           onSaveFilterData={saveFilterDataHandler}
           onViewMyEvents={viewEventsHandler}
           session={session}
+          onPassViewMyEventsData={viewMyEventsDataHandler}
         />
 
         {filterOn &&

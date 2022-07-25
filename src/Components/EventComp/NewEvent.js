@@ -58,9 +58,10 @@ function NewEvent(props) {
 
   const onClickResetHandler = (event) => {
     setCategory(categorylist);
+    setEventId("");
     const filterData = {
       category: categorylist,
-      eventid: eventId,
+      eventid: "",
     };
 
     props.onSaveFilterData(filterData);
@@ -71,7 +72,10 @@ function NewEvent(props) {
   const onClickViewMyEventsHandler = (event) => {
     console.log(props.session.user.id);
     setCategory([]);
+    setEventId("");
     props.onViewMyEvents(props.session.user.id);
+    console.log(viewMyEvents);
+    props.onPassViewMyEventsData(!viewMyEvents);
     setViewMyEvents(!viewMyEvents);
   };
   return (
