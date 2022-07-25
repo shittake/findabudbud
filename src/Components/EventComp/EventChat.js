@@ -4,6 +4,8 @@ import { Modal } from "react-bootstrap";
 import classes from "./EventsItemModal.module.css";
 import { BlueButton, GreenButton, RedButton } from "../Buttons/ColouredButtons";
 import ChatContent from "./ChatContent";
+import { Form, InputGroup, Button } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function EventsChat(props) {
   const [backPressed, setBackPressed] = useState(false);
@@ -44,9 +46,26 @@ export default function EventsChat(props) {
         >
           <ChatContent eventid={props.eventid} userid={props.userid} />
         </div>
-        {/* <footer className={classes.actions}>
-          <RedButton text="Submit" variant="contained"></RedButton>
-        </footer> */}
+        <footer className={classes.actions}>
+          {/* <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <InputGroup style={{ padding: "5px 0 0 0" }}>
+            <Form.Control
+              as="textarea"
+              required
+              value={text}
+              onChange={textInputHandler}
+              style={{ height: "45px", resize: "none" }}
+            />
+            <RedButton
+              type="submit"
+              text="Submit"
+              variant="contained"
+            ></RedButton>
+          </InputGroup>
+        </Form.Group>
+      </Form> */}
+        </footer>
       </div>
     </div>
   );

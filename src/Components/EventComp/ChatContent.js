@@ -253,11 +253,6 @@ export default function ChatContent(props) {
               text="Submit"
               variant="contained"
             ></RedButton>
-            {/* <BlueButton
-              text="Subscribe"
-              variant="contained"
-              onClick={testStateHandler}
-            ></BlueButton> */}
           </InputGroup>
         </Form.Group>
       </Form>
