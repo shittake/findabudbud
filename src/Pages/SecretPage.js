@@ -278,6 +278,8 @@ const SecretPage = ({ session }) => {
 
         <center><img src = {picture} height = "180"></img></center>
 
+        <br></br>
+
        <p><center><strong>Both of you enjoy:</strong></center></p>
 
        

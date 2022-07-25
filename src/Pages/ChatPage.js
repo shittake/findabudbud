@@ -133,7 +133,7 @@ const ChatPage = ({session}) => {
 
       {mine.map(user => user.click)[0] && 
 
-        <p className="success"> You are in the waiting room now! Estimated time for a match: 30 seconds</p>
+        <p className="success"> You are in the waiting room now! Estimated time for a match: 5 seconds</p>
 
       }
 
