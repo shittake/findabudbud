@@ -35,24 +35,24 @@ export default function AdminLogInPage(props) {
     }
   };
 
-  // const handleSignUp = async (e) => {
-  //   try {
-  //     setLoading(true);
-  //     const { user, session, error } = await supabase.auth.signUp({
-  //       email,
-  //       password,
-  //     });
-  //     console.log(error);
-  //     console.log(user);
-  //     console.log(session);
-  //     if (error) throw error;
-  //     alert("Check your email for signup confirmation!");
-  //   } catch (error) {
-  //     alert(error.error_description || error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+  const handleSignUp = async (e) => {
+    try {
+      setLoading(true);
+      const { user, session, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      console.log(error);
+      console.log(user);
+      console.log(session);
+      if (error) throw error;
+      alert("Check your email for signup confirmation!");
+    } catch (error) {
+      alert(error.error_description || error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -102,14 +102,14 @@ export default function AdminLogInPage(props) {
                 onClick={handleLogin}
               ></GreenButton>
             </div>
-            {/* <div style={{ padding: "20px 0 0 0" }}>
+            <div style={{ padding: "20px 0 0 0" }}>
               <RedButton
                 text="sign up"
                 type="submit"
                 variant="contained"
                 onClick={handleSignUp}
-              ></RedButton> */}
-            {/* </div> */}
+              ></RedButton>
+            </div>
           </div>
         </div>
       </form>

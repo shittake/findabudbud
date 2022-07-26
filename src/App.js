@@ -24,6 +24,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="container" style={{ padding: "50px 0 50px 0" }}>
+        {console.log("hi")}
         {isLoading ? <></> : !session ? <Auth /> : <Router session={session} />}
       </div>
     </ThemeProvider>

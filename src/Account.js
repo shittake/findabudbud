@@ -18,7 +18,6 @@ const Account = ({ session }) => {
     try {
       setLoading(true);
       const user = supabase.auth.user();
-
       let { data, error, status } = await supabase
         .from("profiles")
         .select("*")
@@ -44,6 +43,8 @@ const Account = ({ session }) => {
   };
 
   useEffect(() => {
+    console.log({ session });
+    console.log(session.user.id);
     getProfile();
   }, [session]);
 
