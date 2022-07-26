@@ -91,14 +91,25 @@ const Account = ({ session }) => {
       <div className="container">
         <div className="nav">
           {avatar == false ? (
-            <p>You have not chosen an Avatar before. Choose an Avatar! </p>
+            <p
+              style={{
+                padding: "10px 0 3px 15px",
+              }}
+            >
+              You have not chosen an Avatar before. Choose an Avatar!{" "}
+            </p>
           ) : (
-            <p>
+            <div
+              style={{
+                padding: "10px 0 3px 15px",
+              }}
+            >
               You have selected an Avatar before, but you may choose another one
               here if you wish.{" "}
-            </p>
+            </div>
           )}
         </div>
+        <br></br>
         <h1>
           {avatar != false ? (
             <center>
