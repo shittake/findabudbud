@@ -706,7 +706,7 @@ const ProfilePage = ({ session }) => {
       <div
         className="welcome-outer"
         id="welcome-message"
-        style={{ margin: "0 0 10px 0" }}
+        style={{ margin: "0 0 20px 0" }}
       >
         <Welcome username={username}></Welcome>
       </div>
@@ -1523,7 +1523,6 @@ const ProfilePage = ({ session }) => {
       )}
 
       <br></br>
-      <br></br>
 
       {/* Button that updates the user profile and updates database once user clicks */}
       <form onSubmit={updateProfile} className="form-widget">
@@ -1537,7 +1536,8 @@ const ProfilePage = ({ session }) => {
           </button>
         </div>
       </form>
-
+      <br></br>
+      <br></br>
       <br></br>
 
       <h1 className="parent" id="share">
