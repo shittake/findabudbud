@@ -23,7 +23,12 @@ const Account = ({ session }) => {
         .select("*")
         .eq("id", user.id)
         .single();
-
+      console.log(error && status === 406);
+      if (error && status === 406) {
+        const { data, error } = await supabase
+          .from("profiles")
+          .insert([{ id: session.user.id, username: session.user.id }]);
+      }
       if (error && status !== 406) {
         throw error;
       }
@@ -43,8 +48,6 @@ const Account = ({ session }) => {
   };
 
   useEffect(() => {
-    console.log({ session });
-    console.log(session.user.id);
     getProfile();
   }, [session]);
 

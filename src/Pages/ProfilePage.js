@@ -511,6 +511,11 @@ const ProfilePage = ({ session }) => {
         .select("*")
         .eq("id", user.id)
         .single();
+      if (error && status === 406) {
+        const { data: data2, error: error2 } = await supabase
+          .from("profiles")
+          .insert([{ username: session.user.id }]);
+      }
 
       if (error && status !== 406) {
         throw error;
@@ -518,7 +523,7 @@ const ProfilePage = ({ session }) => {
 
       if (data) {
         setUsername(data.username);
-        setBoardGames(data.boardgames);
+        setBoardGames(data.boardgames === null);
         setRPG(data.rpg);
         setShooter(data.shooter);
         setMOBA(data.moba);
@@ -667,14 +672,24 @@ const ProfilePage = ({ session }) => {
         returning: "minimal", // Don't return the value after inserting
       });
 
+      if (!error) {
+        setLoading(false);
+        alert("Profile updated!");
+        return;
+      }
+
       if (error) {
         throw error;
       }
     } catch (error) {
       alert(error.message);
     } finally {
+      let { data: profilesUsername, error } = await supabase
+        .from("profiles")
+        .select("username")
+        .eq("id", session.user.id);
       setLoading(false);
-      alert("Profile updated!");
+      setUsername(profilesUsername[0].username);
     }
   };
 
