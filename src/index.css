@@ -38,6 +38,7 @@ body {
   padding: 0.6%;
   padding-left: 1%;
   background-color: green;
+  z-index: 100;
 }
 
 .welcome {
