@@ -672,9 +672,18 @@ const ProfilePage = ({ session }) => {
         returning: "minimal", // Don't return the value after inserting
       });
 
+      const initialise = () => {
+        setClickGames(false);
+        setClickShows(false);
+        setClickLanguages(false);
+        setClickOthers(false);
+        setClickSports(false);
+      };
+
       if (!error) {
         setLoading(false);
         alert("Profile updated!");
+        initialise();
         return;
       }
 
@@ -688,6 +697,7 @@ const ProfilePage = ({ session }) => {
         .from("profiles")
         .select("username")
         .eq("id", session.user.id);
+      initialise();
       setLoading(false);
       setUsername(profilesUsername[0].username);
     }

@@ -112,6 +112,9 @@ export default function EventForm(props) {
             type="date"
             value={enteredDate}
             min={new Date().toLocaleDateString("en-ca")}
+            max={new Date(
+              new Date().setFullYear(new Date().getFullYear() + 1)
+            ).toLocaleDateString("en-ca")}
             onChange={DateChangeHandler}
             id="date"
           />

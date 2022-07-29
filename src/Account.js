@@ -23,7 +23,6 @@ const Account = ({ session }) => {
         .select("*")
         .eq("id", user.id)
         .single();
-      console.log(error && status === 406);
       if (error && status === 406) {
         const { data, error } = await supabase
           .from("profiles")

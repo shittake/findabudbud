@@ -452,7 +452,7 @@ const SecretPage = ({ session }) => {
         </>
       )}
 
-      {besties.length == 0 && (
+      {besties.length == 0 && !loading && (
         <p id="outcome">Nobody at the moment. Try again later!</p>
       )}
 
