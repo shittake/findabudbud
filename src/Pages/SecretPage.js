@@ -459,7 +459,7 @@ const SecretPage = ({ session }) => {
       <br></br>
       <br></br>
       <br></br>
-      <Footer />
+      <Footer session={session} />
     </>
   );
 };

@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../NavBar";
 
-const Layout = ({ session }) => {
+const Layout = (props) => {
+  const [teleHandle, setTeleHandle] = useState();
+  const viewTeleAlert = (input) => {
+    console.log("in view tele alert");
+    console.log(input);
+    setTeleHandle(input);
+    props.onViewTeleAlert(input);
+  };
+
   return (
     <>
-      <NavBar session={session} />
+      <NavBar session={props.session} onViewTeleAlert={viewTeleAlert} />
       <Outlet />
     </>
   );

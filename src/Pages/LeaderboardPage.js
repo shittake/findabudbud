@@ -26,7 +26,7 @@ const LeaderboardPage = ({ session }) => {
   const findAvatar = (link) => {
     if (link != null) return link;
     else return "https://avatars.dicebear.com/api/bottts/1000.svg";
-  }
+  };
 
   /* Template code:
   <p><center><strong> People who love brawl stars: </strong></center></p>
@@ -55,7 +55,7 @@ const LeaderboardPage = ({ session }) => {
         </center>
       </div>
 
-      <div className="formatTable" id = "table">
+      <div className="formatTable" id="table">
         <table>
           <tr>
             <th>Rank</th>
@@ -79,15 +79,21 @@ const LeaderboardPage = ({ session }) => {
                   <td>{val.username}</td>
                   <td>{val.points}</td>
                   <td>{findTitle(val.points)}</td>
-                  <td><img src={findAvatar(val.avatar_url)} /></td>
+                  <td>
+                    <img src={findAvatar(val.avatar_url)} />
+                  </td>
                   <td>{val.matches}</td>
                   <td>
-                  {val.matches >= 1 && <p>{(val.total_rating/val.matches).toFixed(2)} stars </p>}
-                  {val.matches == 0 && <p>Nothing yet!</p>}</td>
+                    {val.matches >= 1 && (
+                      <p>
+                        {(val.total_rating / val.matches).toFixed(2)} stars{" "}
+                      </p>
+                    )}
+                    {val.matches == 0 && <p>Nothing yet!</p>}
+                  </td>
                 </tr>
               );
             })}
-
         </table>
       </div>
 
@@ -109,9 +115,13 @@ const LeaderboardPage = ({ session }) => {
         </center>
       </div>
 
-      <br></br><br></br><br></br><br></br><br></br>
-      
-      <Footer />
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
+      <Footer session={session} />
     </>
   );
 };

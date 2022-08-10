@@ -242,7 +242,7 @@ const Account = ({ session }) => {
           <br></br>
         </div>
       </div>
-      <Footer />
+      <Footer session={session} />
     </div>
   );
 };

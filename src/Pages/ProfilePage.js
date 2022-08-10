@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { supabase } from "../supabaseClient";
 import Welcome from "../Components/Welcome/Welcome";
 import ChatwootWidget from "../chatwoot.js";
 import TextField from "@mui/material/TextField";
 import HeaderProfile from "../Components/Header/HeaderProfile";
 import Footer from "../Footer";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 
 import {
   FacebookShareButton,
@@ -26,7 +26,10 @@ import {
   PurpleButton,
 } from "../Components/Buttons/ColouredButtons";
 
-const ProfilePage = ({ session }) => {
+import useUpdateEffect from "src/Hooks/useUpdateEffect";
+
+const ProfilePage = ({ session, onViewTeleAlert }) => {
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
   const [telegram_handle, setTelegramHandle] = useState(null);
@@ -89,6 +92,29 @@ const ProfilePage = ({ session }) => {
   const [clickLanguages, setClickLanguages] = useState("false"); //check if user clicked on the "Languages" header
   const [clickSports, setClickSports] = useState("false"); //check if user clicked on the "Sports" header
   const [clickOthers, setClickOthers] = useState("false"); //check if user clicked on the "Others" header
+
+  const navigate = useNavigate();
+
+  useUpdateEffect(() => {
+    const { state } = location;
+
+    if (telegram_handle) {
+      if (telegram_handle.charAt(0) == "@") {
+        telegram_handle = telegram_handle.substring(1);
+      }
+      if (telegram_handle) {
+        return;
+      }
+    }
+    if (state?.cameFromMatch) {
+      alert(
+        "You have to provide your telegram handle in the Profile page before you can be matched with others!"
+      );
+      const element = document.querySelector("#telegram_handle");
+      element?.focus();
+      window.history.replaceState({}, document.title);
+    }
+  }, [telegram_handle]);
 
   useEffect(() => {
     getProfile();
@@ -594,7 +620,6 @@ const ProfilePage = ({ session }) => {
     }
   };
 
-  let navigate = useNavigate();
   const moveToAvatar = () => {
     let path = "/";
     navigate(path);
@@ -604,7 +629,13 @@ const ProfilePage = ({ session }) => {
 
   const updateProfile = async (e) => {
     e.preventDefault();
-
+    const initialise = () => {
+      setClickGames(false);
+      setClickShows(false);
+      setClickLanguages(false);
+      setClickOthers(false);
+      setClickSports(false);
+    };
     try {
       setLoading(true);
       const user = supabase.auth.user();
@@ -672,14 +703,6 @@ const ProfilePage = ({ session }) => {
         returning: "minimal", // Don't return the value after inserting
       });
 
-      const initialise = () => {
-        setClickGames(false);
-        setClickShows(false);
-        setClickLanguages(false);
-        setClickOthers(false);
-        setClickSports(false);
-      };
-
       if (!error) {
         setLoading(false);
         alert("Profile updated!");
@@ -716,8 +739,32 @@ const ProfilePage = ({ session }) => {
     );
   };
 
+  const [teleLoading, setTeleLoading] = useState();
+
+  useEffect(() => {
+    console.log("in use Effect");
+    setTeleLoading(Date.now());
+  }, []);
+
+  useUpdateEffect(() => {
+    console.log("in use update Effect");
+    console.log(onViewTeleAlert);
+
+    if (onViewTeleAlert == false) {
+      alert(
+        "Please fill in your telegram handle before being able to use Match Function"
+      );
+    }
+
+    return () => {
+      console.log("in cleanup");
+    };
+  }, [onViewTeleAlert]);
+
   return (
     <>
+      {console.log("in profile")}
+      {console.log(onViewTeleAlert)}
       <HeaderProfile session={session} />
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
@@ -755,7 +802,7 @@ const ProfilePage = ({ session }) => {
         ) : (
           <form onSubmit={updateProfile} className="form-widget">
             <p>Email: {session.user.email}</p>
-            <p>
+            <div>
               <div>
                 <label htmlFor="username">Username: </label>
                 <div style={{ padding: "7px 0 0 0" }}>
@@ -773,21 +820,36 @@ const ProfilePage = ({ session }) => {
                 <br></br>
                 <label htmlFor="username">Telegram Handle: </label>
                 <div style={{ padding: "7px 0 0 0" }}>
-                  <TextField
-                    margin="dense"
-                    size="small"
-                    required
-                    id="telegram_handle"
-                    label="Required"
-                    placeholder="Your telegram handle"
-                    value={telegram_handle}
-                    onChange={(e) => setTelegramHandle(e.target.value)}
-                  />
+                  {onViewTeleAlert != false && (
+                    <TextField
+                      margin="dense"
+                      size="small"
+                      required
+                      id="telegram_handle"
+                      label="Required"
+                      placeholder="Your telegram handle"
+                      value={telegram_handle}
+                      onChange={(e) => setTelegramHandle(e.target.value)}
+                    />
+                  )}
+                  {onViewTeleAlert == false && (
+                    <TextField
+                      margin="dense"
+                      size="small"
+                      required
+                      id="telegram_handle"
+                      label="Required"
+                      placeholder="Your telegram handle"
+                      value={telegram_handle}
+                      onChange={(e) => setTelegramHandle(e.target.value)}
+                      autoFocus
+                    />
+                  )}
                 </div>
               </div>
-            </p>
+            </div>
 
-            <p>
+            <div>
               <div>
                 {" "}
                 Please indicate your preferences for the following categories.
@@ -797,7 +859,7 @@ const ProfilePage = ({ session }) => {
                 To reveal/hide the subcategories within each of the categories
                 shown below, click on any of the headers!
               </div>
-            </p>
+            </div>
           </form>
         )}
       </div>
@@ -806,44 +868,38 @@ const ProfilePage = ({ session }) => {
 
       <h1 className="clickableText" id="profile2">
         <strong>
-          <button2 onClick={() => toggleGames()} style={{ color: "red" }}>
+          <span onClick={() => toggleGames()} style={{ color: "red" }}>
             {" "}
             Games{" "}
-          </button2>
+          </span>
         </strong>
       </h1>
 
       {clickGames && (
         <>
-          <h className="parent">
-            <temp className="halfchild">
+          <h1 className="parent">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => addGames()}
-                    style={{ color: "green" }}
-                  >
+                  <span onClick={() => addGames()} style={{ color: "green" }}>
                     {" "}
                     Select All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
+            </span>
 
-            <temp className="halfchild">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => clearGames()}
-                    style={{ color: "red" }}
-                  >
+                  <span onClick={() => clearGames()} style={{ color: "red" }}>
                     {" "}
                     Deselect All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
-          </h>
+            </span>
+          </h1>
 
           <h1 className="parent">
             {/* Toggle button to change preference for Board Games */}
@@ -938,43 +994,37 @@ const ProfilePage = ({ session }) => {
       {/* Second Heading - TV Shows/Movies */}
       <h1 className="clickableText">
         <strong>
-          <button2 onClick={() => toggleShows()} style={{ color: "green" }}>
+          <span onClick={() => toggleShows()} style={{ color: "green" }}>
             TV Shows/Movies
-          </button2>
+          </span>
         </strong>
       </h1>
 
       {clickShows && (
         <>
-          <h className="parent">
-            <temp className="halfchild">
+          <h1 className="parent">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => addShows()}
-                    style={{ color: "green" }}
-                  >
+                  <span onClick={() => addShows()} style={{ color: "green" }}>
                     {" "}
                     Select All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
+            </span>
 
-            <temp className="halfchild">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => clearShows()}
-                    style={{ color: "red" }}
-                  >
+                  <span onClick={() => clearShows()} style={{ color: "red" }}>
                     {" "}
                     Deselect All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
-          </h>
+            </span>
+          </h1>
 
           <h1 className="parent">
             {/* Toggle button to change preference for Anime */}
@@ -1098,44 +1148,44 @@ const ProfilePage = ({ session }) => {
       {/* Third heading - LANGUAGES */}
       <h1 className="clickableText">
         <strong>
-          <button2 onClick={() => toggleLanguages()} style={{ color: "blue" }}>
+          <span onClick={() => toggleLanguages()} style={{ color: "blue" }}>
             {" "}
             Languages{" "}
-          </button2>
+          </span>
         </strong>
       </h1>
 
       {clickLanguages && (
         <>
-          <h className="parent">
-            <temp className="halfchild">
+          <h1 className="parent">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
+                  <span
                     onClick={() => addLanguages()}
                     style={{ color: "green" }}
                   >
                     {" "}
                     Select All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
+            </span>
 
-            <temp className="halfchild">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
+                  <span
                     onClick={() => clearLanguages()}
                     style={{ color: "red" }}
                   >
                     {" "}
                     Deselect All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
-          </h>
+            </span>
+          </h1>
 
           <h1 className="parent">
             {/* Toggle button to change preference for Arabic */}
@@ -1268,44 +1318,38 @@ const ProfilePage = ({ session }) => {
       {/* Fourth heading - Sports */}
       <h1 className="clickableText">
         <strong>
-          <button2 onClick={() => toggleSports()} style={{ color: "purple" }}>
+          <span onClick={() => toggleSports()} style={{ color: "purple" }}>
             {" "}
             Sports{" "}
-          </button2>
+          </span>
         </strong>
       </h1>
 
       {clickSports && (
         <>
-          <h className="parent">
-            <temp className="halfchild">
+          <h1 className="parent">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => addSports()}
-                    style={{ color: "green" }}
-                  >
+                  <span onClick={() => addSports()} style={{ color: "green" }}>
                     {" "}
                     Select All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
+            </span>
 
-            <temp className="halfchild">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => clearSports()}
-                    style={{ color: "red" }}
-                  >
+                  <span onClick={() => clearSports()} style={{ color: "red" }}>
                     {" "}
                     Deselect All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
-          </h>
+            </span>
+          </h1>
 
           <h1 className="parent">
             {/* Toggle button to change preference for Badminton */}
@@ -1439,44 +1483,38 @@ const ProfilePage = ({ session }) => {
 
       <h1 className="clickableText" id="profile2">
         <strong>
-          <button2 onClick={() => toggleOthers()} style={{ color: "red" }}>
+          <span onClick={() => toggleOthers()} style={{ color: "red" }}>
             {" "}
             Others{" "}
-          </button2>
+          </span>
         </strong>
       </h1>
 
       {clickOthers && (
         <>
-          <h className="parent">
-            <temp className="halfchild">
+          <h1 className="parent">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => addOthers()}
-                    style={{ color: "green" }}
-                  >
+                  <span onClick={() => addOthers()} style={{ color: "green" }}>
                     {" "}
                     Select All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
+            </span>
 
-            <temp className="halfchild">
+            <span className="halfchild">
               <h1 className="clickableText">
                 <strong>
-                  <button2
-                    onClick={() => clearOthers()}
-                    style={{ color: "red" }}
-                  >
+                  <span onClick={() => clearOthers()} style={{ color: "red" }}>
                     {" "}
                     Deselect All{" "}
-                  </button2>
+                  </span>
                 </strong>
               </h1>
-            </temp>
-          </h>
+            </span>
+          </h1>
 
           <h1 className="parent">
             {/* Toggle button to change preference for Food */}
@@ -1566,7 +1604,7 @@ const ProfilePage = ({ session }) => {
       <br></br>
 
       <h1 className="parent" id="share">
-        <h2 className="child">
+        <p className="child">
           <FacebookShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share!"}
@@ -1574,9 +1612,9 @@ const ProfilePage = ({ session }) => {
           >
             <FacebookIcon size={62} round={true} />
           </FacebookShareButton>
-        </h2>
+        </p>
 
-        <h2 className="child">
+        <p className="child">
           <TelegramShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
@@ -1584,9 +1622,9 @@ const ProfilePage = ({ session }) => {
           >
             <TelegramIcon size={62} round={true} />
           </TelegramShareButton>
-        </h2>
+        </p>
 
-        <h2 className="child">
+        <p className="child">
           <WhatsappShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
@@ -1594,9 +1632,9 @@ const ProfilePage = ({ session }) => {
           >
             <WhatsappIcon size={62} round={true} />
           </WhatsappShareButton>
-        </h2>
+        </p>
 
-        <h2 className="child">
+        <p className="child">
           <LinkedinShareButton
             url="https://findabud.herokuapp.com/"
             quote={"Share"}
@@ -1604,7 +1642,7 @@ const ProfilePage = ({ session }) => {
           >
             <LinkedinIcon size={62} round={true} />
           </LinkedinShareButton>
-        </h2>
+        </p>
       </h1>
 
       <br></br>
@@ -1613,7 +1651,7 @@ const ProfilePage = ({ session }) => {
       <br></br>
       <br></br>
 
-      <Footer />
+      <Footer session={session} />
     </>
   );
 };

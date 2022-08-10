@@ -37,40 +37,41 @@ export default function Router({ session }) {
       }
     };
 
-    const updateUsersOnlineFalse = async () => {
-      try {
-        const { error } = await supabase
-          .from("profiles")
-          .update({ userOnline: 0 }) // go to this column
-          .eq("id", session.user.id);
-        console.log("finish");
-
-        if (error) throw error;
-      } catch (error) {
-        console.log(error);
-      }
-    };
     updateUsersOnlineTrue();
 
-    return async () => {
-      if (ref.current !== null) {
-        ref.current = null;
-      }
-      await updateUsersOnlineFalse();
-    };
+    // return () => {
+    //   if (ref.current !== null) {
+    //     ref.current = null;
+    //   }
+    //   updateUsersOnlineFalse();
+    // };
   }, []);
 
+  const [teleHandle, setTeleHandle] = useState();
+  const viewTeleAlert = (input) => {
+    console.log("in router");
+    console.log(input);
+    setTeleHandle(input);
+  };
+
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh>
       <Routes>
-        <Route path="/" element={<Layout session={session} />}>
+        <Route
+          path="/"
+          element={<Layout session={session} onViewTeleAlert={viewTeleAlert} />}
+        >
           <Route
             path="/"
             element={<Account key={session.user.id} session={session} />}
           />
           <Route
+            reloadDocument={true}
             path="profilepage"
-            element={<ProfilePage session={session} />}
+            element={
+              <ProfilePage session={session} onViewTeleAlert={teleHandle} />
+            }
+            key={Date.now()}
           />
           <Route
             path="firstpage"
