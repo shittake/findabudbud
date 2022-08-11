@@ -38,7 +38,6 @@ export default function Router({ session }) {
     };
 
     updateUsersOnlineTrue();
-
     // return () => {
     //   if (ref.current !== null) {
     //     ref.current = null;

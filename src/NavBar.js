@@ -115,7 +115,7 @@ function NavBar(props) {
 
             <NavLink to="/chatpage">
               <h1>
-                GO CHAT
+                {/* GO CHAT */}
                 <img
                   src={match}
                   id="chat"

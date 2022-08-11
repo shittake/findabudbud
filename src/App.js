@@ -7,6 +7,8 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./Components/Buttons/ButtonStylingTheme";
 import Router from "./Components/Router";
 import axios from "axios";
+import { mount } from "cypress/vue/dist/@vue/test-utils";
+import { unmount } from "cypress/react";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
