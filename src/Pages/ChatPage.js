@@ -174,7 +174,7 @@ const ChatPage = ({ session }) => {
 
       {!mine.map((user) => user.click)[0] && (
         <>
-          <p class="warning">
+          <p className="warning">
             You are not in the waiting room yet. To make your profile visible to
             others, click on another tab, and then the "Match now!" tab again.{" "}
           </p>
@@ -190,12 +190,12 @@ const ChatPage = ({ session }) => {
 
       <br></br>
       <p className="neutral">
-        <div className="button5" id="history">
-          <button2 onClick={moveToHistory}>
+        <span className="button5" id="history">
+          <span onClick={moveToHistory}>
             {" "}
             Click to view your past match history and leave your ratings!
-          </button2>
-        </div>
+          </span>
+        </span>
       </p>
 
       {clickedUsernames.length <= 0 ? (
@@ -206,7 +206,7 @@ const ChatPage = ({ session }) => {
           </p>
         </>
       ) : (
-        <p>
+        <div>
           {/*
         <p><center><strong> People with the most common interests with you </strong></center></p>
         {displayCommon().map(user => <p><center> {user} </center></p>)}
@@ -217,15 +217,15 @@ const ChatPage = ({ session }) => {
             <strong>
               {" "}
               {clickedUsernames.length}
-              {clickedUsernames.length == 1 && <t> user </t>}
-              {clickedUsernames.length > 1 && <t> users </t>}
+              {clickedUsernames.length == 1 && <span> user </span>}
+              {clickedUsernames.length > 1 && <span> users </span>}
               waiting to be matched now...{" "}
             </strong>
           </p>
 
           <center>
-            {clickedAvatars.map((user) => (
-              <img src={user} height="100"></img>
+            {clickedAvatars.map((user, index) => (
+              <img key={index} src={user} height="100"></img>
             ))}
           </center>
           <br></br>
@@ -233,7 +233,7 @@ const ChatPage = ({ session }) => {
           <br></br>
           <br></br>
           <br></br>
-        </p>
+        </div>
       )}
 
       <Footer session={session} />

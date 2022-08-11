@@ -396,9 +396,16 @@ const SecretPage = ({ session }) => {
 
       {besties.length > 0 && (
         <>
-          <p>
-            <center>Matching algorithm has completed.</center>
-          </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "0 0 12px 0",
+            }}
+          >
+            Matching algorithm has completed.
+          </div>
 
           <center>
             <p id="outcome">
@@ -415,11 +422,18 @@ const SecretPage = ({ session }) => {
 
           <br></br>
 
-          <p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "0 0 15px 0",
+            }}
+          >
             <center>
               <strong>Both of you enjoy:</strong>
             </center>
-          </p>
+          </div>
 
           <center>{hobbiesSimilar(selected).join(", ")}</center>
           <br></br>
@@ -436,7 +450,7 @@ const SecretPage = ({ session }) => {
                       besties[0]
                     )
                   }
-                  class="buttonTeleLink"
+                  className="buttonTeleLink"
                   target="_blank"
                 >
                   Send a telegram message to{" "}

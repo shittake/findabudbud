@@ -51,7 +51,7 @@ export default function Auth() {
         <h1 className="homepageimage">
           <img
             src={logo}
-            class="centerimage"
+            className="centerimage"
             height="180"
             onClick={hoverClick}
             style={{ cursor: "pointer" }}
@@ -88,7 +88,7 @@ export default function Auth() {
           />
         )}
 
-        <p className="description">
+        <div className="description" style={{ padding: "10px 0 10px 0" }}>
           <center>
             <div className="auth-centralise-text">
               Key your personal email below and receive a unique login link!
@@ -102,7 +102,8 @@ export default function Auth() {
               use your NUSNET email.
             </div>
           </center>
-        </p>
+        </div>
+
         {loading ? (
           <div className="welcome-outer" style={{ padding: "25px 0 0 0" }}>
             <strong>"Sending magic link..."</strong>

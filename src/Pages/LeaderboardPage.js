@@ -57,43 +57,46 @@ const LeaderboardPage = ({ session }) => {
 
       <div className="formatTable" id="table">
         <table>
-          <tr>
-            <th>Rank</th>
-            <th>Username</th>
-            <th>Points</th>
-            <th>Title</th>
-            <th>Avatar</th>
-            <th>Total Matches</th>
-            <th>Average Rating</th>
-          </tr>
-          {users
-            .sort((a, b) => (a.points < b.points ? 1 : -1))
-            .slice(0, 10)
-            .map((val, key) => {
-              return (
-                <tr key={key}>
-                  <td>
-                    {users.filter((user) => user.points > val.points).length +
-                      1}
-                  </td>
-                  <td>{val.username}</td>
-                  <td>{val.points}</td>
-                  <td>{findTitle(val.points)}</td>
-                  <td>
-                    <img src={findAvatar(val.avatar_url)} />
-                  </td>
-                  <td>{val.matches}</td>
-                  <td>
-                    {val.matches >= 1 && (
-                      <p>
-                        {(val.total_rating / val.matches).toFixed(2)} stars{" "}
-                      </p>
-                    )}
-                    {val.matches == 0 && <p>Nothing yet!</p>}
-                  </td>
-                </tr>
-              );
-            })}
+          <tbody>
+            <tr>
+              <th>Rank</th>
+              <th>Username</th>
+              <th>Points</th>
+              <th>Title</th>
+              <th>Avatar</th>
+              <th>Total Matches</th>
+              <th>Average Rating</th>
+            </tr>
+
+            {users
+              .sort((a, b) => (a.points < b.points ? 1 : -1))
+              .slice(0, 10)
+              .map((val, key) => {
+                return (
+                  <tr key={key}>
+                    <td>
+                      {users.filter((user) => user.points > val.points).length +
+                        1}
+                    </td>
+                    <td>{val.username}</td>
+                    <td>{val.points}</td>
+                    <td>{findTitle(val.points)}</td>
+                    <td>
+                      <img src={findAvatar(val.avatar_url)} />
+                    </td>
+                    <td>{val.matches}</td>
+                    <td>
+                      {val.matches >= 1 && (
+                        <p>
+                          {(val.total_rating / val.matches).toFixed(2)} stars{" "}
+                        </p>
+                      )}
+                      {val.matches == 0 && <p>Nothing yet!</p>}
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
       </div>
 

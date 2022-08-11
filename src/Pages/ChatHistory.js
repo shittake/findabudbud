@@ -204,95 +204,97 @@ const ChatHistory = ({ session }) => {
 
       <div className="formatTable">
         <table className="table2">
-          <tr>
-            <th width="20%">Bud</th>
-            <th width="35%">Matched Date</th>
-            <th width="25%">Give Rating!</th>
-            <th width="20%">Rating received</th>
-          </tr>
+          <tbody>
+            <tr>
+              <th width="20%">Bud</th>
+              <th width="35%">Matched Date</th>
+              <th width="25%">Give Rating!</th>
+              <th width="20%">Rating received</th>
+            </tr>
 
-          {matchWithOthers.map((val, key) => {
-            return (
-              <tr key={key}>
-                <td>{val.secondName}</td>
-                <td>{val.date}</td>
-                <td>
-                  {!val.firstRated && (
-                    <>
-                      {!val.openUpFirst && (
-                        <button
-                          className="tableButton"
-                          onClick={() => toggleOpenFirst(val.id)}
-                        >
-                          Give Rating
-                        </button>
-                      )}
+            {matchWithOthers.map((val, key) => {
+              return (
+                <tr key={key}>
+                  <td>{val.secondName}</td>
+                  <td>{val.date}</td>
+                  <td>
+                    {!val.firstRated && (
+                      <>
+                        {!val.openUpFirst && (
+                          <button
+                            className="tableButton"
+                            onClick={() => toggleOpenFirst(val.id)}
+                          >
+                            Give Rating
+                          </button>
+                        )}
 
-                      {val.openUpFirst && (
-                        <div className="star-rating">
-                          {[...Array(5)].map((star, index) => {
-                            index += 1;
-                            return (
-                              <button
-                                type="button"
-                                key={index}
-                                className={
-                                  index <= (hover || rating) ? "on" : "off"
-                                }
-                                onClick={() =>
-                                  updateRating(index, val.id, val.seconduser)
-                                }
-                                onMouseEnter={() => setHover(index)}
-                                onMouseLeave={() => setHover(rating)}
-                              >
-                                <span className="star">&#9733;</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </>
-                  )}
-                  {val.firstRated && (
-                    <>
-                      {val.firstGive == 1 && (
-                        <p> You gave {val.secondName} 1 point!</p>
-                      )}
-                      {val.firstGive > 1 && (
-                        <p>
-                          {" "}
-                          You gave {val.secondName} {val.firstGive} points!
-                        </p>
-                      )}
-                    </>
-                  )}
-                </td>
+                        {val.openUpFirst && (
+                          <div className="star-rating">
+                            {[...Array(5)].map((star, index) => {
+                              index += 1;
+                              return (
+                                <button
+                                  type="button"
+                                  key={index}
+                                  className={
+                                    index <= (hover || rating) ? "on" : "off"
+                                  }
+                                  onClick={() =>
+                                    updateRating(index, val.id, val.seconduser)
+                                  }
+                                  onMouseEnter={() => setHover(index)}
+                                  onMouseLeave={() => setHover(rating)}
+                                >
+                                  <span className="star">&#9733;</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
+                    )}
+                    {val.firstRated && (
+                      <>
+                        {val.firstGive == 1 && (
+                          <p> You gave {val.secondName} 1 point!</p>
+                        )}
+                        {val.firstGive > 1 && (
+                          <p>
+                            {" "}
+                            You gave {val.secondName} {val.firstGive} points!
+                          </p>
+                        )}
+                      </>
+                    )}
+                  </td>
 
-                <td>
-                  {val.secondRated && val.firstRated && (
-                    <>
-                      {val.secondGive == 1 && (
-                        <p>{val.secondName} gave you 1 point!</p>
-                      )}
-                      {val.secondGive > 1 && (
-                        <p>
-                          {val.secondName} gave you {val.secondGive} points!
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <td>
+                    {val.secondRated && val.firstRated && (
+                      <>
+                        {val.secondGive == 1 && (
+                          <p>{val.secondName} gave you 1 point!</p>
+                        )}
+                        {val.secondGive > 1 && (
+                          <p>
+                            {val.secondName} gave you {val.secondGive} points!
+                          </p>
+                        )}
+                      </>
+                    )}
 
-                  {val.secondRated && !val.firstRated && (
-                    <>Hidden until you give your rating!</>
-                  )}
+                    {val.secondRated && !val.firstRated && (
+                      <>Hidden until you give your rating!</>
+                    )}
 
-                  {!val.secondRated && (
-                    <>{val.secondName} has not rated you yet!</>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
+                    {!val.secondRated && (
+                      <>{val.secondName} has not rated you yet!</>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
 
@@ -304,100 +306,102 @@ const ChatHistory = ({ session }) => {
 
       <div className="formatTable">
         <table className="table2">
-          <tr>
-            <th width="20%">Bud</th>
-            <th width="35%">Matched Date</th>
-            <th width="25%">Give Rating!</th>
-            <th width="20%">Rating received</th>
-          </tr>
-          {matched.map((val, key) => {
-            return (
-              <tr key={key}>
-                <td>{val.firstName}</td>
-                <td className="small">{val.date}</td>
-                <td>
-                  {!val.secondRated && (
-                    <>
-                      {!val.openUpSecond && (
-                        <button
-                          className="tableButton"
-                          onClick={() => toggleOpenSecond(val.id)}
-                        >
-                          Give Rating
-                        </button>
-                      )}
+          <tbody>
+            <tr>
+              <th width="20%">Bud</th>
+              <th width="35%">Matched Date</th>
+              <th width="25%">Give Rating!</th>
+              <th width="20%">Rating received</th>
+            </tr>
+            {matched.map((val, key) => {
+              return (
+                <tr key={key}>
+                  <td>{val.firstName}</td>
+                  <td className="small">{val.date}</td>
+                  <td>
+                    {!val.secondRated && (
+                      <>
+                        {!val.openUpSecond && (
+                          <button
+                            className="tableButton"
+                            onClick={() => toggleOpenSecond(val.id)}
+                          >
+                            Give Rating
+                          </button>
+                        )}
 
-                      {val.openUpSecond && (
-                        <div className="star-rating">
-                          {[...Array(5)].map((star, index) => {
-                            index += 1;
-                            return (
-                              <button
-                                type="button"
-                                key={index}
-                                className={
-                                  index <= (hover || rating) ? "on" : "off"
-                                }
-                                onClick={() =>
-                                  updateRatingFirst(
-                                    index,
-                                    val.id,
-                                    val.firstuser
-                                  )
-                                }
-                                onMouseEnter={() => setHover(index)}
-                                onMouseLeave={() => setHover(rating)}
-                              >
-                                <span className="star">&#9733;</span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </>
-                  )}
+                        {val.openUpSecond && (
+                          <div className="star-rating">
+                            {[...Array(5)].map((star, index) => {
+                              index += 1;
+                              return (
+                                <button
+                                  type="button"
+                                  key={index}
+                                  className={
+                                    index <= (hover || rating) ? "on" : "off"
+                                  }
+                                  onClick={() =>
+                                    updateRatingFirst(
+                                      index,
+                                      val.id,
+                                      val.firstuser
+                                    )
+                                  }
+                                  onMouseEnter={() => setHover(index)}
+                                  onMouseLeave={() => setHover(rating)}
+                                >
+                                  <span className="star">&#9733;</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </>
+                    )}
 
-                  {val.secondRated && (
-                    <>
-                      {val.secondGive == 1 && (
-                        <p> You gave {val.firstName} 1 point!</p>
-                      )}
-                      {val.secondGive > 1 && (
-                        <p>
-                          {" "}
-                          You gave {val.firstName} {val.secondGive} points!
-                        </p>
-                      )}
-                    </>
-                  )}
-                </td>
+                    {val.secondRated && (
+                      <>
+                        {val.secondGive == 1 && (
+                          <p> You gave {val.firstName} 1 point!</p>
+                        )}
+                        {val.secondGive > 1 && (
+                          <p>
+                            {" "}
+                            You gave {val.firstName} {val.secondGive} points!
+                          </p>
+                        )}
+                      </>
+                    )}
+                  </td>
 
-                <td>
-                  {val.firstRated && val.secondRated && (
-                    <>
-                      {val.firstGive == 1 && (
-                        <p> {val.firstName} gave you 1 point! </p>
-                      )}
-                      {val.firstGive > 1 && (
-                        <p>
-                          {" "}
-                          {val.firstName} gave you {val.firstGive} points!{" "}
-                        </p>
-                      )}
-                    </>
-                  )}
+                  <td>
+                    {val.firstRated && val.secondRated && (
+                      <>
+                        {val.firstGive == 1 && (
+                          <p> {val.firstName} gave you 1 point! </p>
+                        )}
+                        {val.firstGive > 1 && (
+                          <p>
+                            {" "}
+                            {val.firstName} gave you {val.firstGive} points!{" "}
+                          </p>
+                        )}
+                      </>
+                    )}
 
-                  {val.firstRated && !val.secondRated && (
-                    <>Hidden until you give your rating!</>
-                  )}
+                    {val.firstRated && !val.secondRated && (
+                      <>Hidden until you give your rating!</>
+                    )}
 
-                  {!val.firstRated && (
-                    <>{val.firstName} has not rated you yet!</>
-                  )}
-                </td>
-              </tr>
-            );
-          })}
+                    {!val.firstRated && (
+                      <>{val.firstName} has not rated you yet!</>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
       </div>
 

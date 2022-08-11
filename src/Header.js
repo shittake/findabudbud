@@ -28,29 +28,27 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Header({ session }) {
-
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState(false);
 
   const fetchData = async () => {
-  const {data, error} = await supabase.from('profiles').select('*')
-  setUsers(data);
-    }
+    const { data, error } = await supabase.from("profiles").select("*");
+    setUsers(data);
+  };
 
   useEffect(() => {
-  fetchData();
-  },[])
+    fetchData();
+  }, []);
 
   const formatDate = (dateString) => {
-    const options = {hour12: false }
-    return new Date(dateString).toLocaleString(undefined, options)
-  }
+    const options = { hour12: false };
+    return new Date(dateString).toLocaleString(undefined, options);
+  };
 
   const toggleHistory = () => {
     setHistory(!history);
-  }
+  };
 
-  
   const steps = [
     {
       selector: "#welcome-message",
@@ -136,7 +134,6 @@ export default function Header({ session }) {
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [firstTime, setFirstTime] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
 
-
   const { header, logo } = useStyles();
 
   var i;
@@ -217,75 +214,84 @@ export default function Header({ session }) {
     </Typography>
   );
 
-  var onlineUsers = users.filter(user => (new Date() - new Date(user.updated_at)) <= 3600000).length;
-  var myHistory = users.filter(user => user.id == session.user.id).map(user => user.point_history).toString().slice(1).split(",");
+  var onlineUsers = users.filter(
+    (user) => new Date() - new Date(user.updated_at) <= 3600000
+  ).length;
+  var myHistory = users
+    .filter((user) => user.id == session.user.id)
+    .map((user) => user.point_history)
+    .toString()
+    .slice(1)
+    .split(",");
   const getMenuButtons = () => {
     return (
-    <>
-      <h1 className="pointSystem" onClick={toggleHistory}>
-        <div>
-          {" "}
-          <strong> Points: {points}</strong>
-        </div>
-        <div>
-          {" "}
-          <strong> Rank: {findTitle(points)} </strong>
-        </div>
-      </h1>
-      <p> Users Online now: {onlineUsers} </p>
-    </>
+      <>
+        <h1 className="pointSystem" onClick={toggleHistory}>
+          <div>
+            {" "}
+            <strong> Points: {points}</strong>
+          </div>
+          <div>
+            {" "}
+            <strong> Rank: {findTitle(points)} </strong>
+          </div>
+        </h1>
+        <p> Users Online now: {onlineUsers} </p>
+      </>
     );
   };
 
-
-
-  
-
   return (
     <header>
-    {history && (
-          <Popup
-            content={
-              <>
-                <p><center><strong>Total points: {points} </strong></center></p>
-                <p><center><strong>Your Point History</strong></center></p>
-                <div className="formatTablePopup">
-                  <table className = "table1">
+      {history && (
+        <Popup
+          content={
+            <>
+              <p>
+                <center>
+                  <strong>Total points: {points} </strong>
+                </center>
+              </p>
+              <p>
+                <center>
+                  <strong>Your Point History</strong>
+                </center>
+              </p>
+              <div className="formatTablePopup">
+                <table className="table1">
+                  <tbody>
                     <tr>
                       <th>Delta</th>
                       <th>Activity</th>
                       <th>Date</th>
                     </tr>
-                    {
-                      myHistory.map((value,key) =>{
-                        return (
-                      <tr key={key}>
-                        <td>{value.split(" ")[0]}</td>
-                        <td>{value.split(" ").slice(1,-4).join(" ")}</td>
-                        <td>{value.split(" ").slice(-3).join(" ")}</td>
-                      </tr>
+                    {myHistory.map((value, key) => {
+                      return (
+                        <tr key={key}>
+                          <td>{value.split(" ")[0]}</td>
+                          <td>{value.split(" ").slice(1, -4).join(" ")}</td>
+                          <td>{value.split(" ").slice(-3).join(" ")}</td>
+                        </tr>
                       );
-                      })
-                    }
-
-                  </table>
-                </div>
-              
-            
-              
-
-
-              </>
-            }
-            handleClose={toggleHistory}
-          />
-        )}
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          }
+          handleClose={toggleHistory}
+        />
+      )}
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour
           steps={steps}
           isOpen={isTourOpen}
-          onRequestClose={() => {setIsTourOpen(false); setFirstTime(false); updateFirstTime()}}
+          onRequestClose={() => {
+            setIsTourOpen(false);
+            setFirstTime(false);
+            updateFirstTime();
+          }}
         />
       )}
     </header>
