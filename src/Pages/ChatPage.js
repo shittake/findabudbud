@@ -11,7 +11,7 @@ import ChatwootWidget from "../chatwoot.js";
 import { Navigate, useNavigate } from "react-router-dom";
 import useUpdateEffect from "src/Hooks/useUpdateEffect";
 
-const ChatPage = ({ session }) => {
+const ChatPage = ({ session, isLoading, numUsersOnline }) => {
   const [teleHandle, setTeleHandle] = useState(null); //initialise to null state
   const [teleLoading, setTeleLoading] = useState(true);
   const navigate = useNavigate();
@@ -166,7 +166,11 @@ const ChatPage = ({ session }) => {
     </>
   ) : (
     <>
-      <HeaderMatch session={session} />
+      <HeaderMatch
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       <div className="App">
         <ChatwootWidget />

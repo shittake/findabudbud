@@ -12,7 +12,7 @@ import EventsItem from "../Components/EventComp/EventsItem";
 import Grid from "@mui/material/Grid";
 import { FormControlUnstyledContext } from "@mui/base";
 
-const EventsPage = ({ session }) => {
+const EventsPage = (props) => {
   const [users, setUsers] = useState([]);
   const [allEvents, setAllEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +66,7 @@ const EventsPage = ({ session }) => {
       .from("join")
       .select("eventid")
       // Filters
-      .eq("userid", session.user.id);
+      .eq("userid", props.session.user.id);
     // console.log("fetching join data now");
     // console.log(join);
     return join;
@@ -86,7 +86,7 @@ const EventsPage = ({ session }) => {
         created_at: event.created_at
           ? event.created_at
           : new Date().toISOString(),
-        userid: session.user.id,
+        userid: props.session.user.id,
         numpeople: event.numpeople,
         category: event.category,
       },
@@ -154,7 +154,7 @@ const EventsPage = ({ session }) => {
   const deleteItemHandler = (id) => {
     setAllEvents(
       allEvents.filter((event) => {
-        return event.id !== id || session.user.id !== event.userid;
+        return event.id !== id || props.session.user.id !== event.userid;
       })
     );
     //delete from backend
@@ -170,7 +170,11 @@ const EventsPage = ({ session }) => {
   return (
     <>
       <div style={{ padding: "10px 0 0 0" }}>
-        <HeaderEvents session={session} />
+        <HeaderEvents
+          session={props.session}
+          isLoading={props.isLoading}
+          numUsersOnline={props.numUsersOnline}
+        />
         <div className="App">
           <ChatwootWidget />
         </div>
@@ -179,7 +183,7 @@ const EventsPage = ({ session }) => {
           onAddEvent={addEventHandler}
           onSaveFilterData={saveFilterDataHandler}
           onViewMyEvents={viewEventsHandler}
-          session={session}
+          session={props.session}
           onPassViewMyEventsData={viewMyEventsDataHandler}
         />
 
@@ -230,9 +234,9 @@ const EventsPage = ({ session }) => {
                         date={event.date}
                         time={event.time}
                         onDeleteItem={deleteItemHandler}
-                        session={session}
+                        session={props.session}
                         useridcreator={
-                          event.userid ? event.userid : session.user.id
+                          event.userid ? event.userid : props.session.user.id
                         }
                         numpeople={event.numpeople}
                         currentnumpeople={event.currentnumpeople}
@@ -266,9 +270,9 @@ const EventsPage = ({ session }) => {
                       date={event.date}
                       time={event.time}
                       onDeleteItem={deleteItemHandler}
-                      session={session}
+                      session={props.session}
                       useridcreator={
-                        event.userid ? event.userid : session.user.id
+                        event.userid ? event.userid : props.session.user.id
                       }
                       numpeople={event.numpeople}
                       currentnumpeople={event.currentnumpeople}
@@ -314,9 +318,9 @@ const EventsPage = ({ session }) => {
                       date={event.date}
                       time={event.time}
                       onDeleteItem={deleteItemHandler}
-                      session={session}
+                      session={props.session}
                       useridcreator={
-                        event.userid ? event.userid : session.user.id
+                        event.userid ? event.userid : props.session.user.id
                       }
                       numpeople={event.numpeople}
                       currentnumpeople={event.currentnumpeople}
@@ -335,7 +339,7 @@ const EventsPage = ({ session }) => {
       <br></br>
       <br></br>
       <br></br>
-      <Footer session={session} />
+      <Footer session={props.session} />
     </>
   );
 };

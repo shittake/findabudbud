@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import ChatwootWidget from "./chatwoot";
 
-const Account = ({ session }) => {
+const Account = ({ session, isLoading, numUsersOnline }) => {
   const [sprite, setSprite] = useState("bottts");
   const [seed, setSeed] = useState(1000);
   const [loading, setLoading] = useState(true);
@@ -90,7 +90,11 @@ const Account = ({ session }) => {
         <ChatwootWidget />
       </div>
 
-      <HeaderAvatar session={session} />
+      <HeaderAvatar
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
       <div className="container">
         <div className="nav">
           {avatar == false ? (
