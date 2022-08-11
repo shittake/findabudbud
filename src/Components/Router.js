@@ -46,6 +46,41 @@ export default function Router({ session }) {
     // };
   }, []);
 
+  const [isLoading, setIsLoading] = useState(true);
+  const [numUsersOnline, setNumUsersOnline] = useState();
+  const fetchUsersOnline = async () => {
+    setIsLoading(true);
+    const { data: message, error: err } = await supabase
+      .from("profiles")
+      .select("userOnline");
+
+    console.log(message);
+
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    console.log("subscription start");
+
+    console.log(mySubscription);
+
+    const mySubscription = supabase
+      .from("*")
+      .on("*", (payload) => {
+        console.log("Change received!", payload);
+        fetchUsersOnline();
+      })
+      .subscribe();
+    fetchUsersOnline();
+
+    console.log("after in");
+    console.log(mySubscription);
+
+    return () => {
+      supabase.removeSubscription(mySubscription);
+      console.log("subscription end");
+    };
+  }, []);
+
   const [teleHandle, setTeleHandle] = useState();
   const viewTeleAlert = (input) => {
     console.log("in router");
