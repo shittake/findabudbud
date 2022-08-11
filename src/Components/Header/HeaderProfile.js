@@ -18,7 +18,7 @@ import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
 import { HeaderProfileTutorial } from "../Welcome/Tutorial";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
-export default function HeaderProfile({ session }) {
+export default function HeaderProfile({ session, isLoading, numUsersOnline }) {
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState(false);
 
@@ -147,7 +147,7 @@ export default function HeaderProfile({ session }) {
             <strong> Rank: {findTitle(points)} </strong>
           </div>
         </h1>
-        <p> Users Online now: {onlineUsers} </p>
+        <p> Users Online now: {!isLoading ? numUsersOnline : ""} </p>
       </>
     );
   };

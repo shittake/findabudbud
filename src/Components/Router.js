@@ -47,24 +47,29 @@ export default function Router({ session }) {
   }, []);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [numUsersOnline, setNumUsersOnline] = useState();
+  const [numUsersOnline, setNumUsersOnline] = useState(null);
   const fetchUsersOnline = async () => {
     setIsLoading(true);
-    const { data: message, error: err } = await supabase
+    const { data: online, error: err } = await supabase
       .from("profiles")
       .select("userOnline");
 
-    console.log(message);
-
+    // console.log(online);
+    var totalUsersOnline = 0;
+    for (let i = 0; i < online.length; i++) {
+      totalUsersOnline += online[i].userOnline;
+    }
+    setNumUsersOnline(totalUsersOnline);
+    // console.log(totalUsersOnline);
     setIsLoading(false);
   };
   useEffect(() => {
-    console.log("subscription start");
+    // console.log("subscription start");
 
-    console.log(mySubscription);
+    // console.log(mySubscription);
 
     const mySubscription = supabase
-      .from("*")
+      .from("profiles")
       .on("*", (payload) => {
         console.log("Change received!", payload);
         fetchUsersOnline();
@@ -72,12 +77,12 @@ export default function Router({ session }) {
       .subscribe();
     fetchUsersOnline();
 
-    console.log("after in");
-    console.log(mySubscription);
+    // console.log("after in");
+    // console.log(mySubscription);
 
     return () => {
       supabase.removeSubscription(mySubscription);
-      console.log("subscription end");
+      // console.log("subscription end");
     };
   }, []);
 
@@ -97,26 +102,77 @@ export default function Router({ session }) {
         >
           <Route
             path="/"
-            element={<Account key={session.user.id} session={session} />}
+            element={
+              <Account
+                key={session.user.id}
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
           />
           <Route
             reloadDocument={true}
             path="profilepage"
             element={
-              <ProfilePage session={session} onViewTeleAlert={teleHandle} />
+              <ProfilePage
+                session={session}
+                onViewTeleAlert={teleHandle}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
             }
             key={Date.now()}
           />
           <Route
             path="firstpage"
-            element={<LeaderboardPage session={session} />}
+            element={
+              <LeaderboardPage
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
           />
-          <Route path="chatpage" element={<ChatPage session={session} />} />
-          <Route path="eventspage" element={<EventsPage session={session} />} />
-          <Route path="secretpage" element={<SecretPage session={session} />} />
+          <Route
+            path="chatpage"
+            element={
+              <ChatPage
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
+          />
+          <Route
+            path="eventspage"
+            element={
+              <EventsPage
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
+          />
+          <Route
+            path="secretpage"
+            element={
+              <SecretPage
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
+          />
           <Route
             path="historypage"
-            element={<ChatHistory session={session} />}
+            element={
+              <ChatHistory
+                session={session}
+                isLoading={isLoading}
+                numUsersOnline={numUsersOnline}
+              />
+            }
           />
         </Route>
       </Routes>

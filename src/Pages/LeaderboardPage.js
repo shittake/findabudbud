@@ -7,7 +7,7 @@ import Footer from "../Footer";
 import "../styles.css";
 import findTitle from "../Components/Methods/findTitle";
 
-const LeaderboardPage = ({ session }) => {
+const LeaderboardPage = ({ session, isLoading, numUsersOnline }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
 
@@ -41,7 +41,11 @@ const LeaderboardPage = ({ session }) => {
 
   return (
     <>
-      <HeaderLeaderboard session={session} />
+      <HeaderLeaderboard
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       <div className="App">
         <ChatwootWidget />

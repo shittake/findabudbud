@@ -6,7 +6,7 @@ import HeaderMatched from "../Components/Header/HeaderMatched";
 import Footer from "../Footer";
 import addToMatch from "../Components/Match/addToMatch";
 
-const SecretPage = ({ session }) => {
+const SecretPage = ({ session, isLoading, numUsersOnline }) => {
   const [users, setUsers] = useState([]);
   const [click, setClick] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -388,7 +388,11 @@ const SecretPage = ({ session }) => {
 
   return (
     <>
-      <HeaderMatched session={session} />
+      <HeaderMatched
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       <div className="App">
         <ChatwootWidget />

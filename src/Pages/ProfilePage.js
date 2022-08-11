@@ -28,7 +28,12 @@ import {
 
 import useUpdateEffect from "src/Hooks/useUpdateEffect";
 
-const ProfilePage = ({ session, onViewTeleAlert }) => {
+const ProfilePage = ({
+  session,
+  onViewTeleAlert,
+  isLoading,
+  numUsersOnline,
+}) => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState(null);
@@ -765,7 +770,11 @@ const ProfilePage = ({ session, onViewTeleAlert }) => {
     <>
       {console.log("in profile")}
       {console.log(onViewTeleAlert)}
-      <HeaderProfile session={session} />
+      <HeaderProfile
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       {/* Chatwoot widget that provides live chat functionality with support staff (aka me and felicia)*/}
       <div className="App">
