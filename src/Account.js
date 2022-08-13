@@ -67,18 +67,16 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
       setLoading(false);
     }
   };
-  // Function to set the current sprite type
+
   function handleSprite(spritetype) {
     setSprite(spritetype);
   }
 
-  // Function to generate random seeds for the API
   function handleGenerate() {
     let x = Math.floor(Math.random() * 1000);
     setSeed(x);
   }
 
-  // Function to download image and save it in our computer
   function downloadImage(link) {
     updateAvatar(link);
     alert("Avatar chosen and saved!");

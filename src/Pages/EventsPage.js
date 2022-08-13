@@ -65,10 +65,7 @@ const EventsPage = (props) => {
     const { data: join, error } = await supabase
       .from("join")
       .select("eventid")
-      // Filters
       .eq("userid", props.session.user.id);
-    // console.log("fetching join data now");
-    // console.log(join);
     return join;
   };
 
@@ -97,17 +94,12 @@ const EventsPage = (props) => {
 
   const addEventHandler = async (event) => {
     const newEvent = await addToSupabase(event);
-    // console.log("new event");
-    // console.log(newEvent);
     getEvents();
-    // setAllEvents([...allEvents, ...newEvent]);
-    // subscribeToInserts();
   };
 
   const [filterOn, setFilterOn] = useState(false);
   const [filterEventId, setFilterEventId] = useState("");
   const [filterCategory, setFilterCategory] = useState([]);
-
   const [viewEventsOn, setViewEventsOn] = useState(false);
   const [myEvents, setMyEvents] = useState([]);
 
@@ -141,14 +133,6 @@ const EventsPage = (props) => {
     const { data, error } = await supabase.from("events").delete().eq("id", id);
     console.log(error);
     console.log(id);
-    //delete all data from join table as well:
-    // console.log("hopefully deleting from supabase");
-    //error 409:
-    // const { data: join, error: err } = await supabase
-    //   .from("join")
-    //   .delete()
-    //   .eq("eventid", id);
-    // console.log("hopefully deleted from supabase");
   };
 
   const deleteItemHandler = (id) => {

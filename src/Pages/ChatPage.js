@@ -40,14 +40,9 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
         } else {
           setTeleHandle(false);
         }
-        // setAlertTele();
-        // setTeleLoadingfalse);
+
 
         if (error) throw error;
-        // if (isValid) {
-        //   Navigate("arejio", { isValid });
-        // history.push("/profile");
-        // }
       } catch (error) {}
       setTeleLoading(false);
     };
@@ -65,7 +60,7 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
 
   setTimeout(() => {
     setRedirectNow(true);
-  }, 5000);
+  }, 30000);
 
   useEffect(() => {
     const unloadCallback = (event) => {
@@ -137,7 +132,7 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
   // Find the user.id of all the people who are currently online (updated < 1 hour ago)
   var onlineUsers = Array.from(
     users
-      .filter((user) => new Date() - new Date(user.updated_at) <= 36000000000) // currently have 4 extra 0s
+      .filter((user) => new Date() - new Date(user.updated_at) <= 3600000) 
       .filter((user) => user.id != session.user.id) // can't match with myself!
       .map((user) => user.id)
   );
@@ -188,7 +183,7 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
       {mine.map((user) => user.click)[0] && (
         <p className="success">
           {" "}
-          You are in the waiting room now! Estimated time for a match: 5 seconds
+          You are in the waiting room now! Estimated time for a match: 30 seconds
         </p>
       )}
 

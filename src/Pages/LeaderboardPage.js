@@ -28,11 +28,6 @@ const LeaderboardPage = ({ session, isLoading, numUsersOnline }) => {
     else return "https://avatars.dicebear.com/api/bottts/1000.svg";
   };
 
-  /* Template code:
-  <p><center><strong> People who love brawl stars: </strong></center></p>
-  {users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
-  */
-
   // To get the current user's number of points:
   var number = users
     .filter((user) => user.id == session.user.id)
