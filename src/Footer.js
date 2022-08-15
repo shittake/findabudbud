@@ -33,7 +33,12 @@ const Footer = ({ session }) => {
     <>
       {/* Sign out button */}
       <div className="footer">
-        <button className="button block" onClick={onSignOut}>
+        <button
+          className="button block"
+          onClick={() => {
+            onSignOut();
+          }}
+        >
           Sign Out
         </button>
       </div>

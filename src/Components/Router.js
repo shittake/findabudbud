@@ -17,6 +17,9 @@ import useUpdateEffect from "src/Hooks/useUpdateEffect";
 
 export default function Router({ session }) {
   const ref = useRef(null);
+
+  const [fetchingCanStart, setFetchingCanStart] = useState(false);
+
   useEffect(() => {
     if (ref.current === null) {
       ref.current = false;
@@ -31,6 +34,8 @@ export default function Router({ session }) {
           .update({ userOnline: 1 }) // go to this column
           .eq("id", session.user.id);
 
+        setFetchingCanStart(true);
+
         if (error) throw error;
       } catch (error) {
         console.log(error);
@@ -38,18 +43,16 @@ export default function Router({ session }) {
     };
 
     updateUsersOnlineTrue();
-    // return () => {
-    //   if (ref.current !== null) {
-    //     ref.current = null;
-    //   }
-    //   updateUsersOnlineFalse();
-    // };
+    return async () => {
+      if (ref.current !== null) {
+        ref.current = null;
+      }
+    };
   }, []);
 
   const [isLoading, setIsLoading] = useState(true);
   const [numUsersOnline, setNumUsersOnline] = useState(null);
   const fetchUsersOnline = async () => {
-    setIsLoading(true);
     const { data: online, error: err } = await supabase
       .from("profiles")
       .select("userOnline");
@@ -59,11 +62,12 @@ export default function Router({ session }) {
     for (let i = 0; i < online.length; i++) {
       totalUsersOnline += online[i].userOnline;
     }
+    console.log("total users online: ", totalUsersOnline);
     setNumUsersOnline(totalUsersOnline);
     // console.log(totalUsersOnline);
     setIsLoading(false);
   };
-  useEffect(() => {
+  useUpdateEffect(() => {
     // console.log("subscription start");
 
     // console.log(mySubscription);
@@ -84,7 +88,7 @@ export default function Router({ session }) {
       supabase.removeSubscription(mySubscription);
       // console.log("subscription end");
     };
-  }, []);
+  }, [fetchingCanStart]);
 
   const [teleHandle, setTeleHandle] = useState();
   const viewTeleAlert = (input) => {
