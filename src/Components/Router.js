@@ -18,7 +18,6 @@ import useUpdateEffect from "src/Hooks/useUpdateEffect";
 export default function Router({ session }) {
   const ref = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
-
   const [fetchingCanStart, setFetchingCanStart] = useState(false);
 
   useEffect(() => {
