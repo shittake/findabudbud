@@ -17,6 +17,7 @@ import useUpdateEffect from "src/Hooks/useUpdateEffect";
 
 export default function Router({ session }) {
   const ref = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [fetchingCanStart, setFetchingCanStart] = useState(false);
 
@@ -34,6 +35,7 @@ export default function Router({ session }) {
           .update({ userOnline: 1 }) // go to this column
           .eq("id", session.user.id);
 
+        console.log("finish updating, fetching can start");
         setFetchingCanStart(true);
 
         if (error) throw error;
@@ -50,7 +52,6 @@ export default function Router({ session }) {
     };
   }, []);
 
-  const [isLoading, setIsLoading] = useState(true);
   const [numUsersOnline, setNumUsersOnline] = useState(null);
   const fetchUsersOnline = async () => {
     const { data: online, error: err } = await supabase
@@ -76,7 +77,6 @@ export default function Router({ session }) {
       .from("profiles")
       .on("*", (payload) => {
         console.log("Change received!", payload);
-        fetchUsersOnline();
       })
       .subscribe();
     fetchUsersOnline();
