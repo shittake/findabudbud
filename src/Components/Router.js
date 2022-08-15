@@ -51,7 +51,7 @@ export default function Router({ session }) {
     };
   }, []);
 
-  const [numUsersOnline, setNumUsersOnline] = useState(null);
+  const [numUsersOnline, setNumUsersOnline] = useState(6);
   const fetchUsersOnline = async () => {
     const { data: online, error: err } = await supabase
       .from("profiles")
