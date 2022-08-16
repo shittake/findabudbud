@@ -69,7 +69,7 @@ export default function ChatContent(props) {
     console.log(mySubscription);
 
     const mySubscription = supabase
-      .from("*")
+      .from("eventsmessages")
       .on("*", (payload) => {
         console.log("Change received!", payload);
         fetchAllMessages();

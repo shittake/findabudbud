@@ -16,25 +16,24 @@ import Popup from "../../Popup";
 import findTitle from "../Methods/findTitle";
 import { useStyles, useStylesName as useStyles2 } from "../Methods/useStyles";
 import { HeaderHistoryTutorial } from "../Welcome/Tutorial";
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
-export default function HeaderHistory({ session }) {
-
+export default function HeaderHistory({ session, isLoading, numUsersOnline }) {
   const [users, setUsers] = useState([]);
   const [history, setHistory] = useState(false);
 
   const fetchData = async () => {
-  const {data, error} = await supabase.from('profiles').select('*')
-  setUsers(data);
-    }
+    const { data, error } = await supabase.from("profiles").select("*");
+    setUsers(data);
+  };
 
   useEffect(() => {
-  fetchData();
-  },[])
+    fetchData();
+  }, []);
 
   const toggleHistory = () => {
     setHistory(!history);
-  }
+  };
 
   useEffect(() => {
     getProfile();
@@ -60,7 +59,7 @@ export default function HeaderHistory({ session }) {
 
   const disableBody = (target) => {
     disableBodyScroll(target);
-  }
+  };
 
   const [points, setPoints] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -68,10 +67,8 @@ export default function HeaderHistory({ session }) {
   const [isTourOpen, setIsTourOpen] = useState(false);
   const [firstTimeHistory, setFirstTimeHistory] = useState(true); // Only during the first time a user logs in, the tutorial will be shown automatically
 
-
   const { header, logo } = useStyles();
   const { logo2 } = useStyles2();
-
 
   const clickFAQ = () => {
     setIsTourOpen(true);
@@ -119,76 +116,93 @@ export default function HeaderHistory({ session }) {
 
   const findabudLogo = (
     <>
-    <Typography variant="h6" component="h1" className={logo}>
-      FINDABUD
-    </Typography>
-    <Typography variant="h6" component="h1" className={logo2}>
-      CHAT HISTORY
-    </Typography>
+      <Typography variant="h6" component="h1" className={logo}>
+        FINDABUD
+      </Typography>
+      <Typography variant="h6" component="h1" className={logo2}>
+        CHAT HISTORY
+      </Typography>
     </>
   );
 
-  var onlineUsers = users.filter(user => (new Date() - new Date(user.updated_at)) <= 3600000).length;
-  var myHistory = users.filter(user => user.id == session.user.id).map(user => user.point_history).toString().slice(1).split(",");
+  var onlineUsers = users.filter(
+    (user) => new Date() - new Date(user.updated_at) <= 3600000
+  ).length;
+  var myHistory = users
+    .filter((user) => user.id == session.user.id)
+    .map((user) => user.point_history)
+    .toString()
+    .slice(1)
+    .split(",");
   const getMenuButtons = () => {
     return (
-    <>
-      <h1 className="pointSystem" onClick={toggleHistory}>
-        <div>
-          {" "}
-          <strong> Points: {points}</strong>
-        </div>
-        <div>
-          {" "}
-          <strong> Rank: {findTitle(points)} </strong>
-        </div>
-      </h1>
-      <p> Users Online now: {onlineUsers} </p>
-    </>
+      <>
+        <h1 className="pointSystem" onClick={toggleHistory}>
+          <div>
+            {" "}
+            <strong> Points: {points}</strong>
+          </div>
+          <div>
+            {" "}
+            <strong> Rank: {findTitle(points)} </strong>
+          </div>
+        </h1>
+        <p> Users Online now: {!isLoading ? numUsersOnline : ""} </p>
+      </>
     );
   };
 
   return (
     <header>
-    {history && (
-          <Popup
-            content={
-              <>
-                <p><center><strong>Total points: {points} </strong></center></p>
-                <p><center><strong>Your Point History</strong></center></p>
-                <div className="formatTablePopup">
-                  <table className = "table1">
-                    <tr>
-                      <th>Delta</th>
-                      <th>Activity</th>
-                      <th>Date</th>
-                    </tr>
-                    {
-                      myHistory.map((value,key) =>{
-                        return (
+      {history && (
+        <Popup
+          content={
+            <>
+              <p>
+                <center>
+                  <strong>Total points: {points} </strong>
+                </center>
+              </p>
+              <p>
+                <center>
+                  <strong>Your Point History</strong>
+                </center>
+              </p>
+              <div className="formatTablePopup">
+                <table className="table1">
+                  <tr>
+                    <th>Delta</th>
+                    <th>Activity</th>
+                    <th>Date</th>
+                  </tr>
+                  {myHistory.map((value, key) => {
+                    return (
                       <tr key={key}>
                         <td>{value.split(" ")[0]}</td>
-                        <td>{value.split(" ").slice(1,-4).join(" ")}</td>
+                        <td>{value.split(" ").slice(1, -4).join(" ")}</td>
                         <td>{value.split(" ").slice(-3).join(" ")}</td>
                       </tr>
-                      );
-                      })
-                    }
-
-                  </table>
-                </div>
-              </>
-            }
-            handleClose={toggleHistory}
-          />
-        )}
+                    );
+                  })}
+                </table>
+              </div>
+            </>
+          }
+          handleClose={toggleHistory}
+        />
+      )}
       <AppBar className={header}>{displayDesktop()}</AppBar>
       {isTourOpen && (
         <Tour
-          steps= {HeaderHistoryTutorial()}
+          steps={HeaderHistoryTutorial()}
           isOpen={isTourOpen}
           onAfterOpen={disableBody}
-          onRequestClose={(target) => {enableBodyScroll(target);setIsTourOpen(false); setFirstTimeHistory(false); updateFirstTime()}}
+          onRequestClose={(target) => {
+            enableBodyScroll(target);
+            setIsTourOpen(false);
+            setFirstTimeHistory(false);
+            updateFirstTime();
+          }}
         />
       )}
     </header>

@@ -7,7 +7,7 @@ import Footer from "../Footer";
 import "../styles.css";
 import findTitle from "../Components/Methods/findTitle";
 
-const LeaderboardPage = ({ session }) => {
+const LeaderboardPage = ({ session, isLoading, numUsersOnline }) => {
   const [username, setUsername] = useState(null);
   const [brawl_stars, setBrawlStars] = useState(null);
 
@@ -28,11 +28,6 @@ const LeaderboardPage = ({ session }) => {
     else return "https://avatars.dicebear.com/api/bottts/1000.svg";
   };
 
-  /* Template code:
-  <p><center><strong> People who love brawl stars: </strong></center></p>
-  {users.filter(user => user.brawl_stars).map(user => <p><center>{user.username}</center></p>)}
-  */
-
   // To get the current user's number of points:
   var number = users
     .filter((user) => user.id == session.user.id)
@@ -41,7 +36,11 @@ const LeaderboardPage = ({ session }) => {
 
   return (
     <>
-      <HeaderLeaderboard session={session} />
+      <HeaderLeaderboard
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       <div className="App">
         <ChatwootWidget />

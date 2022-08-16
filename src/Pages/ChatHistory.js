@@ -5,7 +5,7 @@ import Footer from "../Footer";
 import ChatwootWidget from "../chatwoot.js";
 import React from "react";
 
-const ChatHistory = ({ session }) => {
+const ChatHistory = ({ session, isLoading, numUsersOnline }) => {
   const [matchWithOthers, setMatches] = useState([]);
   const [matched, setMatched] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -185,7 +185,11 @@ const ChatHistory = ({ session }) => {
 
   return (
     <>
-      <HeaderHistory session={session} />
+      <HeaderHistory
+        session={session}
+        isLoading={isLoading}
+        numUsersOnline={numUsersOnline}
+      />
 
       <div className="App">
         <ChatwootWidget />

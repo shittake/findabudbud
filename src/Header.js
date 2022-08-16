@@ -236,7 +236,7 @@ export default function Header({ session }) {
             <strong> Rank: {findTitle(points)} </strong>
           </div>
         </h1>
-        <p> Users Online now: {onlineUsers} </p>
+        {/* <p> Users Online now: {onlineUsers} </p> */}
       </>
     );
   };
