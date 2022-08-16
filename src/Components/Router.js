@@ -18,6 +18,7 @@ import useUpdateEffect from "src/Hooks/useUpdateEffect";
 export default function Router({ session }) {
   const ref = useRef(null);
   useEffect(() => {
+    console.log("entered router useeffect");
     if (ref.current === null) {
       ref.current = false;
       return;
