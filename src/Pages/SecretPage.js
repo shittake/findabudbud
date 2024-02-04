@@ -78,7 +78,7 @@ const SecretPage = ({ session, isLoading, numUsersOnline }) => {
       .map((user) =>
         user.avatar_url != null
           ? user.avatar_url
-          : "https://avatars.dicebear.com/api/bottts/1000.svg"
+          : "https://api.dicebear.com/7.x/big-ears/svg?seed=1000"
       )
   );
 
@@ -371,7 +371,7 @@ const SecretPage = ({ session, isLoading, numUsersOnline }) => {
   var pictureFind = selected.map((user) => user.avatar_url)[0];
   var picture =
     pictureFind == null
-      ? "https://avatars.dicebear.com/api/bottts/1000.svg"
+      ? "https://api.dicebear.com/7.x/big-ears/svg?seed=1000"
       : pictureFind;
   console.log(picture);
   var contact =

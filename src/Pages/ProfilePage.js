@@ -565,7 +565,7 @@ const ProfilePage = ({
         setAvatarUrl(
           data.avatar_url
             ? data.avatar_url
-            : "https://avatars.dicebear.com/api/bottts/1000.svg"
+            : "https://api.dicebear.com/7.x/big-ears/svg?seed=1000"
         );
         setPoints(data.points);
         setShares(data.shares);
