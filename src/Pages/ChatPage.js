@@ -41,7 +41,6 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
           setTeleHandle(false);
         }
 
-
         if (error) throw error;
       } catch (error) {}
       setTeleLoading(false);
@@ -132,7 +131,7 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
   // Find the user.id of all the people who are currently online (updated < 1 hour ago)
   var onlineUsers = Array.from(
     users
-      .filter((user) => new Date() - new Date(user.updated_at) <= 3600000) 
+      .filter((user) => new Date() - new Date(user.updated_at) <= 3600000)
       .filter((user) => user.id != session.user.id) // can't match with myself!
       .map((user) => user.id)
   );
@@ -147,7 +146,7 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
       .map((user) =>
         user.avatar_url != null
           ? user.avatar_url
-          : "https://avatars.dicebear.com/api/bottts/1000.svg"
+          : "https://api.dicebear.com/7.x/big-ears/svg?seed=1000"
       )
   );
 
@@ -183,7 +182,8 @@ const ChatPage = ({ session, isLoading, numUsersOnline }) => {
       {mine.map((user) => user.click)[0] && (
         <p className="success">
           {" "}
-          You are in the waiting room now! Estimated time for a match: 30 seconds
+          You are in the waiting room now! Estimated time for a match: 30
+          seconds
         </p>
       )}
 

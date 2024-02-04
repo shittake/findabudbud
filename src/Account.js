@@ -137,6 +137,15 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
           <div className="btns" id="options">
             <button
               className="button3"
+              disabled={points < 300}
+              onClick={() => {
+                handleSprite("adventurer");
+              }}
+            >
+              Adventurers
+            </button>
+            <button
+              className="button3"
               disabled={points < 200}
               onClick={() => {
                 handleSprite("avataaars");
@@ -146,20 +155,11 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
             </button>
             <button
               className="button3"
-              disabled={points < 200}
               onClick={() => {
-                handleSprite("micah");
+                handleSprite("icons");
               }}
             >
-              Humans 2
-            </button>
-            <button
-              className="button3"
-              onClick={() => {
-                handleSprite("human");
-              }}
-            >
-              Pixels
+              Icons
             </button>
             <button
               className="button3"
@@ -172,7 +172,7 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
             <button
               className="button3"
               onClick={() => {
-                handleSprite("jdenticon");
+                handleSprite("shapes");
               }}
             >
               Shapes
@@ -188,15 +188,15 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
             <button
               className="button3"
               onClick={() => {
-                handleSprite("gridy");
+                handleSprite("lorelei-neutral");
               }}
             >
-              Aliens
+              Expressions
             </button>
           </div>
           <div className="avatar" id="picture">
             <img
-              src={`https://avatars.dicebear.com/api/${sprite}/${seed}.svg`}
+              src={`https://api.dicebear.com/7.x/${sprite}/svg?seed=${seed}`}
               height="500"
               alt="Sprite"
             />
@@ -225,7 +225,7 @@ const Account = ({ session, isLoading, numUsersOnline }) => {
               id="down"
               onClick={() => {
                 downloadImage(
-                  `https://avatars.dicebear.com/api/${sprite}/${seed}.svg`
+                  `https://api.dicebear.com/7.x/${sprite}/svg?seed=${seed}`
                 );
               }}
             >

@@ -25,7 +25,7 @@ const LeaderboardPage = ({ session, isLoading, numUsersOnline }) => {
 
   const findAvatar = (link) => {
     if (link != null) return link;
-    else return "https://avatars.dicebear.com/api/bottts/1000.svg";
+    else return "https://api.dicebear.com/7.x/big-ears/svg?seed=1000";
   };
 
   // To get the current user's number of points:
