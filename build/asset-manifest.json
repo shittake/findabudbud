@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ea5b284b.css",
+    "main.js": "/static/js/main.f53a20ef.js",
+    "static/js/255.a58ff63b.chunk.js": "/static/js/255.a58ff63b.chunk.js",
+    "static/media/FindabudLogo.png": "/static/media/FindabudLogo.06357044607e12dd9d20.png",
+    "static/media/Events-2.png": "/static/media/Events-2.c105dead18623530cc46.png",
+    "static/media/MyProfile.png": "/static/media/MyProfile.9ef99babd37ebf12670e.png",
+    "static/media/Match.png": "/static/media/Match.f11e224e50e893134258.png",
+    "static/media/LeaderboardNew.png": "/static/media/LeaderboardNew.215b1a03e6f0b05f2065.png",
+    "index.html": "/index.html",
+    "main.ea5b284b.css.map": "/static/css/main.ea5b284b.css.map",
+    "main.f53a20ef.js.map": "/static/js/main.f53a20ef.js.map",
+    "255.a58ff63b.chunk.js.map": "/static/js/255.a58ff63b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea5b284b.css",
+    "static/js/main.f53a20ef.js"
+  ]
+}
