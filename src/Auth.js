@@ -41,123 +41,124 @@ export default function Auth() {
   };
 
   return (
-    <div className="auth-formatting">
-      <br></br>
-      <div>
-        <h1 style={{ background: "transparent" }}>
-          <center>hello! you have arrived at findabud's login page :D</center>
-        </h1>
-
-        <h1 className="homepageimage">
-          <img
-            src={logo}
-            className="centerimage"
-            height="180"
-            onClick={hoverClick}
-            style={{ cursor: "pointer" }}
-          />
-        </h1>
-
-        {isOpen && (
-          <Popup
-            content={
-              <>
-                <b>
-                  <center> ABOUT US </center>
-                </b>
-                <br></br>
-                <p>
-                  {" "}
-                  Findabud was created by Eric and Felicia to increase
-                  opportunities for NUS students to make more like-minded
-                  friends.{" "}
-                </p>
-                <p>
-                  {" "}
-                  You can contact us using the live chat feature on the bottom
-                  right corner of your screen once you login.{" "}
-                </p>
-                <p>
-                  {" "}
-                  Alternatively, you can email us at e0406922@u.nus.edu (Eric)
-                  or e0564015@u.nus.edu (Felicia).{" "}
-                </p>
-              </>
-            }
-            handleClose={hoverClick}
-          />
-        )}
-
-        <div className="description" style={{ padding: "10px 0 10px 0" }}>
-          <center>
-            <div className="auth-centralise-text">
-              Key your personal email below and receive a unique login link!
-            </div>
-            <div>
-              <strong>
-                <u>
-                  <em> DO NOT</em>
-                </u>{" "}
-              </strong>
-              use your NUSNET email.
-            </div>
-          </center>
-        </div>
-
-        {loading ? (
-          <div className="welcome-outer" style={{ padding: "25px 0 0 0" }}>
-            <strong>"Sending magic link..."</strong>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleLogin}
-            style={{ display: "flex", justifyContent: "center" }}
+    <div className="login-container">
+      <div className="auth-formatting">
+        <br></br>
+        <div>
+          <h1
+            style={{
+              background: "transparent",
+              fontFamily: "Comic Sans MS",
+              fontSize: "36px",
+            }}
           >
-            <div className="auth-email-formatting">
-              <div style={{ padding: "30px" }}>
-                <TextField
-                  margin="dense"
-                  size="small"
-                  // inputProps={{ sx: { height: 10 } }}
-                  required
-                  id="outlined-required"
-                  label="Required"
-                  // defaultValue="Hello World"
-                  className="inputField"
-                  type="email"
-                  placeholder="Your email"
-                  value={email}
-                  onChange={(e) => {
-                    console.log(e.target.value);
-                    setEmail(e.target.value);
-                  }}
-                />
+            <center>Hello! You have arrived at FindABud's login page 😀</center>
+          </h1>
+          <br />
+
+          <h1 className="homepageimage">
+            <img
+              src={logo}
+              className="centerimage"
+              height="220"
+              onClick={hoverClick}
+              style={{ cursor: "pointer" }}
+            />
+          </h1>
+
+          {isOpen && (
+            <Popup
+              content={
+                <>
+                  <b>
+                    <center> ABOUT US </center>
+                  </b>
+                  <br></br>
+                  <p>
+                    Findabud was created by Eric and Felicia to increase
+                    opportunities for NUS students to make more like-minded
+                    friends.
+                  </p>
+                  <p>
+                    You can contact us using the live chat feature on the bottom
+                    right corner of your screen once you login.
+                  </p>
+                  <p>
+                    Alternatively, you can email us at e0406922@u.nus.edu (Eric)
+                    or e0564015@u.nus.edu (Felicia).
+                  </p>
+                </>
+              }
+              handleClose={hoverClick}
+            />
+          )}
+
+          <div className="description" style={{ padding: "10px 0 10px 0" }}>
+            <center>
+              <div className="auth-centralise-text">
+                Create an account with us or login with your email below!
               </div>
-              <div style={{ padding: "22.5px" }}>
-                <button className="button block" aria-live="polite">
-                  Send magic link
-                </button>
-              </div>
+            </center>
+          </div>
+
+          {loading ? (
+            <div className="welcome-outer" style={{ padding: "25px 0 0 0" }}>
+              <strong>"Sending magic link..."</strong>
             </div>
-          </form>
-        )}
-        <div
-          style={{
-            padding: "50px 0 0 0",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {!adminLogIn && (
-            <BlueButton
-              text="Admin Sign In"
-              variant="contained"
-              onClick={adminLogInHandler}
-            ></BlueButton>
+          ) : (
+            <form
+              onSubmit={handleLogin}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <div
+                className={
+                  isOpen ? "dark-email-formatting" : "auth-email-formatting"
+                }
+              >
+                <div style={{ padding: "30px" }}>
+                  <TextField
+                    margin="dense"
+                    size="small"
+                    // inputProps={{ sx: { height: 10 } }}
+                    required
+                    id="outlined-required"
+                    label="Email"
+                    // defaultValue="Hello World"
+                    className="inputField"
+                    type="email"
+                    placeholder="Your email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                  />
+                </div>
+                <div style={{ padding: "10px" }}>
+                  <button className="button block" aria-live="polite">
+                    Send magic link
+                  </button>
+                </div>
+              </div>
+            </form>
           )}
-          {adminLogIn && (
-            <AdminLogInPage onClick={closeAdminLogInHandler}></AdminLogInPage>
-          )}
+          <div
+            style={{
+              padding: "40px 0 0 0",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            {!adminLogIn && (
+              <BlueButton
+                text="Admin Sign In"
+                variant="contained"
+                onClick={adminLogInHandler}
+              ></BlueButton>
+            )}
+            {adminLogIn && (
+              <AdminLogInPage onClick={closeAdminLogInHandler}></AdminLogInPage>
+            )}
+          </div>
         </div>
       </div>
     </div>
